@@ -54,7 +54,12 @@ class DASQuery(object):
             stdout=subprocess.PIPE,
         )
         jsonS = output.communicate()[0]
-        self.response = json.loads(jsonS)
+        try:
+            self.response = json.loads(jsonS)
+        except json.JSONDecodeError:
+            print("Could not parse result json")
+            print(str(jsonS.decode("utf-8")))
+            return
 
     def parse_sample_details(self):
         result = self.response
@@ -80,23 +85,25 @@ class DASQuery(object):
         xsec = questionary.text(
             f"Set xsec for {nick}. Leave blank for value of 1.0"
         ).ask()
-        if xsec is not None:
-            return float(xsec)
-        else:
+        if xsec == "" or xsec is None:
             return 1.0
+        else:
+            return float(xsec)
 
     def _fill_generator_weight(self, nick):
-        xsec = questionary.text(
+        gen_weight = questionary.text(
             f"Set generator_weight for {nick}. Leave blank for value of 1.0"
         ).ask()
-        if xsec is not None:
-            return float(xsec)
-        else:
+        if gen_weight == "" or gen_weight is None:
             return 1.0
+        else:
+            return float(gen_weight)
 
     def _build_nick(self, nick):
-        parts = nick.split("/")
-        nick = parts[1] + "_" + parts[2].replace("_", "-")
+        parts = nick.split("/")[1:]
+        # nick is the first part of the DAS sting + the second part till the first "_"
+        # if there is no "_" in the second part, the whole second part is used
+        nick = parts[0] + "_" + parts[1].split("_")[0]
         return nick
 
     def _get_era(self, nick):
@@ -108,16 +115,24 @@ class DASQuery(object):
     def _build_sampletype(self, nick):
         process = nick.split("/")[1].lower()
         sampletype = "None"
+        print(f"Setting sampletype for {process}")
         if "dy".lower() in process:
-            return "dy"
+            return "dyjets"
         elif "TTT".lower() in process:
-            return "tt"
+            return "ttbar"
+        elif "ST_t".lower() in process:
+            return "singletop"
         elif any(name.lower() in process for name in ["WZ", "WW", "ZZ"]):
-            return "vv"
-        elif "zjet".lower() in process:
-            return "zj"
+            return "diboson"
+        elif any(name.lower() in process for name in ["EWK"]):
+            return "electroweak_boson"
         elif any(
             name.lower() in process
+            for name in ["wjet", "w1jet", "w2jet", "w3jet", "w4jet"]
+        ):
+            return "wjets"
+        elif any(
+            process.startswith(name.lower())
             for name in [
                 "BTagCSV",
                 "BTagMu",
@@ -142,7 +157,38 @@ class DASQuery(object):
         ):
             return "data"
         elif "Embedding".lower() in process:
-            return "emb"
+            return "embedding"
+        # tautau signals
+        elif any(name.lower() in process for name in ["GluGluHToTauTau"]):
+            return "ggh_htautau"
+        elif any(name.lower() in process for name in ["VBFHToTauTau"]):
+            return "vbf_htautau"
+        elif any(
+            name.lower() in process
+            for name in [
+                "ttHToTauTau",
+                "WplusHToTauTau",
+                "WminusHToTauTau",
+                "ZHToTauTau",
+            ]
+        ):
+            return "rem_htautau"
+        # bb signals
+        elif any(name.lower() in process for name in ["GluGluHToBB"]):
+            return "ggh_hbb"
+        elif any(name.lower() in process for name in ["VBFHToBB"]):
+            return "vbf_hbb"
+
+        elif any(
+            name.lower() in process
+            for name in [
+                "ttHToBB",
+                "WplusH_HToBB",
+                "WminusH_HToBB",
+                "ZH_HToBB",
+            ]
+        ):
+            return "rem_hbb"
         else:
             sampletype = questionary.text(
                 f"No automatic sampletype found - Set sampletype for {nick} manually: "
@@ -198,7 +244,14 @@ class SampleDatabase(object):
 
     def load_database(self):
         if not os.path.exists(self.database_path):
-            raise FileNotFoundError(f"{self.database_path} does not exist ..")
+            # create a new one if it does not exist
+            answer = questionary.confirm(
+                f"Create a new database  at {self.database_path}? "
+            ).ask()
+            if not answer:
+                raise FileNotFoundError(f"{self.database_path} does not exist ..")
+            else:
+                open(self.database_path, mode="a").close()
         # now copy a work verison of the database to use for edits
 
         if os.path.exists(self.working_database_path):
@@ -209,7 +262,8 @@ class SampleDatabase(object):
         else:
             os.system(f"cp {self.database_path} {self.working_database_path}")
         with open(self.working_database_path, "r") as stream:
-            self.database = yaml.safe_load(stream)
+            # if the file is empty load an empty dict
+            self.database = yaml.safe_load(stream) or {}
 
     def parse_database(self):
         for sample in self.database:
@@ -307,7 +361,7 @@ def parse_args():
         "--save-mode", help="Save mode of the database", action="store_true"
     )
     parser.add_argument(
-        "--dataset-path",
+        "--database-path",
         help="Path to the database",
         type=str,
         default="sample_database/datasets.yaml",
@@ -333,24 +387,22 @@ def finding_and_adding_sample(database):
                 f"Nick: {result['dataset']} - last changed: {result['last_modification_date'].strftime('%d %b %Y %H:%M')} - created: {result['added'].strftime('%d %b %Y %H:%M')}"
             )
         questionary.print("Multiple results found")
-        options += ["All of the above", "None of the above"]
-        answer = questionary.select(
+        options += ["None of the above"]
+        answers = questionary.checkbox(
             "Which dataset do you want to add ?",
             choices=options,
-            show_selected=True,
-            use_indicator=True,
         ).ask()
-        task = options.index(answer)
-        if task == len(options) - 1:
+        if len(answers) == 1 and answers[0] == "None of the above":
             questionary.print("Adding nothing")
             return
-        elif task == len(options) - 2:
-            for result in results:
-                details = DASQuery(nick=result["dataset"], type="details").result
-                database.add_sample(details)
+        if len(answers) != 1 and "None of the above" in answers:
+            questionary.print("Invalid selection, Adding nothing")
+            return
         else:
-            details = DASQuery(nick=results[task]["dataset"], type="details").result
-            database.add_sample(details)
+            for answer in answers:
+                task = options.index(answer)
+                details = DASQuery(nick=results[task]["dataset"], type="details").result
+                database.add_sample(details)
 
 
 def delete_sample(database):
@@ -432,7 +484,7 @@ def create_production_file(database):
 def startup():
     args = parse_args()
     questionary.print("Starting up Datasetmanager")
-    db = SampleDatabase(args.dataset_path)
+    db = SampleDatabase(args.database_path)
     questionary.print("Database loaded")
     db.status()
     processing = True
