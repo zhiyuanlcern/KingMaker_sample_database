@@ -151,34 +151,42 @@ EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISumm
   nick: EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: electroweak_boson
   xsec: 10.66
-ElEmbedding_Run2018A:
-  datasetname: ElEmbedding_Run2018A-UL2018
+ElectronEmbedding_Run2018A-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 14960365
   nfiles: 150
+  nick: ElectronEmbedding_Run2018A-UL2018
   sample_type: embedding
-ElEmbedding_Run2018B:
-  datasetname: ElEmbedding_Run2018B-UL2018
+  xsec: 1.0
+ElectronEmbedding_Run2018B-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 7110291
   nfiles: 72
+  nick: ElectronEmbedding_Run2018B-UL2018
   sample_type: embedding
-ElEmbedding_Run2018C:
-  datasetname: ElEmbedding_Run2018C-UL2018
+  xsec: 1.0
+ElectronEmbedding_Run2018C-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 6542941
   nfiles: 66
+  nick: ElectronEmbedding_Run2018C-UL2018
   sample_type: embedding
-ElEmbedding_Run2018D:
-  datasetname: ElEmbedding_Run2018D-UL2018
+  xsec: 1.0
+ElectronEmbedding_Run2018D-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 30640012
   nfiles: 307
+  nick: ElectronEmbedding_Run2018D-UL2018
   sample_type: embedding
+  xsec: 1.0
 GluGluHToBB_M-125_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18NanoAODv9-106X:
   dbs: /GluGluHToBB_M-125_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM
   era: 2018
@@ -197,34 +205,42 @@ GluGluHToTauTau_M125_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18NanoAODv9-106
   nick: GluGluHToTauTau_M125_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: ggh_htautau
   xsec: 3.0469376
-MuEmbedding_Run2018A:
-  datasetname: MuEmbedding_Run2018A-UL2018
+MuonEmbedding_Run2018A-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 20764967
   nfiles: 208
+  nick: MuonEmbedding_Run2018A-UL2018
   sample_type: embedding
-MuEmbedding_Run2018B:
-  datasetname: MuEmbedding_Run2018B-UL2018
+  xsec: 1.0
+MuonEmbedding_Run2018B-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 9301733
   nfiles: 94
+  nick: MuonEmbedding_Run2018B-UL2018
   sample_type: embedding
-MuEmbedding_Run2018C:
-  datasetname: MuEmbedding_Run2018C-UL2018
+  xsec: 1.0
+MuonEmbedding_Run2018C-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 8566763
   nfiles: 86
+  nick: MuonEmbedding_Run2018C-UL2018
   sample_type: embedding
-MuEmbedding_Run2018D:
-  datasetname: MuEmbedding_Run2018D-UL2018
+  xsec: 1.0
+MuonEmbedding_Run2018D-UL2018:
   dbs: /sample/not/published
   era: 2018
+  generator_weight: 1.0
   nevents: 40168375
   nfiles: 402
+  nick: MuonEmbedding_Run2018D-UL2018
   sample_type: embedding
+  xsec: 1.0
 ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8_RunIISummer20UL18NanoAODv9-106X:
   dbs: /ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM
   era: 2018
@@ -324,6 +340,150 @@ TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18NanoAODv9-106X:
   nick: TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: ttbar
   xsec: 365.35
+TauEmbedding-ElMuFinalState_Run2018A-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 13801819
+  nfiles: 139
+  nick: TauEmbedding-ElMuFinalState_Run2018A-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElMuFinalState_Run2018B-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 6693715
+  nfiles: 67
+  nick: TauEmbedding-ElMuFinalState_Run2018B-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElMuFinalState_Run2018C-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 6158660
+  nfiles: 62
+  nick: TauEmbedding-ElMuFinalState_Run2018C-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElMuFinalState_Run2018D-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 28830292
+  nfiles: 289
+  nick: TauEmbedding-ElMuFinalState_Run2018D-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElTauFinalState_Run2018A-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 11729068
+  nfiles: 118
+  nick: TauEmbedding-ElTauFinalState_Run2018A-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElTauFinalState_Run2018B-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 5890564
+  nfiles: 59
+  nick: TauEmbedding-ElTauFinalState_Run2018B-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElTauFinalState_Run2018C-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 5423087
+  nfiles: 55
+  nick: TauEmbedding-ElTauFinalState_Run2018C-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-ElTauFinalState_Run2018D-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 25379139
+  nfiles: 254
+  nick: TauEmbedding-ElTauFinalState_Run2018D-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2018A-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 11733301
+  nfiles: 118
+  nick: TauEmbedding-MuTauFinalState_Run2018A-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2018B-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 5888849
+  nfiles: 59
+  nick: TauEmbedding-MuTauFinalState_Run2018B-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2018C-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 5421924
+  nfiles: 55
+  nick: TauEmbedding-MuTauFinalState_Run2018C-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2018D-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 25375446
+  nfiles: 254
+  nick: TauEmbedding-MuTauFinalState_Run2018D-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-TauTauFinalState_Run2018A-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 10362200
+  nfiles: 104
+  nick: TauEmbedding-TauTauFinalState_Run2018A-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-TauTauFinalState_Run2018B-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 5226401
+  nfiles: 53
+  nick: TauEmbedding-TauTauFinalState_Run2018B-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-TauTauFinalState_Run2018C-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 4822567
+  nfiles: 49
+  nick: TauEmbedding-TauTauFinalState_Run2018C-UL2018
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-TauTauFinalState_Run2018D-UL2018:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 22557705
+  nfiles: 226
+  nick: TauEmbedding-TauTauFinalState_Run2018D-UL2018
+  sample_type: embedding
+  xsec: 1.0
 Tau_Run2018A-UL2018:
   dbs: /Tau/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
   era: 2018
