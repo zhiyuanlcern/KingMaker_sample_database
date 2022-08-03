@@ -164,8 +164,8 @@ ElectronEmbedding_Run2018B-UL2018:
   dbs: /sample/not/published
   era: 2018
   generator_weight: 1.0
-  nevents: 7110291
-  nfiles: 72
+  nevents: 7051492
+  nfiles: 71
   nick: ElectronEmbedding_Run2018B-UL2018
   sample_type: embedding
   xsec: 1.0
@@ -182,7 +182,7 @@ ElectronEmbedding_Run2018D-UL2018:
   dbs: /sample/not/published
   era: 2018
   generator_weight: 1.0
-  nevents: 30640012
+  nevents: 30696609
   nfiles: 307
   nick: ElectronEmbedding_Run2018D-UL2018
   sample_type: embedding
@@ -443,8 +443,8 @@ TauEmbedding-MuTauFinalState_Run2018D-UL2018:
   dbs: /sample/not/published
   era: 2018
   generator_weight: 1.0
-  nevents: 25375446
-  nfiles: 254
+  nevents: 25419943
+  nfiles: 255
   nick: TauEmbedding-MuTauFinalState_Run2018D-UL2018
   sample_type: embedding
   xsec: 1.0
