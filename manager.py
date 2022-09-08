@@ -100,7 +100,7 @@ class DASQuery(object):
             return float(gen_weight)
 
     def _build_nick(self, nick):
-        if "ext" in nick:
+        if "_ext" in nick:
             ext_v = "_ext" + nick[nick.find("_ext") + 4]
         else:
             ext_v = ""
