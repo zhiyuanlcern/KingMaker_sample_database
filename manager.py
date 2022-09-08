@@ -101,11 +101,13 @@ class DASQuery(object):
 
     def _build_nick(self, nick):
         if "ext" in nick:
-            ext_v = nick[nick.find("_ext") + 4]
+            ext_v = "_ext" + nick[nick.find("_ext") + 4]
+        else:
+            ext_v = ""
         parts = nick.split("/")[1:]
         # nick is the first part of the DAS sting + the second part till the first "_"
         # if there is no "_" in the second part, the whole second part is used
-        nick = parts[0] + "_" + parts[1].split("_")[0] + "_ext" + ext_v
+        nick = parts[0] + "_" + parts[1].split("_")[0] + ext_v
 
         return nick
 
