@@ -6,7 +6,7 @@ import json
 import subprocess
 from datetime import datetime
 import re
-import fnmatch
+from calculate_genweights import calculate_genweight
 
 
 def default_entry():
@@ -313,6 +313,25 @@ class SampleDatabase(object):
             if self.database[sample]["dbs"] == dasnick:
                 self.print_by_nick(sample)
 
+    def genweight_by_nick(self, nick):
+        sample = self.database[nick]
+        questionary.print(f"--- {nick} ---", style="bold")
+        questionary.print(f"Current generator_weight: {sample['generator_weight']}")
+        questionary.print(f"Will calcuate new generator_weight for the sameple (this will take some minutes ....)")
+        # get the generator weight
+        new_genweight = calculate_genweight(sample)
+        questionary.print(f"New generator_weight: {new_genweight}")
+        answer = questionary.confirm("Do you want to update the database?").ask()
+        if answer:
+            sample["generator_weight"] = new_genweight
+            self.database[nick] = sample
+            self.save_database()
+
+    def genweight_by_das(self, dasnick):
+        for sample in self.database:
+            if self.database[sample]["dbs"] == dasnick:
+                self.genweight_by_nick(sample)
+
     def delete_by_nick(self, nick):
         for sample in self.database:
             if sample == nick:
@@ -441,6 +460,19 @@ def find_samples_by_nick(database):
         database.print_by_das(nick)
         return
 
+def update_genweight(database):
+    nick = questionary.autocomplete(
+        "Enter a sample nick to search for",
+        database.samplenicks,
+    ).ask()
+    if nick in database.samplenicks:
+        database.genweight_by_nick(nick)
+        return
+    if nick in database.dasnicks:
+        database.genweight_by_das(nick)
+        return
+
+
 
 def find_samples_by_das(database):
     nick = questionary.autocomplete(
@@ -496,8 +528,9 @@ def startup():
         "Find samples (by DAS name)",  # Task 4
         "Print details of a sample",  # Task 5
         "Create a production file",  # Task 6
-        "Save and Exit",  # Task 7
-        "Exit without Save",  # Task 8
+        "Update genweight", # Task 7
+        "Save and Exit",  # Task 8
+        "Exit without Save",  # Task 9
     ]
     while processing:
         answer = questionary.select(
@@ -528,12 +561,14 @@ def startup():
             continue
         elif task == 6:
             create_production_file(db)
+        elif task == 7:
+            update_genweight(db)
             continue
-        if task == 7:
+        if task == 8:
             db.save_database()
             db.close_database()
             exit()
-        elif task == 8:
+        elif task == 9:
             db.close_database()
             exit()
 
