@@ -100,10 +100,15 @@ class DASQuery(object):
             return float(gen_weight)
 
     def _build_nick(self, nick):
+        if "_ext" in nick:
+            ext_v = "_ext" + nick[nick.find("_ext") + 4]
+        else:
+            ext_v = ""
         parts = nick.split("/")[1:]
         # nick is the first part of the DAS sting + the second part till the first "_"
         # if there is no "_" in the second part, the whole second part is used
-        nick = parts[0] + "_" + parts[1].split("_")[0]
+        nick = parts[0] + "_" + parts[1].split("_")[0] + ext_v
+
         return nick
 
     def _get_era(self, nick):
@@ -113,7 +118,7 @@ class DASQuery(object):
             return int(m.group(0))
 
     def _build_sampletype(self, nick):
-        process = nick.split("/")[1].lower()
+        process = "/" + nick.split("/")[1].lower()
         sampletype = "None"
         print(f"Setting sampletype for {process}")
         if "dy".lower() in process:
@@ -122,13 +127,17 @@ class DASQuery(object):
             return "ttbar"
         elif "ST_t".lower() in process:
             return "singletop"
-        elif any(name.lower() in process for name in ["WZ", "WW", "ZZ"]):
+        elif any(name.lower() in process for name in ["/WZ_", "/WW_", "/ZZ_"]):
             return "diboson"
+        elif any(
+            name.lower() in process for name in ["/WWW_", "/WWZ_", "/WZZ_", "/ZZZ_"]
+        ):
+            return "triboson"
         elif any(name.lower() in process for name in ["EWK"]):
             return "electroweak_boson"
         elif any(
             name.lower() in process
-            for name in ["wjet", "w1jet", "w2jet", "w3jet", "w4jet"]
+            for name in ["/wjet", "/w1jet", "/w2jet", "/w3jet", "/w4jet"]
         ):
             return "wjets"
         elif any(
@@ -158,6 +167,15 @@ class DASQuery(object):
             return "data"
         elif "Embedding".lower() in process:
             return "embedding"
+        elif any(name.lower() in process for name in ["ttZJets", "ttWJets"]):
+            return "rem_ttbar"
+        elif any(name.lower() in process for name in ["GluGluToContinToZZ"]):
+            return "ggZZ"
+        elif any(
+            name.lower() in process
+            for name in ["GluGluZH", "HZJ", "HWplusJ", "HWminusJ"]
+        ):
+            return "rem_VH"
         # tautau signals
         elif any(name.lower() in process for name in ["GluGluHToTauTau"]):
             return "ggh_htautau"
