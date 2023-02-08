@@ -510,7 +510,7 @@ EWKWMinus2Jets_WToLNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunII
   nfiles: 22
   nick: EWKWMinus2Jets_WToLNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: electroweak_boson
-  xsec: 23.24
+  xsec: 32.05
 EWKWPlus2Jets_WToLNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /EWKWPlus2Jets_WToLNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM
   era: 2016preVFP
@@ -546,7 +546,7 @@ EWKWPlus2Jets_WToLNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIIS
   nfiles: 29
   nick: EWKWPlus2Jets_WToLNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: electroweak_boson
-  xsec: 29.59
+  xsec: 39.05
 EWKZ2Jets_ZToLL_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /EWKZ2Jets_ZToLL_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM
   era: 2016preVFP
@@ -582,7 +582,7 @@ EWKZ2Jets_ZToLL_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer
   nfiles: 3
   nick: EWKZ2Jets_ZToLL_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: electroweak_boson
-  xsec: 4.321
+  xsec: 6.215
 EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v2/NANOAODSIM
   era: 2016preVFP
@@ -618,7 +618,7 @@ EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISumm
   nfiles: 23
   nick: EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV-madgraph-pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: electroweak_boson
-  xsec: 10.66
+  xsec: 10.65
 ElectronEmbedding_Run2018A-UL2018:
   dbs: /sample/not/published
   era: 2018
