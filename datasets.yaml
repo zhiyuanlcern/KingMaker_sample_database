@@ -1,6 +1,6 @@
 DY1JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /DY1JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 31961410
   nfiles: 32
@@ -9,7 +9,7 @@ DY1JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 928.3
 DY1JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /DY1JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 31570459
   nfiles: 27
@@ -36,7 +36,7 @@ DY1JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 928.3
 DY2JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /DY2JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 12696373
   nfiles: 22
@@ -45,7 +45,7 @@ DY2JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 293.6
 DY2JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /DY2JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 14573456
   nfiles: 15
@@ -72,7 +72,7 @@ DY2JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 293.6
 DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 10285720
   nfiles: 15
@@ -81,7 +81,7 @@ DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 86.53
 DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 9553830
   nfiles: 17
@@ -90,7 +90,7 @@ DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 86.53
 DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODv9-20UL16JMENano:
   dbs: /DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODv9-20UL16JMENano_106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 9382141
   nfiles: 29
@@ -108,7 +108,7 @@ DY3JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 86.53
 DY4JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /DY4JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 4655680
   nfiles: 15
@@ -117,7 +117,7 @@ DY4JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL1
   xsec: 41.28
 DY4JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /DY4JetsToLL_M-50_MatchEWPDG20_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 4450325
   nfiles: 50
@@ -756,7 +756,7 @@ GluGluHToWWTo2L2Nu_M125_TuneCP5_13TeV_powheg2_JHUGenV714_pythia8_RunIISummer20UL
   xsec: 1.14074
 GluGluToContinToZZTo2e2mu_TuneCP5_13TeV-mcfm701-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /GluGluToContinToZZTo2e2mu_TuneCP5_13TeV-mcfm701-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v2/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 500000
   nfiles: 15
@@ -765,7 +765,7 @@ GluGluToContinToZZTo2e2mu_TuneCP5_13TeV-mcfm701-pythia8_RunIISummer20UL16NanoAOD
   xsec: 3.292
 GluGluToContinToZZTo2e2mu_TuneCP5_13TeV-mcfm701-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /GluGluToContinToZZTo2e2mu_TuneCP5_13TeV-mcfm701-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 499000
   nfiles: 12
@@ -1872,7 +1872,7 @@ TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18NanoAODv9-106X:
   xsec: 366.34
 TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v2/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2850164
   nfiles: 26
@@ -1881,7 +1881,7 @@ TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL16NanoAOD
   xsec: 0.2161
 TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 3322643
   nfiles: 12
@@ -1908,7 +1908,7 @@ TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL18NanoAOD
   xsec: 0.2161
 TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v2/NANOAODSIM
-  era: null
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 271496
   nfiles: 7
@@ -1917,7 +1917,7 @@ TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL16NanoAODA
   xsec: 0.4377
 TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_RunIISummer20UL16NanoAODv9-106X:
   dbs: /TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM
-  era: null
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 308983
   nfiles: 8
