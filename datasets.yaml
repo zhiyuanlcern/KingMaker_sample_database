@@ -3498,4 +3498,4 @@ ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8_RunIISummer20UL18NanoAODv9-106X:
   nfiles: 52
   nick: ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8_RunIISummer20UL18NanoAODv9-106X
   sample_type: rem_ttbar
-  xsec: 0.2529
+  xsec: 0.5407
