@@ -10,6 +10,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/7/merged_nano_6.root
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/8/merged_nano_7.root
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/9/merged_nano_8.root
+- root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/10/merged_nano_9.root
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/11/merged_nano_10.root
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/12/merged_nano_11.root
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/13/merged_nano_12.root
@@ -66,8 +67,8 @@ filelist:
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/64/merged_nano_63.root
 - root://xrootd-cms.infn.it///store/user/sbrommer/ul_embedding_nanoaod/v3/nanoaod_data_2016/ElEmbedding_data_2016_ElEmb_nanoaod_Run2016_G/65/merged_nano_64.root
 generator_weight: 1.0
-nevents: 6384559
-nfiles: 64
+nevents: 6484559
+nfiles: 65
 nick: ElectronEmbedding_Run2016G-UL2016
 sample_type: embedding
 xsec: 1.0
