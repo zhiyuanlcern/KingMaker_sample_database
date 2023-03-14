@@ -2662,6 +2662,51 @@ TauEmbedding-MuTauFinalState_Run2016H-UL2016:
   nick: TauEmbedding-MuTauFinalState_Run2016H-UL2016
   sample_type: embedding
   xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2017B-UL2017:
+  dbs: /sample/not/published
+  era: 2017
+  generator_weight: 1.0
+  nevents: 4163359
+  nfiles: 42
+  nick: TauEmbedding-MuTauFinalState_Run2017B-UL2017
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2017C-UL2017:
+  dbs: /sample/not/published
+  era: 2017
+  generator_weight: 1.0
+  nevents: 8875988
+  nfiles: 89
+  nick: TauEmbedding-MuTauFinalState_Run2017C-UL2017
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2017D-UL2017:
+  dbs: /sample/not/published
+  era: 2017
+  generator_weight: 1.0
+  nevents: 3901306
+  nfiles: 40
+  nick: TauEmbedding-MuTauFinalState_Run2017D-UL2017
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2017E-UL2017:
+  dbs: /sample/not/published
+  era: 2017
+  generator_weight: 1.0
+  nevents: 8116296
+  nfiles: 82
+  nick: TauEmbedding-MuTauFinalState_Run2017E-UL2017
+  sample_type: embedding
+  xsec: 1.0
+TauEmbedding-MuTauFinalState_Run2017F-UL2017:
+  dbs: /sample/not/published
+  era: 2017
+  generator_weight: 1.0
+  nevents: 11016797
+  nfiles: 111
+  nick: TauEmbedding-MuTauFinalState_Run2017F-UL2017
+  sample_type: embedding
+  xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2018A-UL2018:
   dbs: /sample/not/published
   era: 2018
