@@ -3141,7 +3141,7 @@ TTZToQQ_TuneCP5_13TeV-amcatnlo-pythia8_RunIISummer20UL18NanoAODv9-106X:
   xsec: 0.5104
 TauEmbedding-ElMuFinalState_Run2016-HIPM_B_ver1-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 41514
   nfiles: 1
@@ -3150,7 +3150,7 @@ TauEmbedding-ElMuFinalState_Run2016-HIPM_B_ver1-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016-HIPM_B_ver2-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 4098044
   nfiles: 41
@@ -3159,7 +3159,7 @@ TauEmbedding-ElMuFinalState_Run2016-HIPM_B_ver2-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016-HIPM_C-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1708650
   nfiles: 18
@@ -3168,7 +3168,7 @@ TauEmbedding-ElMuFinalState_Run2016-HIPM_C-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016-HIPM_D-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2818695
   nfiles: 29
@@ -3177,7 +3177,7 @@ TauEmbedding-ElMuFinalState_Run2016-HIPM_D-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016-HIPM_E-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2516750
   nfiles: 26
@@ -3186,7 +3186,7 @@ TauEmbedding-ElMuFinalState_Run2016-HIPM_E-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016-HIPM_F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1570276
   nfiles: 16
@@ -3195,7 +3195,7 @@ TauEmbedding-ElMuFinalState_Run2016-HIPM_F-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 330129
   nfiles: 4
@@ -3204,7 +3204,7 @@ TauEmbedding-ElMuFinalState_Run2016F-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016G-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 6182307
   nfiles: 62
@@ -3213,7 +3213,7 @@ TauEmbedding-ElMuFinalState_Run2016G-UL2016:
   xsec: 1.0
 TauEmbedding-ElMuFinalState_Run2016H-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 7269936
   nfiles: 73
@@ -3303,7 +3303,7 @@ TauEmbedding-ElMuFinalState_Run2018D-UL2018:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016-HIPM_B_ver1-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 37169
   nfiles: 1
@@ -3312,7 +3312,7 @@ TauEmbedding-ElTauFinalState_Run2016-HIPM_B_ver1-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016-HIPM_B_ver2-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 3681620
   nfiles: 37
@@ -3321,7 +3321,7 @@ TauEmbedding-ElTauFinalState_Run2016-HIPM_B_ver2-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016-HIPM_C-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1534006
   nfiles: 16
@@ -3330,7 +3330,7 @@ TauEmbedding-ElTauFinalState_Run2016-HIPM_C-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016-HIPM_D-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2528341
   nfiles: 26
@@ -3339,7 +3339,7 @@ TauEmbedding-ElTauFinalState_Run2016-HIPM_D-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016-HIPM_E-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2255051
   nfiles: 23
@@ -3348,7 +3348,7 @@ TauEmbedding-ElTauFinalState_Run2016-HIPM_E-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016-HIPM_F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1405258
   nfiles: 15
@@ -3357,7 +3357,7 @@ TauEmbedding-ElTauFinalState_Run2016-HIPM_F-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 295839
   nfiles: 3
@@ -3366,7 +3366,7 @@ TauEmbedding-ElTauFinalState_Run2016F-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016G-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 5537230
   nfiles: 56
@@ -3375,7 +3375,7 @@ TauEmbedding-ElTauFinalState_Run2016G-UL2016:
   xsec: 1.0
 TauEmbedding-ElTauFinalState_Run2016H-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 6510323
   nfiles: 66
@@ -3465,7 +3465,7 @@ TauEmbedding-ElTauFinalState_Run2018D-UL2018:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016-HIPM_B_ver1-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 37174
   nfiles: 1
@@ -3474,7 +3474,7 @@ TauEmbedding-MuTauFinalState_Run2016-HIPM_B_ver1-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016-HIPM_B_ver2-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 3681133
   nfiles: 37
@@ -3483,7 +3483,7 @@ TauEmbedding-MuTauFinalState_Run2016-HIPM_B_ver2-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016-HIPM_C-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1533712
   nfiles: 16
@@ -3492,7 +3492,7 @@ TauEmbedding-MuTauFinalState_Run2016-HIPM_C-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016-HIPM_D-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2528017
   nfiles: 26
@@ -3501,7 +3501,7 @@ TauEmbedding-MuTauFinalState_Run2016-HIPM_D-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016-HIPM_E-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2255185
   nfiles: 23
@@ -3510,7 +3510,7 @@ TauEmbedding-MuTauFinalState_Run2016-HIPM_E-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016-HIPM_F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1405277
   nfiles: 15
@@ -3519,7 +3519,7 @@ TauEmbedding-MuTauFinalState_Run2016-HIPM_F-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 295786
   nfiles: 3
@@ -3528,7 +3528,7 @@ TauEmbedding-MuTauFinalState_Run2016F-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016G-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 5536664
   nfiles: 56
@@ -3537,7 +3537,7 @@ TauEmbedding-MuTauFinalState_Run2016G-UL2016:
   xsec: 1.0
 TauEmbedding-MuTauFinalState_Run2016H-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 6509703
   nfiles: 66
@@ -3627,7 +3627,7 @@ TauEmbedding-MuTauFinalState_Run2018D-UL2018:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016-HIPM_B_ver1-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 32876
   nfiles: 1
@@ -3636,7 +3636,7 @@ TauEmbedding-TauTauFinalState_Run2016-HIPM_B_ver1-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016-HIPM_B_ver2-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 3293961
   nfiles: 33
@@ -3645,7 +3645,7 @@ TauEmbedding-TauTauFinalState_Run2016-HIPM_B_ver2-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016-HIPM_C-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1376531
   nfiles: 14
@@ -3654,7 +3654,7 @@ TauEmbedding-TauTauFinalState_Run2016-HIPM_C-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016-HIPM_D-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2267710
   nfiles: 23
@@ -3663,7 +3663,7 @@ TauEmbedding-TauTauFinalState_Run2016-HIPM_D-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016-HIPM_E-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 2024212
   nfiles: 21
@@ -3672,7 +3672,7 @@ TauEmbedding-TauTauFinalState_Run2016-HIPM_E-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016-HIPM_F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016preVFP
   generator_weight: 1.0
   nevents: 1262882
   nfiles: 13
@@ -3681,7 +3681,7 @@ TauEmbedding-TauTauFinalState_Run2016-HIPM_F-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016F-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 263765
   nfiles: 3
@@ -3690,7 +3690,7 @@ TauEmbedding-TauTauFinalState_Run2016F-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016G-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 4933509
   nfiles: 50
@@ -3699,7 +3699,7 @@ TauEmbedding-TauTauFinalState_Run2016G-UL2016:
   xsec: 1.0
 TauEmbedding-TauTauFinalState_Run2016H-UL2016:
   dbs: /sample/not/published
-  era: 2016
+  era: 2016postVFP
   generator_weight: 1.0
   nevents: 5792626
   nfiles: 58
