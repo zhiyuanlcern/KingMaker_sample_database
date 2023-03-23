@@ -2935,7 +2935,7 @@ WW_TuneCP5_13TeV-pythia8_RunIISummer20UL18NanoAODv9-106X:
 WZTo2Q2L_mllmin4p0_TuneCP5_13TeV-amcatnloFXFX-pythia8_RunIISummer20UL16NanoAODAPVv9-106X:
   dbs: /WZTo2Q2L_mllmin4p0_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v2/NANOAODSIM
   era: 2016preVFP
-  generator_weight: 1.0
+  generator_weight: 0.6237965928039464
   nevents: 15678816
   nfiles: 17
   nick: WZTo2Q2L_mllmin4p0_TuneCP5_13TeV-amcatnloFXFX-pythia8_RunIISummer20UL16NanoAODAPVv9-106X
