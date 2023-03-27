@@ -1,6 +1,6 @@
 import json
 import subprocess
-import ROOT
+# import ROOT
 import time
 import uproot
 from rich.progress import Progress
@@ -25,28 +25,28 @@ def read_filelist_from_das(dbs):
     ]
 
 
-# # main function with RDF
-def calculate_genweight(dataset):
-    ROOT.EnableImplicitMT(2)
-    start = time.time()
-    filelist = read_filelist_from_das(dataset["dbs"])
-    # add the treename to each element in the filelist
-    try:
-        d = ROOT.RDataFrame("Events", filelist)
-        cuts = {"negative": "(genWeight<0)*1", "positive": "(genWeight>=0)*1"}
-        negative_d = d.Filter(cuts["negative"]).Count()
-        positive_d = d.Filter(cuts["positive"]).Count()
-        negative = negative_d.GetValue()
-        positive = positive_d.GetValue()
-        negfrac = negative / (negative + positive)
-        genweight = 1 - 2 * negfrac
-        print(f"Final genweight: {genweight}")
-        end = time.time()
-        print(f"Time: {end - start}")
-        return genweight
-    except:
-        print("Error when reading input files")
-        return 1.0
+# # # main function with RDF
+# def calculate_genweight(dataset):
+#     ROOT.EnableImplicitMT(2)
+#     start = time.time()
+#     filelist = read_filelist_from_das(dataset["dbs"])
+#     # add the treename to each element in the filelist
+#     try:
+#         d = ROOT.RDataFrame("Events", filelist)
+#         cuts = {"negative": "(genWeight<0)*1", "positive": "(genWeight>=0)*1"}
+#         negative_d = d.Filter(cuts["negative"]).Count()
+#         positive_d = d.Filter(cuts["positive"]).Count()
+#         negative = negative_d.GetValue()
+#         positive = positive_d.GetValue()
+#         negfrac = negative / (negative + positive)
+#         genweight = 1 - 2 * negfrac
+#         print(f"Final genweight: {genweight}")
+#         end = time.time()
+#         print(f"Time: {end - start}")
+#         return genweight
+#     except:
+#         print("Error when reading input files")
+#         return 1.0
 
 
 def calculate_genweight_uproot(dataset):
