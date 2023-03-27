@@ -66,7 +66,7 @@ def calculate_genweight_uproot(dataset):
         filelist = [file + ":Events" for file in filelist]
         for i, file in enumerate(filelist):
             try:
-                events = uproot.open(file)
+                events = uproot.open(file, timeout=5)
                 array = events["genWeight"].array(library="np")
                 negative += np.count_nonzero(array < 0)
                 positive += np.count_nonzero(array >= 0)
