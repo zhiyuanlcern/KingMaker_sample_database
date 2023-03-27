@@ -6,7 +6,7 @@ import json
 import subprocess
 from datetime import datetime
 import re
-from calculate_genweights import calculate_genweight, calculate_genweight_uproot
+from calculate_genweights import calculate_genweight_uproot
 from questionary import Style
 
 custom_style = Style(
