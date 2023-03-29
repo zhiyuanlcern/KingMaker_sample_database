@@ -6,7 +6,29 @@ import json
 import subprocess
 from datetime import datetime
 import re
-from calculate_genweights import calculate_genweight
+from calculate_genweights import calculate_genweight_uproot
+from questionary import Style
+
+custom_style = Style(
+    [
+        ("qmark", "fg:#673ab7 bold"),  # token in front of the question
+        ("question", "bold"),  # question text
+        ("answer", "fg:#f44336 bold"),  # submitted answer text behind the question
+        ("pointer", "fg:#673ab7 bold"),  # pointer used in select and checkbox prompts
+        (
+            "highlighted",
+            "fg:#673ab7 bold",
+        ),  # pointed-at choice in select and checkbox prompts
+        ("selected", "fg:#cc5454"),  # style for a selected item of a checkbox
+        ("separator", "fg:#cc5454"),  # separator in lists
+        ("instruction", ""),  # user instructions for select, rawselect, checkbox
+        ("text", ""),  # plain text
+        (
+            "disabled",
+            "fg:#858585 italic",
+        ),  # disabled choices for select and checkbox prompts
+    ]
+)
 
 
 def default_entry():
@@ -92,7 +114,8 @@ class DASQuery(object):
 
     def _fill_generator_weight(self, nick):
         gen_weight = questionary.text(
-            f"Set generator_weight for {nick}. Leave blank for value of 1.0"
+            f"Set generator_weight for {nick}. Leave blank for value of 1.0",
+            style=custom_style,
         ).ask()
         if gen_weight == "" or gen_weight is None:
             return 1.0
@@ -209,7 +232,8 @@ class DASQuery(object):
             return "rem_hbb"
         else:
             sampletype = questionary.text(
-                f"No automatic sampletype found - Set sampletype for {nick} manually: "
+                f"No automatic sampletype found - Set sampletype for {nick} manually: ",
+                style=custom_style,
             ).ask()
             return sampletype
         answer = questionary.confirm(f"Is sampletype {sampletype} correct ?").ask()
@@ -264,7 +288,7 @@ class SampleDatabase(object):
         if not os.path.exists(self.database_path):
             # create a new one if it does not exist
             answer = questionary.confirm(
-                f"Create a new database  at {self.database_path}? "
+                f"Create a new database  at {self.database_path}? ", style=custom_style
             ).ask()
             if not answer:
                 raise FileNotFoundError(f"{self.database_path} does not exist ..")
@@ -274,9 +298,11 @@ class SampleDatabase(object):
 
         if os.path.exists(self.working_database_path):
             questionary.print(" A working version of the database exists")
-            answer = questionary.confirm("Load working version of database ?").ask()
-            if not answer:
-                raise FileNotFoundError("Aborting")
+            answer = questionary.confirm(
+                "Load working version of database ?", style=custom_style
+            ).ask()
+            if answer:
+                self.working_database_path = self.database_path
         else:
             os.system(f"cp {self.database_path} {self.working_database_path}")
         with open(self.working_database_path, "r") as stream:
@@ -335,15 +361,22 @@ class SampleDatabase(object):
         sample = self.database[nick]
         questionary.print(f"--- {nick} ---", style="bold")
         questionary.print(f"Current generator_weight: {sample['generator_weight']}")
-        questionary.print(f"Will calcuate new generator_weight for the sameple (this will take some minutes ....)")
+        questionary.print(
+            f"Will calcuate new generator_weight for the sample (this will take some minutes ....)"
+        )
         # get the generator weight
-        new_genweight = calculate_genweight(sample)
-        questionary.print(f"New generator_weight: {new_genweight}")
-        answer = questionary.confirm("Do you want to update the database?").ask()
-        if answer:
-            sample["generator_weight"] = new_genweight
-            self.database[nick] = sample
-            self.save_database()
+        new_genweight = calculate_genweight_uproot(sample)
+        if new_genweight is None:
+            questionary.print("Error when calculating genweights, no updates done.")
+        else:
+            questionary.print(f"New generator_weight: {new_genweight}")
+            answer = questionary.confirm(
+                "Do you want to update the database?", style=custom_style
+            ).ask()
+            if answer:
+                sample["generator_weight"] = new_genweight
+                self.database[nick] = sample
+                self.save_database()
 
     def genweight_by_das(self, dasnick):
         for sample in self.database:
@@ -408,7 +441,7 @@ def parse_args():
 
 
 def finding_and_adding_sample(database):
-    nick = questionary.text("Enter a DAS nick to add").ask()
+    nick = questionary.text("Enter a DAS nick to add", style=custom_style).ask()
     if nick in database.dasnicks:
         questionary.print("DAS nick is already in database")
         database.print_by_das(nick)
@@ -426,8 +459,7 @@ def finding_and_adding_sample(database):
         questionary.print("Multiple results found")
         options += ["None of the above"]
         answers = questionary.checkbox(
-            "Which dataset do you want to add ?",
-            choices=options,
+            "Which dataset do you want to add ?", choices=options, style=custom_style
         ).ask()
         if len(answers) == 1 and answers[0] == "None of the above":
             questionary.print("Adding nothing")
@@ -436,10 +468,19 @@ def finding_and_adding_sample(database):
             questionary.print("Invalid selection, Adding nothing")
             return
         else:
+            samples_added = []
             for answer in answers:
                 task = options.index(answer)
                 details = DASQuery(nick=results[task]["dataset"], type="details").result
                 database.add_sample(details)
+                samples_added.append(details["nick"])
+            # now ask if the genweights should be calculated
+            gen_question = questionary.confirm(
+                "Do you want to calculate the genweights for all added samples ?"
+            ).ask()
+            if gen_question:
+                for sample in samples_added:
+                    database.genweight_by_nick(sample)
 
 
 def delete_sample(database):
@@ -455,7 +496,7 @@ def delete_sample(database):
 
 
 def print_sample(database):
-    nick = questionary.text("Enter a nick to print").ask()
+    nick = questionary.text("Enter a nick to print", style=custom_style).ask()
     if nick in database.samplenicks:
         database.print_by_nick(nick)
         return
@@ -470,6 +511,7 @@ def find_samples_by_nick(database):
     nick = questionary.autocomplete(
         "Enter a sample nick to search for",
         database.samplenicks,
+        style=custom_style,
     ).ask()
     if nick in database.samplenicks:
         database.print_by_nick(nick)
@@ -478,10 +520,12 @@ def find_samples_by_nick(database):
         database.print_by_das(nick)
         return
 
+
 def update_genweight(database):
     nick = questionary.autocomplete(
         "Enter a sample nick to search for",
         database.samplenicks,
+        style=custom_style,
     ).ask()
     if nick in database.samplenicks:
         database.genweight_by_nick(nick)
@@ -491,11 +535,11 @@ def update_genweight(database):
         return
 
 
-
 def find_samples_by_das(database):
     nick = questionary.autocomplete(
         "Enter a sample nick to search for",
         list(database.dasnicks),
+        style=custom_style,
     ).ask()
     print(nick)
     if nick == "None":
@@ -510,14 +554,18 @@ def create_production_file(database):
     possible_eras = [str(x) for x in list(database.eras)]
     possible_samples = list(database.sample_types)
     selected_eras = questionary.checkbox(
-        "Select eras to be added ", possible_eras
+        "Select eras to be added ",
+        possible_eras,
+        style=custom_style,
     ).ask()
     selected_sample_types = questionary.checkbox(
-        "Select sampletypes to be added ", possible_samples
+        "Select sampletypes to be added ",
+        possible_samples,
+        style=custom_style,
     ).ask()
     nicks = database.get_nicks(eras=selected_eras, sample_types=selected_sample_types)
     outputfile = questionary.text(
-        "Name of the outputfile ?", default="samples.txt"
+        "Name of the outputfile ?", default="samples.txt", style=custom_style
     ).ask()
     with open(outputfile, "w") as f:
         for nick in nicks:
@@ -546,7 +594,7 @@ def startup():
         "Find samples (by DAS name)",  # Task 4
         "Print details of a sample",  # Task 5
         "Create a production file",  # Task 6
-        "Update genweight", # Task 7
+        "Update genweight",  # Task 7
         "Save and Exit",  # Task 8
         "Exit without Save",  # Task 9
     ]
@@ -556,6 +604,7 @@ def startup():
             choices=available_tasks,
             show_selected=True,
             use_indicator=True,
+            style=custom_style,
         ).ask()
         task = available_tasks.index(answer)
 
