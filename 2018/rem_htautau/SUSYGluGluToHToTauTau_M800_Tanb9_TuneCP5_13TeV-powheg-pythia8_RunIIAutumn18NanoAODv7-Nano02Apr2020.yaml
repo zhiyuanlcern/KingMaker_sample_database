@@ -1,0 +1,10 @@
+dbs: /SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+era: 2018
+generator_weight: 1.0
+nevents: 200000
+nfiles: 1
+filelist:
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/270000/9FF69A46-0135-B844-A8AB-5D46712FEA24.root
+nick: SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+sample_type: rem_htautau
+xsec: 1.0

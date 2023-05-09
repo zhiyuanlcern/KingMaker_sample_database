@@ -1,0 +1,11 @@
+dbs: /SUSYGluGluToHToTauTau_M-100_TuneCP5_13TeV-pythia8/RunIIAutumn18NanoAOD-102X_upgrade2018_realistic_v15-v1/NANOAODSIM
+era: 2018
+filelist:
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAOD/SUSYGluGluToHToTauTau_M-100_TuneCP5_13TeV-pythia8/NANOAODSIM/102X_upgrade2018_realistic_v15-v1/10000/29EFC331-3B9E-404D-88BC-C0AD56D895BB.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAOD/SUSYGluGluToHToTauTau_M-100_TuneCP5_13TeV-pythia8/NANOAODSIM/102X_upgrade2018_realistic_v15-v1/10000/05A44CCC-7ADF-DA4E-BE7E-C585E5A66249.root
+generator_weight: 1.0
+nevents: 476000
+nfiles: 2
+nick: SUSYGluGluToHToTauTau_M-100_TuneCP5_13TeV-pythia8_RunIIAutumn18NanoAOD-102X
+sample_type: rem_htautau
+xsec: 1.0
