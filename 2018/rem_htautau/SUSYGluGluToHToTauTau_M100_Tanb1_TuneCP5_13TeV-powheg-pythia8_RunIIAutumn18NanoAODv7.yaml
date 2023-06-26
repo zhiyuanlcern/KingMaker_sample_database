@@ -1,0 +1,21 @@
+dbs: /SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/NANOAODSIM
+era: 2018
+filelist:
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/1C03145E-E66C-9545-9F71-D615E204F39F.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/219A602B-2534-E54B-9244-6DCCE6ED55FE.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/4444E918-AD40-0347-920C-6DCCF8EDC97F.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/4DB3BF23-74C7-E148-89B2-D1AB7272BC53.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/65967EC2-FB0C-CE4C-9ECF-3708D2A83972.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/6CC2FFC1-52BF-C24E-9EED-5FDA29763E52.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/7BC94854-0F06-5B42-B80F-D703B8F46258.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/814690D4-DF2D-2B4F-AE49-85C22EDED5EF.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/B965EE1E-B467-8D46-A50C-136A15F86C17.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/CFE0F4C1-9DF3-5443-8978-8E3E7D19DD13.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/DD418E67-CF94-6B42-8AF5-55FD614A3D07.root
+- root://xrootd-cms.infn.it///store/mc/RunIIAutumn18NanoAODv7/SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/30000/EB9100D1-E684-E448-8C29-656AF889B759.root
+generator_weight: 1.0
+nevents: 12
+nfiles: 12
+nick: SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+sample_type: rem_htautau
+xsec: 1.0
