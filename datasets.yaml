@@ -2869,6 +2869,15 @@ SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18Nan
   nick: SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X
   sample_type: rem_htautau
   xsec: 1.0
+SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 12
+  nfiles: 12
+  nick: SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
 SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
   dbs: /SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
   era: 2018
