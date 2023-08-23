@@ -169,6 +169,506 @@ DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8_RunIISummer20UL17NanoAODv9-106X
   nick: DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8_RunIISummer20UL17NanoAODv9-106X
   sample_type: dyjets
   xsec: 5129.0
+Background:
+  nick: Background
+  xsec: 1.0
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1.0
+  nfiles: 1.0
+  sample_type: Background
+Background1:
+  nick: Background1
+  xsec: 1.0
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1.0
+  nfiles: 1.0
+  sample_type: Background1
+Background2:
+  nick: Background2
+  xsec: 1.0
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1.0
+  nfiles: 1.0
+  sample_type: Background2
+Background3:
+  nick: Background3
+  xsec: 1.0
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1.0
+  nfiles: 1.0
+  sample_type: Background3
+
+SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v2/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 12
+  nfiles: 12
+  nick: SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+
+SUSYGluGluToHToTauTau_M1000_Tanb11_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X:
+  dbs: /SUSYGluGluToHToTauTau_M1000_Tanb11_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M1000_Tanb11_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X:
+  dbs: /SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 3
+  nick: SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 6
+  nfiles: 6
+  nick: SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M125_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M125_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 6
+  nfiles: 6
+  nick: SUSYGluGluToHToTauTau_M125_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M130_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M130_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M130_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M1400_Tanb21_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X:
+  dbs: /SUSYGluGluToHToTauTau_M1400_Tanb21_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 4
+  nick: SUSYGluGluToHToTauTau_M1400_Tanb21_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M140_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M140_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M140_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M1600_Tanb31_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X:
+  dbs: /SUSYGluGluToHToTauTau_M1600_Tanb31_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M1600_Tanb31_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020_102X
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M160_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M160_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M160_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M180_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M180_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 5
+  nfiles: 5
+  nick: SUSYGluGluToHToTauTau_M180_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M200_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M200_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M200_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M250_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M250_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M250_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M300_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M300_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 500000
+  nfiles: 2
+  nick: SUSYGluGluToHToTauTau_M300_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 500000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 500000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 12
+  nick: SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M60_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M60_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 7
+  nfiles: 7
+  nick: SUSYGluGluToHToTauTau_M60_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M80_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M80_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 7
+  nfiles: 7
+  nick: SUSYGluGluToHToTauTau_M80_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7
+  sample_type: rem_htautau
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 7
+  nick: SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: rem_htautau
+  xsec: 1.0
+
+Xtohh60:
+  dbs: Xtohh60
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh60
+  sample_type: BSM_60
+  xsec: 1.0
+
+Xtohh80:
+  dbs: Xtohh80
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh80
+  sample_type: BSM_80
+  xsec: 1.0
+
+Xtohh100:
+  dbs: Xtohh100
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh100
+  sample_type: BSM_100
+  xsec: 1.0
+
+
+Xtohh120:
+  dbs: Xtohh120
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh120
+  sample_type: BSM_120
+  xsec: 1.0
+
+Xtohh125:
+  dbs: Xtohh125
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh125
+  sample_type: BSM_125
+  xsec: 1.0
+
+Xtohh200:
+  dbs: Xtohh200
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh200
+  sample_type: BSM_200
+  xsec: 1.0
+
+Xtohh300:
+  dbs: Xtohh300
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh300
+  sample_type: BSM_300
+  xsec: 1.0
+
+Xtohh400:
+  dbs: Xtohh400
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh400
+  sample_type: BSM_400
+  xsec: 1.0
+
+Xtohh500:
+  dbs: Xtohh500
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh500
+  sample_type: BSM_500
+  xsec: 1.0
+
+Xtohh600:
+  dbs: Xtohh600
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh600
+  sample_type: BSM_600
+  xsec: 1.0
+Xtohh700:
+  dbs: Xtohh700
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh700
+  sample_type: BSM_700
+  xsec: 1.0
+Xtohh800:
+  dbs: Xtohh800
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh800
+  sample_type: BSM_800
+  xsec: 1.0
+Xtohh900:
+  dbs: Xtohh900
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh900
+  sample_type: BSM_900
+  xsec: 1.0
+Xtohh1000:
+  dbs: Xtohh1000
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh1000
+  sample_type: BSM_1000
+  xsec: 1.0
+Xtohh1200:
+  dbs: Xtohh1200
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh1200
+  sample_type: BSM_1200
+  xsec: 1.0
+Xtohh1400:
+  dbs: Xtohh1400
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh1400
+  sample_type: BSM_1400
+  xsec: 1.0
+
+Xtohh1600:
+  dbs: Xtohh1600
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 2
+  nick: Xtohh1600
+  sample_type: BSM_1600
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 500000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: BSM_400
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 500000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: BSM_500
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 12
+  nick: SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: BSM_600
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: BSM_700
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: BSM_800
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020:
+  dbs: /SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM
+  era: 2018
+  generator_weight: 1.0
+  nevents: 200000
+  nfiles: 7
+  nick: SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
+  sample_type: BSM_900
+  xsec: 1.0
+SingleMuon_Run2018A-UL2018:
+  dbs: /SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD
+  era: 2018
+FF_Combined:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: FF_Combined
+  sample_type: fakes
+  xsec: 1.0
+# Fake:
+#   dbs: /sample/not/published
+#   era: 2018
+#   generator_weight: 1.0
+#   nevents: 1
+#   nfiles: 1
+#   nick: Fake
+#   sample_type: fakes
+#   xsec: 1.0
+
+FF_DR_ttbar:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: FF_DR_ttbar
+  sample_type: fakes
+  xsec: 1.0
+FF_DR_W:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: FF_DR_W
+  sample_type: fakes
+  xsec: 1.0
+FF_DR_QCD:
+  dbs: /sample/not/published
+  era: 2018
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: FF_DR_QCD
+  sample_type: fakes
+  xsec: 1.0
 DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8_RunIISummer20UL18NanoAODv9-106X:
   dbs: /DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM
   era: 2018
