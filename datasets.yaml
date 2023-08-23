@@ -401,7 +401,195 @@ SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18Nano
   nick: SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIAutumn18NanoAODv7-Nano02Apr2020
   sample_type: rem_htautau
   xsec: 1.0
-
+SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 961000
+  nfiles: 7
+  nick: SUSYGluGluToHToTauTau_M100_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_100
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M1200_Tanb15_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_1200
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 979000
+  nfiles: 2
+  nick: SUSYGluGluToHToTauTau_M120_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_120
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M125_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M125_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 994000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M125_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_125
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M130_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M130_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 2
+  nick: SUSYGluGluToHToTauTau_M130_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_130
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M1400_Tanb21_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M1400_Tanb21_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 10
+  nick: SUSYGluGluToHToTauTau_M1400_Tanb21_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_1400
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M140_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M140_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 7
+  nick: SUSYGluGluToHToTauTau_M140_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_140
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M1600_Tanb31_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M1600_Tanb31_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M1600_Tanb31_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_1600
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M160_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M160_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 100000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M160_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_160
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M180_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M180_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M180_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_180
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M200_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M200_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 8
+  nick: SUSYGluGluToHToTauTau_M200_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_200
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M250_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M250_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 5
+  nick: SUSYGluGluToHToTauTau_M250_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_250
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M300_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M300_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M300_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_300
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 2
+  nick: SUSYGluGluToHToTauTau_M400_Tanb4_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_400
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 2
+  nick: SUSYGluGluToHToTauTau_M500_Tanb5_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_500
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M600_Tanb6_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_600
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M60_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M60_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 2
+  nick: SUSYGluGluToHToTauTau_M60_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_60
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M700_Tanb8_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_700
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M800_Tanb9_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_800
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M80_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M80_Tanb1_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v2/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 12
+  nick: SUSYGluGluToHToTauTau_M80_Tanb1_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_80
+  xsec: 1.0
+SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7:
+  dbs: /SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8/RunIIFall17NanoAODv7-PU2017_12Apr2018_Nano02Apr2020_102X_mc2017_realistic_v8-v1/NANOAODSIM
+  era: 2017
+  generator_weight: 1.0
+  nevents: 1000000
+  nfiles: 1
+  nick: SUSYGluGluToHToTauTau_M900_Tanb10_TuneCP5_13TeV-powheg-pythia8_RunIIFall17NanoAODv7
+  sample_type: BSM_900
+  xsec: 1.0
 Xtohh60:
   dbs: Xtohh60
   era: 2018
