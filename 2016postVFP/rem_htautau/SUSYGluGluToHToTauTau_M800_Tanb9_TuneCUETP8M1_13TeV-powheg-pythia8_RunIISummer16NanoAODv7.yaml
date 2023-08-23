@@ -1,0 +1,12 @@
+dbs: /SUSYGluGluToHToTauTau_M800_Tanb9_TuneCUETP8M1_13TeV-powheg-pythia8/RunIISummer16NanoAODv7-PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM
+era: 2016postVFP
+filelist:
+- root://xrootd-cms.infn.it///store/mc/RunIISummer16NanoAODv7/SUSYGluGluToHToTauTau_M800_Tanb9_TuneCUETP8M1_13TeV-powheg-pythia8/NANOAODSIM/PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/260000/07521372-8AC5-8641-AEA0-AF335B0221B0.root
+- root://xrootd-cms.infn.it///store/mc/RunIISummer16NanoAODv7/SUSYGluGluToHToTauTau_M800_Tanb9_TuneCUETP8M1_13TeV-powheg-pythia8/NANOAODSIM/PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/260000/A02F408F-913B-254A-BB51-7421E979D103.root
+- root://xrootd-cms.infn.it///store/mc/RunIISummer16NanoAODv7/SUSYGluGluToHToTauTau_M800_Tanb9_TuneCUETP8M1_13TeV-powheg-pythia8/NANOAODSIM/PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/260000/CACE561A-46BA-D34F-BD33-DC97E5DAAB66.root
+generator_weight: 1.0
+nevents: 3
+nfiles: 3
+nick: SUSYGluGluToHToTauTau_M800_Tanb9_TuneCUETP8M1_13TeV-powheg-pythia8_RunIISummer16NanoAODv7
+sample_type: rem_htautau
+xsec: 1.0
