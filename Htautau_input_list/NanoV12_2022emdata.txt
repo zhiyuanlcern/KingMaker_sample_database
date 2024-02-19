@@ -1,0 +1,7 @@
+MuonEG_Sep2022_Run2022C
+MuonEG_Sep2022_Run2022D
+EGamma_Sep2022_Run2022C
+EGamma_Sep2022_Run2022D
+SingleMuon_Sep2022_Run2022C
+Muon_Sep2022_Run2022C
+Muon_Sep2022_Run2022D
