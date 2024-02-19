@@ -72,30 +72,30 @@
 
 
 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_wg.txt  --workers 1 --production-tag NanoV12_2022MC_wg >> NanoV12_2022MC_wg.log & 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_wg.txt  --workers 1 --production-tag NanoV12_2022EEMC_wg >> NanoV12_2022EEMC_wg.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_wg.txt  --workers 1 --production-tag NanoV12_2022MC_wg >> NanoV12_2022MC_wg.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_wg.txt  --workers 1 --production-tag NanoV12_2022EEMC_wg >> NanoV12_2022EEMC_wg.log & 
 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_dyjets.txt  --workers 1 --production-tag NanoV12_2022MC_dyjets >> NanoV12_2022MC_dyjets.log & 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_diboson.txt  --workers 1 --production-tag NanoV12_2022MC_diboson >> NanoV12_2022MC_diboson.log & 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_ttbar.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar >> NanoV12_2022MC_ttbar.log & 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_wjets.txt  --workers 1 --production-tag NanoV12_2022MC_wjets >> NanoV12_2022MC_wjets.log & 
-#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_singletop.txt  --workers 1 --production-tag NanoV12_2022MC_singletop >> NanoV12_2022MC_singletop.log & 
-#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_hbb.txt  --workers 1 --production-tag NanoV12_2022MC_hbb >> NanoV12_2022MC_hbb.log & 
-#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau >> NanoV12_2022MC_htautau.log & 
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022data.txt  --workers 1 --production-tag NanoV12_2022data >> NanoV12_2022data.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_dyjets.txt  --workers 1 --production-tag NanoV12_2022MC_dyjets >> NanoV12_2022MC_dyjets.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_diboson.txt  --workers 1 --production-tag NanoV12_2022MC_diboson >> NanoV12_2022MC_diboson.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_ttbar.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar >> NanoV12_2022MC_ttbar.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_wjets.txt  --workers 1 --production-tag NanoV12_2022MC_wjets >> NanoV12_2022MC_wjets.log & 
+#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_singletop.txt  --workers 1 --production-tag NanoV12_2022MC_singletop >> NanoV12_2022MC_singletop.log & 
+#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_hbb.txt  --workers 1 --production-tag NanoV12_2022MC_hbb >> NanoV12_2022MC_hbb.log & 
+#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau >> NanoV12_2022MC_htautau.log & 
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022data.txt  --workers 1 --production-tag NanoV12_2022data >> NanoV12_2022data.log & 
 
 
 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_dyjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_dyjets >> NanoV12_2022EEMC_dyjets.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_diboson.txt  --workers 1 --production-tag NanoV12_2022EEMC_diboson >> NanoV12_2022EEMC_diboson.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar >> NanoV12_2022EEMC_ttbar.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_wjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_wjets >> NanoV12_2022EEMC_wjets.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_singletop.txt  --workers 1 --production-tag NanoV12_2022EEMC_singletop >> NanoV12_2022EEMC_singletop.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_hbb.txt  --workers 1 --production-tag NanoV12_2022EEMC_hbb >> NanoV12_2022EEMC_hbb.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau >> NanoV12_2022EEMC_htautau.log & 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEdata.txt  --workers 1 --production-tag NanoV12_2022EEdata >> NanoV12_2022EEdata.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_dyjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_dyjets >> NanoV12_2022EEMC_dyjets.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_diboson.txt  --workers 1 --production-tag NanoV12_2022EEMC_diboson >> NanoV12_2022EEMC_diboson.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar >> NanoV12_2022EEMC_ttbar.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_wjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_wjets >> NanoV12_2022EEMC_wjets.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_singletop.txt  --workers 1 --production-tag NanoV12_2022EEMC_singletop >> NanoV12_2022EEMC_singletop.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_hbb.txt  --workers 1 --production-tag NanoV12_2022EEMC_hbb >> NanoV12_2022EEMC_hbb.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau >> NanoV12_2022EEMC_htautau.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEdata.txt  --workers 1 --production-tag NanoV12_2022EEdata >> NanoV12_2022EEdata.log & 
 
-  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEdata_et.txt  --workers 1 --production-tag 2022EEdata_et > 2022EEdata_et.log & 
+  # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEdata_et.txt  --workers 1 --production-tag 2022EEdata_et > 2022EEdata_et.log & 
   
   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Run3_missingMC.txt  --workers 1 --production-tag Run3_missingMC > Run3_missingMC.log & 
 # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Run3_missing.txt  --workers 1 --production-tag test >> Run3_missing.log & 
@@ -131,39 +131,40 @@
 
 
 # sed -i 's/scopes = \["em"\]/scopes = ["et"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022etdata.txt --production-tag NanoV12_2022etdata >>NanoV12_2022etdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022etdata.txt --production-tag NanoV12_2022etdata >>NanoV12_2022etdata.log &
 # sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022mtdata.txt --production-tag NanoV12_2022mtdata >>NanoV12_2022mtdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022mtdata.txt --production-tag NanoV12_2022mtdata >>NanoV12_2022mtdata.log &
 # sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022ttdata.txt --production-tag NanoV12_2022ttdata >>NanoV12_2022ttdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022ttdata.txt --production-tag NanoV12_2022ttdata >>NanoV12_2022ttdata.log &
 # sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022emdata.txt --production-tag NanoV12_2022emdata >>NanoV12_2022emdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022emdata.txt --production-tag NanoV12_2022emdata >>NanoV12_2022emdata.log &
 
 
 # sed -i 's/scopes = \["em"\]/scopes = ["et"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEetdata.txt --production-tag NanoV12_2022EEetdata >>NanoV12_2022EEetdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEetdata.txt --production-tag NanoV12_2022EEetdata >>NanoV12_2022EEetdata.log &
 # sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEmtdata.txt --production-tag NanoV12_2022EEmtdata >>NanoV12_2022EEmtdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEmtdata.txt --production-tag NanoV12_2022EEmtdata >>NanoV12_2022EEmtdata.log &
 # sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEttdata.txt --production-tag NanoV12_2022EEttdata >>NanoV12_2022EEttdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEttdata.txt --production-tag NanoV12_2022EEttdata >>NanoV12_2022EEttdata.log &
 # sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEemdata.txt --production-tag NanoV12_2022EEemdata >>NanoV12_2022EEemdata.log &
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEemdata.txt --production-tag NanoV12_2022EEemdata >>NanoV12_2022EEemdata.log &
 
 
 
-# echo running for et; sed -i 's/scopes = \["em"\]/scopes = ["et"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["et"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022etdata.txt --production-tag NanoV12_2022etdata >>NanoV12_2022etdata.log & 
+# echo running for et; sed -i 's/scopes = \["em"\]/scopes = ["et"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["et"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022etdata.txt --production-tag NanoV12_2022etdata >>NanoV12_2022etdata.log & 
 # sleep 60 ;
-# echo running for mt; sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["mt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022mtdata.txt --production-tag NanoV12_2022mtdata >>NanoV12_2022mtdata.log &
+# echo running for mt; sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["mt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022mtdata.txt --production-tag NanoV12_2022mtdata >>NanoV12_2022mtdata.log &
 # sleep 60 ;
-# echo running for tt; sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["tt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022ttdata.txt --production-tag NanoV12_2022ttdata >>NanoV12_2022ttdata.log &
+# echo running for tt; sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["tt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022ttdata.txt --production-tag NanoV12_2022ttdata >>NanoV12_2022ttdata.log &
 # sleep 60;
-# echo running for em; sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["em"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022emdata.txt --production-tag NanoV12_2022emdata >>NanoV12_2022emdata.log &
+# echo running for em; sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["em"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022emdata.txt --production-tag NanoV12_2022emdata >>NanoV12_2022emdata.log &
 
 
 
 first_chan='em'
-for channel in  'mt' 'tt' ;
+# for channel in  'mt' 'et' ;
 # for channel in 'et'  ;
+for channel in  'em' 'tt' ;
 
 do 
 echo running for ${channel}; 
@@ -172,25 +173,29 @@ sed -i  's/scopes = \["'${first_chan}'"\]/scopes = ["'${channel}'"]/g' lawluigi_
 if grep -q 'scopes = \["'"${channel}"'"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg; 
 then
 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EE${channel}data.txt --production-tag NanoV12_2022EE${channel}data >>NanoV12_2022EE${channel}data.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022${channel}data.txt --production-tag NanoV12_2022${channel}data >>NanoV12_2022${channel}data.log & 
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EE${channel}data.txt --production-tag NanoV12_2022EE${channel}data >>NanoV12_2022EE${channel}data.log & 
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022${channel}data.txt --production-tag NanoV12_2022${channel}data >>NanoV12_2022${channel}data.log & 
 # sleep 200
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_dyjets.txt  --workers 1 --production-tag NanoV12_2022MC_dyjets${channel} >> NanoV12_2022MC_dyjets${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_wjets.txt  --workers 1 --production-tag NanoV12_2022MC_wjets${channel} >> NanoV12_2022MC_wjets${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_dyjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_dyjets${channel} >> NanoV12_2022EEMC_dyjets${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_wjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_wjets${channel} >> NanoV12_2022EEMC_wjets${channel}.log & 
-# sleep 6000
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_singletop.txt  --workers 1 --production-tag NanoV12_2022EEMC_singletop${channel} >> NanoV12_2022EEMC_singletop${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_diboson.txt  --workers 1 --production-tag NanoV12_2022EEMC_diboson${channel} >> NanoV12_2022EEMC_diboson${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar${channel} >> NanoV12_2022EEMC_ttbar${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau${channel} >> NanoV12_2022EEMC_htautau${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_hbb.txt  --workers 1 --production-tag NanoV12_2022EEMC_hbb${channel} >> NanoV12_2022EEMC_hbb${channel}.log & 
-# sleep 3000
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_singletop.txt  --workers 1 --production-tag NanoV12_2022MC_singletop${channel} >> NanoV12_2022MC_singletop${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_diboson.txt  --workers 1 --production-tag NanoV12_2022MC_diboson${channel} >> NanoV12_2022MC_diboson${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_ttbar.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar${channel} >> NanoV12_2022MC_ttbar${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau${channel} >> NanoV12_2022MC_htautau${channel}.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_hbb.txt  --workers 1 --production-tag NanoV12_2022MC_hbb${channel} >> NanoV12_2022MC_hbb${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_dyjets.txt  --workers 1 --production-tag NanoV12_2022MC_dyjets${channel} >> NanoV12_2022MC_dyjets${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_wjets.txt  --workers 1 --production-tag NanoV12_2022MC_wjets${channel} >> NanoV12_2022MC_wjets${channel}.log & 
+sleep 600
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_singletop.txt  --workers 1 --production-tag NanoV12_2022MC_singletop${channel} >> NanoV12_2022MC_singletop${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_diboson.txt  --workers 1 --production-tag NanoV12_2022MC_diboson${channel} >> NanoV12_2022MC_diboson${channel}.log & 
+sleep 3000
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_ttbar.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar${channel} >> NanoV12_2022MC_ttbar${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau${channel} >> NanoV12_2022MC_htautau${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_hbb.txt  --workers 1 --production-tag NanoV12_2022MC_hbb${channel} >> NanoV12_2022MC_hbb${channel}.log & 
+sleep 3000
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_dyjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_dyjets${channel} >> NanoV12_2022EEMC_dyjets${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_wjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_wjets${channel} >> NanoV12_2022EEMC_wjets${channel}.log & 
+sleep 3000
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_singletop.txt  --workers 1 --production-tag NanoV12_2022EEMC_singletop${channel} >> NanoV12_2022EEMC_singletop${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_diboson.txt  --workers 1 --production-tag NanoV12_2022EEMC_diboson${channel} >> NanoV12_2022EEMC_diboson${channel}.log & 
+sleep 3000
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar${channel} >> NanoV12_2022EEMC_ttbar${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau${channel} >> NanoV12_2022EEMC_htautau${channel}.log & 
+nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_hbb.txt  --workers 1 --production-tag NanoV12_2022EEMC_hbb${channel} >> NanoV12_2022EEMC_hbb${channel}.log & 
+sleep 3000
 
 
 # python3 scripts/ProductionStatus.py  --analysis tau  --config config --samplelist Htautau_input_list/NanoV12_2022MC_dyjets.txt  --tag 
@@ -219,66 +224,66 @@ done
 
 
 
-first_chan='tt'
-for channel in 'em' ;
-# for channel in 'et'  ;
+# first_chan='tt'
+# for channel in 'em' ;
+# # for channel in 'et'  ;
 
-do 
-echo running for ${channel}; 
-sed -i  's/scopes = \["'${first_chan}'"\]/scopes = ["'${channel}'"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  
+# do 
+# echo running for ${channel}; 
+# sed -i  's/scopes = \["'${first_chan}'"\]/scopes = ["'${channel}'"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  
 
-if grep -q 'scopes = \["'"${channel}"'"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg; 
-then
+# if grep -q 'scopes = \["'"${channel}"'"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg; 
+# then
 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EE${channel}data.txt --production-tag NanoV12_2022EE${channel}data >>NanoV12_2022EE${channel}data.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022${channel}data.txt --production-tag NanoV12_2022${channel}data >>NanoV12_2022${channel}data.log & 
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EE${channel}data.txt --production-tag NanoV12_2022EE${channel}data >>NanoV12_2022EE${channel}data.log & 
-# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022${channel}data.txt --production-tag NanoV12_2022${channel}data >>NanoV12_2022${channel}data.log & 
-# sleep 100
-sleep 10 ;
-fi
-first_chan=${channel}
-done
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EE${channel}data.txt --production-tag NanoV12_2022EE${channel}data >>NanoV12_2022EE${channel}data.log & 
+# nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022${channel}data.txt --production-tag NanoV12_2022${channel}data >>NanoV12_2022${channel}data.log & 
+# # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EE${channel}data.txt --production-tag NanoV12_2022EE${channel}data >>NanoV12_2022EE${channel}data.log & 
+# # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022${channel}data.txt --production-tag NanoV12_2022${channel}data >>NanoV12_2022${channel}data.log & 
+# # sleep 100
+# sleep 10 ;
+# fi
+# first_chan=${channel}
+# done
 
 
 
-# echo running for mt; sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["mt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEmtdata.txt --production-tag NanoV12_2022EEmtdata >>NanoV12_2022EEmtdata.log &
+# echo running for mt; sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["mt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEmtdata.txt --production-tag NanoV12_2022EEmtdata >>NanoV12_2022EEmtdata.log &
 # sleep 60 ;
-# echo running for tt; sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["tt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEttdata.txt --production-tag NanoV12_2022EEttdata >>NanoV12_2022EEttdata.log &
+# echo running for tt; sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["tt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEttdata.txt --production-tag NanoV12_2022EEttdata >>NanoV12_2022EEttdata.log &
 # sleep 60;
-# echo running for em; sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["em"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEemdata.txt --production-tag NanoV12_2022EEemdata >>NanoV12_2022EEemdata.log &
+# echo running for em; sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["em"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEemdata.txt --production-tag NanoV12_2022EEemdata >>NanoV12_2022EEemdata.log &
 
 
 
 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_dyjets.txt  --workers 1 --production-tag NanoV12_2022MC_dyjets >> NanoV12_2022MC_dyjets.log & 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_diboson.txt  --workers 1 --production-tag NanoV12_2022MC_diboson >> NanoV12_2022MC_diboson.log & 
-# #  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_ttbar.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar >> NanoV12_2022MC_ttbar.log & 
-#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_wjets.txt  --workers 1 --production-tag NanoV12_2022MC_wjets >> NanoV12_2022MC_wjets.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_singletop.txt  --workers 1 --production-tag NanoV12_2022MC_singletop >> NanoV12_2022MC_singletop.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_hbb.txt  --workers 1 --production-tag NanoV12_2022MC_hbb >> NanoV12_2022MC_hbb.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau >> NanoV12_2022MC_htautau.log & 
-# # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022data.txt  --workers 1 --production-tag NanoV12_2022data >> NanoV12_2022data.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_dyjets.txt  --workers 1 --production-tag NanoV12_2022MC_dyjets >> NanoV12_2022MC_dyjets.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_diboson.txt  --workers 1 --production-tag NanoV12_2022MC_diboson >> NanoV12_2022MC_diboson.log & 
+# #  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_ttbar.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar >> NanoV12_2022MC_ttbar.log & 
+#  nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_wjets.txt  --workers 1 --production-tag NanoV12_2022MC_wjets >> NanoV12_2022MC_wjets.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_singletop.txt  --workers 1 --production-tag NanoV12_2022MC_singletop >> NanoV12_2022MC_singletop.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_hbb.txt  --workers 1 --production-tag NanoV12_2022MC_hbb >> NanoV12_2022MC_hbb.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau >> NanoV12_2022MC_htautau.log & 
+# # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022data.txt  --workers 1 --production-tag NanoV12_2022data >> NanoV12_2022data.log & 
 
 
 
-#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_dyjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_dyjets >> NanoV12_2022EEMC_dyjets.log & 
-#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_diboson.txt  --workers 1 --production-tag NanoV12_2022EEMC_diboson >> NanoV12_2022EEMC_diboson.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar >> NanoV12_2022EEMC_ttbar.log & 
-#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_wjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_wjets >> NanoV12_2022EEMC_wjets.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_singletop.txt  --workers 1 --production-tag NanoV12_2022EEMC_singletop >> NanoV12_2022EEMC_singletop.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_hbb.txt  --workers 1 --production-tag NanoV12_2022EEMC_hbb >> NanoV12_2022EEMC_hbb.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau >> NanoV12_2022EEMC_htautau.log & 
-#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/NanoV12_2022EEdata.txt  --workers 1 --production-tag NanoV12_2022EEdata >> NanoV12_2022EEdata.log & 
+#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_dyjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_dyjets >> NanoV12_2022EEMC_dyjets.log & 
+#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_diboson.txt  --workers 1 --production-tag NanoV12_2022EEMC_diboson >> NanoV12_2022EEMC_diboson.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar >> NanoV12_2022EEMC_ttbar.log & 
+#   nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_wjets.txt  --workers 1 --production-tag NanoV12_2022EEMC_wjets >> NanoV12_2022EEMC_wjets.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_singletop.txt  --workers 1 --production-tag NanoV12_2022EEMC_singletop >> NanoV12_2022EEMC_singletop.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_hbb.txt  --workers 1 --production-tag NanoV12_2022EEMC_hbb >> NanoV12_2022EEMC_hbb.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau >> NanoV12_2022EEMC_htautau.log & 
+#   # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEdata.txt  --workers 1 --production-tag NanoV12_2022EEdata >> NanoV12_2022EEdata.log & 
 
 
-# echo running for et; sed -i 's/scopes = \["em"\]/scopes = ["et"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ; grep -q 'scopes = \["et"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_et >>missing__dyjets._etlog & 
+# echo running for et; sed -i 's/scopes = \["em"\]/scopes = ["et"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ; grep -q 'scopes = \["et"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_et >>missing__dyjets._etlog & 
 # sleep 60 ;
-# echo running for mt; sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["mt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_mt >>missing__dyjets_mt.log &
+# echo running for mt; sed -i 's/scopes = \["et"\]/scopes = ["mt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["mt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_mt >>missing__dyjets_mt.log &
 # sleep 60 ;
-# echo running for tt; sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["tt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_tt >>missing__dyjets_tt.log &
+# echo running for tt; sed -i 's/scopes = \["mt"\]/scopes = ["tt"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["tt"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_tt >>missing__dyjets_tt.log &
 # sleep 60;
-# echo running for em; sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["em"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_em >>missing__dyjets_em.log &
+# echo running for em; sed -i 's/scopes = \["tt"\]/scopes = ["em"]/g' lawluigi_configs/KingMaker_lxplus_luigi.cfg  ;  grep -q 'scopes = \["em"\]' lawluigi_configs/KingMaker_lxplus_luigi.cfg && nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/missing__dyjets.txt --production-tag missing__dyjets_em >>missing__dyjets_em.log &
 
 
 # nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Run3_missing.txt  --workers 1 --production-tag test >> Run3_missing.log & 
