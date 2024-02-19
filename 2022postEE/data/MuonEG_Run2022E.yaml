@@ -1,0 +1,25 @@
+dbs: /MuonEG/Run2022E-ReRecoNanoAODv11-v1/NANOAOD
+era: 2022postEE
+filelist:
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/27cd82d4-186f-4015-91ff-230acf40925b.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/4aabd330-7013-4bf6-94df-c627858ea100.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/4f3bea9c-d6bd-4842-8ec1-1c3f7cdc5fba.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/585a7713-03f2-44a8-a26e-56ae3f31e05a.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/7a882bf0-1611-4ce7-ba83-929f3973e033.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/936cec0e-3d04-4151-b0b7-93276d402410.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/98263a15-27aa-410b-b7c8-71629f2c513d.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/9f1410e7-2688-4d42-86fe-48f70ebc9810.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/a17b1cc2-041f-4437-97aa-d91262d2a949.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/ab151937-28d7-4f27-afc3-6dc59164c783.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/b48b2c69-e130-4b5c-ae8d-e2e31ec7bb74.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/ca9d1d3c-1bce-4a13-908c-87b91b72fd06.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/e358b773-49b0-41c8-a23a-2be56e561eca.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/50000/f4896d43-a807-40cd-a2f5-45eb6a46aa7b.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/60000/6efb158a-08af-4c4d-bd84-707745d797b5.root
+- root://xrootd-cms.infn.it///store/data/Run2022E/MuonEG/NANOAOD/ReRecoNanoAODv11-v1/60000/d5c3dd30-bd0d-4116-878e-9928967513b6.root
+generator_weight: 1.0
+nevents: 16
+nfiles: 16
+nick: MuonEG_Run2022E
+sample_type: data
+xsec: 1.0
