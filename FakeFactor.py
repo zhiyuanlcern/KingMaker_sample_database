@@ -46,18 +46,19 @@ else:
     print("wrong year provided")
     sys.exit(-10) 
 
-MC_weight_list = ["genWeight", "btag_weight", "id_wgt_tau_vsJet_Medium_2", "trg_wgt_ditau_crosstau_2", "genEventSumW" ]
+
+MC_weight_list = ["genWeight", "btag_weight", "id_wgt_tau_vsJet_Medium_2", "trg_wgt_ditau_crosstau_2", "genEventSumW" , "Xsec"]
 if channel == "et":
     lepton_selection = combinecut(Htautau.et_triggers_selections[era],Htautau.electron_selections,Htautau.lepton_veto,)
     complete_lepton_selection = lepton_selection
     var = "pt_2"
-    MC_weight =  f'is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} *  id_wgt_tau_vsJet_Medium_2 * id_wgt_ele_wpTight * (trg_wgt_ditau_crosstau_2 * trg_cross_ele24tau30_hps + 1 * (trg_cross_ele24tau30_hps <1))  / genEventSumW  : genWeight'
+    MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} *  id_wgt_tau_vsJet_Medium_2 * id_wgt_ele_wpTight * (trg_wgt_ditau_crosstau_2 * trg_cross_ele24tau30_hps + 1 * (trg_cross_ele24tau30_hps <1))  / genEventSumW  :  double(1.0))'
     MC_weight_list.extend(["id_wgt_ele_wpTight" ])
 elif channel == "mt":
     lepton_selection = combinecut(Htautau.mt_triggers_selections[era],Htautau.muon_selections,Htautau.lepton_veto,)
     complete_lepton_selection  = lepton_selection
     var = "pt_2"
-    MC_weight =  f'is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} * id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  * (trg_wgt_ditau_crosstau_2 * trg_cross_mu20tau27_hps  + 1 * (trg_cross_mu20tau27_hps < 1) )/ genEventSumW  : genWeight'
+    MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} * id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  * (trg_wgt_ditau_crosstau_2 * trg_cross_mu20tau27_hps  + 1 * (trg_cross_mu20tau27_hps < 1) )/ genEventSumW  :  double(1.0) )'
     MC_weight_list.extend(["iso_wgt_mu_1"])
 elif channel == "tt":
     # lepton_selection = combinecut(Htautau.tt_triggers_selections[era],Htautau.tt_secondtau_selections,Htautau.lepton_veto)
@@ -65,7 +66,8 @@ elif channel == "tt":
     # lepton_selection = combinecut(Htautau.lepton_veto)
     complete_lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto) #Htautau.tt_triggers_selections[era]
     var = "pt_1"
-    MC_weight =  f'is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi}  / genEventSumW  : genWeight'
+    MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} * id_wgt_tau_vsJet_Medium_2  * id_wgt_tau_vsJet_Medium_1 * ( trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 + 1 * (trg_double_tau35_mediumiso_hps <1)) / genEventSumW  : double(1.0))'
+    MC_weight_list.extend(["id_wgt_tau_vsJet_Medium_1", "trg_wgt_ditau_crosstau_1"])
 else:
     exit("wrong channel provided")
 
@@ -528,7 +530,8 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
     samples = getall_list(input_path, samples_list)
     print("using samples: ", samples)
     samples_noW = getall_list(input_path, samples_list, exclude_wjets=True)
-    # print(samples)
+    print("using samples: ", samples)
+    print("using weight:  ",  f'({MC_weight})/{lumi}')
     df_withW = R.RDataFrame('ntuple', samples).Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
         f'({MC_weight})/{lumi}')
     df_noW = R.RDataFrame('ntuple', samples_noW).Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
@@ -560,9 +563,9 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
                     # Generate the C++ code for the interpolation function
                     cpp_code = f"""
                     
-                    TGraph* graph_{npreb}_{ratio}_{DR}{syst} = (TGraph*)f_FakeFactor->Get("{graph_name}");
-                    double interpolate_{npreb}_{ratio}_{DR}{syst}(double x) {{
-                        return graph_{npreb}_{ratio}_{DR}{syst}->Eval(x);
+                    TGraph* graph_{npreb}_{ratio}_{DR}{syst}0 = (TGraph*)f_FakeFactor->Get("{graph_name}");
+                    double interpolate_{npreb}_{ratio}_{DR}{syst}0(double x) {{
+                        return graph_{npreb}_{ratio}_{DR}{syst}0->Eval(x);
                     }}
                     """
                     # print(cpp_code)
@@ -580,7 +583,7 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
                     # Combine cuts and weights into a single string
                     if combined_weight_str != "":
                         combined_weight_str += " + "
-                    combined_weight_str += f"({combinecut(nprebjets_dic[npreb], ratio_dic[ratio])}) * interpolate_{npreb}_{ratio}_{DR}{syst}({var})"
+                    combined_weight_str += f"({combinecut(nprebjets_dic[npreb], ratio_dic[ratio])}) * interpolate_{npreb}_{ratio}_{DR}{syst}0({var})"
             # print(f"combined_weight_str, {combined_weight_str}")
             df0 = df_noW if DR == "W" else df_withW
             if syst == "":
@@ -930,7 +933,7 @@ def clousre_correction( run_double_correction = True, index = 1):
 
 if __name__ == '__main__':        
     
-    # R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
+    
     # if run:
     #     df_d = get_df(input_path, samples_list) # acquire dataframe 
     # else:
@@ -942,63 +945,52 @@ if __name__ == '__main__':
     # write_FF_f(h_n, FF_output, syst=True) # save the calculated FF from the last step in FakeFactor.root 
     # FF_input.Close()
     # FF_output.Close()
-    # # R.DisableImplicitMT() ## R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
-    # for DR in cut_dic:
-    #     for npreb in nprebjets_dic:
-    #             for ratio in ratio_dic:
-    #                 Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = True, syst="") ## Produce FF_tot_stat systematics
-    #                 for sys in ["_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsDown","_FF_wjetsUp"  ]:
-    #                     Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = False, syst= sys) ## Produce FF_ttbar, FF_Wjets systematics
+    # R.DisableImplicitMT() ## R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
+    for DR in cut_dic:
+        for npreb in nprebjets_dic:
+                for ratio in ratio_dic:
+                    Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = True, syst="") ## Produce FF_tot_stat systematics
+                    for sys in ["_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsDown","_FF_wjetsUp"  ]:
+                        Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = False, syst= sys) ## Produce FF_ttbar, FF_Wjets systematics
     # if produce_final_fakes :
-    #     # R.EnableImplicitMT()
-    #     # produce the fakes
+        # produce the fakes
         
-    #     # produce_fake(input_path, samples_list, final_string)
-    #     df_dict, columns = produce_fake(input_path, samples_list, [
-    #         "_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"
-    #         ], save_DR = True) 
-    # #    always save_DR , the output is needed by the closure corrections
-    #     combine_Fakes(input_path,df_dict,columns, True)
-    ##     ## link to a new directory 
-    ##     ID_path = f'{input_path}_SR_ID/'
-    ##     os.system(f'mkdir -p {ID_path}' )
-    ##     os.chdir(ID_path)
-    ##     os.system('mkdir -p bkp/' )
-    ##     os.system('rm  bkp/*')
-    ##     os.system('ln -s ../' + input_path + '/* . ')
-    ##     os.system('mv FF_Combined.root bkp')
-    ##     os.system('rm FF*.root Fake*root')
-    ##     os.system('mv bkp/* .')       
-    ##     os.chdir(f"..")
-    if run:
-        ## R.DisableImplicitMT() ##  R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
-        clousre_correction(run_double_correction=False , index=1)
-        os.system(f"mkdir -p {input_path}_corrected/")
-        os.chdir(f"{input_path}_corrected/")
-        os.system(f'ln -s ../{input_path}/* .')
-        os.system(f'mv FF* bkp')
-        os.chdir(f"..")
-        print(os.getcwd())
-        print("moving files to single corrected folder")
-        os.system(f'mv {input_path}/FF_*closure*root {input_path}_corrected/')  
-        os.system(f'mv {input_path}_corrected/FF_Combinedclosure_corrected.root {input_path}_corrected/FF_Combined.root')  
-        os.system(f'mv {input_path}_corrected/FF_QCD_closure_corrected.root {input_path}_corrected/FF_QCD.root')  
-        os.system(f'mv {input_path}_corrected/FF_ttbar_closure_corrected.root {input_path}_corrected/FF_ttbar.root')  
-        os.system(f'mv {input_path}_corrected/FF_W_closure_corrected.root {input_path}_corrected/FF_W.root')  
-        os.system(f'mv {input_path}_corrected/bkp/FF_ttbar.root {input_path}_corrected/')  
-        if channel != "tt":
-            # after running the previous block, run the second block
-            clousre_correction(run_double_correction=True, index=2 )
-            os.system(f"mkdir -p {input_path}_double_corrected/")
-            os.chdir(f"{input_path}_double_corrected/")
-            os.system(f'ln -s ../{input_path}/* .')
-            os.system(f'mv FF* bkp')
-            os.chdir(f"..")
-            print(os.getcwd())
-            print("moving files to double corrected folder")
-            os.system(f'mv {input_path}/FF_*double_corrected*root {input_path}_double_corrected/')  
-            os.system(f'mv {input_path}_double_corrected/FF_Combineddouble_corrected.root {input_path}_double_corrected/FF_Combined.root')  
-            os.system(f'mv {input_path}_double_corrected/FF_QCD_double_corrected.root {input_path}_double_corrected/FF_QCD.root')  
-            os.system(f'mv {input_path}_double_corrected/FF_ttbar_double_corrected.root {input_path}_double_corrected/FF_ttbar.root')  
-            os.system(f'mv {input_path}_double_corrected/FF_W_double_corrected.root {input_path}_double_corrected/FF_W.root')  
-            os.system(f'mv {input_path}_double_corrected/bkp/FF_ttbar.root {input_path}_double_corrected/')  
+        # df_dict, columns = produce_fake(input_path, samples_list, [])
+        df_dict, columns = produce_fake(input_path, samples_list, [
+            "_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"
+            ], save_DR = True) 
+        #    always save_DR , the output is needed by the closure corrections
+        combine_Fakes(input_path,df_dict,columns, True)
+
+    # if run:
+    ## R.DisableImplicitMT() ##  R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
+    # clousre_correction(run_double_correction=False , index=1)
+    # os.system(f"mkdir -p {input_path}_corrected/")
+    # os.chdir(f"{input_path}_corrected/")
+    # os.system(f'ln -s ../{input_path}/* .')
+    # os.system(f'mv FF* bkp')
+    # os.chdir(f"..")
+    # print(os.getcwd())
+    # print("moving files to single corrected folder")
+    # os.system(f'mv {input_path}/FF_*closure*root {input_path}_corrected/')  
+    # os.system(f'mv {input_path}_corrected/FF_Combinedclosure_corrected.root {input_path}_corrected/FF_Combined.root')  
+    # os.system(f'mv {input_path}_corrected/FF_QCD_closure_corrected.root {input_path}_corrected/FF_QCD.root')  
+    # os.system(f'mv {input_path}_corrected/FF_ttbar_closure_corrected.root {input_path}_corrected/FF_ttbar.root')  
+    # os.system(f'mv {input_path}_corrected/FF_W_closure_corrected.root {input_path}_corrected/FF_W.root')  
+    # os.system(f'mv {input_path}_corrected/bkp/FF_ttbar.root {input_path}_corrected/')  
+    # if channel != "tt":
+    #     # after running the previous block, run the second block
+    #     clousre_correction(run_double_correction=True, index=2 )
+    #     os.system(f"mkdir -p {input_path}_double_corrected/")
+    #     os.chdir(f"{input_path}_double_corrected/")
+    #     os.system(f'ln -s ../{input_path}/* .')
+    #     os.system(f'mv FF* bkp')
+    #     os.chdir(f"..")
+    #     print(os.getcwd())
+    #     print("moving files to double corrected folder")
+    #     os.system(f'mv {input_path}/FF_*double_corrected*root {input_path}_double_corrected/')  
+    #     os.system(f'mv {input_path}_double_corrected/FF_Combineddouble_corrected.root {input_path}_double_corrected/FF_Combined.root')  
+    #     os.system(f'mv {input_path}_double_corrected/FF_QCD_double_corrected.root {input_path}_double_corrected/FF_QCD.root')  
+    #     os.system(f'mv {input_path}_double_corrected/FF_ttbar_double_corrected.root {input_path}_double_corrected/FF_ttbar.root')  
+    #     os.system(f'mv {input_path}_double_corrected/FF_W_double_corrected.root {input_path}_double_corrected/FF_W.root')  
+    #     os.system(f'mv {input_path}_double_corrected/bkp/FF_ttbar.root {input_path}_double_corrected/')  
