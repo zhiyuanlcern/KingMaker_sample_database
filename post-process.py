@@ -2,7 +2,7 @@ import sys
 import yaml
 import os
 import ROOT as R
-with open("../sample_database/datasets.yaml" , "r") as file:
+with open("/data/bond/lizhe/KingMaker_sample_database/datasets.yaml" , "r") as file:
     samples_list =  yaml.safe_load(file)
 
 R.EnableImplicitMT()
@@ -91,7 +91,7 @@ def post_proc(f, samples_list):
             "id_wgt_mu_1" : "1.0f", "id_wgt_tau_vsEle_VVLoose_2" : "double(1.0)", "id_wgt_tau_vsJet_Medium_2" : "double(1.0)", "id_wgt_tau_vsMu_Loose_2" : "double(1.0)","iso_wgt_mu_1" : "double(1.0)",  "trg_wgt_single_mu24ormu27" : "double(1.0)",
             "ZPtMassReweightWeight" : "double(1.0)", "FF_weight": "1.0f",
             'C_QCD': 'met/pt_2 * cos(metphi - phi_2 ) ',
-            'C_W': '(met + pt_1)/pt_2 * cos(metphi + phi_1- phi_2 )'} )
+            'C_W': '(met + pt_1)/pt_2 * cos(metphi + phi_1- phi_2 )', 'DY_weight':'1.0f'} )
 
 
 

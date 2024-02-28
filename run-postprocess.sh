@@ -1,5 +1,5 @@
 
-for channel in  'et';
+for channel in  'em';
 do 
 for i in  2022EE 2022postEE;
 do 
@@ -11,7 +11,7 @@ for f in ./*root ;
 # do 
 do
 # echo $f
-python /data/bond/zhiyuanl/Plotting/post-process.py  $f  >> postprocess.log&    
+python /data/bond/lizhe/KingMaker_sample_database/post-process.py  $f  >> postprocess.log&    
 
 done 
 cd -
