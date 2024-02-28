@@ -2,8 +2,12 @@ import sys
 import yaml
 import os
 import ROOT as R
+<<<<<<< HEAD
 import array
 with open("../sample_database/datasets.yaml" , "r") as file:
+=======
+with open("/data/bond/lizhe/KingMaker_sample_database/datasets.yaml" , "r") as file:
+>>>>>>> 7367d0d6fdaa6cc5a2f5e70c3b986ce97e33a54b
     samples_list =  yaml.safe_load(file)
 
 R.EnableImplicitMT()
@@ -121,5 +125,5 @@ def post_proc(f, samples_list, keep_only_nom=False):
             # break
     
 
-post_proc(sys.argv[1],samples_list,bool(int(sys.argv[2])) ) 
+post_proc(sys.argv[1],samples_list ) 
     
