@@ -121,5 +121,5 @@ def post_proc(f, samples_list, keep_only_nom=False):
             # break
     
 
-post_proc(sys.argv[1],samples_list ) 
+post_proc(sys.argv[1],samples_list,bool(int(sys.argv[2])) ) 
     
