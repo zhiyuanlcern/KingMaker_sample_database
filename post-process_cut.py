@@ -51,7 +51,10 @@ except:
 if "Train_weight" in ori_col_names:
     print(f"Already processed for file {input_file}.  ")
     sys.exit(0)
-filtered_df = df.Filter(cut_dict[channel_name]).Define("Train_weight", weight_dict[channel_name])
+if ("Data" in input_file) or ("data" in input_file):
+    filtered_df = df.Filter(cut_dict[channel_name]).Define("Train_weight", "1.0f")    
+else:
+    filtered_df = df.Filter(cut_dict[channel_name]).Define("Train_weight", weight_dict[channel_name])
 col_names = [str(c) for c in ori_col_names if ("pnn" in str(c) or "Train_weight" in str(c))]
 
 # Now, write the filtered data frame to a temporary file
