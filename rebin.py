@@ -22,7 +22,7 @@ weight_dict = {
 weight_list = weight_dict[channel]
 
 sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}"
-bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}"]#,f"DYto2Tau.root{param}",f"FF_Combined.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"Wjets.root{param}",] #f"Top.root{param}",
+bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}",f"FF_Combined.root{param}",]#,f"DYto2Tau.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"Wjets.root{param}",] #f"Top.root{param}",
 data_file_list = [f"Data.root{param}"]
 
 samples_name = "sample_database/datasets.yaml" 
@@ -249,7 +249,7 @@ def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
     if pnn_item == "pnn_"+f"{param}":
         signal_root_hist = ROOT.TH1F(f"{s_type}", f"{s_type} Distribution", n_bins, bin_edges)
     else:
-        signal_root_hist = ROOT.TH1F(f"{s_type}{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
+        signal_root_hist = ROOT.TH1F(f"{s_type}_{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
 
     for i in range(n_bins):
     # SetBinContent takes bin index starting from 1, and the bin content value
@@ -303,6 +303,8 @@ def main():
             else:
                 bkg_weight_array_sum[s_type + pnn_item] = pd.concat([bkg_weight_array_sum[s_type + pnn_item],bkg_weight_array[pnn_item]],axis=0)
         for train_weight in trainweight_array_list:
+            if "jer" in train_weight or "jes" in train_weight:
+                    continue
             if s_type+train_weight not in bkg_trainweight_array_list:
                 bkg_trainweight_array_list[s_type+train_weight] = pd.DataFrame()
                 bkg_trainweight_array_list[s_type+train_weight] = pd.concat([bkg_trainweight_array_list[s_type+train_weight],trainweight_array_list[train_weight]],axis=0)
@@ -326,6 +328,8 @@ def main():
         # print(item)
         save_root(sig_array[item], sig_weight_array[item],new_bins,sig_s_type,param,pnn_item=str(item))
     for item in sig_trainweight_array_list:
+        if ("jer" in item )or ("jes" in item):
+            continue
         save_root(sig_array[f'pnn_{param}'], sig_trainweight_array_list[item],new_bins,sig_s_type,param,pnn_item=str(item))
     # for s_type in type_list:
         # for pnn_item in pnn_branches:
@@ -333,11 +337,13 @@ def main():
         # for train_weight in trainweight_array_list:
         #     save_root(bkg_array_sum[s_type + f'pnn_{param}'],bkg_trainweight_array_list[s_type+train_weight],new_bins,s_type,param,train_weight)
     for item in bkg_array_sum:
-        save_root(bkg_array_sum[item],bkg_weight_array_sum[item],new_bins,type="",param,item)
+        save_root(bkg_array_sum[item],bkg_weight_array_sum[item],new_bins,s_type="",param=param,pnn_item=item)
     for item in bkg_trainweight_array_list:
+        if ("jer" in item )or ("jes" in item):
+            continue
         for type in type_list:
             if type in item:
-                save_root(bkg_array_sum[type+f'pnn_{param}'],bkg_trainweight_array_list[item],new_bins,type="",param=param,pnn_item=item)
+                save_root(bkg_array_sum[type+f'pnn_{param}'],bkg_trainweight_array_list[item],new_bins,s_type="",param=param,pnn_item=item)
 
 if __name__ == "__main__":
     main()
