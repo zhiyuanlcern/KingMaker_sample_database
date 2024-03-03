@@ -9,6 +9,7 @@ sig_file = "GluGluHto2Tau_M-60_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer
 # bkg_file = "DYto2Mu_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_mt_pnn_mt.root"
 
 bkg_file_list = ["DYto2Mu_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_mt_pnn_mt_1.root","WWto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12.root"]
+data_file_list = ["MuonEG.root"]
 era = "2022postEE"
 param = 100
 
@@ -30,6 +31,31 @@ def get_weight_branch(input_file, weight):
     weight_branches = [name for name in branch_names if f"{weight}" in name]
     # print(pnn_branches)
     return weight_branches
+
+def get_data_array(era,param,input_data):
+    bkg, sig, bkg_array, data_array, signal_hist, bin_edges, background_hist,bkg_weight_array,sig_weight_array= {},{}, {},{}, {},{},{},{},{}
+    data = uproot.open(f"{input_data}")["ntuple"]
+    data_array_list = {}
+    data_array = data.arrays(f"pnn_{param}", library="pd")
+    data_neg_idx = np.where(data_array<0)
+    data_array = data_array.drop(data_neg_idx[0])
+    data_array = np.arctanh((data_array -0.5 )*1.9999999)
+
+    if era == "2022EE":
+        lumi = 7.875e3
+    else:
+        lumi = 26.337e3
+    for i in weight_list:
+        data_array_list[i] = data.arrays(i, library="pd").drop(data_neg_idx[0])
+    data_weight = lumi/data_array_list["genEventSumW"].iloc[:,0].values
+    for i in weight_list:
+        if i != "genEventSumW":
+            data_weight = data_weight*data_array_list[i].iloc[:,0].values
+    data_weight_array = pd.DataFrame(data_weight,columns=["Train_weight"])
+    
+    s_type = "Data"
+    return data_array, data_weight_array, s_type
+
 
 def get_sig_array(era,param,input_sig):
     bkg, sig, bkg_array, sig_array, signal_hist, bin_edges, background_hist,bkg_weight_array,sig_weight_array= {},{}, {},{}, {},{},{},{},{}
@@ -198,7 +224,7 @@ def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight
 def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
     # if "BSM" in s_type:
     #     print(f"{s_type}{pnn_item}")
-    root_filename = f"histograms_{param}_check.root"
+    root_filename = f"histograms_{param}_check_2.root"
     signal_hist, bin_edges = np.histogram(signal_mva, bins=new_bins, weights=signal_weight)
 
     signal_hist = np.where(signal_hist < 0, 0, signal_hist)
@@ -233,6 +259,13 @@ def main():
     bkg_weight_array_sum["sum"] = pd.DataFrame()
     bkg_trainweight_array_list = {}
 
+    data_array_sum = pd.DataFrame()
+    data_weight_array_sum = pd.DataFrame()
+    for data_file in data_file_list:
+        data_array, data_weight_array, data_s_type = get_data_array(era,param,data_file)
+        data_array_sum = pd.concat([data_array_sum,data_array],axis=0)
+        data_weight_array_sum = pd.concat([data_weight_array_sum,data_weight_array],axis=0)
+    
     sig_array, sig_weight_array,sig_s_type,sig_trainweight_array_list = get_sig_array(era,param,sig_file)
     for bkg_file in bkg_file_list:
         bkg_array, bkg_weight_array, s_type, pnn_branches, trainweight_array_list = get_bkg_array(era,param,bkg_file)
@@ -273,6 +306,8 @@ def main():
     # print(bkg_weight_array_sum)
 
     # Save signal file
+    save_root(data_array_sum, data_weight_array_sum,new_bins,data_s_type,param,pnn_item="")
+
     for item in sig_array:
         # print(item)
         save_root(sig_array[item], sig_weight_array[item],new_bins,sig_s_type,param,pnn_item=str(item))
