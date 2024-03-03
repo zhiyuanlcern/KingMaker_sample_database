@@ -4,14 +4,26 @@ import pandas as pd
 import ROOT
 import yaml
 import os
-weight_list = ["genWeight","FF_weight","Xsec","genEventSumW","btag_weight"]#,"Xsec","genEventSumW"
-sig_file = "GluGluHto2Tau_M-60_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_et_pnn_mt.root"
-# bkg_file = "DYto2Mu_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_mt_pnn_mt.root"
+import sys
 
-bkg_file_list = ["DYto2Mu_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_mt_pnn_mt_1.root","WWto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12.root"]
-data_file_list = ["MuonEG.root"]
-era = "2022postEE"
-param = 100
+
+
+
+param = int(sys.argv[1])
+channel = str(sys.argv[2])
+era = str(sys.argv[3])
+
+
+weight_dict = {
+    "tt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"],
+    "mt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2"],
+    "et": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","id_wgt_ele_wpTight",], #"trg_cross_ele24tau30_hps", "trg_wgt_ditau_crosstau_2"
+}
+weight_list = weight_dict[channel]
+
+sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}"
+bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}"]#,f"DYto2Tau.root{param}",f"FF_Combined.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"Wjets.root{param}",] #f"Top.root{param}",
+data_file_list = [f"Data.root{param}"]
 
 samples_name = "sample_database/datasets.yaml" 
 with open(samples_name, "r") as file:
@@ -41,17 +53,17 @@ def get_data_array(era,param,input_data):
     data_array = data_array.drop(data_neg_idx[0])
     data_array = np.arctanh((data_array -0.5 )*1.9999999)
 
-    if era == "2022EE":
-        lumi = 7.875e3
-    else:
-        lumi = 26.337e3
-    for i in weight_list:
-        data_array_list[i] = data.arrays(i, library="pd").drop(data_neg_idx[0])
-    data_weight = lumi/data_array_list["genEventSumW"].iloc[:,0].values
-    for i in weight_list:
-        if i != "genEventSumW":
-            data_weight = data_weight*data_array_list[i].iloc[:,0].values
-    data_weight_array = pd.DataFrame(data_weight,columns=["Train_weight"])
+    # if era == "2022EE":
+    #     lumi = 7.875e3
+    # else:
+    #     lumi = 26.337e3
+    # for i in weight_list:
+    #     data_array_list[i] = data.arrays(i, library="pd").drop(data_neg_idx[0])
+    data_weight = np.ones(len(data_array))
+    # for i in weight_list:
+    #     if i != "genEventSumW":
+    #         data_weight = data_weight*data_array_list[i].iloc[:,0].values
+    data_weight_array = pd.DataFrame(data_weight,columns=["Limit_Weight"])
     
     s_type = "Data"
     return data_array, data_weight_array, s_type
@@ -82,7 +94,7 @@ def get_sig_array(era,param,input_sig):
         for i in weight_list:
             if i != "genEventSumW":
                 sig_weight = sig_weight*sig_array_list[i].iloc[:,0].values
-        sig_weight_array = pd.DataFrame(sig_weight,columns=["Train_weight"])
+        sig_weight_array = pd.DataFrame(sig_weight,columns=["Limit_Weight"])
         sig_weight_array_list[pnn_item] = sig_weight_array
     
     sig_array = sig.arrays(f"pnn_{param}", library="pd")
@@ -106,7 +118,7 @@ def get_sig_array(era,param,input_sig):
                     if i != "genEventSumW" and i not in weight_item:
                         sig_weight = sig_weight*sig_array_list[i].iloc[:,0].values
                 sig_weight = sig_weight*weight_array_list[weight_item].iloc[:,0].values
-                sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Train_weight_{weight_item}"])
+                sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Limit_Weight_{weight_item}"])
                 trainweight_array_list[weight_item] = sig_weight_array
 
     # print(bkg_neg_idx)
@@ -151,7 +163,7 @@ def get_bkg_array(era,param,input_bkg):
         for i in weight_list:
             if i != "genEventSumW":
                 bkg_weight = bkg_weight*bkg_array_list[i].iloc[:,0].values
-        bkg_weight_array = pd.DataFrame(bkg_weight,columns=["Train_weight"])
+        bkg_weight_array = pd.DataFrame(bkg_weight,columns=["Limit_Weight"])
         bkg_weight_array_list[pnn_item] = bkg_weight_array
     bkg_array = bkg.arrays(f"pnn_{param}", library="pd")
 
@@ -175,7 +187,7 @@ def get_bkg_array(era,param,input_bkg):
                     if i != "genEventSumW" and i not in weight_item:
                         sig_weight = sig_weight*sig_array_list[i].iloc[:,0].values
                 sig_weight = sig_weight*weight_array_list[weight_item].iloc[:,0].values
-                sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Train_weight_{weight_item}"])
+                sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Limit_Weight_{weight_item}"])
                 trainweight_array_list[weight_item] = sig_weight_array                
 
     return pnn_array_list, bkg_weight_array_list, s_type,pnn_branches, trainweight_array_list
