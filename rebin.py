@@ -234,8 +234,10 @@ def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
         root_file = ROOT.TFile(root_filename, "UPDATE")
     else:
         root_file = ROOT.TFile(root_filename, "RECREATE")
-
-    signal_root_hist = ROOT.TH1F(f"{s_type}{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
+    if pnn_item == "pnn_"+f"{param}":
+        signal_root_hist = ROOT.TH1F(f"{s_type}", f"{s_type} Distribution", n_bins, bin_edges)
+    else:
+        signal_root_hist = ROOT.TH1F(f"{s_type}{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
 
     for i in range(n_bins):
     # SetBinContent takes bin index starting from 1, and the bin content value
@@ -313,11 +315,17 @@ def main():
         save_root(sig_array[item], sig_weight_array[item],new_bins,sig_s_type,param,pnn_item=str(item))
     for item in sig_trainweight_array_list:
         save_root(sig_array[f'pnn_{param}'], sig_trainweight_array_list[item],new_bins,sig_s_type,param,pnn_item=str(item))
-    for s_type in type_list:
-        for pnn_item in pnn_branches:
-            save_root(bkg_array_sum[s_type + pnn_item],bkg_weight_array_sum[s_type + pnn_item],new_bins,s_type,param,pnn_item)
-        for train_weight in trainweight_array_list:
-            save_root(bkg_array_sum[s_type + f'pnn_{param}'],bkg_trainweight_array_list[s_type+train_weight],new_bins,s_type,param,train_weight)
+    # for s_type in type_list:
+        # for pnn_item in pnn_branches:
+        #     save_root(bkg_array_sum[s_type + pnn_item],bkg_weight_array_sum[s_type + pnn_item],new_bins,s_type,param,pnn_item)
+        # for train_weight in trainweight_array_list:
+        #     save_root(bkg_array_sum[s_type + f'pnn_{param}'],bkg_trainweight_array_list[s_type+train_weight],new_bins,s_type,param,train_weight)
+    for item in bkg_array_sum:
+        save_root(bkg_array_sum[item],bkg_weight_array_sum[item],new_bins,type="",param,item)
+    for item in bkg_trainweight_array_list:
+        for type in type_list:
+            if type in item:
+                save_root(bkg_array_sum[type+f'pnn_{param}'],bkg_trainweight_array_list[item],new_bins,type="",param=param,pnn_item=item)
 
 if __name__ == "__main__":
     main()
