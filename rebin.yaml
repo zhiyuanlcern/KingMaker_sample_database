@@ -1,0 +1,57 @@
+DYto2L:
+ dbs: /DYto2L
+ era: 2022EE
+ nick: DYto2L
+ sample_type: dyjets_ll
+ xsec: 1
+DYto2Tau:
+ dbs: /DYto2Tau
+ era: 2022EE
+ nick: DYto2Tau
+ sample_type: dyjets_tautau
+ xsec: 1
+Hto2B:
+ dbs: /Hto2B
+ era: 2022EE
+ nick: Hto2B
+ sample_type: ggh_hbb 
+ xsec: 1
+Data:
+ dbs: /Data
+ era: 2022EE
+ nick: Data
+ sample_type: data
+ xsec: 1
+Top:
+ dbs: /Top
+ era: 2022EE
+ nick: Top
+ sample_type: ttbar
+ xsec: 1
+Wjets:
+ dbs: /Wjets
+ era: 2022EE
+ nick: Wjets
+ sample_type: wjets
+ xsec: 1
+diboson:
+ dbs: /diboson
+ era: 2022EE
+ nick: diboson
+ sample_type: diboson
+ xsec: 1
+Hto2Tau:
+ dbs: /Hto2Tau
+ era: 2022EE
+ nick: Hto2Tau
+ sample_type: ggh_htautau
+ xsec: 1
+FF_Combined:
+  dbs: /sample/not/published
+  era: 2022EE
+  generator_weight: 1.0
+  nevents: 1
+  nfiles: 1
+  nick: FF_Combined
+  sample_type: fakes
+  xsec: 1.0
