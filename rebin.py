@@ -22,7 +22,7 @@ weight_dict = {
 weight_list = weight_dict[channel]
 
 sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}" if era == "2022EE" else f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{param}"
-bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}",f"DYto2Tau.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"FF_Combined.root{param}"] #f"Top.root{param}",f"Wjets.root{param}",
+bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}",f"DYto2Tau.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"FF_Combined.root{param}",f"Top.root{param}",f"Wjets.root{param}"] #f"Top.root{param}",f"Wjets.root{param}",
 data_file_list = [f"Data.root{param}"]
 
 samples_name = "../sample_database/rebin.yaml" 
@@ -185,6 +185,8 @@ def get_bkg_array(era,param,input_bkg):
         for i in weight_list:
             if i != "genEventSumW":
                 bkg_weight = bkg_weight*bkg_array_list[i].iloc[:,0].values
+        if s_type == "ggh_htautau":
+            bkg_weight = 0.1 * bkg_weight
         bkg_weight_array = pd.DataFrame(bkg_weight,columns=["Limit_Weight"])
         bkg_weight_array_list[pnn_item] = bkg_weight_array
     bkg_array = bkg.arrays(f"pnn_{param}", library="pd")
@@ -208,6 +210,8 @@ def get_bkg_array(era,param,input_bkg):
                 for i in weight_list:
                     if i != "genEventSumW" and i not in weight_item:
                         sig_weight = sig_weight*sig_array_list[i].iloc[:,0].values
+                if s_type == "ggh_htautau":
+                    sig_weight = 0.1 * sig_weight
                 sig_weight = sig_weight*weight_array_list[weight_item].iloc[:,0].values
                 sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Limit_Weight_{weight_item}"])
                 trainweight_array_list[weight_item] = sig_weight_array                
@@ -366,8 +370,13 @@ def main():
     for item in bkg_trainweight_array_list:
         if ("jer" in item )or ("jes" in item):
             continue
+        underscore_count = item.count('_')
+        if underscore_count >= 2:
+            split_item = '_'.join(item.split('_')[:2])
+        else:
+            split_item = item
         for type in type_list:
-            if type in item:
+            if type in split_item:
                 print(f"saving for : {type}_pnn_{param}, item: {item}")
                 save_root(bkg_array_sum[f'{type}_pnn_{param}'],bkg_trainweight_array_list[item],new_bins,s_type="",param=param,pnn_item=item)
 
