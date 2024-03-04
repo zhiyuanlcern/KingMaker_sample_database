@@ -56,7 +56,7 @@ if ("Data" in input_file) or ("data" in input_file):
 else:
     filtered_df = df.Filter(cut_dict[channel_name]).Define("Train_weight", weight_dict[channel_name])
 new_column = filtered_df.GetColumnNames()
-col_names = [str(c) for c in new_column if ("pnn" in str(c) or "Train_weight" in str(c) or "weight" in str(c) or "wgt" in str(c) or "Weight" in str(c) or "Xsec" in str(c))]
+col_names = [str(c) for c in new_column if ("pnn" in str(c) or "Train_weight" in str(c) or "weight" in str(c) or "wgt" in str(c) or "Weight" in str(c) or "Xsec" in str(c) or "genEvent" in str(c)) ]
 
 # Now, write the filtered data frame to a temporary file
 filtered_df.Snapshot("ntuple", input_file, col_names)
