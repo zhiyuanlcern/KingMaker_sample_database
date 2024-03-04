@@ -21,15 +21,37 @@ weight_dict = {
 }
 weight_list = weight_dict[channel]
 
-sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}"
-bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}",f"FF_Combined.root{param}",]#,f"DYto2Tau.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"Wjets.root{param}",] #f"Top.root{param}",
+sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}" if era == "2022EE" else f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{param}"
+bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}",f"DYto2Tau.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"FF_Combined.root{param}"] #f"Top.root{param}",f"Wjets.root{param}",
 data_file_list = [f"Data.root{param}"]
 
-samples_name = "sample_database/datasets.yaml" 
+samples_name = "../sample_database/rebin.yaml" 
 with open(samples_name, "r") as file:
     samples_list =  yaml.safe_load(file)
 
+
+def is_file_ok(file_path):
+    # Attempt to open the file
+    file = ROOT.TFile.Open(file_path, "READ")
+    
+    # Check if the file is open and healthy
+    if file and not file.IsZombie() and file.TestBit(ROOT.TFile.kRecovered):
+        print(f"Warning: File {file_path} was not properly closed but has been recovered.")
+        file.Close()
+        return False
+    elif not file or file.IsZombie():
+        print(f"Error: Cannot open file {file_path} or file is corrupted.")
+        if file:
+            file.Close()
+        return False
+    else:
+        file.Close()
+        return True
+
 def get_branch(input_file, param):
+    if not is_file_ok(input_file):
+        print(f"File cannot be opened, skipping for mass point: {param}")
+        sys.exit(0)
     file = uproot.open(input_file)["ntuple"]
     branch_names = file.keys()
 
@@ -236,7 +258,7 @@ def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight
 def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
     # if "BSM" in s_type:
     #     print(f"{s_type}{pnn_item}")
-    root_filename = f"histograms_{param}_check_2.root"
+    root_filename = f"histograms_{param}_{channel}_{era}.root"
     signal_hist, bin_edges = np.histogram(signal_mva, bins=new_bins, weights=signal_weight)
 
     signal_hist = np.where(signal_hist < 0, 0, signal_hist)
@@ -249,7 +271,10 @@ def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
     if pnn_item == "pnn_"+f"{param}":
         signal_root_hist = ROOT.TH1F(f"{s_type}", f"{s_type} Distribution", n_bins, bin_edges)
     else:
-        signal_root_hist = ROOT.TH1F(f"{s_type}_{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
+        if s_type == "":
+            signal_root_hist = ROOT.TH1F(f"{s_type}{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
+        else:
+            signal_root_hist = ROOT.TH1F(f"{s_type}_{pnn_item}", f"{s_type} Distribution", n_bins, bin_edges)
 
     for i in range(n_bins):
     # SetBinContent takes bin index starting from 1, and the bin content value
@@ -291,25 +316,25 @@ def main():
         # print(bkg_weight_array)
         bkg_weight_array_sum["sum"] = pd.concat([bkg_weight_array_sum["sum"],bkg_weight_array[f"pnn_{param}"]],axis=0)
         for pnn_item in pnn_branches:
-            if (s_type + pnn_item) not in bkg_array_sum:
-                bkg_array_sum[s_type + pnn_item] = pd.DataFrame()
-                bkg_array_sum[s_type + pnn_item] = pd.concat([bkg_array_sum[s_type + pnn_item],bkg_array[pnn_item]],axis=0)
+            if (f"{s_type}_{pnn_item}") not in bkg_array_sum:
+                bkg_array_sum[f"{s_type}_{pnn_item}"] = pd.DataFrame()
+                bkg_array_sum[f"{s_type}_{pnn_item}"] = pd.concat([bkg_array_sum[f"{s_type}_{pnn_item}"],bkg_array[pnn_item]],axis=0)
             else:
-                bkg_array_sum[s_type + pnn_item] = pd.concat([bkg_array_sum[s_type + pnn_item],bkg_array[pnn_item]],axis=0)
+                bkg_array_sum[f"{s_type}_{pnn_item}"] = pd.concat([bkg_array_sum[f"{s_type}_{pnn_item}"],bkg_array[pnn_item]],axis=0)
         for pnn_item in pnn_branches:
-            if (s_type + pnn_item) not in bkg_weight_array_sum:
-                bkg_weight_array_sum[s_type + pnn_item] = pd.DataFrame()
-                bkg_weight_array_sum[s_type + pnn_item] = pd.concat([bkg_weight_array_sum[s_type + pnn_item],bkg_weight_array[pnn_item]],axis=0)
+            if (f"{s_type}_{pnn_item}") not in bkg_weight_array_sum:
+                bkg_weight_array_sum[f"{s_type}_{pnn_item}"] = pd.DataFrame()
+                bkg_weight_array_sum[f"{s_type}_{pnn_item}"] = pd.concat([bkg_weight_array_sum[f"{s_type}_{pnn_item}"],bkg_weight_array[pnn_item]],axis=0)
             else:
-                bkg_weight_array_sum[s_type + pnn_item] = pd.concat([bkg_weight_array_sum[s_type + pnn_item],bkg_weight_array[pnn_item]],axis=0)
+                bkg_weight_array_sum[f"{s_type}_{pnn_item}"] = pd.concat([bkg_weight_array_sum[f"{s_type}_{pnn_item}"],bkg_weight_array[pnn_item]],axis=0)
         for train_weight in trainweight_array_list:
             if "jer" in train_weight or "jes" in train_weight:
                     continue
-            if s_type+train_weight not in bkg_trainweight_array_list:
-                bkg_trainweight_array_list[s_type+train_weight] = pd.DataFrame()
-                bkg_trainweight_array_list[s_type+train_weight] = pd.concat([bkg_trainweight_array_list[s_type+train_weight],trainweight_array_list[train_weight]],axis=0)
+            if f"{s_type}_{train_weight}" not in bkg_trainweight_array_list:
+                bkg_trainweight_array_list[f"{s_type}_{train_weight}"] = pd.DataFrame()
+                bkg_trainweight_array_list[f"{s_type}_{train_weight}"] = pd.concat([bkg_trainweight_array_list[f"{s_type}_{train_weight}"],trainweight_array_list[train_weight]],axis=0)
             else:
-                bkg_trainweight_array_list[s_type+train_weight] = pd.concat([bkg_trainweight_array_list[s_type+train_weight],trainweight_array_list[train_weight]],axis=0)
+                bkg_trainweight_array_list[f"{s_type}_{train_weight}"] = pd.concat([bkg_trainweight_array_list[f"{s_type}_{train_weight}"],trainweight_array_list[train_weight]],axis=0)
 
     new_bins = rebin_histogram(sig_array[f"pnn_{param}"],bkg_array_sum["sum"],sig_weight_array[f"pnn_{param}"],bkg_weight_array_sum["sum"],0.5)
     for s_type in bkg_array_sum:
@@ -333,9 +358,9 @@ def main():
         save_root(sig_array[f'pnn_{param}'], sig_trainweight_array_list[item],new_bins,sig_s_type,param,pnn_item=str(item))
     # for s_type in type_list:
         # for pnn_item in pnn_branches:
-        #     save_root(bkg_array_sum[s_type + pnn_item],bkg_weight_array_sum[s_type + pnn_item],new_bins,s_type,param,pnn_item)
+        #     save_root(bkg_array_sum[f"{s_type}_{pnn_item}"],bkg_weight_array_sum[f"{s_type}_{pnn_item}"],new_bins,s_type,param,pnn_item)
         # for train_weight in trainweight_array_list:
-        #     save_root(bkg_array_sum[s_type + f'pnn_{param}'],bkg_trainweight_array_list[s_type+train_weight],new_bins,s_type,param,train_weight)
+        #     save_root(bkg_array_sum[s_type + f'pnn_{param}'],bkg_trainweight_array_list[f"{s_type}_{train_weight}"],new_bins,s_type,param,train_weight)
     for item in bkg_array_sum:
         save_root(bkg_array_sum[item],bkg_weight_array_sum[item],new_bins,s_type="",param=param,pnn_item=item)
     for item in bkg_trainweight_array_list:
@@ -343,7 +368,8 @@ def main():
             continue
         for type in type_list:
             if type in item:
-                save_root(bkg_array_sum[type+f'pnn_{param}'],bkg_trainweight_array_list[item],new_bins,s_type="",param=param,pnn_item=item)
+                print(f"saving for : {type}_pnn_{param}, item: {item}")
+                save_root(bkg_array_sum[f'{type}_pnn_{param}'],bkg_trainweight_array_list[item],new_bins,s_type="",param=param,pnn_item=item)
 
 if __name__ == "__main__":
     main()
