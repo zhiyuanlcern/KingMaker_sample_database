@@ -52,8 +52,8 @@ if channel == "et":
     lepton_selection = combinecut(Htautau.et_triggers_selections[era],Htautau.electron_selections,Htautau.lepton_veto,)
     complete_lepton_selection = lepton_selection
     var = "pt_2"
-    MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} *  id_wgt_tau_vsJet_Medium_2 * id_wgt_ele_wpTight * (trg_wgt_ditau_crosstau_2 * trg_cross_ele24tau30_hps + 1 * (trg_cross_ele24tau30_hps <1))  / genEventSumW  :  double(1.0))'
-    MC_weight_list.extend(["id_wgt_ele_wpTight" ])
+    MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} *  id_wgt_tau_vsJet_Medium_2 *id_wgt_tau_vsEle_Tight_2* id_wgt_ele_wpTight * (trg_wgt_ditau_crosstau_2 * trg_cross_ele24tau30_hps + 1 * (trg_cross_ele24tau30_hps <1))  / genEventSumW  :  double(1.0))'
+    MC_weight_list.extend(["id_wgt_ele_wpTight" , "id_wgt_tau_vsEle_Tight_2"])
 elif channel == "mt":
     lepton_selection = combinecut(Htautau.mt_triggers_selections[era],Htautau.muon_selections,Htautau.lepton_veto,)
     complete_lepton_selection  = lepton_selection
@@ -214,8 +214,9 @@ def Add_new_column(input_path, samples_list, new_column, embedding = False, FF =
                     df_mc.Snapshot('ntuple',  f)
                 else:
                     print( f'column {new_column} already exists, skip' )   
-def get_df(input_path, samples_list, save_ttbar_data=False):
+def get_df(input_path, samples_list, save_ttbar_data=False, save_fraction=False):
     df_d = {}
+    binning = [30,40,50,60,70,80,90,100,120,140,200,350,500]
     samples = getall_list(input_path, samples_list)
     samples_noW = getall_list(input_path, samples_list, exclude_wjets=True) ## exlcude wjets background from W DR, Wjets will be only coming from fakes
     # print(samples)
@@ -250,6 +251,7 @@ def get_df(input_path, samples_list, save_ttbar_data=False):
     print(f"Finish getting df, entries : {df_noW.Count().GetValue() }")
     print(f"Finish getting W df, entries of W Anti ID: {df_d['DR_WAnti'].Count().GetValue() }")
     print(f"Finish getting W df, entries of W ID: {df_d['DR_WID'].Count().GetValue() }")
+
     
     return df_d
 def get_FF_f(df_d, FF_input,run =False, syst = False):
@@ -644,7 +646,8 @@ def combine_Fakes(input_path, df_dict, columns,  rerun = False, systematics = []
     # for DR in ['DR_ttbar', 'DR_W', 'DR_QCD']: 
     # histogram name: wjets_ARtight_mTnobmt_tot
     # for DR in ["data", "wjets", "ttbar"]:    
-    DRs = ["data"] if channel == "tt" else ["data", "wjets", "ttbar"]
+    # DRs = ["data"] if channel == "tt" else ["data", "wjets", "ttbar"]
+    DRs = ["data"] if channel == "tt" else ["wjets"]
     DR_name = {"data":"QCD",    "wjets":"W",    "ttbar":"ttbar" } ## the naming follow the names in produce_fake
     
     systematics.insert(0,"")  ##  add the nominal in the syst list, nominal is alaways run
@@ -685,16 +688,18 @@ def combine_Fakes(input_path, df_dict, columns,  rerun = False, systematics = []
             # print(GetmTtotweights_code)
             R.gROOT.LoadMacro('cpp_code/loadFF.C') # load FF histograms /or any other histograms into a dictionary called Weights with key [histname] 
             R.gInterpreter.Declare(GetmTtotweights_code) 
-        for syst in systematics:
-            # for tt channel, nothing to be updated
-            if channel !="tt": 
-                df = df.Redefine(f'FF_weight{syst}', f'GetmTtotweights{DR}(mt_tot,nbtag,mt_1 ) * FF_weight{syst}')
-                # df = df.Redefine(f'genWeight{syst}', f'FF_weight{syst}')
-                print("I am here 14 ", df.Count().GetValue())
+        
+        # for syst in systematics:
+        #     # for tt channel, nothing to be updated
+        #     if channel !="tt": 
+        #         df = df.Redefine(f'FF_weight{syst}', f'GetmTtotweights{DR}(mt_tot,nbtag,mt_1 ) * FF_weight{syst}')
+        #         # df = df.Redefine(f'genWeight{syst}', f'FF_weight{syst}')
+        #         print("I am here 14 ", df.Count().GetValue())
         df.Snapshot('ntuple', f'{input_path}/Fakes_mttot_tmp{tag}{DR}.root', columns)
     
     if channel != "tt": 
-        in_file  = f"{input_path}/Fakes_mttot_tmp{tag}data.root {input_path}/Fakes_mttot_tmp{tag}wjets.root {input_path}/Fakes_mttot_tmp{tag}ttbar.root "
+        # in_file  = f"{input_path}/Fakes_mttot_tmp{tag}data.root {input_path}/Fakes_mttot_tmp{tag}wjets.root {input_path}/Fakes_mttot_tmp{tag}ttbar.root "
+        in_file  = f"{input_path}/Fakes_mttot_tmp{tag}wjets.root  "
     else:
         in_file  = f"{input_path}/Fakes_mttot_tmp{tag}data.root "
     os.system(f'hadd -f {input_path}/FF_Combined{tag}.root {in_file}')
@@ -934,18 +939,18 @@ def clousre_correction( run_double_correction = True, index = 1):
 if __name__ == '__main__':        
     
     
-    # if run:
-    #     df_d = get_df(input_path, samples_list) # acquire dataframe 
-    # else:
-    #     df_d = 0
+    if run:
+        df_d = get_df(input_path, samples_list) # acquire dataframe 
+    else:
+        df_d = 0
         
-    # FF_input  = R.TFile.Open('/'.join([input_path,'FF_input.root']), 'RECREATE' if run else 'READ' ) 
-    # h_n = get_FF_f(df_d, FF_input,run, syst=True) # acquire histogram, save them in FakeFactor.root. if run, this functions will get the histograms from the dataframe; else get it from existing FF_input.root
-    # FF_output = R.TFile.Open('/'.join([input_path,'FakeFactor.root']), 'RECREATE' ) 
-    # write_FF_f(h_n, FF_output, syst=True) # save the calculated FF from the last step in FakeFactor.root 
-    # FF_input.Close()
-    # FF_output.Close()
-    # R.DisableImplicitMT() ## R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
+    FF_input  = R.TFile.Open('/'.join([input_path,'FF_input.root']), 'RECREATE' if run else 'READ' ) 
+    h_n = get_FF_f(df_d, FF_input,run, syst=True) # acquire histogram, save them in FakeFactor.root. if run, this functions will get the histograms from the dataframe; else get it from existing FF_input.root
+    FF_output = R.TFile.Open('/'.join([input_path,'FakeFactor.root']), 'RECREATE' ) 
+    write_FF_f(h_n, FF_output, syst=True) # save the calculated FF from the last step in FakeFactor.root 
+    FF_input.Close()
+    FF_output.Close()
+    R.DisableImplicitMT() ## R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
     for DR in cut_dic:
         for npreb in nprebjets_dic:
                 for ratio in ratio_dic:
@@ -963,34 +968,34 @@ if __name__ == '__main__':
         combine_Fakes(input_path,df_dict,columns, True)
 
     # if run:
-    ## R.DisableImplicitMT() ##  R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
-    # clousre_correction(run_double_correction=False , index=1)
-    # os.system(f"mkdir -p {input_path}_corrected/")
-    # os.chdir(f"{input_path}_corrected/")
-    # os.system(f'ln -s ../{input_path}/* .')
-    # os.system(f'mv FF* bkp')
-    # os.chdir(f"..")
-    # print(os.getcwd())
-    # print("moving files to single corrected folder")
-    # os.system(f'mv {input_path}/FF_*closure*root {input_path}_corrected/')  
-    # os.system(f'mv {input_path}_corrected/FF_Combinedclosure_corrected.root {input_path}_corrected/FF_Combined.root')  
-    # os.system(f'mv {input_path}_corrected/FF_QCD_closure_corrected.root {input_path}_corrected/FF_QCD.root')  
-    # os.system(f'mv {input_path}_corrected/FF_ttbar_closure_corrected.root {input_path}_corrected/FF_ttbar.root')  
-    # os.system(f'mv {input_path}_corrected/FF_W_closure_corrected.root {input_path}_corrected/FF_W.root')  
+    # R.DisableImplicitMT() ##  R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
+    clousre_correction(run_double_correction=False , index=1)
+    os.system(f"mkdir -p {input_path}_corrected/")
+    os.chdir(f"{input_path}_corrected/")
+    os.system(f'ln -s ../{input_path}/* .')
+    os.system(f'mv FF* bkp')
+    os.chdir(f"..")
+    print(os.getcwd())
+    print("moving files to single corrected folder")
+    os.system(f'mv {input_path}/FF_*closure*root {input_path}_corrected/')  
+    os.system(f'mv {input_path}_corrected/FF_Combinedclosure_corrected.root {input_path}_corrected/FF_Combined_corrected.root')  
+    os.system(f'mv {input_path}_corrected/FF_QCD_closure_corrected.root {input_path}_corrected/FF_QCD_corrected.root')  
+    os.system(f'mv {input_path}_corrected/FF_ttbar_closure_corrected.root {input_path}_corrected/FF_ttbar_corrected.root')  
+    os.system(f'mv {input_path}_corrected/FF_W_closure_corrected.root {input_path}_corrected/FF_W_corrected.root')  
     # os.system(f'mv {input_path}_corrected/bkp/FF_ttbar.root {input_path}_corrected/')  
-    # if channel != "tt":
-    #     # after running the previous block, run the second block
-    #     clousre_correction(run_double_correction=True, index=2 )
-    #     os.system(f"mkdir -p {input_path}_double_corrected/")
-    #     os.chdir(f"{input_path}_double_corrected/")
-    #     os.system(f'ln -s ../{input_path}/* .')
-    #     os.system(f'mv FF* bkp')
-    #     os.chdir(f"..")
-    #     print(os.getcwd())
-    #     print("moving files to double corrected folder")
-    #     os.system(f'mv {input_path}/FF_*double_corrected*root {input_path}_double_corrected/')  
-    #     os.system(f'mv {input_path}_double_corrected/FF_Combineddouble_corrected.root {input_path}_double_corrected/FF_Combined.root')  
-    #     os.system(f'mv {input_path}_double_corrected/FF_QCD_double_corrected.root {input_path}_double_corrected/FF_QCD.root')  
-    #     os.system(f'mv {input_path}_double_corrected/FF_ttbar_double_corrected.root {input_path}_double_corrected/FF_ttbar.root')  
-    #     os.system(f'mv {input_path}_double_corrected/FF_W_double_corrected.root {input_path}_double_corrected/FF_W.root')  
-    #     os.system(f'mv {input_path}_double_corrected/bkp/FF_ttbar.root {input_path}_double_corrected/')  
+    if channel != "tt":
+        # after running the previous block, run the second block
+        clousre_correction(run_double_correction=True, index=2 )
+        os.system(f"mkdir -p {input_path}_double_corrected/")
+        os.chdir(f"{input_path}_double_corrected/")
+        os.system(f'ln -s ../{input_path}/* .')
+        os.system(f'mv FF* bkp')
+        os.chdir(f"..")
+        print(os.getcwd())
+        # print("moving files to double corrected folder")
+        os.system(f'mv {input_path}/FF_*double_corrected*root {input_path}_double_corrected/')  
+        os.system(f'mv {input_path}_double_corrected/FF_Combineddouble_corrected.root {input_path}_double_corrected/FF_Combined_double_corrected.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_QCD_double_corrected.root {input_path}_double_corrected/FF_QCD_double_corrected.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_ttbar_double_corrected.root {input_path}_double_corrected/FF_ttbar_double_corrected.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_W_double_corrected.root {input_path}_double_corrected/FF_W_double_corrected.root')  
+        # os.system(f'mv {input_path}_double_corrected/bkp/FF_ttbar.root {input_path}_double_corrected/')  
