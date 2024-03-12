@@ -12,18 +12,18 @@ import sys
 param = int(sys.argv[1])
 channel = str(sys.argv[2])
 era = str(sys.argv[3])
-
+tag = str(sys.argv[4])
 
 weight_dict = {
     "tt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"],
     "mt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2"],
-    "et": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","id_wgt_ele_wpTight",], #"trg_cross_ele24tau30_hps", "trg_wgt_ditau_crosstau_2"
+    "et": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2", "id_wgt_ele_wpTight",], #"trg_cross_ele24tau30_hps", "trg_wgt_ditau_crosstau_2", "id_wgt_tau_vsEle_Tight_2"
 }
 weight_list = weight_dict[channel]
 
-sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}" if era == "2022EE" else f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{param}"
-bkg_file_list = [f"diboson.root{param}",f"DYto2L.root{param}",f"DYto2Tau.root{param}",f"Hto2B.root{param}",f"Hto2Tau.root{param}",f"FF_Combined.root{param}",f"Top.root{param}",f"Wjets.root{param}"] #f"Top.root{param}",f"Wjets.root{param}",
-data_file_list = [f"Data.root{param}"]
+sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}{tag}" if era == "2022EE" else f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{param}{tag}"
+bkg_file_list = [f"diboson.root{param}{tag}",f"DYto2L.root{param}{tag}",f"DYto2Tau.root{param}{tag}",f"Hto2B.root{param}{tag}",f"Hto2Tau.root{param}{tag}",f"FF_Combined.root{param}{tag}",f"Top.root{param}{tag}"] #,f"Wjets.root{param}{tag}",f"Top.root{param}{tag}", f"Wjets.root{param}{tag}"
+data_file_list = [f"Data.root{param}{tag}"]
 
 samples_name = "../sample_database/rebin.yaml" 
 with open(samples_name, "r") as file:
@@ -59,6 +59,9 @@ def get_branch(input_file, param):
     # print(pnn_branches)
     return pnn_branches
 def get_weight_branch(input_file, weight):
+    if not is_file_ok(input_file):
+        print(f"File cannot be opened, skipping for mass point: {param}")
+        sys.exit(0)
     file = uproot.open(input_file)["ntuple"]
     branch_names = file.keys()
 
@@ -73,7 +76,7 @@ def get_data_array(era,param,input_data):
     data_array = data.arrays(f"pnn_{param}", library="pd")
     data_neg_idx = np.where(data_array<0)
     data_array = data_array.drop(data_neg_idx[0])
-    data_array = np.arctanh((data_array -0.5 )*1.9999999)
+    # data_array = np.arctanh((data_array -0.5 )*1.9999999)
 
     # if era == "2022EE":
     #     lumi = 7.875e3
@@ -105,7 +108,7 @@ def get_sig_array(era,param,input_sig):
         pnn_array_list[pnn_item] = sig.arrays(pnn_item, library="pd")
         sig_neg_idx = np.where(pnn_array_list[pnn_item]<0)
         pnn_array_list[pnn_item] = pnn_array_list[pnn_item].drop(sig_neg_idx[0])
-        pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.9999999)
+        # pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.9999999)
         if era == "2022EE":
             lumi = 7.875e3
         else:
@@ -174,7 +177,7 @@ def get_bkg_array(era,param,input_bkg):
         pnn_array_list[pnn_item] = bkg.arrays(pnn_item, library="pd")
         bkg_neg_idx = np.where(pnn_array_list[pnn_item]<0)
         pnn_array_list[pnn_item] = pnn_array_list[pnn_item].drop(bkg_neg_idx[0])
-        pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.9999999)
+        # pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.9999999)
         if era == "2022EE":
             lumi = 7.875e3
         else:
@@ -186,6 +189,8 @@ def get_bkg_array(era,param,input_bkg):
             if i != "genEventSumW":
                 bkg_weight = bkg_weight*bkg_array_list[i].iloc[:,0].values
         if s_type == "ggh_htautau":
+            bkg_weight = 0.1 * bkg_weight
+        if s_type == "ggh_hbb":
             bkg_weight = 0.1 * bkg_weight
         bkg_weight_array = pd.DataFrame(bkg_weight,columns=["Limit_Weight"])
         bkg_weight_array_list[pnn_item] = bkg_weight_array
@@ -212,13 +217,15 @@ def get_bkg_array(era,param,input_bkg):
                         sig_weight = sig_weight*sig_array_list[i].iloc[:,0].values
                 if s_type == "ggh_htautau":
                     sig_weight = 0.1 * sig_weight
+                if s_type == "ggh_hbb":
+                    sig_weight = 0.1 * sig_weight
                 sig_weight = sig_weight*weight_array_list[weight_item].iloc[:,0].values
                 sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Limit_Weight_{weight_item}"])
                 trainweight_array_list[weight_item] = sig_weight_array                
 
     return pnn_array_list, bkg_weight_array_list, s_type,pnn_branches, trainweight_array_list
 
-def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight, Z_threshold=0.5):
+def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight, Z_threshold=0.2):
     num = 5001
     # low, high  = np.min(overall), np.max(overall)
     high =max(background_mva.max().max(), signal_mva.max().max())
@@ -234,7 +241,7 @@ def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight
     def Z(k, l):
         ns = np.sum(signal_hist[k:l+1])
         nb = np.sum(background_hist[k:l+1])
-        if nb + ns >=1:
+        if nb + ns >=0.2:
             return 10 * ns / Ns + 5 * nb / Nb
         else:
             return 0
@@ -262,7 +269,7 @@ def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight
 def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
     # if "BSM" in s_type:
     #     print(f"{s_type}{pnn_item}")
-    root_filename = f"histograms_{param}_{channel}_{era}.root"
+    root_filename = f"histograms_{param}_{channel}_{era}{tag}.root"
     signal_hist, bin_edges = np.histogram(signal_mva, bins=new_bins, weights=signal_weight)
 
     signal_hist = np.where(signal_hist < 0, 0, signal_hist)
