@@ -214,6 +214,9 @@ def Add_new_column(input_path, samples_list, new_column, embedding = False, FF =
                     df_mc.Snapshot('ntuple',  f)
                 else:
                     print( f'column {new_column} already exists, skip' )   
+
+
+
 def get_df(input_path, samples_list, save_ttbar_data=False, save_fraction=False):
     df_d = {}
     binning = [30,40,50,60,70,80,90,100,120,140,200,350,500]
@@ -252,8 +255,14 @@ def get_df(input_path, samples_list, save_ttbar_data=False, save_fraction=False)
     print(f"Finish getting W df, entries of W Anti ID: {df_d['DR_WAnti'].Count().GetValue() }")
     print(f"Finish getting W df, entries of W ID: {df_d['DR_WID'].Count().GetValue() }")
 
-    
+
     return df_d
+
+
+#Calculate fake factor  2024_04_10
+
+
+
 def get_FF_f(df_d, FF_input,run =False, syst = False):
     h_d = {}
     #r = [30,40,50,60,70,80,90,100,120,140,200,350]
@@ -290,6 +299,11 @@ def get_FF_f(df_d, FF_input,run =False, syst = False):
                     # h_d[DR+tau_id+npreb+ratio].Draw()
                     # c.Print(input_path + '/' + DR+tau_id+npreb+ratio + '.png' ) 
     return h_d
+
+
+
+# save root file 2024_04_10
+
 def write_FF_f(h_d, FF_output, syst = False):
     for DR in cut_dic:
         for npreb in nprebjets_dic:
@@ -309,6 +323,11 @@ def write_FF_f(h_d, FF_output, syst = False):
                     FF_processed.SetMaximum(1.0)
                     FF_processed.SetMinimum(0)
                     write(FF_processed, f'FakeFactor/{DR}' ,'FF' + DR + var + npreb + ratio + sys, FF_output)  
+
+
+
+# cal fit 2024_04_10
+
 def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst= ""):
     print(f"running for {'FF'+DR+var + npreb + ratio + syst}")
     if DR ==  "DR_ttbar" and npreb == "0preb":
@@ -523,6 +542,10 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
     output_file.Close()
     c.Print( input_path +'/FF'+DR+var + npreb + ratio + syst+'.png')
     fnew.Close()
+
+
+
+    
 def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
     '''
     input_path, sample_list, final_string:dictionary of key DR names and values FF string
