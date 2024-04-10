@@ -9,7 +9,6 @@ import array
 # code run steering
 # run = False
 run = True
-# produce_fake = False
 produce_final_fakes = True
 
 R.gROOT.SetBatch(True)
@@ -53,7 +52,7 @@ if channel == "et":
     complete_lepton_selection = lepton_selection
     var = "pt_2"
     MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} *  id_wgt_tau_vsJet_Medium_2 *id_wgt_tau_vsEle_Tight_2* id_wgt_ele_wpTight * (trg_wgt_ditau_crosstau_2 * trg_cross_ele24tau30_hps + 1 * (trg_cross_ele24tau30_hps <1))  / genEventSumW  :  double(1.0))'
-    MC_weight_list.extend(["id_wgt_ele_wpTight" , "id_wgt_tau_vsEle_Tight_2"])
+    MC_weight_list.extend(["id_wgt_ele_wpTight" , "id_wgt_tau_vsEle_Tight_2", 'trg_wgt_single_ele30'])
 elif channel == "mt":
     lepton_selection = combinecut(Htautau.mt_triggers_selections[era],Htautau.muon_selections,Htautau.lepton_veto,)
     complete_lepton_selection  = lepton_selection
@@ -62,12 +61,12 @@ elif channel == "mt":
     MC_weight_list.extend(["iso_wgt_mu_1"])
 elif channel == "tt":
     # lepton_selection = combinecut(Htautau.tt_triggers_selections[era],Htautau.tt_secondtau_selections,Htautau.lepton_veto)
-    lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto)
-    # lepton_selection = combinecut(Htautau.lepton_veto)
-    complete_lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto) #Htautau.tt_triggers_selections[era]
+    # lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto)
+    lepton_selection = combinecut(Htautau.lepton_veto)
+    complete_lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto, Htautau.tt_triggers_selections[era])
     var = "pt_1"
     MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} * id_wgt_tau_vsJet_Medium_2  * id_wgt_tau_vsJet_Medium_1 * ( trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 + 1 * (trg_double_tau35_mediumiso_hps <1)) / genEventSumW  : double(1.0))'
-    MC_weight_list.extend(["id_wgt_tau_vsJet_Medium_1", "trg_wgt_ditau_crosstau_1"])
+    MC_weight_list.extend(["id_wgt_tau_vsJet_Medium_1", "trg_wgt_ditau_crosstau_1", "trg_wgt_ditau_crosstau_2"])
 else:
     exit("wrong channel provided")
 
@@ -81,7 +80,7 @@ print(input_path, channel)
 # input_path = 'mutau-new-CROWN/'
 # input_path = 'mutau-fastmtt/'
 # input_path = 'mutau-fastmtt'
-with open("sample_database/datasets.yaml" , "r") as file:
+with open("sample_database/datasets_plotting.yaml" , "r") as file:
     samples_list =  yaml.safe_load(file)
 
 
@@ -162,7 +161,7 @@ def getall_list(input_path, samples_list, embedding =False, FF = False, signal=F
     '''
     inputfile = []
     for fname in os.listdir(input_path):
-        if '.root' not in fname or 'FakeFactor' in fname or 'output' in fname or 'input' in fname or 'Fakes' in fname or "closure" in fname or "Closure" in fname or "pnn" in fname:
+        if '.root' not in fname or 'FakeFactor' in fname or 'output' in fname or 'input' in fname or 'Fakes' in fname or "closure" in fname or "Closure" in fname or "pnn" in fname or "tmpsamples" in fname:
             continue
         if not embedding:  ## default to skip embedding
             if  'Embedding' in fname :
@@ -542,26 +541,36 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
     output_file.Close()
     c.Print( input_path +'/FF'+DR+var + npreb + ratio + syst+'.png')
     fnew.Close()
-
-
-
-    
-def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
+def produce_fake(input_path, samples_list, systematics = [], save_DR = True ,index = 10):
     '''
     input_path, sample_list, final_string:dictionary of key DR names and values FF string
     produce fakes template in Anti ID regions and for each DRs
     in fact the selections for each DR is not applied here. Only the FF for each DR is applied
     '''
     samples = getall_list(input_path, samples_list)
-    print("using samples: ", samples)
-    samples_noW = getall_list(input_path, samples_list, exclude_wjets=True)
-    print("using samples: ", samples)
+    if not os.path.exists(f'{input_path}/tmpsamples_withW.root'):
+        command = "hadd -f2 " + f'{input_path}/tmpsamples_withW.root' + " " + " ".join(samples)
+        # Execute the command using os.system
+        result = os.system(command)
+        if result != 0:
+            sys.exit(-1)
+    if not os.path.exists(f'{input_path}/tmpsamples_withnoW.root'):
+        samples_noW = getall_list(input_path, samples_list, exclude_wjets=True)
+        command = "hadd -f2 " + f'{input_path}/tmpsamples_withnoW.root' + " " + " ".join(samples_noW)
+        result = os.system(command)
+        if result != 0:
+            sys.exit(-1)
     print("using weight:  ",  f'({MC_weight})/{lumi}')
-    df_withW = R.RDataFrame('ntuple', samples).Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
-        f'({MC_weight})/{lumi}')
-    df_noW = R.RDataFrame('ntuple', samples_noW).Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
-        f'({MC_weight})/{lumi}')
-    df_data = R.RDataFrame('ntuple', getdata_list(input_path, samples_list))
+    # R.gDebug=3
+    ## the lumi is divided only once here. Otherwise the normalisation is wrong
+    df_withW = R.RDataFrame('ntuple', f'{input_path}/tmpsamples_withW.root').Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
+        f'({MC_weight})/{lumi}') #.Redefine("genWeight_tmp", f" is_data == 0? genWeight_tmp/{lumi} :genWeight_tmp  ")
+    df_noW = R.RDataFrame('ntuple', f'{input_path}/tmpsamples_withnoW.root').Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
+        f'({MC_weight})/{lumi}') #.Redefine("genWeight_tmp", f" is_data == 0? genWeight_tmp/{lumi} :genWeight_tmp  ")
+    df_data = R.RDataFrame('ntuple', getdata_list(input_path, samples_list)).Filter(combinecut(Anti_ID,Htautau.lepton_veto, complete_lepton_selection)).Define('genWeight_tmp',  
+        f'({MC_weight})/{lumi}') #.Redefine("genWeight_tmp", f" is_data == 0? genWeight_tmp/{lumi} :genWeight_tmp  ")
+
+
     columns = list(df_data.GetColumnNames() )
     print("printing data list:   ", getdata_list(input_path, samples_list))
     print("printing data columns:      " , columns)
@@ -569,11 +578,11 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
     ## many columns are not present in data, using only data columns to save
     systematics.insert(0,"") ##  add the nominal in the syst list, nominal is alaways run
     ## systematics example: _FF_tot_StatUp
-    cpp_code_initial =f""" TFile* f_FakeFactor = new TFile("{input_path}/FakeFactor_fitted.root");"""
+    cpp_code_initial =f""" TFile* f_FakeFactor{index} = new TFile("{input_path}/FakeFactor_fitted.root");"""
     R.gInterpreter.Declare(cpp_code_initial)
     
     df_dict = {}
-    DR_list = ['QCD'] if channel =="tt" else ['W', 'QCD','ttbar']
+    DR_list = ['QCD'] if channel =="tt" else [ 'W','QCD','ttbar']
     for DR in DR_list:
         for syst in systematics:
             for npreb in nprebjets_dic:
@@ -588,9 +597,9 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
                     # Generate the C++ code for the interpolation function
                     cpp_code = f"""
                     
-                    TGraph* graph_{npreb}_{ratio}_{DR}{syst}0 = (TGraph*)f_FakeFactor->Get("{graph_name}");
-                    double interpolate_{npreb}_{ratio}_{DR}{syst}0(double x) {{
-                        return graph_{npreb}_{ratio}_{DR}{syst}0->Eval(x);
+                    TGraph* graph_{npreb}_{ratio}_{DR}{syst}{index} = (TGraph*)f_FakeFactor{index}->Get("{graph_name}");
+                    double interpolate_{npreb}_{ratio}_{DR}{syst}{index}(double x) {{
+                        return graph_{npreb}_{ratio}_{DR}{syst}{index}->Eval(x);
                     }}
                     """
                     # print(cpp_code)
@@ -608,9 +617,12 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
                     # Combine cuts and weights into a single string
                     if combined_weight_str != "":
                         combined_weight_str += " + "
-                    combined_weight_str += f"({combinecut(nprebjets_dic[npreb], ratio_dic[ratio])}) * interpolate_{npreb}_{ratio}_{DR}{syst}0({var})"
+                    combined_weight_str += f"({combinecut(nprebjets_dic[npreb], ratio_dic[ratio])}) * interpolate_{npreb}_{ratio}_{DR}{syst}{index}({var})"
             # print(f"combined_weight_str, {combined_weight_str}")
-            df0 = df_noW if DR == "W" else df_withW
+            if channel=="tt":
+                df0= df_data ## in practice the MC subtaction leave a small gap in the SR. The MC subtraction is very small and shouldn't cause any difference
+            else:
+                df0 = df_noW if DR == "W" else df_withW
             if syst == "":
                 if "FF_weight" not in df0.GetColumnNames():
                     df_dict[DR] = df0.Define("FF_weight", f"genWeight_tmp * ({combined_weight_str})" )
@@ -652,25 +664,30 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True):
         # print(df_dict["QCD"].GetColumnNames())
         # df_dict["QCD"].Snapshot('ntuple', f'test.root', ['genWeight_FF_tot_StatUp'])
     
-    DR_speical_cut = {'QCD': "1>0"} if channel =="tt" else {'W': Htautau.W_true_only, 'QCD' : "1>0",'ttbar': "1>0"}
+    DR_speical_cut = {'QCD': "1>0"} if channel =="tt" else {'W': Htautau.W_true_only, 'QCD' : "1>0",'ttbar': Htautau.ttbar_true_only}
     if save_DR:
         for DR in df_dict:
         # for DR in ["ttbar"]:            
             print("processing ",DR)
             # print("saving DR with columns:  ", output_column)
+            print('checking output coloumn', output_column)
+            for c in output_column:
+                if str(c) not in df_dict[DR].GetColumnNames():
+                    print(f'================   ERROR: {c} not in output column')
+            # df_dict[DR].Filter(DR_speical_cut[DR]).Snapshot("ntuple", f"{input_path}/FF_{DR}.root", output_column)
+            df_dict[DR].Filter(DR_speical_cut[DR]).Snapshot("ntuple", f"{input_path}/FF_{DR}.root")
             
-            df_dict[DR].Filter(DR_speical_cut[DR]).Snapshot("ntuple", f"{input_path}/FF_{DR}.root", output_column)
             print(f"saving dataframe {DR} to FF_{DR}.root"  )
     return df_dict, output_column
-def combine_Fakes(input_path, df_dict, columns,  rerun = False, systematics = [], tag = ""):
+def combine_Fakes(input_path, df_dict, columns,  apply_fraction = False, systematics = [], tag = ""):
     '''
     fraction: root file storing the fraction in mt_tot
     '''
     # for DR in ['DR_ttbar', 'DR_W', 'DR_QCD']: 
     # histogram name: wjets_ARtight_mTnobmt_tot
     # for DR in ["data", "wjets", "ttbar"]:    
-    # DRs = ["data"] if channel == "tt" else ["data", "wjets", "ttbar"]
-    DRs = ["data"] if channel == "tt" else ["wjets"]
+    DRs = ["data"] if channel == "tt" else ["data", "wjets", "ttbar"]
+    # DRs = ["data"] if channel == "tt" else ["wjets"]
     DR_name = {"data":"QCD",    "wjets":"W",    "ttbar":"ttbar" } ## the naming follow the names in produce_fake
     
     systematics.insert(0,"")  ##  add the nominal in the syst list, nominal is alaways run
@@ -712,17 +729,19 @@ def combine_Fakes(input_path, df_dict, columns,  rerun = False, systematics = []
             R.gROOT.LoadMacro('cpp_code/loadFF.C') # load FF histograms /or any other histograms into a dictionary called Weights with key [histname] 
             R.gInterpreter.Declare(GetmTtotweights_code) 
         
-        # for syst in systematics:
-        #     # for tt channel, nothing to be updated
-        #     if channel !="tt": 
-        #         df = df.Redefine(f'FF_weight{syst}', f'GetmTtotweights{DR}(mt_tot,nbtag,mt_1 ) * FF_weight{syst}')
-        #         # df = df.Redefine(f'genWeight{syst}', f'FF_weight{syst}')
-        #         print("I am here 14 ", df.Count().GetValue())
+        for syst in systematics:
+            # for tt channel, nothing to be updated
+            if apply_fraction:
+                if channel !="tt": 
+                    df = df.Redefine(f'FF_weight{syst}', f'GetmTtotweights{DR}(mt_tot,nbtag,mt_1 ) * FF_weight{syst}')
+                    # df = df.Redefine(f'genWeight{syst}', f'FF_weight{syst}')
+                    print("I am here 14 ", df.Count().GetValue())
         df.Snapshot('ntuple', f'{input_path}/Fakes_mttot_tmp{tag}{DR}.root', columns)
+        print(f"finishing saving temporary fakes file to :{input_path}/Fakes_mttot_tmp{tag}{DR}.root ")
     
     if channel != "tt": 
-        # in_file  = f"{input_path}/Fakes_mttot_tmp{tag}data.root {input_path}/Fakes_mttot_tmp{tag}wjets.root {input_path}/Fakes_mttot_tmp{tag}ttbar.root "
-        in_file  = f"{input_path}/Fakes_mttot_tmp{tag}wjets.root  "
+        in_file  = f"{input_path}/Fakes_mttot_tmp{tag}data.root {input_path}/Fakes_mttot_tmp{tag}wjets.root {input_path}/Fakes_mttot_tmp{tag}ttbar.root "
+        # in_file  = f"{input_path}/Fakes_mttot_tmp{tag}wjets.root  "
     else:
         in_file  = f"{input_path}/Fakes_mttot_tmp{tag}data.root "
     os.system(f'hadd -f {input_path}/FF_Combined{tag}.root {in_file}')
@@ -750,14 +769,15 @@ def clousre_correction( run_double_correction = True, index = 1):
         ## for ttbar, I haven't figured out a way to correct    
         bins = 20
         if lumi < 10e3:
-            bins= 10
+            bins= 20
         if channel =="tt":
             var =  "eta_1"
-            h_setting[DR] = ( f"Correction;{var};Closure Correction", bins, -2.1, 2.1)
+            h_setting[DR] = ( f"Correction;{var};Closure Correction", bins, -2.3, 2.3)
         else:
             var = f"C_{DR}"    
             var_2 = "pt_1"
             binning = [20,30,35,40,45,50,55,60,65,70,75,80,90,100,150] if DR =="W" else [20,30,35,40,45,50,55,60,70,80,120]
+            # binning = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1,1.2,1.3,1.4,1.5,1.6] if DR =="W" else [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1,1.2,1.3,1.4,1.5,1.6]
             h_setting[DR] = ( f"Correction;{var};Closure Correction",bins,-2.5,2.) if DR == "QCD" else ( f"Correction;{var};Closure Correction",bins,-6,6)    
             h_setting[f"{DR}_pt_1"] = ( f"Correction;{var_2};Closure Correction",len(binning)-1, array.array('d', binning))
         exclude_w = True if DR=="W" else False
@@ -766,25 +786,25 @@ def clousre_correction( run_double_correction = True, index = 1):
         df_num[DR] = R.RDataFrame('ntuple', samples) 
         df_den[DR] = R.RDataFrame('ntuple', f"{input_path}/FF_{DR}.root") 
         if DR == "QCD":    
-            df_num["QCD"] = df_num[DR].Filter(combinecut(DR_QCD, ID, selection)).Define('genWeight_tmp',f'{MC_weight}')
-            df_den["QCD"] = df_den[DR].Filter(combinecut(DR_QCD, ID, selection)).Define('genWeight_tmp',f'FF_weight * {lumi} ')
+            df_num["QCD"] = df_num[DR].Filter(combinecut(DR_QCD, ID, selection)).Define('genWeight_tmp1',f'{MC_weight}')
+            df_den["QCD"] = df_den[DR].Filter(combinecut(DR_QCD, ID, selection)).Define('genWeight_tmp1',f'FF_weight * {lumi} ')
             print(f"Finish getting QCD df, entries of QCD ID: {df_num['QCD'].Count().GetValue() }")
         if DR == "W":
-            df_num["W"]= df_num[DR].Filter(combinecut('is_wjets < 1', DR_W, ID, selection )).Define('genWeight_tmp',f'{MC_weight}')
-            df_den["W"] = df_den[DR].Filter(combinecut('is_wjets < 1', DR_W, ID, selection )).Define('genWeight_tmp',f'FF_weight * {lumi} ')
+            df_num["W"]= df_num[DR].Filter(combinecut('is_wjets < 1', DR_W, ID, selection )).Define('genWeight_tmp1',f'{MC_weight}')
+            df_den["W"] = df_den[DR].Filter(combinecut('is_wjets < 1', DR_W, ID, selection )).Define('genWeight_tmp1',f'FF_weight * {lumi} ')
             print(f"Finish getting W df, entries of W ID: {df_num['W'].Count().GetValue() }")
     if run:
         closure_input  = R.TFile.Open('/'.join([input_path,'closure_input.root']), 'RECREATE' ) 
         for DR in df_num:
             print(f"generating histograms of {DR}")
-            h_n[DR] = df_num[DR].Histo1D((f"input_num_{DR}",*h_setting[DR]),var, 'genWeight_tmp')
-            h_d[DR] = df_den[DR].Histo1D((f"input_den_{DR}",*h_setting[DR]),var, 'genWeight_tmp')
+            h_n[DR] = df_num[DR].Histo1D((f"input_num_{DR}",*h_setting[DR]),var, 'genWeight_tmp1')
+            h_d[DR] = df_den[DR].Histo1D((f"input_den_{DR}",*h_setting[DR]),var, 'genWeight_tmp1')
             # write(h, directory, name,fout): "Write `h` to dir `directory` with name `name` in file `fout`"
             write(h_n[DR], "", f'closure_{DR}_num',closure_input)
             write(h_d[DR], "", f'closure_{DR}_den',closure_input)
             if channel != "tt" and run_double_correction:
-                h_n[f"{DR}_pt_1"] = df_num[DR].Histo1D((f"input_num_{DR}_pt_1",*h_setting[f"{DR}_pt_1"]),var_2, 'genWeight_tmp')
-                h_d[f"{DR}_pt_1"] = df_den[DR].Histo1D((f"input_den_{DR}_pt_1",*h_setting[f"{DR}_pt_1"]),var_2, 'genWeight_tmp')
+                h_n[f"{DR}_pt_1"] = df_num[DR].Histo1D((f"input_num_{DR}_pt_1",*h_setting[f"{DR}_pt_1"]),var_2, 'genWeight_tmp1')
+                h_d[f"{DR}_pt_1"] = df_den[DR].Histo1D((f"input_den_{DR}_pt_1",*h_setting[f"{DR}_pt_1"]),var_2, 'genWeight_tmp1')
                 write(h_n[f"{DR}_pt_1"], "", f'closure_{DR}_pt_1_num',closure_input)
                 write(h_d[f"{DR}_pt_1"], "", f'closure_{DR}_pt_1_den',closure_input)
 
@@ -933,8 +953,10 @@ def clousre_correction( run_double_correction = True, index = 1):
                     "FF_weight_FF_closureDown", f"FF_weight").Define(
                     "FF_weight_FF_closureUp",   f"FF_weight * ({weight_str}) * ({weight_str})"  ) ## multiply two times for up, no for down
                 df_dict[DR] = df_dict[DR].Redefine("FF_weight", f"FF_weight_tmp * ({weight_str})" )
+                for s in ["_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"]:
+                    df_dict[DR] = df_dict[DR].Redefine(f"FF_weight{s}", f"FF_weight{s} * ({weight_str})" )
             
-            print(weight_str)
+            # print(weight_str)
             df_dict[DR] = df_dict[DR].Define("Closure_corrected", "int(1)")
             # .Define(
             #     f'pt_1_FF_closureDown', f' FF_weight_FF_closureDown == 0? -1.0f : pt_1').Define(
@@ -956,11 +978,10 @@ def clousre_correction( run_double_correction = True, index = 1):
     
 
     columns = list(df_dict["QCD"].GetColumnNames())
-    combine_Fakes(input_path,df_dict,columns, True, tag = tag)
+    combine_Fakes(input_path,df_dict,columns, True, ["_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown", "_FF_closureDown", "_FF_closureUp" ], tag = tag)
 
 
 if __name__ == '__main__':        
-    
     
     if run:
         df_d = get_df(input_path, samples_list) # acquire dataframe 
@@ -974,6 +995,7 @@ if __name__ == '__main__':
     FF_input.Close()
     FF_output.Close()
     R.DisableImplicitMT() ## R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
+    i = 10
     for DR in cut_dic:
         for npreb in nprebjets_dic:
                 for ratio in ratio_dic:
@@ -982,13 +1004,14 @@ if __name__ == '__main__':
                         Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = False, syst= sys) ## Produce FF_ttbar, FF_Wjets systematics
     # if produce_final_fakes :
         # produce the fakes
-        
+    for DR in cut_dic:  
         # df_dict, columns = produce_fake(input_path, samples_list, [])
         df_dict, columns = produce_fake(input_path, samples_list, [
             "_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"
-            ], save_DR = True) 
+            ], save_DR = True, index =i)
+        i+=1 
         #    always save_DR , the output is needed by the closure corrections
-        combine_Fakes(input_path,df_dict,columns, True)
+        combine_Fakes(input_path,df_dict,columns, True,["_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"] )
 
     # if run:
     # R.DisableImplicitMT() ##  R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
@@ -1001,11 +1024,11 @@ if __name__ == '__main__':
     print(os.getcwd())
     print("moving files to single corrected folder")
     os.system(f'mv {input_path}/FF_*closure*root {input_path}_corrected/')  
-    os.system(f'mv {input_path}_corrected/FF_Combinedclosure_corrected.root {input_path}_corrected/FF_Combined_corrected.root')  
-    os.system(f'mv {input_path}_corrected/FF_QCD_closure_corrected.root {input_path}_corrected/FF_QCD_corrected.root')  
-    os.system(f'mv {input_path}_corrected/FF_ttbar_closure_corrected.root {input_path}_corrected/FF_ttbar_corrected.root')  
-    os.system(f'mv {input_path}_corrected/FF_W_closure_corrected.root {input_path}_corrected/FF_W_corrected.root')  
-    # os.system(f'mv {input_path}_corrected/bkp/FF_ttbar.root {input_path}_corrected/')  
+    os.system(f'mv {input_path}_corrected/FF_Combinedclosure_corrected.root {input_path}_corrected/FF_Combined.root')  
+    os.system(f'mv {input_path}_corrected/FF_QCD_closure_corrected.root {input_path}_corrected/FF_QCD.root')  
+    os.system(f'mv {input_path}_corrected/FF_ttbar_closure_corrected.root {input_path}_corrected/FF_ttbar.root')  
+    os.system(f'mv {input_path}_corrected/FF_W_closure_corrected.root {input_path}_corrected/FF_W.root')  
+    os.system(f'mv {input_path}_corrected/bkp/FF_ttbar.root {input_path}_corrected/')  
     if channel != "tt":
         # after running the previous block, run the second block
         clousre_correction(run_double_correction=True, index=2 )
@@ -1017,8 +1040,8 @@ if __name__ == '__main__':
         print(os.getcwd())
         # print("moving files to double corrected folder")
         os.system(f'mv {input_path}/FF_*double_corrected*root {input_path}_double_corrected/')  
-        os.system(f'mv {input_path}_double_corrected/FF_Combineddouble_corrected.root {input_path}_double_corrected/FF_Combined_double_corrected.root')  
-        os.system(f'mv {input_path}_double_corrected/FF_QCD_double_corrected.root {input_path}_double_corrected/FF_QCD_double_corrected.root')  
-        os.system(f'mv {input_path}_double_corrected/FF_ttbar_double_corrected.root {input_path}_double_corrected/FF_ttbar_double_corrected.root')  
-        os.system(f'mv {input_path}_double_corrected/FF_W_double_corrected.root {input_path}_double_corrected/FF_W_double_corrected.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_Combineddouble_corrected.root {input_path}_double_corrected/FF_Combined.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_QCD_double_corrected.root {input_path}_double_corrected/FF_QCD.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_ttbar_double_corrected.root {input_path}_double_corrected/FF_ttbar.root')  
+        os.system(f'mv {input_path}_double_corrected/FF_W_double_corrected.root {input_path}_double_corrected/FF_W.root')  
         # os.system(f'mv {input_path}_double_corrected/bkp/FF_ttbar.root {input_path}_double_corrected/')  
