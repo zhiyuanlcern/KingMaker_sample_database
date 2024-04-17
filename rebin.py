@@ -15,15 +15,16 @@ era = str(sys.argv[3])
 tag = str(sys.argv[4])
 
 weight_dict = {
-    "tt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"],
+    "tt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","trg_wgt_ditau_crosstau_12"],
     "mt": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2"],
     "et": ["Xsec", "puweight", "genWeight", "genEventSumW", "btag_weight", "FF_weight","id_wgt_tau_vsJet_Medium_2", "id_wgt_ele_wpTight",], #"trg_cross_ele24tau30_hps", "trg_wgt_ditau_crosstau_2", "id_wgt_tau_vsEle_Tight_2"
 }
 weight_list = weight_dict[channel]
 
-sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}{tag}" if era == "2022EE" else f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{param}{tag}"
-bkg_file_list = [f"diboson.root{param}{tag}",f"DYto2L.root{param}{tag}",f"DYto2Tau.root{param}{tag}",f"Hto2B.root{param}{tag}",f"Hto2Tau.root{param}{tag}",f"FF_Combined.root{param}{tag}",f"Top.root{param}{tag}"] #,f"Wjets.root{param}{tag}",f"Top.root{param}{tag}", f"Wjets.root{param}{tag}"
-data_file_list = [f"Data.root{param}{tag}"]
+# sig_file = f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{param}{tag}" if era == "2022EE" else f"GluGluHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{param}{tag}"
+sig_file = f"bbHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_{channel}.root{tag}" if era == "2022EE" else f"bbHto2Tau_M-{param}_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_{channel}.root{tag}"
+bkg_file_list = [f"diboson.root{tag}",f"DYto2L.root{tag}",f"DYto2Tau.root{tag}",f"Hto2B.root{tag}",f"Hto2Tau.root{tag}",f"FF_Combined.root{tag}",f"Wjets.root{tag}",f"Top.root{tag}"]
+data_file_list = [f"Data.root{tag}"]
 
 samples_name = "../sample_database/rebin.yaml" 
 with open(samples_name, "r") as file:
@@ -55,7 +56,7 @@ def get_branch(input_file, param):
     file = uproot.open(input_file)["ntuple"]
     branch_names = file.keys()
 
-    pnn_branches = [name for name in branch_names if f"pnn_{param}" in name]
+    pnn_branches = [name for name in branch_names if f"PNN_{param}" in name]
     # print(pnn_branches)
     return pnn_branches
 def get_weight_branch(input_file, weight):
@@ -73,10 +74,10 @@ def get_data_array(era,param,input_data):
     bkg, sig, bkg_array, data_array, signal_hist, bin_edges, background_hist,bkg_weight_array,sig_weight_array= {},{}, {},{}, {},{},{},{},{}
     data = uproot.open(f"{input_data}")["ntuple"]
     data_array_list = {}
-    data_array = data.arrays(f"pnn_{param}", library="pd")
+    data_array = data.arrays(f"PNN_{param}", library="pd")
     data_neg_idx = np.where(data_array<0)
     data_array = data_array.drop(data_neg_idx[0])
-    # data_array = np.arctanh((data_array -0.5 )*1.9999999)
+    data_array = np.arctanh((data_array -0.5 )*1.99999)
 
     # if era == "2022EE":
     #     lumi = 7.875e3
@@ -108,11 +109,15 @@ def get_sig_array(era,param,input_sig):
         pnn_array_list[pnn_item] = sig.arrays(pnn_item, library="pd")
         sig_neg_idx = np.where(pnn_array_list[pnn_item]<0)
         pnn_array_list[pnn_item] = pnn_array_list[pnn_item].drop(sig_neg_idx[0])
-        # pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.9999999)
+        pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.99999)
         if era == "2022EE":
             lumi = 7.875e3
-        else:
+        elif era == "2022postEE":
             lumi = 26.337e3
+        elif era == "Run3":
+            lumi = 26.337e3 +  7.875e3
+        else :
+            sys.exit(-1)
         for i in weight_list:
             sig_array_list[i] = sig.arrays(i, library="pd").drop(sig_neg_idx[0])
         sig_weight = lumi/sig_array_list["genEventSumW"].iloc[:,0].values
@@ -122,7 +127,7 @@ def get_sig_array(era,param,input_sig):
         sig_weight_array = pd.DataFrame(sig_weight,columns=["Limit_Weight"])
         sig_weight_array_list[pnn_item] = sig_weight_array
     
-    sig_array = sig.arrays(f"pnn_{param}", library="pd")
+    sig_array = sig.arrays(f"PNN_{param}", library="pd")
 
     nominal_neg_idx = np.where(sig_array< 0)
     for weight in weight_list:
@@ -134,8 +139,12 @@ def get_sig_array(era,param,input_sig):
                 weight_array_list[weight_item] = weight_array_list[weight_item].drop(nominal_neg_idx[0])
                 if era == "2022EE":
                     lumi = 7.875e3
-                else:
+                elif era == "2022postEE":
                     lumi = 26.337e3
+                elif era == "Run3":
+                    lumi = 26.337e3 +  7.875e3
+                else :
+                    sys.exit(-1)
                 for i in weight_list:
                     sig_array_list[i] = sig.arrays(i, library="pd").drop(nominal_neg_idx[0])
                 sig_weight = lumi/sig_array_list["genEventSumW"].iloc[:,0].values
@@ -177,24 +186,28 @@ def get_bkg_array(era,param,input_bkg):
         pnn_array_list[pnn_item] = bkg.arrays(pnn_item, library="pd")
         bkg_neg_idx = np.where(pnn_array_list[pnn_item]<0)
         pnn_array_list[pnn_item] = pnn_array_list[pnn_item].drop(bkg_neg_idx[0])
-        # pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.9999999)
+        pnn_array_list[pnn_item] = np.arctanh((pnn_array_list[pnn_item] -0.5 )*1.99999)
         if era == "2022EE":
             lumi = 7.875e3
-        else:
+        elif era == "2022postEE":
             lumi = 26.337e3
+        elif era == "Run3":
+            lumi = 26.337e3 +  7.875e3
+        else :
+            sys.exit(-1)
         for i in weight_list:
             bkg_array_list[i] = bkg.arrays(i, library="pd").drop(bkg_neg_idx[0])
         bkg_weight = lumi/bkg_array_list["genEventSumW"].iloc[:,0].values
         for i in weight_list:
             if i != "genEventSumW":
                 bkg_weight = bkg_weight*bkg_array_list[i].iloc[:,0].values
-        if s_type == "ggh_htautau":
-            bkg_weight = 0.1 * bkg_weight
-        if s_type == "ggh_hbb":
-            bkg_weight = 0.1 * bkg_weight
+        # if s_type == "ggh_htautau":
+        #     bkg_weight = 0.1 * bkg_weight
+        # if s_type == "ggh_hbb":
+        #     bkg_weight = 0.1 * bkg_weight
         bkg_weight_array = pd.DataFrame(bkg_weight,columns=["Limit_Weight"])
         bkg_weight_array_list[pnn_item] = bkg_weight_array
-    bkg_array = bkg.arrays(f"pnn_{param}", library="pd")
+    bkg_array = bkg.arrays(f"PNN_{param}", library="pd")
 
     nominal_neg_idx = np.where(bkg_array < 0)
 
@@ -207,25 +220,29 @@ def get_bkg_array(era,param,input_bkg):
                 weight_array_list[weight_item] = weight_array_list[weight_item].drop(nominal_neg_idx[0])
                 if era == "2022EE":
                     lumi = 7.875e3
-                else:
-                    lumi = 26.337e3   
+                elif era == "2022postEE":
+                    lumi = 26.337e3
+                elif era == "Run3":
+                    lumi = 26.337e3 +  7.875e3
+                else :
+                    sys.exit(-1)
                 for i in weight_list:
                     sig_array_list[i] = bkg.arrays(i, library="pd").drop(nominal_neg_idx[0])
                 sig_weight = lumi/sig_array_list["genEventSumW"].iloc[:,0].values
                 for i in weight_list:
                     if i != "genEventSumW" and i not in weight_item:
                         sig_weight = sig_weight*sig_array_list[i].iloc[:,0].values
-                if s_type == "ggh_htautau":
-                    sig_weight = 0.1 * sig_weight
-                if s_type == "ggh_hbb":
-                    sig_weight = 0.1 * sig_weight
+                # if s_type == "ggh_htautau":
+                #     sig_weight = 0.1 * sig_weight
+                # if s_type == "ggh_hbb":
+                #     sig_weight = 0.1 * sig_weight
                 sig_weight = sig_weight*weight_array_list[weight_item].iloc[:,0].values
                 sig_weight_array = pd.DataFrame(sig_weight,columns=[f"Limit_Weight_{weight_item}"])
                 trainweight_array_list[weight_item] = sig_weight_array                
 
     return pnn_array_list, bkg_weight_array_list, s_type,pnn_branches, trainweight_array_list
 
-def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight, Z_threshold=0.2):
+def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight, Z_threshold=0.5):
     num = 5001
     # low, high  = np.min(overall), np.max(overall)
     high =max(background_mva.max().max(), signal_mva.max().max())
@@ -241,7 +258,7 @@ def rebin_histogram(signal_mva, background_mva, signal_weight, background_weight
     def Z(k, l):
         ns = np.sum(signal_hist[k:l+1])
         nb = np.sum(background_hist[k:l+1])
-        if nb + ns >=0.2:
+        if nb >=0.2:
             return 10 * ns / Ns + 5 * nb / Nb
         else:
             return 0
@@ -279,7 +296,7 @@ def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
         root_file = ROOT.TFile(root_filename, "UPDATE")
     else:
         root_file = ROOT.TFile(root_filename, "RECREATE")
-    if pnn_item == "pnn_"+f"{param}":
+    if pnn_item == "PNN_"+f"{param}":
         signal_root_hist = ROOT.TH1F(f"{s_type}", f"{s_type} Distribution", n_bins, bin_edges)
     else:
         if s_type == "":
@@ -290,7 +307,7 @@ def save_root(signal_mva, signal_weight, new_bins, s_type, param,pnn_item):
     for i in range(n_bins):
     # SetBinContent takes bin index starting from 1, and the bin content value
         signal_root_hist.SetBinContent(i+1, signal_hist[i])
-    signal_root_hist.GetXaxis().SetTitle("pnn_100_rebin")
+    signal_root_hist.GetXaxis().SetTitle("PNN_100_rebin")
     signal_root_hist.GetYaxis().SetTitle("N")
 
     # Write the histograms to the file
@@ -322,10 +339,10 @@ def main():
         # print(s_type,trainweight_array_list)
         if s_type not in type_list:
             type_list.append(s_type)
-        bkg_array_sum["sum"] = pd.concat([bkg_array_sum["sum"], bkg_array[f"pnn_{param}"]],axis=0)
+        bkg_array_sum["sum"] = pd.concat([bkg_array_sum["sum"], bkg_array[f"PNN_{param}"]],axis=0)
         # print(bkg_weight_array_sum["sum"])
         # print(bkg_weight_array)
-        bkg_weight_array_sum["sum"] = pd.concat([bkg_weight_array_sum["sum"],bkg_weight_array[f"pnn_{param}"]],axis=0)
+        bkg_weight_array_sum["sum"] = pd.concat([bkg_weight_array_sum["sum"],bkg_weight_array[f"PNN_{param}"]],axis=0)
         for pnn_item in pnn_branches:
             if (f"{s_type}_{pnn_item}") not in bkg_array_sum:
                 bkg_array_sum[f"{s_type}_{pnn_item}"] = pd.DataFrame()
@@ -347,7 +364,7 @@ def main():
             else:
                 bkg_trainweight_array_list[f"{s_type}_{train_weight}"] = pd.concat([bkg_trainweight_array_list[f"{s_type}_{train_weight}"],trainweight_array_list[train_weight]],axis=0)
 
-    new_bins = rebin_histogram(sig_array[f"pnn_{param}"],bkg_array_sum["sum"],sig_weight_array[f"pnn_{param}"],bkg_weight_array_sum["sum"],0.5)
+    new_bins = rebin_histogram(sig_array[f"PNN_{param}"],bkg_array_sum["sum"],sig_weight_array[f"PNN_{param}"],bkg_weight_array_sum["sum"])
     for s_type in bkg_array_sum:
         bkg_array_sum[s_type] = bkg_array_sum[s_type].reset_index(drop=True)
     for s_type in bkg_weight_array_sum:
@@ -366,13 +383,15 @@ def main():
     for item in sig_trainweight_array_list:
         if ("jer" in item )or ("jes" in item):
             continue
-        save_root(sig_array[f'pnn_{param}'], sig_trainweight_array_list[item],new_bins,sig_s_type,param,pnn_item=str(item))
+        save_root(sig_array[f'PNN_{param}'], sig_trainweight_array_list[item],new_bins,sig_s_type,param,pnn_item=str(item))
     # for s_type in type_list:
         # for pnn_item in pnn_branches:
         #     save_root(bkg_array_sum[f"{s_type}_{pnn_item}"],bkg_weight_array_sum[f"{s_type}_{pnn_item}"],new_bins,s_type,param,pnn_item)
         # for train_weight in trainweight_array_list:
         #     save_root(bkg_array_sum[s_type + f'pnn_{param}'],bkg_trainweight_array_list[f"{s_type}_{train_weight}"],new_bins,s_type,param,train_weight)
+    # bkg_array_sum are the bkgs array
     for item in bkg_array_sum:
+        print(f"item, {item}")
         save_root(bkg_array_sum[item],bkg_weight_array_sum[item],new_bins,s_type="",param=param,pnn_item=item)
     for item in bkg_trainweight_array_list:
         if ("jer" in item )or ("jes" in item):
@@ -384,8 +403,8 @@ def main():
             split_item = item
         for type in type_list:
             if type in split_item:
-                print(f"saving for : {type}_pnn_{param}, item: {item}")
-                save_root(bkg_array_sum[f'{type}_pnn_{param}'],bkg_trainweight_array_list[item],new_bins,s_type="",param=param,pnn_item=item)
+                print(f"saving for : {type}_PNN_{param}, item: {item}")
+                save_root(bkg_array_sum[f'{type}_PNN_{param}'],bkg_trainweight_array_list[item],new_bins,s_type="",param=param,pnn_item=item)
 
 if __name__ == "__main__":
     main()
