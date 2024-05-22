@@ -1,3 +1,67 @@
+# DYto2L:
+#  era: 2022EE
+#  nick: DYto2L
+#  sample_type: dyjets_ll
+# DYto2Tau:
+#  era: 2022EE
+#  nick: DYto2Tau
+#  sample_type: dyjets_tautau
+# Hto2B:
+#  era: 2022EE
+#  nick: Hto2B
+#  sample_type: ggh_hbb 
+# Data:
+#  era: 2022EE
+#  nick: Data
+#  sample_type: data
+# Top:
+#  era: 2022EE
+#  nick: Top
+#  sample_type: ttbar
+# Wjets:
+#  era: 2022EE
+#  nick: Wjets
+#  sample_type: wjets
+# diboson:
+#  era: 2022EE
+#  nick: diboson
+#  sample_type: diboson
+# Hto2Tau:
+#  era: 2022EE
+#  nick: Hto2Tau
+#  sample_type: ggh_htautau
+# DYto2L:
+#  era: 2022EE
+#  nick: DYto2L
+#  sample_type: dyjets_ll
+# DYto2Tau:
+#  era: 2022EE
+#  nick: DYto2Tau
+#  sample_type: dyjets_tautau
+# Hto2B:
+#  era: 2022EE
+#  nick: Hto2B
+#  sample_type: ggh_hbb 
+# Data:
+#  era: 2022EE
+#  nick: Data
+#  sample_type: data
+# Top:
+#  era: 2022EE
+#  nick: Top
+#  sample_type: ttbar
+# Wjets:
+#  era: 2022EE
+#  nick: Wjets
+#  sample_type: wjets
+# diboson:
+#  era: 2022EE
+#  nick: diboson
+#  sample_type: diboson
+# Hto2Tau:
+#  era: 2022EE
+#  nick: Hto2Tau
+#  sample_type: ggh_htautau
 WW_TuneCP5_13p6TeV_pythia8_Run3Summer22EENanoAODv12:
    era: 2022postEE
    nick: WW_TuneCP5_13p6TeV_pythia8_Run3Summer22EENanoAODv12
