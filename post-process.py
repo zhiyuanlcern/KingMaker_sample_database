@@ -116,9 +116,9 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
     }
     }
     weight_dict = {
-        "tt": 'Xsec *  {0}* puweight * genWeight/genEventSumW *    btag_weight   *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 *  FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2'.format(lumi),
-        "mt": 'Xsec   * {0} * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1'.format(lumi),
-        "et": 'Xsec * {0}* puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30'.format(lumi),
+        "tt": 'is_data? double(1.0) : Xsec *  {0}* puweight * genWeight/genEventSumW *    btag_weight   *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 *  FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 * ggh_NNLO_weight'.format(lumi),
+        "mt": 'is_data? double(1.0) : Xsec   * {0} * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 * ggh_NNLO_weight'.format(lumi),
+        "et": 'is_data? double(1.0) : Xsec * {0}* puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 * ggh_NNLO_weight'.format(lumi),
     }
     
     print("start processing    ")
@@ -148,7 +148,7 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
             "ZPtMassReweightWeight" : "double(1.0)", "FF_weight": "1.0f",
             'C_QCD': 'met/pt_2 * cos(metphi - phi_2 ) ',  'C_W': '(met + pt_1)/pt_2 * cos(metphi + phi_1- phi_2 )',
             'deta_12' : 'eta_1 - eta_2', 'dphi_12' : 'phi_1 - phi_2', 'tau_gen_match_2' : 'bool(0)',
-            'Lumi': str(lumi),  
+            'Lumi': str(lumi),  "ggh_NNLO_weight": "double(1.0)",
             # 'trg_wgt_ditau_crosstau_12' : '( trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 + 1 * (trg_double_tau35_mediumiso_hps <1))'
             } )
             df_mc, _2 = Add_new_column(df_mc, 
