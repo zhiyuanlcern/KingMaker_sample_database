@@ -1,3 +1,16 @@
+# Get the username from the environment variable
+USER=$(whoami)
+
+# Get the first letter of the username
+FIRST_LETTER=${USER:0:1}
+
+# Define the new path
+NEW_PATH="root://eosuser.cern.ch///eos/user/$FIRST_LETTER/$USER/CROWN/ntuples/"
+sed -i "s|^wlcg_path =.*|wlcg_path = $NEW_PATH|" lawluigi_configs/KingMaker_lxplus_luigi.cfg
+sed -i "s|^base:.*|base: $NEW_PATH|" lawluigi_configs/KingMaker_lxplus_law.cfg
+
+
+
 
 channel="all"
 replacement="scopes = [\"mt\", \"et\", \"tt\", \"em\"]"
