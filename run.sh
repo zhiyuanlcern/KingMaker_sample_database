@@ -32,9 +32,6 @@ nohup law run ProduceSamples --local-scheduler False --analysis tau  --config co
 nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_ttbar.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar${channel}_Version8_allsyst >> NanoV12_2022EEMC_ttbar${channel}_Version8_allsyst.log & 
 sleep 300
 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Version8_2022missing.txt  --workers 1 --production-tag NanoV12_2022MC_ttbar${channel}_Version8_allsyst >> NanoV12_2022MC_ttbar${channel}_Version8_allsyst.log & 
-nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list Version8_2022EEmissing.txt  --workers 1 --production-tag NanoV12_2022EEMC_ttbar${channel}_Version8_allsyst >> NanoV12_2022EEMC_ttbar${channel}_Version8_allsyst.log & 
-sleep 300
 
 nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022MC_htautau.txt  --workers 1 --production-tag NanoV12_2022MC_htautau${channel}_Version8_allsyst >> NanoV12_2022MC_htautau${channel}_Version8_allsyst.log & 
 nohup law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/Htautau_input_list/NanoV12_2022EEMC_htautau.txt  --workers 1 --production-tag NanoV12_2022EEMC_htautau${channel}_Version8_allsyst >> NanoV12_2022EEMC_htautau${channel}_Version8_allsyst.log & 
