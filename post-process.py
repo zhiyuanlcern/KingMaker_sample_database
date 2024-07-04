@@ -119,6 +119,7 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
         "tt": 'is_data? double(1.0) : Xsec *  {0}* puweight * genWeight/genEventSumW *    btag_weight   *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 *  FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 '.format(lumi), # * ggh_NNLO_weight
         "mt": 'is_data? double(1.0) : Xsec   * {0} * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 '.format(lumi), # * ggh_NNLO_weight
         "et": 'is_data? double(1.0) : Xsec * {0}* puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 '.format(lumi), # * ggh_NNLO_weight
+        "em": 'Xsec * {0} * genWeight/genEventSumW *   ((trg_wgt_single_ele30 * (trg_single_ele30 > 0) + 1 * (trg_single_ele30 < 1) ) * id_wgt_ele_wpTight * id_wgt_mu_2 * btag_weight * puweight * (trg_wgt_single_mu24 * (trg_single_mu24 > 0) + 1 * (trg_single_mu24 < 1) ))' .format(lumi),
     }
     
     print("start processing    ")
