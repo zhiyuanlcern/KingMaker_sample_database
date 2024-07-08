@@ -61,6 +61,7 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                 dz_1 = get_variable(tree, "dz_1",suffix)
                 dxy_1 = get_variable(tree, "dxy_1",suffix)
                 iso_1 = get_variable(tree, "iso_1",suffix)
+                phi_2 = get_variable(tree,"phi_2",suffix)
                 deltaR_ditaupair = get_variable(tree, "deltaR_ditaupair",suffix)
                 pt_1 = get_variable(tree, "pt_1",suffix)
                 eta_2 = get_variable(tree, "eta_2",suffix)
@@ -141,19 +142,19 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                     selection_dic["mt"] = (((trg_cross_mu20tau27_hps==1)|(trg_single_mu24==1)|(trg_single_mu27==1)|(trg_single_tau180_2==1)) & \
                         (pt_1 > 25.0) & (pt_2 > 30) & (extramuon_veto == 0)  &  (extraelec_veto == 0) & \
                         (id_tau_vsMu_Loose_2 > 0) & (id_tau_vsJet_Medium_2 > 0) & (id_tau_vsEle_VVLoose_2 > 0 ) & \
-                        (( gen_match_2 != 6 & is_wjets>0 ) | (is_wjets <1)  ) &  ((q_1 * q_2) < 0) )
+                        (( (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) &  ((q_1 * q_2) < 0) )
                     selection_dic["nob_mt"] = selection_dic["mt"] & (nbtag == 0)
                     selection_dic["btag_mt"] = selection_dic["mt"] & (nbtag == 1)
                 elif channel == "et":
                     selection_dic["et"] = (((trg_single_ele30 ==1)| (trg_single_ele32==1)|(trg_single_ele35==1)|(trg_single_tau180_2==1))& \
                         (pt_1 > 30) & (pt_2 > 30)  &  (extramuon_veto == 0)  & (extraelec_veto == 0) & \
                         (id_tau_vsMu_VLoose_2 > 0)  & (id_tau_vsEle_Tight_2 > 0) & (id_tau_vsJet_Medium_2 > 0 ) & \
-                        (( gen_match_2 != 6 & is_wjets>0 ) | (is_wjets <1)  ) & ((q_1 * q_2) < 0) )  # 
+                        ((   (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) & ((q_1 * q_2) < 0) )  # 
                     selection_dic["nob_et"] = selection_dic["et"] & nbtag == 0
                     selection_dic["btag_et"] = selection_dic["et"] & nbtag == 1
                     if era == "2022postEE":
-                        selection_dic["nob_et"] = selection_dic["et"] & nbtag == 0 &  (not (phi_2>1.8 &phi_2< 2.7 &eta_2 > 1.5  &eta_2<2.2))
-                        selection_dic["btag_et"] = selection_dic["et"] & nbtag == 1 &  (not (phi_2>1.8 &phi_2< 2.7 &eta_2 > 1.5  &eta_2<2.2))
+                        selection_dic["nob_et"] = selection_dic["et"] & nbtag == 0 &  ( not( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2)  ) )
+                        selection_dic["btag_et"] = selection_dic["et"] & nbtag == 1 &  ( not( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  &(eta_2<2.2) ) )
                     # (trg_double_tau30_plusPFjet60==1) | (trg_double_tau30_plusPFjet75==1) | 
                 elif channel == "tt":
                     selection_dic["tt"] = ((trg_double_tau35_mediumiso_hps==1) | (trg_single_deeptau180_1==1) | (trg_single_deeptau180_2  ==1) )& \
