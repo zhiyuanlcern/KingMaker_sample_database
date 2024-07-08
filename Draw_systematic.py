@@ -150,11 +150,11 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                         (pt_1 > 30) & (pt_2 > 30)  &  (extramuon_veto == 0)  & (extraelec_veto == 0) & \
                         (id_tau_vsMu_VLoose_2 > 0)  & (id_tau_vsEle_Tight_2 > 0) & (id_tau_vsJet_Medium_2 > 0 ) & \
                         ((   (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) & ((q_1 * q_2) < 0) )  # 
-                    selection_dic["nob_et"] = selection_dic["et"] & nbtag == 0
-                    selection_dic["btag_et"] = selection_dic["et"] & nbtag == 1
+                    selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0)
+                    selection_dic["btag_et"] = selection_dic["et"] & (nbtag == 1)
                     if era == "2022postEE":
-                        selection_dic["nob_et"] = selection_dic["et"] & nbtag == 0 &  ( not( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2)  ) )
-                        selection_dic["btag_et"] = selection_dic["et"] & nbtag == 1 &  ( not( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  &(eta_2<2.2) ) )
+                        selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0) &~  (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2) ) )
+                        selection_dic["btag_et"] = selection_dic["et"] & (nbtag == 1) &~ (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  &(eta_2<2.2) ) )
                     # (trg_double_tau30_plusPFjet60==1) | (trg_double_tau30_plusPFjet75==1) | 
                 elif channel == "tt":
                     selection_dic["tt"] = ((trg_double_tau35_mediumiso_hps==1) | (trg_single_deeptau180_1==1) | (trg_single_deeptau180_2  ==1) )& \
@@ -163,8 +163,8 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                         ((id_tau_vsJet_Medium_1 > 0) & (id_tau_vsEle_VVLoose_1 > 0) & (id_tau_vsMu_VLoose_1 > 0))& \
                         ((id_tau_vsJet_Medium_2 > 0) & (id_tau_vsEle_VVLoose_2 > 0) & (id_tau_vsMu_VLoose_2 > 0))& \
                         (deltaR_ditaupair > 0.5) & ((q_1 * q_2) < 0)
-                    selection_dic["btag_tt"] = selection_dic["tt"] & nbtag ==1 
-                    selection_dic["nob_tt"] = selection_dic["tt"] & nbtag ==0
+                    selection_dic["btag_tt"] = selection_dic["tt"] & (nbtag ==1) 
+                    selection_dic["nob_tt"] = selection_dic["tt"] & (nbtag ==0)
                 elif channel == "em":
                     selection_dic["em"] = ((extramuon_veto == 0) & (extraelec_veto == 0) & \
                                 ((trg_cross_mu23ele12 == 1) | (trg_cross_mu8ele23 == 1) | (trg_single_ele30 == 1) |
