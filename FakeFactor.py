@@ -9,7 +9,7 @@ import array
 # code run steering
 # run = False
 run = True
-produce_final_fakes = True
+# produce_final_fakes = True
 
 R.gROOT.SetBatch(True)
 
@@ -60,9 +60,9 @@ elif channel == "mt":
     MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} * id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  * (trg_wgt_ditau_crosstau_2 * trg_cross_mu20tau27_hps  + 1 * (trg_cross_mu20tau27_hps < 1) )/ genEventSumW  :  double(1.0) )'
     MC_weight_list.extend(["iso_wgt_mu_1"])
 elif channel == "tt":
-    # lepton_selection = combinecut(Htautau.tt_triggers_selections[era],Htautau.tt_secondtau_selections,Htautau.lepton_veto)
+    lepton_selection = combinecut(Htautau.tt_triggers_selections[era],Htautau.tt_secondtau_selections,Htautau.lepton_veto)
     # lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto)
-    lepton_selection = combinecut(Htautau.lepton_veto)
+    # lepton_selection = combinecut(Htautau.lepton_veto)
     complete_lepton_selection = combinecut(Htautau.tt_secondtau_selections,Htautau.lepton_veto, Htautau.tt_triggers_selections[era])
     var = "pt_1"
     MC_weight =  f'(is_data == 0? genWeight *  btag_weight * puweight * (-1.0) * Xsec * {lumi} * id_wgt_tau_vsJet_Medium_2  * id_wgt_tau_vsJet_Medium_1 * ( trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 + 1 * (trg_double_tau35_mediumiso_hps <1)) / genEventSumW  : double(1.0))'
@@ -213,12 +213,10 @@ def Add_new_column(input_path, samples_list, new_column, embedding = False, FF =
                     df_mc.Snapshot('ntuple',  f)
                 else:
                     print( f'column {new_column} already exists, skip' )   
-
-
-
 def get_df(input_path, samples_list, save_ttbar_data=False, save_fraction=False):
     df_d = {}
-    binning = [30,40,50,60,70,80,90,100,120,140,200,350,500]
+    print(combinecut(DR_QCD, ID, lepton_selection))
+    # binning = [30,40,50,60,70,80,90,100,120,140,200,350,500]
     samples = getall_list(input_path, samples_list)
     samples_noW = getall_list(input_path, samples_list, exclude_wjets=True) ## exlcude wjets background from W DR, Wjets will be only coming from fakes
     # print(samples)
@@ -254,14 +252,8 @@ def get_df(input_path, samples_list, save_ttbar_data=False, save_fraction=False)
     print(f"Finish getting W df, entries of W Anti ID: {df_d['DR_WAnti'].Count().GetValue() }")
     print(f"Finish getting W df, entries of W ID: {df_d['DR_WID'].Count().GetValue() }")
 
-
+    
     return df_d
-
-
-#Calculate fake factor  2024_04_10
-
-
-
 def get_FF_f(df_d, FF_input,run =False, syst = False):
     h_d = {}
     #r = [30,40,50,60,70,80,90,100,120,140,200,350]
@@ -277,38 +269,33 @@ def get_FF_f(df_d, FF_input,run =False, syst = False):
                             ## logic for ttbar / wjets stat up/down
                             #if is_ttbar: # up: redefine genWeight_tmp = genWeight_tmp * 1.4 # down: redefine genWeight_tmp =  genWeight_tmp * 0.6
                             #if is_wjets: # up: redefine genWeight_tmp = genWeight_tmp * 1.2 # down: redefine genWeight_tmp = genWeight_tmp * 0.8
-                            h_d[DR+tau_id+npreb+ratio+"_FF_ttbarUp"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"_FF_ttbarUp", "is_ttbar? 1.4 * genWeight_tmp : genWeight_tmp ").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"_FF_ttbarUp")
-                            h_d[DR+tau_id+npreb+ratio+"_FF_ttbarDown"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"_FF_ttbarDown", "is_ttbar? 0.6 * genWeight_tmp : genWeight_tmp").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"_FF_ttbarDown")
-                            h_d[DR+tau_id+npreb+ratio+"_FF_wjetsDown"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"_FF_wjetsDown", "is_wjets? 1.2 * genWeight_tmp : genWeight_tmp").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"_FF_wjetsDown")
-                            h_d[DR+tau_id+npreb+ratio+"_FF_wjetsUp"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"_FF_wjetsUp", "is_wjets? 0.8 * genWeight_tmp : genWeight_tmp").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"_FF_wjetsUp")
+                            h_d[DR+tau_id+npreb+ratio+"__FF_ttbarUp"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"__FF_ttbarUp", "is_ttbar? 1.4 * genWeight_tmp : genWeight_tmp ").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"__FF_ttbarUp")
+                            h_d[DR+tau_id+npreb+ratio+"__FF_ttbarDown"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"__FF_ttbarDown", "is_ttbar? 0.6 * genWeight_tmp : genWeight_tmp").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"__FF_ttbarDown")
+                            h_d[DR+tau_id+npreb+ratio+"__FF_wjetsDown"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"__FF_wjetsDown", "is_wjets? 1.2 * genWeight_tmp : genWeight_tmp").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"__FF_wjetsDown")
+                            h_d[DR+tau_id+npreb+ratio+"__FF_wjetsUp"] = df_d[DR+tau_id].Filter(combinecut(ID_dic[tau_id], nprebjets_dic[npreb], ratio_dic[ratio])).Define(DR+tau_id+npreb+ratio+"__FF_wjetsUp", "is_wjets? 0.8 * genWeight_tmp : genWeight_tmp").Histo1D(('FF_h', 'FF_h' ,len(binning)-1, array.array('d', binning)),var, DR+tau_id+npreb+ratio+"__FF_wjetsUp")
                         # write(h, directory, name,fout): "Write `h` to dir `directory` with name `name` in file `fout`"
                         write(h_d[DR+tau_id+npreb+ratio], "", DR+tau_id+npreb+ratio,FF_input)
                         if syst:
-                            write(h_d[DR+tau_id+npreb+ratio+"_FF_ttbarUp"], "", DR+tau_id+npreb+ratio+"_FF_ttbarUp", FF_input)
-                            write(h_d[DR+tau_id+npreb+ratio+"_FF_ttbarDown"], "", DR+tau_id+npreb+ratio+"_FF_ttbarDown", FF_input)
-                            write(h_d[DR+tau_id+npreb+ratio+"_FF_wjetsDown"], "", DR+tau_id+npreb+ratio+"_FF_wjetsDown", FF_input)
-                            write(h_d[DR+tau_id+npreb+ratio+"_FF_wjetsUp"], "", DR+tau_id+npreb+ratio+"_FF_wjetsUp", FF_input)
+                            write(h_d[DR+tau_id+npreb+ratio+"__FF_ttbarUp"], "", DR+tau_id+npreb+ratio+"__FF_ttbarUp", FF_input)
+                            write(h_d[DR+tau_id+npreb+ratio+"__FF_ttbarDown"], "", DR+tau_id+npreb+ratio+"__FF_ttbarDown", FF_input)
+                            write(h_d[DR+tau_id+npreb+ratio+"__FF_wjetsDown"], "", DR+tau_id+npreb+ratio+"__FF_wjetsDown", FF_input)
+                            write(h_d[DR+tau_id+npreb+ratio+"__FF_wjetsUp"], "", DR+tau_id+npreb+ratio+"__FF_wjetsUp", FF_input)
                         
                     h_d[DR+tau_id+npreb+ratio] =  get(DR+tau_id+npreb+ratio, "",FF_input )
                     if syst:
-                        h_d[DR+tau_id+npreb+ratio+"_FF_ttbarUp"] = get(DR+tau_id+npreb+ratio+"_FF_ttbarUp", "", FF_input)
-                        h_d[DR+tau_id+npreb+ratio+"_FF_ttbarDown"] = get(DR+tau_id+npreb+ratio+"_FF_ttbarDown", "", FF_input)
-                        h_d[DR+tau_id+npreb+ratio+"_FF_wjetsDown"] = get(DR+tau_id+npreb+ratio+"_FF_wjetsDown", "", FF_input)
-                        h_d[DR+tau_id+npreb+ratio+"_FF_wjetsUp"] = get(DR+tau_id+npreb+ratio+"_FF_wjetsUp", "", FF_input)
+                        h_d[DR+tau_id+npreb+ratio+"__FF_ttbarUp"] = get(DR+tau_id+npreb+ratio+"__FF_ttbarUp", "", FF_input)
+                        h_d[DR+tau_id+npreb+ratio+"__FF_ttbarDown"] = get(DR+tau_id+npreb+ratio+"__FF_ttbarDown", "", FF_input)
+                        h_d[DR+tau_id+npreb+ratio+"__FF_wjetsDown"] = get(DR+tau_id+npreb+ratio+"__FF_wjetsDown", "", FF_input)
+                        h_d[DR+tau_id+npreb+ratio+"__FF_wjetsUp"] = get(DR+tau_id+npreb+ratio+"__FF_wjetsUp", "", FF_input)
                     # h_d[DR+tau_id+npreb+ratio].Draw()
                     # c.Print(input_path + '/' + DR+tau_id+npreb+ratio + '.png' ) 
     return h_d
-
-
-
-# save root file 2024_04_10
-
 def write_FF_f(h_d, FF_output, syst = False):
     for DR in cut_dic:
         for npreb in nprebjets_dic:
             for ratio in ratio_dic:
                 if syst: 
-                    syst_list = ["","_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsDown","_FF_wjetsUp"  ]
+                    syst_list = ["","__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsDown","__FF_wjetsUp"  ]
                 else:
                     syst_list = [""]
                 for sys in syst_list:
@@ -322,11 +309,6 @@ def write_FF_f(h_d, FF_output, syst = False):
                     FF_processed.SetMaximum(1.0)
                     FF_processed.SetMinimum(0)
                     write(FF_processed, f'FakeFactor/{DR}' ,'FF' + DR + var + npreb + ratio + sys, FF_output)  
-
-
-
-# cal fit 2024_04_10
-
 def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst= ""):
     print(f"running for {'FF'+DR+var + npreb + ratio + syst}")
     if DR ==  "DR_ttbar" and npreb == "0preb":
@@ -633,8 +615,10 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True ,ind
                     'genWeight', "1.0f").Redefine('is_fake', 'true' ).Redefine("puweight", "double(1.0)")
                 for w in MC_weight_list:
                     df_dict[DR] = df_dict[DR].Redefine(w, "1.0f")
-                
+                    df_dict[DR] = df_dict[DR].Redefine('id_wgt_tau_vsJet_Medium_2',  'double(1)')
                 df_dict[DR] = df_dict[DR].Redefine('id_tau_vsJet_Medium_1' if channel == "tt" else 'id_tau_vsJet_Medium_2',  'int(1)')
+                if channel == "tt":
+                    df_dict[DR] = df_dict[DR].Redefine('id_wgt_tau_vsJet_Medium_1',  'double(1)')
                     #.Filter("genWeight != 0")
             else:
                 ## set pt to -1 if weight is 0, pt if not equal to 0 for syst
@@ -662,7 +646,7 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True ,ind
 
         # print(output_column)
         # print(df_dict["QCD"].GetColumnNames())
-        # df_dict["QCD"].Snapshot('ntuple', f'test.root', ['genWeight_FF_tot_StatUp'])
+        # df_dict["QCD"].Snapshot('ntuple', f'test.root', ['genWeight__FF_tot_StatUp'])
     
     DR_speical_cut = {'QCD': "1>0"} if channel =="tt" else {'W': Htautau.W_true_only, 'QCD' : "1>0",'ttbar': Htautau.ttbar_true_only}
     if save_DR:
@@ -950,25 +934,25 @@ def clousre_correction( run_double_correction = True, index = 1):
                 sys.exit(-1)
             else:
                 df_dict[DR] = df_dict[DR].Define("FF_weight_tmp", "FF_weight").Define(
-                    "FF_weight_FF_closureDown", f"FF_weight").Define(
-                    "FF_weight_FF_closureUp",   f"FF_weight * ({weight_str}) * ({weight_str})"  ) ## multiply two times for up, no for down
+                    "FF_weight__FF_closureDown", f"FF_weight").Define(
+                    "FF_weight__FF_closureUp",   f"FF_weight * ({weight_str}) * ({weight_str})"  ) ## multiply two times for up, no for down
                 df_dict[DR] = df_dict[DR].Redefine("FF_weight", f"FF_weight_tmp * ({weight_str})" )
-                for s in ["_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"]:
+                for s in ["__FF_tot_StatDown", "__FF_tot_StatUp", "__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsUp","__FF_wjetsDown"]:
                     df_dict[DR] = df_dict[DR].Redefine(f"FF_weight{s}", f"FF_weight{s} * ({weight_str})" )
             
             # print(weight_str)
             df_dict[DR] = df_dict[DR].Define("Closure_corrected", "int(1)")
             # .Define(
-            #     f'pt_1_FF_closureDown', f' FF_weight_FF_closureDown == 0? -1.0f : pt_1').Define(
-            #     f'pt_1_FF_closureUp', f' FF_weight_FF_closureUp == 0? -1.0f : pt_1').Redefine(
+            #     f'pt_1_FF_closureDown', f' FF_weight__FF_closureDown == 0? -1.0f : pt_1').Define(
+            #     f'pt_1_FF_closureUp', f' FF_weight__FF_closureUp == 0? -1.0f : pt_1').Redefine(
             #     f'pt_1', f' FF_weight == 0? -1.0f : pt_1')
             
             df_dict[DR].Snapshot("ntuple", f"{input_path}/FF_{DR}_{tag}.root")
     if channel != "tt" :
         df_dict["ttbar"]= R.RDataFrame('ntuple', f"{input_path}/FF_ttbar.root").Define(
             "Closure_corrected", "int(1)").Define(
-            "FF_weight_FF_closureDown", f"FF_weight").Define(
-            "FF_weight_FF_closureUp", f"FF_weight").Define(
+            "FF_weight__FF_closureDown", f"FF_weight").Define(
+            "FF_weight__FF_closureUp", f"FF_weight").Define(
             "FF_weight_tmp", f"FF_weight")
             # .Define(
             # 'pt_1_FF_closureDown', "pt_1").Define(
@@ -978,7 +962,7 @@ def clousre_correction( run_double_correction = True, index = 1):
     
 
     columns = list(df_dict["QCD"].GetColumnNames())
-    combine_Fakes(input_path,df_dict,columns, True, ["_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown", "_FF_closureDown", "_FF_closureUp" ], tag = tag)
+    combine_Fakes(input_path,df_dict,columns, True, ["__FF_tot_StatDown", "__FF_tot_StatUp", "__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsUp","__FF_wjetsDown", "__FF_closureDown", "__FF_closureUp" ], tag = tag)
 
 
 if __name__ == '__main__':        
@@ -1000,18 +984,18 @@ if __name__ == '__main__':
         for npreb in nprebjets_dic:
                 for ratio in ratio_dic:
                     Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = True, syst="") ## Produce FF_tot_stat systematics
-                    for sys in ["_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsDown","_FF_wjetsUp"  ]:
+                    for sys in ["__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsDown","__FF_wjetsUp"  ]:
                         Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = False, syst= sys) ## Produce FF_ttbar, FF_Wjets systematics
     # if produce_final_fakes :
         # produce the fakes
     for DR in cut_dic:  
         # df_dict, columns = produce_fake(input_path, samples_list, [])
         df_dict, columns = produce_fake(input_path, samples_list, [
-            "_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"
+            "__FF_tot_StatDown", "__FF_tot_StatUp", "__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsUp","__FF_wjetsDown"
             ], save_DR = True, index =i)
         i+=1 
         #    always save_DR , the output is needed by the closure corrections
-        combine_Fakes(input_path,df_dict,columns, True,["_FF_tot_StatDown", "_FF_tot_StatUp", "_FF_ttbarUp","_FF_ttbarDown", "_FF_wjetsUp","_FF_wjetsDown"] )
+        combine_Fakes(input_path,df_dict,columns, True,["__FF_tot_StatDown", "__FF_tot_StatUp", "__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsUp","__FF_wjetsDown"] )
 
     # if run:
     # R.DisableImplicitMT() ##  R.EnableImplicitMT() # I dont know why but it causes the TVirtualFitter.GetFitter() fail
