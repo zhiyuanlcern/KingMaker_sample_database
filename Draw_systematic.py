@@ -192,11 +192,11 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                 if channel =="em":
                     train_weight_dic["em"] = (Xsec * lumi * genWeight / genEventSumW *((trg_wgt_single_ele30 * (trg_single_ele30 > 0) + 1 * (trg_single_ele30 < 1)) *id_wgt_ele_wpTight * id_wgt_mu_2 * btag_weight * puweight *(trg_wgt_single_mu24 * (trg_single_mu24 > 0) + 1 * (trg_single_mu24 < 1))))
                 elif channel =="tt":
-                    train_weight_dic["tt"] = Xsec * lumi * puweight * genWeight/genEventSumW * btag_weight *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 * FF_weight # * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 
+                    train_weight_dic["tt"] = Xsec * lumi * puweight * genWeight/genEventSumW * btag_weight *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 * FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 
                 elif channel == "mt":
-                    train_weight_dic["mt"] = Xsec * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 
+                    train_weight_dic["mt"] = Xsec * lumi * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 
                 elif channel == "et":
-                    train_weight_dic["et"] = Xsec * puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
+                    train_weight_dic["et"] = Xsec * lumi *  puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
                 train_weight = train_weight_dic[channel]
                 # 应用筛选条件并累积权重数据
                 weights[var].append(train_weight[selection])
