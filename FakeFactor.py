@@ -447,7 +447,7 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
         #             formular_string
         #         ),30, 2000)        
         print("I am here 11")  
-        if bin_120_value - bin_120_error >0:
+        if bin_120_value - bin_120_error >0 and  bin_120_error/ (bin_120_value + 0.001) < thr:
             hint = SetValueError(hint,bin_120, bin_120_value,bin_120_error,True)
     
     ## We increase the error linearly for high pT bins
