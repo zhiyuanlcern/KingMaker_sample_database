@@ -11,35 +11,48 @@ def get_variable(tree, var_base, var_suffix=""):
     if var_name in tree.keys():
         var = tree[var_name]
         dtype = var.dtype
-        print(var_name, dtype)
+        # print(var_name, dtype)
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)
         return var
     else:
         var = tree[var_base]
         dtype = var.dtype
-        print(var_name, dtype)
+        # print(var_name, dtype)
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)       
         return var
 # Function to save numpy arrays as ROOT histograms
-def save_hist_to_root(hist_data, bins, variables, output_file):
-    root_file = R.TFile(output_file, "RECREATE")
-    for var in variables:
-        hist_name = f"{var}"
-        root_hist = R.TH1F(hist_name, var, len(bins)-1, bins)
-        for i, count in enumerate(hist_data[var]):
-            root_hist.SetBinContent(i+1, count)
-        root_hist.Write()
+def save_hist_to_root(hist_data, bins, var, output_file):
+    if os.path.exists(output_file):
+        root_file = R.TFile(output_file, "UPDATE")
+    else:
+        root_file = R.TFile(output_file, "RECREATE")
+    hist_name = f"{var}"
+    root_hist = R.TH1F(hist_name, hist_name, len(bins)-1, bins)
+    for i, count in enumerate(hist_data[var]):
+        root_hist.SetBinContent(i+1, count)
+    root_hist.Write()
     root_file.Close()
-def main(folder_path, era,variables, output_file, bins, channel, btag):
+def main(folder_path, era,variables, suffixs, output_file, bins, channel, btag):
     # if os.path.exists(output_file):
     #     print(f"Output file {output_file} already exists. Skipping execution.")
     #     return
     # 初始化空列表来存储所有文件中的数据
-    data = {var: [] for var in variables}
-    weights = {var: [] for var in variables}
-
+    data = {}
+    weights = {}
+    if "" not in suffixs: 
+        suffixs.insert(0, "")
+    for var in variables:
+        for suffix in suffixs:
+            data[var + suffix] = []
+            weights[var + suffix] = []
+    if era == "2022EE":
+        lumi = 7.875e3
+    elif era == "2022postEE":
+        lumi = 26.337e3
+    else:
+        raise ValueError("Error: Year not found {}".format(era))
     # 遍历文件夹中的所有 ROOT 文件
     for filename in os.listdir(folder_path):
         if filename.endswith(".root"):
@@ -51,10 +64,13 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
             # 获取 TTree
             # tree = file["ntuple"]
             tree = rdf.AsNumpy()
+            print('converting rdf to numpy')
             # 提取变量数据并累积
-            for var in variables:
-                base_var = var.split('__')[0]
-                suffix = var[len(base_var):]
+            
+            for suffix in suffixs:
+                print(f"processing {suffix}")
+                # base_var = var.split('__')[0]
+                # suffix = var[len(base_var):]
                 extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
                 extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
                 eta_1 = get_variable(tree, "eta_1",suffix)
@@ -82,7 +98,6 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                 if channel == "em":
                     id_wgt_ele_wpTight = get_variable(tree, "id_wgt_ele_wpTight",suffix)
                     id_wgt_mu_2 = get_variable(tree, "id_wgt_mu_2",suffix)
-                    
                     trg_cross_mu23ele12 = get_variable(tree, "trg_cross_mu23ele12",suffix)
                     trg_cross_mu8ele23 = get_variable(tree, "trg_cross_mu8ele23",suffix)
                     trg_single_ele30 = get_variable(tree, "trg_single_ele30",suffix)
@@ -121,8 +136,8 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                     trg_wgt_single_ele30 = get_variable(tree, "trg_wgt_single_ele30")
                     trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2")
                 if channel == "tt":
-                    # trg_double_tau30_plusPFjet60 = get_variable(tree, "trg_double_tau30_plusPFjet60")
-                    # trg_double_tau30_plusPFjet75 = get_variable(tree, "trg_double_tau30_plusPFjet75")
+                    trg_double_tau30_plusPFjet60 = get_variable(tree, "trg_double_tau30_plusPFjet60")
+                    trg_double_tau30_plusPFjet75 = get_variable(tree, "trg_double_tau30_plusPFjet75")
                     trg_double_tau35_mediumiso_hps = get_variable(tree, "trg_double_tau35_mediumiso_hps")
                     trg_single_deeptau180_1 = get_variable(tree, "trg_single_deeptau180_1")
                     trg_single_deeptau180_2 = get_variable(tree, "trg_single_deeptau180_2")
@@ -135,7 +150,7 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                     id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2")
                     id_wgt_tau_vsJet_Medium_1 = get_variable(tree, "id_wgt_tau_vsJet_Medium_1")
                     FF_weight = get_variable(tree, "FF_weight")
-                    # trg_wgt_ditau_crosstau_1  = get_variable(tree, "trg_wgt_ditau_crosstau_1 ")
+                    trg_wgt_ditau_crosstau_1  = get_variable(tree, "trg_wgt_ditau_crosstau_1 ")
                     trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2")
                 selection_dic = {} 
                 if channel == "mt":
@@ -155,9 +170,8 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                     if era == "2022postEE":
                         selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0) &~  (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2) ) )
                         selection_dic["btag_et"] = selection_dic["et"] & (nbtag == 1) &~ (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  &(eta_2<2.2) ) )
-                    # (trg_double_tau30_plusPFjet60==1) | (trg_double_tau30_plusPFjet75==1) | 
                 elif channel == "tt":
-                    selection_dic["tt"] = ((trg_double_tau35_mediumiso_hps==1) | (trg_single_deeptau180_1==1) | (trg_single_deeptau180_2  ==1) )& \
+                    selection_dic["tt"] = ((trg_double_tau35_mediumiso_hps==1) | (trg_single_deeptau180_1==1) | (trg_single_deeptau180_2==1) | (trg_double_tau30_plusPFjet60==1) | (trg_double_tau30_plusPFjet75==1))& \
                         (pt_1 > 40) & (pt_2 > 40) & (extramuon_veto == 0) & (extraelec_veto == 0) & \
                         (dz_1 < 0.2) & (dz_2 < 0.2) & (eta_1 < 2.1) & (eta_1 > -2.1) & (eta_2 < 2.1) & (eta_2 > -2.1) & \
                         ((id_tau_vsJet_Medium_1 > 0) & (id_tau_vsEle_VVLoose_1 > 0) & (id_tau_vsMu_VLoose_1 > 0))& \
@@ -177,16 +191,12 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                     print("wrong channel provided!! ")
                 # selection = ((nbtag == 0))
                 # 应用筛选条件
+                print("applying selection")
                 selection = selection_dic[f'{btag}_{channel}']
+                for var in variables:
+                    data[var + suffix ].append(get_variable(tree, var, suffix)[selection])
 
-                data[var].append(get_variable(tree, base_var, suffix)[selection])
-
-                if era == "2022EE":
-                    lumi = 7.875e3
-                elif era == "2022postEE":
-                    lumi = 26.337e3
-                else:
-                    raise ValueError("Error: Year not found {}".format(era))
+ 
                 # 计算 train_weight
                 train_weight_dic = {}
                 if channel =="em":
@@ -199,67 +209,80 @@ def main(folder_path, era,variables, output_file, bins, channel, btag):
                     train_weight_dic["et"] = Xsec * lumi *  puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
                 train_weight = train_weight_dic[channel]
                 # 应用筛选条件并累积权重数据
-                weights[var].append(train_weight[selection])
+                for var in variables:
+                    weights[var + suffix].append(train_weight[selection])
 
     # 将所有文件的数据拼接在一起
     for var in variables:
-        data[var] = np.concatenate(data[var])
-        weights[var] = np.concatenate(weights[var])
-        # print(var,":",len(weights[var]))
+        for suffix in suffixs:
+            data[var + suffix] = np.concatenate(data[var+suffix])
+            weights[var + suffix] = np.concatenate(weights[var+suffix])
+            # print(var,":",len(weights[var]))
 
-    # 创建主图和子图
-    fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
-                                            gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
+   
 
     # 绘制主图上的直方图
     colors = ['blue', 'red', 'green']
     hist_data = {}
-    for i, var in enumerate(variables):
-        hist_data[var], bins, _ = ax_main.hist(data[var], bins=bins, histtype='step', 
-                                               label=var, color=colors[i % len(colors)], weights=weights[var])
+    for j, var in enumerate(variables):
+        # 创建主图和子图
+        fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
+                                            gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
+        for i, suffix in enumerate(suffixs):
+            hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
+                                                label=var, color=colors[(i+j) % len(colors)], weights=weights[var+suffix])
 
-    # 设置x轴为对数刻度
-    ax_main.set_xscale('log')
+        # 设置x轴为对数刻度
+        # ax_main.set_xscale('log')
 
-    # 添加主图标题和标签
-    ax_main.set_title('mt_tot Variables')
-    ax_main.set_ylabel('Events')
-    ax_ratio.set_ylim(0.9, 1.1)
-    ax_main.legend()
+        # 添加主图标题和标签
+        ax_main.set_title(f'{var}')
+        ax_main.set_ylabel('Events')
+        ax_ratio.set_ylim(0.8, 1.2)
+        ax_main.legend()
 
-    # 计算和绘制比例图
-    # print(hist_data)
-    ratio_up = np.divide(hist_data[variables[1]], hist_data[variables[0]], out=np.zeros_like(hist_data[variables[1]]), where=hist_data[variables[0]]!=0)
-    ratio_down = np.divide(hist_data[variables[2]], hist_data[variables[0]], out=np.zeros_like(hist_data[variables[2]]), where=hist_data[variables[0]]!=0)
+        # 计算和绘制比例图
+        # print(hist_data)
+        ratio_up = np.divide(hist_data[var + suffixs[1]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[1]]), where=hist_data[var]!=0)
+        ratio_down = np.divide(hist_data[var + suffixs[2]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[2]]), where=hist_data[var]!=0)
 
-    # 绘制比例图
-    ax_ratio.hist(bins[:-1], bins, weights=ratio_up, histtype='step', label='mt_tot_up / btag', color='red')
-    ax_ratio.hist(bins[:-1], bins, weights=ratio_down, histtype='step', label='mt_tot_down / btag', color='green')
-    ax_ratio.axhline(1, color='black', linestyle='--')
-    # 设置比例图标签
-    ax_ratio.set_xlabel('mt_tot value')
-    ax_ratio.set_ylabel('Ratio')
-    ax_ratio.legend()
+        # 绘制比例图
+        ax_ratio.hist(bins[:-1], bins, weights=ratio_up, histtype='step', label='mt_tot_up / btag', color='red')
+        ax_ratio.hist(bins[:-1], bins, weights=ratio_down, histtype='step', label='mt_tot_down / btag', color='green')
+        ax_ratio.axhline(1, color='black', linestyle='--')
+        # 设置比例图标签
+        ax_ratio.set_xlabel(f'{var}')
+        ax_ratio.set_ylabel('Ratio')
+        ax_ratio.legend()
 
-    # 保存图形为文件
-    plt.savefig(output_file)
-    # Save histograms to a ROOT file
-    save_hist_to_root(hist_data, bins, variables, "output_histograms.root")
-    print(f"Figure saved as {output_file}")
+        # 保存图形为文件
+        # Save histograms to a ROOT file
+        # save_hist_to_root(hist_data, bins, variables, "output_histograms.root")
+        f_strip = folder_path.strip("/")
+        plt.savefig(f"{f_strip}_era_{var + suffixs[1]}_{btag}.png")
+        # plt.clf()
+        for suffix in suffixs:
+            save_hist_to_root(hist_data, bins, var+suffix,  f"{f_strip}_era_{var + suffixs[1]}_{btag}.root")
+        print(f"Figure saved as {f_strip}_era_{var + suffixs[1]}_{btag}.png")
 
-    # 显示图形
-    plt.show()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot btag variables from ROOT files with weights.')
     parser.add_argument('folder_path', type=str, help='Path to the folder containing ROOT files')
-    parser.add_argument('--variables', type=str, help='Variables to plot (e.g., btag)')
+    # parser.add_argument('--suffixs', type=str, help='Variables to plot (e.g., btag)')
     parser.add_argument('--shift', nargs='+', type=str, help='Shift to plot (e.g., __jesUncTotalUp)')
     parser.add_argument('--output', type=str, default='btag.png', help='Output file name (default: btag.png)')
     parser.add_argument('--era', type=str, default='2022postEE', help='input era, 2022postEE or 2022EE')
     parser.add_argument('--channel', type=str, default='mt', help='decay channel, mt, et, tt, em')
     parser.add_argument('--btag', type=str, default='nob', help='btag selection, nob, btag')
+    parser.add_argument('--PNN', type=int, default=1, help='run PNN score or mt_tot')
     args = parser.parse_args()
-    bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
-    variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    main(args.folder_path,args.era, variables, args.output, bins,  args.channel, args.btag)
+    bins = np.linspace(0, 1, 2001).tolist()  # 2001 points to get 2000 intervals
+    # bins = [50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0]
+    # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
+    mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120, ]#  125,  130, 135, 140,  160,  180, 200,250]
+    PNN_vars= [f"PNN_{m}" for m in mass]
+    if args.PNN:
+        main(args.folder_path,args.era, PNN_vars, args.shift, args.output, bins,  args.channel, args.btag)
+    else:
+        main(args.folder_path,args.era, ['mt_tot'], args.shift, args.output, bins,  args.channel, args.btag)
