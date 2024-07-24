@@ -535,12 +535,16 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True ,ind
         # Execute the command using os.system
         result = os.system(command)
         if result != 0:
+            print("Error:  hadding failed. try hadd the following by hand: ")
+            print(command)
             sys.exit(-1)
     if not os.path.exists(f'{input_path}/tmpsamples_withnoW.root'):
         samples_noW = getall_list(input_path, samples_list, exclude_wjets=True)
         command = "hadd -f2 " + f'{input_path}/tmpsamples_withnoW.root' + " " + " ".join(samples_noW)
         result = os.system(command)
         if result != 0:
+            print("Error:  hadding failed. try hadd the following by hand: ")
+            print(command)
             sys.exit(-1)
     print("using weight:  ",  f'({MC_weight})/{lumi}')
     # R.gDebug=3
