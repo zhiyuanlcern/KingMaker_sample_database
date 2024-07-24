@@ -279,8 +279,8 @@ def main(folder_path, era,variables, suffixs,   channel, btag):
             plt.savefig(f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
             # plt.clf()
             for suffix in suffixs:
-                save_hist_to_root(hist_data, bins, var+suffix,  f"{folder_path}_output/{folder_path}/{f_strip}_era_{var + suffixs[1]}_{btag}.root")
-            print(f"Figure saved as {folder_path}/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
+                save_hist_to_root(hist_data, bins, var+suffix,  f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.root")
+            print(f"Figure saved as {folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
 
 
 if __name__ == "__main__":
