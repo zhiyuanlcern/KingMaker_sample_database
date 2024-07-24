@@ -38,15 +38,15 @@ def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
     # if os.path.exists(output_file):
     #     print(f"Output file {output_file} already exists. Skipping execution.")
     #     return
-    # 初始化空列表来存储所有文件中的数据
-    data = {}
-    weights = {}
+    def check_finshed(filename):
+        f_strip = filename.replace(".root", "")
+        if os.path.exists(f"{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
+            print(f"already finshed running for {f_strip}_era_{var + suffixs[1]}_{btag}")
+            return 1
+        else:
+            return 0
     if "" not in suffixs: 
-        suffixs.insert(0, "")
-    for var in variables:
-        for suffix in suffixs:
-            data[var + suffix] = []
-            weights[var + suffix] = []
+            suffixs.insert(0, "")
     if era == "2022EE":
         lumi = 7.875e3
     elif era == "2022postEE":
@@ -55,6 +55,24 @@ def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
         raise ValueError("Error: Year not found {}".format(era))
     # 遍历文件夹中的所有 ROOT 文件
     for filename in os.listdir(folder_path):
+        f_strip = filename.replace(".root", "")
+        finished = True
+        for var in variables:
+            if check_finshed(filename):
+                continue
+            else: 
+                finished = False
+        if finished:
+            continue
+        # 初始化空列表来存储所有文件中的数据
+        data = {}
+        weights = {}
+        if not filename.endswith(".root"):
+            continue
+        for var in variables:
+            for suffix in suffixs:
+                data[var + suffix] = []
+                weights[var + suffix] = []
         if filename.endswith(".root"):
             file_path = os.path.join(folder_path, filename)
             print("reading file: ", filename)
@@ -69,8 +87,6 @@ def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
             
             for suffix in suffixs:
                 print(f"processing {suffix}")
-                # base_var = var.split('__')[0]
-                # suffix = var[len(base_var):]
                 extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
                 extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
                 eta_1 = get_variable(tree, "eta_1",suffix)
@@ -194,6 +210,9 @@ def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
                 print("applying selection")
                 selection = selection_dic[f'{btag}_{channel}']
                 for var in variables:
+                    ## skip for finshed files
+                    if check_finshed(filename):
+                        continue
                     data[var + suffix ].append(get_variable(tree, var, suffix)[selection])
 
  
@@ -210,64 +229,60 @@ def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
                 train_weight = train_weight_dic[channel]
                 # 应用筛选条件并累积权重数据
                 for var in variables:
+                    if check_finshed(filename):
+                        continue
                     weights[var + suffix].append(train_weight[selection])
 
-    # 将所有文件的数据拼接在一起
-    for var in variables:
-        for suffix in suffixs:
-            data[var + suffix] = np.concatenate(data[var+suffix])
-            weights[var + suffix] = np.concatenate(weights[var+suffix])
-            # print(var,":",len(weights[var]))
 
-   
+        # 绘制主图上的直方图
+        colors = ['blue', 'red', 'green']
+        hist_data = {}
+        for j, var in enumerate(variables):
+            if check_finshed(filename):
+                        continue
+            # 创建主图和子图
+            fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
+                                                gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
+            for i, suffix in enumerate(suffixs):
+                if var == "mt_tot":
+                    bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
+                else:
+                    bins = np.linspace(0, 1, 2001).tolist() 
+                hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
+                                                    label=var, color=colors[(i+j) % len(colors)], weights=weights[var+suffix])
 
-    # 绘制主图上的直方图
-    colors = ['blue', 'red', 'green']
-    hist_data = {}
-    for j, var in enumerate(variables):
-        # 创建主图和子图
-        fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
-                                            gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
-        for i, suffix in enumerate(suffixs):
-            if var == "mt_tot":
-                bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
-            else:
-                bins = np.linspace(0, 1, 2001).tolist() 
-            hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
-                                                label=var, color=colors[(i+j) % len(colors)], weights=weights[var+suffix])
+            # 设置x轴为对数刻度
+            # ax_main.set_xscale('log')
 
-        # 设置x轴为对数刻度
-        # ax_main.set_xscale('log')
+            # 添加主图标题和标签
+            ax_main.set_title(f'{var}')
+            ax_main.set_ylabel('Events')
+            ax_ratio.set_ylim(0.8, 1.2)
+            ax_main.legend()
 
-        # 添加主图标题和标签
-        ax_main.set_title(f'{var}')
-        ax_main.set_ylabel('Events')
-        ax_ratio.set_ylim(0.8, 1.2)
-        ax_main.legend()
+            # 计算和绘制比例图
+            # print(hist_data)
+            ratio_up = np.divide(hist_data[var + suffixs[1]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[1]]), where=hist_data[var]!=0)
+            ratio_down = np.divide(hist_data[var + suffixs[2]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[2]]), where=hist_data[var]!=0)
 
-        # 计算和绘制比例图
-        # print(hist_data)
-        ratio_up = np.divide(hist_data[var + suffixs[1]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[1]]), where=hist_data[var]!=0)
-        ratio_down = np.divide(hist_data[var + suffixs[2]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[2]]), where=hist_data[var]!=0)
+            # 绘制比例图
+            ax_ratio.hist(bins[:-1], bins, weights=ratio_up, histtype='step', label='mt_tot_up / btag', color='red')
+            ax_ratio.hist(bins[:-1], bins, weights=ratio_down, histtype='step', label='mt_tot_down / btag', color='green')
+            ax_ratio.axhline(1, color='black', linestyle='--')
+            # 设置比例图标签
+            ax_ratio.set_xlabel(f'{var}')
+            ax_ratio.set_ylabel('Ratio')
+            ax_ratio.legend()
 
-        # 绘制比例图
-        ax_ratio.hist(bins[:-1], bins, weights=ratio_up, histtype='step', label='mt_tot_up / btag', color='red')
-        ax_ratio.hist(bins[:-1], bins, weights=ratio_down, histtype='step', label='mt_tot_down / btag', color='green')
-        ax_ratio.axhline(1, color='black', linestyle='--')
-        # 设置比例图标签
-        ax_ratio.set_xlabel(f'{var}')
-        ax_ratio.set_ylabel('Ratio')
-        ax_ratio.legend()
-
-        # 保存图形为文件
-        # Save histograms to a ROOT file
-        # save_hist_to_root(hist_data, bins, variables, "output_histograms.root")
-        f_strip = folder_path.strip("/")
-        plt.savefig(f"{f_strip}_era_{var + suffixs[1]}_{btag}.png")
-        # plt.clf()
-        for suffix in suffixs:
-            save_hist_to_root(hist_data, bins, var+suffix,  f"{f_strip}_era_{var + suffixs[1]}_{btag}.root")
-        print(f"Figure saved as {f_strip}_era_{var + suffixs[1]}_{btag}.png")
+            # 保存图形为文件
+            # Save histograms to a ROOT file
+            # save_hist_to_root(hist_data, bins, variables, "output_histograms.root")
+            
+            plt.savefig(f"{f_strip}_era_{var + suffixs[1]}_{btag}.png")
+            # plt.clf()
+            for suffix in suffixs:
+                save_hist_to_root(hist_data, bins, var+suffix,  f"{f_strip}_era_{var + suffixs[1]}_{btag}.root")
+            print(f"Figure saved as {f_strip}_era_{var + suffixs[1]}_{btag}.png")
 
 
 if __name__ == "__main__":
