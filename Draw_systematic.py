@@ -34,7 +34,7 @@ def save_hist_to_root(hist_data, bins, var, output_file):
         root_hist.SetBinContent(i+1, count)
     root_hist.Write()
     root_file.Close()
-def main(folder_path, era,variables, suffixs, output_file, bins, channel, btag):
+def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
     # if os.path.exists(output_file):
     #     print(f"Output file {output_file} already exists. Skipping execution.")
     #     return
@@ -229,6 +229,10 @@ def main(folder_path, era,variables, suffixs, output_file, bins, channel, btag):
         fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
                                             gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
         for i, suffix in enumerate(suffixs):
+            if var == "mt_tot":
+                bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
+            else:
+                bins = np.linspace(0, 1, 2001).tolist() 
             hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
                                                 label=var, color=colors[(i+j) % len(colors)], weights=weights[var+suffix])
 
@@ -278,11 +282,11 @@ if __name__ == "__main__":
     parser.add_argument('--PNN', type=int, default=1, help='run PNN score or mt_tot')
     args = parser.parse_args()
     bins = np.linspace(0, 1, 2001).tolist()  # 2001 points to get 2000 intervals
-    # bins = [50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0]
+    # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
+
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120, ]#  125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
-    if args.PNN:
-        main(args.folder_path,args.era, PNN_vars, args.shift, args.output, bins,  args.channel, args.btag)
-    else:
-        main(args.folder_path,args.era, ['mt_tot'], args.shift, args.output, bins,  args.channel, args.btag)
+    PNN_vars.append("mt_tot")
+    main(args.folder_path,args.era, PNN_vars, args.shift, args.output,  args.channel, args.btag)
+    
