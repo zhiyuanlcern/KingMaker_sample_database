@@ -34,14 +34,12 @@ def save_hist_to_root(hist_data, bins, var, output_file):
         root_hist.SetBinContent(i+1, count)
     root_hist.Write()
     root_file.Close()
-def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
-    # if os.path.exists(output_file):
-    #     print(f"Output file {output_file} already exists. Skipping execution.")
-    #     return
+def main(folder_path, era,variables, suffixs,   channel, btag):
     def check_finshed(filename):
         f_strip = filename.replace(".root", "")
-        if os.path.exists(f"{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
-            print(f"already finshed running for {f_strip}_era_{var + suffixs[1]}_{btag}")
+        os.system(f'mkdir -p {folder_path}_output')
+        if os.path.exists(f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
+            print(f"already finshed running for {folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}")
             return 1
         else:
             return 0
@@ -278,19 +276,17 @@ def main(folder_path, era,variables, suffixs, output_file,  channel, btag):
             # Save histograms to a ROOT file
             # save_hist_to_root(hist_data, bins, variables, "output_histograms.root")
             
-            plt.savefig(f"{f_strip}_era_{var + suffixs[1]}_{btag}.png")
+            plt.savefig(f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
             # plt.clf()
             for suffix in suffixs:
-                save_hist_to_root(hist_data, bins, var+suffix,  f"{f_strip}_era_{var + suffixs[1]}_{btag}.root")
-            print(f"Figure saved as {f_strip}_era_{var + suffixs[1]}_{btag}.png")
+                save_hist_to_root(hist_data, bins, var+suffix,  f"{folder_path}_output/{folder_path}/{f_strip}_era_{var + suffixs[1]}_{btag}.root")
+            print(f"Figure saved as {folder_path}/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot btag variables from ROOT files with weights.')
     parser.add_argument('folder_path', type=str, help='Path to the folder containing ROOT files')
-    # parser.add_argument('--suffixs', type=str, help='Variables to plot (e.g., btag)')
     parser.add_argument('--shift', nargs='+', type=str, help='Shift to plot (e.g., __jesUncTotalUp)')
-    parser.add_argument('--output', type=str, default='btag.png', help='Output file name (default: btag.png)')
     parser.add_argument('--era', type=str, default='2022postEE', help='input era, 2022postEE or 2022EE')
     parser.add_argument('--channel', type=str, default='mt', help='decay channel, mt, et, tt, em')
     parser.add_argument('--btag', type=str, default='nob', help='btag selection, nob, btag')
@@ -303,5 +299,5 @@ if __name__ == "__main__":
     mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
-    main(args.folder_path,args.era, PNN_vars, args.shift, args.output,  args.channel, args.btag)
+    main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
     
