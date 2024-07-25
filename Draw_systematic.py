@@ -35,9 +35,17 @@ def save_hist_to_root(hist_data, bins, var, output_file):
     root_hist.Write()
     root_file.Close()
 def main(folder_path, era,variables, suffixs,   channel, btag):
+    os.system(f'mkdir -p {folder_path}_output')
     def check_finshed(filename):
         f_strip = filename.replace(".root", "")
-        os.system(f'mkdir -p {folder_path}_output')
+        if "2HDM" in filename:
+            match = re.search(r'Hto2Tau_M-(\d+)', filename)
+            masses_check = [int(match.group(1))]
+            m = masses_check[0]
+            if str(m) not in var and (var != "mt_tot") :
+                print(f"no need to run for PNN score {folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}")
+                return 1
+        
         if os.path.exists(f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
             print(f"already finshed running for {folder_path}_output/{f_strip}_era_{var + suffixs[1]}_{btag}")
             return 1
@@ -296,7 +304,7 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
