@@ -49,7 +49,7 @@ def check_finished(folder, filename, var, suffixs, btag):
         if match:
             masses_check = [int(match.group(1))]
             m = masses_check[0]
-            if str(m) not in var and (var != "mt_tot"):
+            if f"PNN_{m}" not in var and (var != "mt_tot"):
                 print(f"no need to run for PNN score {folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 return True
     
@@ -187,8 +187,9 @@ def process_file(args):
                         (trg_single_ele32 == 1) | (trg_single_ele35 == 1) | (trg_single_mu24 == 1) | (trg_single_mu27 == 1)) & \
                         ((eta_1 > -2.4) & (eta_1 < 2.4) & (dz_1 < 0.2) & (dxy_1 < 0.045) & (iso_1 < 0.15) & \
                         (deltaR_ditaupair > 0.3) & (pt_1 > 15)) & \
-                        ((eta_2 > -2.4) & (eta_2 < 2.4) & (dz_2 < 0.2) & (dxy_2 < 0.045) & (iso_2 < 0.2) & (pt_2 > 15)) & \
-                        (nbtag == 0) & ((q_1 * q_2) < 0))
+                        ((eta_2 > -2.4) & (eta_2 < 2.4) & (dz_2 < 0.2) & (dxy_2 < 0.045) & (iso_2 < 0.2) & (pt_2 > 15)) & ((q_1 * q_2) < 0) ) 
+            selection_dic["nob_em"] = selection_dic["em"] & (nbtag == 0)
+            selection_dic["btag_em"] = selection_dic["em"] & (nbtag == 1)
         else:
             print("wrong channel provided!! ")
         # selection = ((nbtag == 0))
@@ -196,12 +197,8 @@ def process_file(args):
         print("applying selection")
         selection = selection_dic[f'{btag}_{channel}']
         for var in variables:
-            ## skip for finshed files
-            if check_finished(output_folder, filename,  var, suffixs, btag):
-                print(f"already finished running for {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
-                continue
             data[var + suffix ].append(get_variable(tree, var, suffix)[selection])
- 
+        print("finshied selection")
         # 计算 train_weight
         train_weight_dic = {}
         if channel =="em":
@@ -213,12 +210,13 @@ def process_file(args):
         elif channel == "et":
             train_weight_dic["et"] = Xsec * lumi *  puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
         train_weight = train_weight_dic[channel]
+        print("finshied weight")
         # 应用筛选条件并累积权重数据
         for var in variables:
             if check_finished(output_folder, filename,  var, suffixs, btag):
+                print(f"already finished running for {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 continue
             weights[var + suffix].append(train_weight[selection])
-
 
     # Plotting and saving
     colors = ['blue', 'red', 'green']
@@ -254,8 +252,6 @@ def process_file(args):
         plt.close(fig)
         for suffix in suffixs:
             print(suffix)
-            # if check_finished(filename, var, suffixs):
-            #     print("why is this finished?")
             save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root")
             # save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffix}_{btag}.root")
 
@@ -272,8 +268,10 @@ def main(folder_path, era, variables, suffixs, channel, btag):
         lumi = 26.337e3
     else:
         raise ValueError(f"Error: Year not found {era}")
-
-    files = [[folder_path, filename, era, copy.deepcopy(variables), suffixs, channel, btag, lumi] for filename in os.listdir(folder_path)]
+    files = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".root") and ("tmp" not in filename): 
+            files.append([folder_path, filename, era, copy.deepcopy(variables), suffixs, channel, btag, lumi]) 
     for f in files:
         print(f)
         for var in list(f[3]):  # Use list(f[3]) to make a copy for safe iteration
@@ -282,12 +280,13 @@ def main(folder_path, era, variables, suffixs, channel, btag):
                 f[3].remove(var)  # Removing variables that have finished
         if not f[3]:
             print(f"finished all variables for file {f[1]}")
-
+        print("running for variables: ",f[3])
     pool = Pool(min(cpu_count(), len(files)))
     max_jobs_per_iteration = 5  # Limit the number of jobs submitted at once
     max_jobs = 80
     try:
         while files:
+            print(files)
             jobs_submitted = 0  # Reset jobs submitted counter for each iteration
             for f in list(files):  # Use a copy of the list for safe iteration
                 memory_usage = get_memory_usage()
@@ -296,7 +295,7 @@ def main(folder_path, era, variables, suffixs, channel, btag):
                     pool.apply_async(process_file, args=(f,))
                     files.remove(f)
                     jobs_submitted += 1
-                    time.sleep(50)  # Add a small delay between job submissions to prevent rapid submissions
+                    time.sleep(10)  # Add a small delay between job submissions to prevent rapid submissions
                 elif memory_usage >= 40.0:
                     print(f"Memory usage is high ({memory_usage}%). Waiting...")
                     break  # Exit the loop if memory usage is high
@@ -308,7 +307,7 @@ def main(folder_path, era, variables, suffixs, channel, btag):
             while ((running_jobs := sum(1 for p in pool._pool if p.is_alive())) >= max_jobs):
                 print(f"Running jobs ({running_jobs}) have reached the maximum limit. Waiting...")
                 time.sleep(60)  # Adjust wait time as needed
-
+            gc.collect()
     finally:
         pool.close()
         pool.join()
@@ -326,7 +325,7 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
