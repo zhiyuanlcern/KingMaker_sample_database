@@ -12,23 +12,51 @@ import re
 import time
 import psutil
 
+def get_filtered_columns(rdf, suffixs):
+    all_columns = []
+    columns = []
+    for i in rdf.GetColumnNames():
+        all_columns.append(str(i))    
+    # Ensure all elements in 'all_columns' are strings
+    all_columns = [col.decode() if isinstance(col, bytes) else col for col in all_columns]
+    
+    for suffix in suffixs:
+        if suffix == "":
+            for column in all_columns:
+                if "__" not in column:
+                    columns.append(column)
+        else:
+            for column in all_columns:
+                if suffix in column:
+                    columns.append(column)
+    return columns
 def get_memory_usage():
     # Return the percentage of used memory
     memory_usage = psutil.virtual_memory().percent
     return memory_usage
 def get_variable(tree, var_base, var_suffix=""):
     var_name = f"{var_base}{var_suffix}"
+    # print(var_name)
+    if "FF_weight" in var_name:
+        print(var_name, "=====================")
     if var_name in tree.keys():
+        # print("yes")
         var = tree[var_name]
         dtype = var.dtype
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)
+        # print(var_name)
+
         return var
     else:
+        print("no")
+        print(var_name)
+        # print(tree.keys())
         var = tree[var_base]
         dtype = var.dtype
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
-            var = var.astype(np.int32)       
+            var = var.astype(np.int32)      
+        print(var_name)
         return var
 # Function to save numpy arrays as ROOT histograms
 def save_hist_to_root(hist_data, bins, var, output_file):
@@ -52,8 +80,8 @@ def check_finished(folder, filename, var, suffixs, btag):
             if f"PNN_{m}" not in var and (var != "mt_tot"):
                 print(f"no need to run for PNN score {folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 return True
-    
     if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
+        print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
         return True
     return False
 def process_file(args):
@@ -61,31 +89,58 @@ def process_file(args):
     f_strip = filename.replace(".root", "")
     output_folder = f"{folder_path}_output"
     if not filename.endswith(".root"):
+        print(filename, "not endwith root")
         return
     if variables == []:
         print(f"finished all variables for file {filename}")
         return
     file_path = os.path.join(folder_path, filename)
     rdf = R.RDataFrame("ntuple", file_path)
-    tree = rdf.AsNumpy()
+    ## fill the neccessary variables here
+    useful_vars = ["mt_tot", 'PNN_100', 'PNN_105', 'PNN_110', 'PNN_115', 'PNN_120', 'PNN_125', 'PNN_130', 'PNN_135', 'PNN_140', 'PNN_160', 'PNN_180', 'PNN_200', 'PNN_250', 'PNN_60', 'PNN_65', 'PNN_70', 'PNN_75', 'PNN_80', 'PNN_85', 'PNN_90', 'PNN_95',"extramuon_veto","extraelec_veto","eta_1","dz_1","dxy_1","iso_1","phi_2","deltaR_ditaupair","pt_1","eta_2","dz_2","dxy_2","iso_2","pt_2","nbtag","q_1","q_2","puweight","Xsec","genWeight","genEventSumW","gen_match_2","is_wjets","btag_weight","id_wgt_ele_wpTight","id_wgt_mu_2","trg_cross_mu23ele12","trg_cross_mu8ele23","trg_single_ele30","trg_single_ele32","trg_single_ele35","trg_single_mu24","trg_single_mu27","trg_wgt_single_mu24","trg_wgt_single_ele30","trg_cross_mu20tau27_hps","trg_single_tau180_2","trg_single_mu24","trg_single_mu27","id_tau_vsMu_Loose_2","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_wgt_tau_vsJet_Medium_2","FF_weight","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2","id_wgt_tau_vsMu_Tight_2","id_wgt_mu_1","trg_single_ele30"    ,"trg_single_ele32","trg_single_ele35","trg_single_tau180_2","id_tau_vsMu_VLoose_2","id_tau_vsEle_Tight_2","id_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_2","FF_weight","id_wgt_tau_vsEle_Tight_2","id_wgt_ele_wpTight","trg_wgt_single_ele30","trg_wgt_ditau_crosstau_2","trg_double_tau30_plusPFjet60","trg_double_tau30_plusPFjet75","trg_double_tau35_mediumiso_hps","trg_single_deeptau180_1","trg_single_deeptau180_2","id_tau_vsJet_Medium_1","id_tau_vsEle_VVLoose_1","id_tau_vsMu_VLoose_1","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_tau_vsMu_VLoose_2","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","FF_weight","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"]
+    no_syst = "True"
+    for v in rdf.GetColumnNames():
+        if suffixs[1] in v:
+            no_syst = False
+    if no_syst:
+        print(f"no systematics {suffixs[1] } for file {filename}")
+        return 
 
+    tree = {}
+    columns = get_filtered_columns(rdf, suffixs)
+    columns_final = []
+    for i in columns:
+        if i.split('__', 1)[0]  in useful_vars:
+            columns_final.append(i)
+    try:
+        tree = rdf.AsNumpy(columns=columns_final)
+        print("Successfully converted to NumPy array.")
+    except Exception as e:
+        print(f"Error during conversion: {e}")
+    del rdf
+    
     data = {var + suffix: [] for var in variables for suffix in suffixs}
     weights = {var + suffix: [] for var in variables for suffix in suffixs}
     for suffix in suffixs:
         print(f"processing {suffix}")
+        print("wtf")
         extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
+        print("hig")
         extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
         eta_1 = get_variable(tree, "eta_1",suffix)
         dz_1 = get_variable(tree, "dz_1",suffix)
         dxy_1 = get_variable(tree, "dxy_1",suffix)
+        print("hig")
         iso_1 = get_variable(tree, "iso_1",suffix)
         phi_2 = get_variable(tree,"phi_2",suffix)
         deltaR_ditaupair = get_variable(tree, "deltaR_ditaupair",suffix)
         pt_1 = get_variable(tree, "pt_1",suffix)
+        print("hig")
         eta_2 = get_variable(tree, "eta_2",suffix)
         dz_2 = get_variable(tree, "dz_2",suffix)
         dxy_2 = get_variable(tree, "dxy_2",suffix)
         iso_2 = get_variable(tree, "iso_2",suffix)
+        print("hig")
         pt_2 = get_variable(tree, "pt_2",suffix)
         nbtag = get_variable(tree, "nbtag",suffix)
         q_1 = get_variable(tree, "q_1",suffix)
@@ -110,51 +165,52 @@ def process_file(args):
             trg_wgt_single_mu24 = get_variable(tree, "trg_wgt_single_mu24",suffix)
             trg_wgt_single_ele30 = get_variable(tree, "trg_wgt_single_ele30",suffix)
         if channel == "mt":
-            trg_cross_mu20tau27_hps = get_variable(tree, "trg_cross_mu20tau27_hps")
-            trg_single_tau180_2 = get_variable(tree, "trg_single_tau180_2")
-            trg_single_mu24 = get_variable(tree, "trg_single_mu24")
-            trg_single_mu27 = get_variable(tree, "trg_single_mu27")
-            id_tau_vsMu_Loose_2 = get_variable(tree, "id_tau_vsMu_Loose_2")
-            id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2")
-            id_tau_vsEle_VVLoose_2 = get_variable(tree, "id_tau_vsEle_VVLoose_2")
-            id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2")
-            FF_weight = get_variable(tree, "FF_weight")
-            iso_wgt_mu_1 = get_variable(tree, "iso_wgt_mu_1")
-            trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2")
-            id_wgt_tau_vsMu_Tight_2 = get_variable(tree, "id_wgt_tau_vsMu_Tight_2")
-            id_wgt_mu_1 = get_variable(tree, "id_wgt_mu_1")
+            trg_cross_mu20tau27_hps = get_variable(tree, "trg_cross_mu20tau27_hps",suffix)
+            trg_single_tau180_2 = get_variable(tree, "trg_single_tau180_2",suffix)
+            trg_single_mu24 = get_variable(tree, "trg_single_mu24",suffix)
+            trg_single_mu27 = get_variable(tree, "trg_single_mu27",suffix)
+            id_tau_vsMu_Loose_2 = get_variable(tree, "id_tau_vsMu_Loose_2",suffix)
+            id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2",suffix)
+            id_tau_vsEle_VVLoose_2 = get_variable(tree, "id_tau_vsEle_VVLoose_2",suffix)
+            id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2",suffix)
+            FF_weight = get_variable(tree, "FF_weight",suffix)
+            iso_wgt_mu_1 = get_variable(tree, "iso_wgt_mu_1",suffix)
+            trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2",suffix)
+            id_wgt_tau_vsMu_Tight_2 = get_variable(tree, "id_wgt_tau_vsMu_Tight_2",suffix)
+            id_wgt_mu_1 = get_variable(tree, "id_wgt_mu_1",suffix)
         if channel == 'et': 
-            trg_single_ele30 = get_variable(tree, "trg_single_ele30")    
-            trg_single_ele32 = get_variable(tree, "trg_single_ele32")
-            trg_single_ele35 = get_variable(tree, "trg_single_ele35")
-            trg_single_tau180_2 = get_variable(tree, "trg_single_tau180_2")
-            id_tau_vsMu_VLoose_2 = get_variable(tree, "id_tau_vsMu_VLoose_2")
-            id_tau_vsEle_Tight_2 = get_variable(tree, "id_tau_vsEle_Tight_2")
-            id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2")
-            id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2")
-            FF_weight = get_variable(tree, "FF_weight")
-            id_wgt_tau_vsEle_Tight_2 = get_variable(tree, "id_wgt_tau_vsEle_Tight_2")
-            id_wgt_ele_wpTight = get_variable(tree, "id_wgt_ele_wpTight")
-            trg_wgt_single_ele30 = get_variable(tree, "trg_wgt_single_ele30")
-            trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2")
+            trg_single_ele30 = get_variable(tree, "trg_single_ele30", suffix)    
+            trg_single_ele32 = get_variable(tree, "trg_single_ele32", suffix)
+            trg_single_ele35 = get_variable(tree, "trg_single_ele35", suffix)
+            trg_single_tau180_2 = get_variable(tree, "trg_single_tau180_2", suffix)
+            id_tau_vsMu_VLoose_2 = get_variable(tree, "id_tau_vsMu_VLoose_2", suffix)
+            id_tau_vsEle_Tight_2 = get_variable(tree, "id_tau_vsEle_Tight_2", suffix)
+            id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2", suffix)
+            id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2", suffix)
+            id_wgt_tau_vsEle_Tight_2 = get_variable(tree, "id_wgt_tau_vsEle_Tight_2", suffix)
+            FF_weight = get_variable(tree, "FF_weight",suffix)
+            id_wgt_ele_wpTight = get_variable(tree, "id_wgt_ele_wpTight", suffix)
+            trg_wgt_single_ele30 = get_variable(tree, "trg_wgt_single_ele30", suffix)
+            trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2", suffix)
         if channel == "tt":
-            trg_double_tau30_plusPFjet60 = get_variable(tree, "trg_double_tau30_plusPFjet60")
-            trg_double_tau30_plusPFjet75 = get_variable(tree, "trg_double_tau30_plusPFjet75")
-            trg_double_tau35_mediumiso_hps = get_variable(tree, "trg_double_tau35_mediumiso_hps")
-            trg_single_deeptau180_1 = get_variable(tree, "trg_single_deeptau180_1")
-            trg_single_deeptau180_2 = get_variable(tree, "trg_single_deeptau180_2")
-            id_tau_vsJet_Medium_1 = get_variable(tree, "id_tau_vsJet_Medium_1")
-            id_tau_vsEle_VVLoose_1 = get_variable(tree, "id_tau_vsEle_VVLoose_1")
-            id_tau_vsMu_VLoose_1 = get_variable(tree, "id_tau_vsMu_VLoose_1")
-            id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2")
-            id_tau_vsEle_VVLoose_2 = get_variable(tree, "id_tau_vsEle_VVLoose_2")
-            id_tau_vsMu_VLoose_2 = get_variable(tree, "id_tau_vsMu_VLoose_2")
-            id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2")
-            id_wgt_tau_vsJet_Medium_1 = get_variable(tree, "id_wgt_tau_vsJet_Medium_1")
-            FF_weight = get_variable(tree, "FF_weight")
-            trg_wgt_ditau_crosstau_1  = get_variable(tree, "trg_wgt_ditau_crosstau_1 ")
-            trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2")
+            trg_double_tau30_plusPFjet60 = get_variable(tree, "trg_double_tau30_plusPFjet60", suffix)
+            trg_double_tau30_plusPFjet75 = get_variable(tree, "trg_double_tau30_plusPFjet75", suffix)
+            trg_double_tau35_mediumiso_hps = get_variable(tree, "trg_double_tau35_mediumiso_hps", suffix)
+            trg_single_deeptau180_1 = get_variable(tree, "trg_single_deeptau180_1", suffix)
+            trg_single_deeptau180_2 = get_variable(tree, "trg_single_deeptau180_2", suffix)
+            id_tau_vsJet_Medium_1 = get_variable(tree, "id_tau_vsJet_Medium_1", suffix)
+            id_tau_vsEle_VVLoose_1 = get_variable(tree, "id_tau_vsEle_VVLoose_1", suffix)
+            id_tau_vsMu_VLoose_1 = get_variable(tree, "id_tau_vsMu_VLoose_1", suffix)
+            id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2", suffix)
+            id_tau_vsEle_VVLoose_2 = get_variable(tree, "id_tau_vsEle_VVLoose_2", suffix)
+            id_tau_vsMu_VLoose_2 = get_variable(tree, "id_tau_vsMu_VLoose_2", suffix)
+            id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2", suffix)
+            id_wgt_tau_vsJet_Medium_1 = get_variable(tree, "id_wgt_tau_vsJet_Medium_1", suffix)
+            FF_weight = get_variable(tree, "FF_weight", suffix)
+            trg_wgt_ditau_crosstau_1  = get_variable(tree, "trg_wgt_ditau_crosstau_1", suffix)
+            trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2", suffix)
         selection_dic = {} 
+        print("hi", btag_weight)
         if channel == "mt":
             selection_dic["mt"] = (((trg_cross_mu20tau27_hps==1)|(trg_single_mu24==1)|(trg_single_mu27==1)|(trg_single_tau180_2==1)) & \
                 (pt_1 > 25.0) & (pt_2 > 30) & (extramuon_veto == 0)  &  (extraelec_veto == 0) & \
@@ -194,11 +250,13 @@ def process_file(args):
             print("wrong channel provided!! ")
         # selection = ((nbtag == 0))
         # 应用筛选条件
+        print("selection_dic", selection_dic )
         print("applying selection")
         selection = selection_dic[f'{btag}_{channel}']
         for var in variables:
             data[var + suffix ].append(get_variable(tree, var, suffix)[selection])
         print("finshied selection")
+        print(data, "data")
         # 计算 train_weight
         train_weight_dic = {}
         if channel =="em":
@@ -210,6 +268,7 @@ def process_file(args):
         elif channel == "et":
             train_weight_dic["et"] = Xsec * lumi *  puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
         train_weight = train_weight_dic[channel]
+        print("train_weight_dic", train_weight_dic )
         print("finshied weight")
         # 应用筛选条件并累积权重数据
         for var in variables:
@@ -256,37 +315,38 @@ def process_file(args):
             # save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffix}_{btag}.root")
 
         print(f"saved as {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
-
+    del tree
     gc.collect()
 def main(folder_path, era, variables, suffixs, channel, btag):
     os.makedirs(f"{folder_path}_output", exist_ok=True)
-    if "" not in suffixs:
-        suffixs.insert(0, "")
+
     if era == "2022EE":
         lumi = 7.875e3
     elif era == "2022postEE":
         lumi = 26.337e3
     else:
         raise ValueError(f"Error: Year not found {era}")
-    files = []
+    files=[]
+    if "" not in suffixs:
+        suffixs.insert(0, "")
     for filename in os.listdir(folder_path):
-        if filename.endswith(".root") and ("tmp" not in filename): 
-            files.append([folder_path, filename, era, copy.deepcopy(variables), suffixs, channel, btag, lumi]) 
+        if not  filename.endswith(".root"):
+            continue
+        files.append([folder_path, filename, era, copy.deepcopy(variables), suffixs, channel, btag, lumi])
     for f in files:
-        print(f)
         for var in list(f[3]):  # Use list(f[3]) to make a copy for safe iteration
             if check_finished(f"{folder_path}_output", f[1], var, suffixs, btag):
                 print(f"finished running for {folder_path}_output", f[1], var, suffixs, btag)
                 f[3].remove(var)  # Removing variables that have finished
         if not f[3]:
             print(f"finished all variables for file {f[1]}")
-        print("running for variables: ",f[3])
-    pool = Pool(min(cpu_count(), len(files)))
+            files.remove(f)
+    num_cores_to_use = 2  # Set the number of cores you want to use
+    pool = Pool(processes=num_cores_to_use)
     max_jobs_per_iteration = 5  # Limit the number of jobs submitted at once
-    max_jobs = 80
+    max_jobs = 50
     try:
         while files:
-            print(files)
             jobs_submitted = 0  # Reset jobs submitted counter for each iteration
             for f in list(files):  # Use a copy of the list for safe iteration
                 memory_usage = get_memory_usage()
@@ -295,7 +355,8 @@ def main(folder_path, era, variables, suffixs, channel, btag):
                     pool.apply_async(process_file, args=(f,))
                     files.remove(f)
                     jobs_submitted += 1
-                    time.sleep(10)  # Add a small delay between job submissions to prevent rapid submissions
+                    time.sleep(1)  # Add a small delay between job submissions to prevent rapid submissions
+                    # gc.collect()
                 elif memory_usage >= 40.0:
                     print(f"Memory usage is high ({memory_usage}%). Waiting...")
                     break  # Exit the loop if memory usage is high
@@ -307,11 +368,11 @@ def main(folder_path, era, variables, suffixs, channel, btag):
             while ((running_jobs := sum(1 for p in pool._pool if p.is_alive())) >= max_jobs):
                 print(f"Running jobs ({running_jobs}) have reached the maximum limit. Waiting...")
                 time.sleep(60)  # Adjust wait time as needed
-            gc.collect()
+
     finally:
         pool.close()
         pool.join()
-
+    gc.collect()
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot btag variables from ROOT files with weights.')
     parser.add_argument('folder_path', type=str, help='Path to the folder containing ROOT files')
@@ -325,7 +386,7 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65,]# 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
