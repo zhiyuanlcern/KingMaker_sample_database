@@ -37,8 +37,6 @@ def get_memory_usage():
 def get_variable(tree, var_base, var_suffix=""):
     var_name = f"{var_base}{var_suffix}"
     # print(var_name)
-    if "FF_weight" in var_name:
-        print(var_name, "=====================")
     if var_name in tree.keys():
         # print("yes")
         var = tree[var_name]
@@ -72,6 +70,21 @@ def save_hist_to_root(hist_data, bins, var, output_file):
     root_file.Close()
 def check_finished(folder, filename, var, suffixs, btag):
     f_strip = filename.replace(".root", "")
+    print("checking file", f_strip)
+    print(suffixs)
+    if suffixs == [""]:
+        # running only for nominal
+        if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
+            print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
+            return True
+        else: 
+            return False
+    if "Run2022" in filename:
+        if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
+            print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
+            return True
+        else: 
+            return False
     if "2HDM" in filename:
         match = re.search(r'Hto2Tau_M-(\d+)', filename)
         if match:
@@ -83,7 +96,8 @@ def check_finished(folder, filename, var, suffixs, btag):
     if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
         print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
         return True
-    return False
+    else:
+        return False
 def process_file(args):
     folder_path, filename, era, variables, suffixs, channel, btag, lumi = args
     f_strip = filename.replace(".root", "")
@@ -103,8 +117,12 @@ def process_file(args):
         if suffixs[1] in v:
             no_syst = False
     if no_syst:
-        print(f"no systematics {suffixs[1] } for file {filename}")
-        return 
+        if "Run2022" in filename:
+            suffixs =[""]
+            pass
+        else:
+            print(f"no systematics {suffixs[1] } for file {filename}")
+            return 
 
     tree = {}
     columns = get_filtered_columns(rdf, suffixs)
@@ -123,24 +141,19 @@ def process_file(args):
     weights = {var + suffix: [] for var in variables for suffix in suffixs}
     for suffix in suffixs:
         print(f"processing {suffix}")
-        print("wtf")
         extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
-        print("hig")
         extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
         eta_1 = get_variable(tree, "eta_1",suffix)
         dz_1 = get_variable(tree, "dz_1",suffix)
         dxy_1 = get_variable(tree, "dxy_1",suffix)
-        print("hig")
         iso_1 = get_variable(tree, "iso_1",suffix)
         phi_2 = get_variable(tree,"phi_2",suffix)
         deltaR_ditaupair = get_variable(tree, "deltaR_ditaupair",suffix)
         pt_1 = get_variable(tree, "pt_1",suffix)
-        print("hig")
         eta_2 = get_variable(tree, "eta_2",suffix)
         dz_2 = get_variable(tree, "dz_2",suffix)
         dxy_2 = get_variable(tree, "dxy_2",suffix)
         iso_2 = get_variable(tree, "iso_2",suffix)
-        print("hig")
         pt_2 = get_variable(tree, "pt_2",suffix)
         nbtag = get_variable(tree, "nbtag",suffix)
         q_1 = get_variable(tree, "q_1",suffix)
@@ -210,7 +223,6 @@ def process_file(args):
             trg_wgt_ditau_crosstau_1  = get_variable(tree, "trg_wgt_ditau_crosstau_1", suffix)
             trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2", suffix)
         selection_dic = {} 
-        print("hi", btag_weight)
         if channel == "mt":
             selection_dic["mt"] = (((trg_cross_mu20tau27_hps==1)|(trg_single_mu24==1)|(trg_single_mu27==1)|(trg_single_tau180_2==1)) & \
                 (pt_1 > 25.0) & (pt_2 > 30) & (extramuon_veto == 0)  &  (extraelec_veto == 0) & \
@@ -250,34 +262,37 @@ def process_file(args):
             print("wrong channel provided!! ")
         # selection = ((nbtag == 0))
         # 应用筛选条件
-        print("selection_dic", selection_dic )
-        print("applying selection")
+        # print("selection_dic", selection_dic )
         selection = selection_dic[f'{btag}_{channel}']
         for var in variables:
             data[var + suffix ].append(get_variable(tree, var, suffix)[selection])
         print("finshied selection")
-        print(data, "data")
+        # print(data, "data")
         # 计算 train_weight
         train_weight_dic = {}
-        if channel =="em":
-            train_weight_dic["em"] = (Xsec * lumi * genWeight / genEventSumW *((trg_wgt_single_ele30 * (trg_single_ele30 > 0) + 1 * (trg_single_ele30 < 1)) *id_wgt_ele_wpTight * id_wgt_mu_2 * btag_weight * puweight *(trg_wgt_single_mu24 * (trg_single_mu24 > 0) + 1 * (trg_single_mu24 < 1))))
-        elif channel =="tt":
-            train_weight_dic["tt"] = Xsec * lumi * puweight * genWeight/genEventSumW * btag_weight *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 * FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 
-        elif channel == "mt":
-            train_weight_dic["mt"] = Xsec * lumi * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 
-        elif channel == "et":
-            train_weight_dic["et"] = Xsec * lumi *  puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
-        train_weight = train_weight_dic[channel]
-        print("train_weight_dic", train_weight_dic )
+        if not "Run2022" in filename:
+            if channel =="em":
+                train_weight_dic["em"] = (Xsec * lumi * genWeight / genEventSumW *((trg_wgt_single_ele30 * (trg_single_ele30 > 0) + 1 * (trg_single_ele30 < 1)) *id_wgt_ele_wpTight * id_wgt_mu_2 * btag_weight * puweight *(trg_wgt_single_mu24 * (trg_single_mu24 > 0) + 1 * (trg_single_mu24 < 1))))
+            elif channel =="tt":
+                train_weight_dic["tt"] = Xsec * lumi * puweight * genWeight/genEventSumW * btag_weight *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 * FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 
+            elif channel == "mt":
+                train_weight_dic["mt"] = Xsec * lumi * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 
+            elif channel == "et":
+                train_weight_dic["et"] = Xsec * lumi *  puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 
+            train_weight = train_weight_dic[channel]
+        # print("train_weight_dic", train_weight_dic )
         print("finshied weight")
         # 应用筛选条件并累积权重数据
         for var in variables:
+            if "Run2022" in filename:
+                continue
             if check_finished(output_folder, filename,  var, suffixs, btag):
                 print(f"already finished running for {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 continue
+     
             weights[var + suffix].append(train_weight[selection])
 
-    # Plotting and saving
+    print("Plotting and saving")
     colors = ['blue', 'red', 'green']
     hist_data = {}
     for var in variables:
@@ -285,36 +300,39 @@ def process_file(args):
             continue
         fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
                                                 gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
+        print("init plot")
         for i, suffix in enumerate(suffixs):
-            # if check_finished(filename, var, suffixs):
-            #     continue
             bins = np.linspace(0, 1, 2001).tolist() if var != "mt_tot" else [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
-            hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
+            if "Run2022" in filename:
+                hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
+                                                        label=var+ suffix, color=colors[i])
+                print("finished processing data")
+            else:
+                hist_data[var+suffix], bins, _ = ax_main.hist(data[var+suffix], bins=bins, histtype='step', 
                                                         label=var+ suffix, color=colors[i], weights=weights[var+suffix])
-
         ax_main.set_title(f'{var}')
         ax_main.set_ylabel('Events')
         ax_ratio.set_ylim(0.8, 1.2)
         ax_main.legend()
+        if len(suffixs) >= 3:
+            ratio_up = np.divide(hist_data[var + suffixs[1]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[1]]), where=hist_data[var]!=0)
+            ratio_down = np.divide(hist_data[var + suffixs[2]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[2]]), where=hist_data[var]!=0)
 
-        ratio_up = np.divide(hist_data[var + suffixs[1]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[1]]), where=hist_data[var]!=0)
-        ratio_down = np.divide(hist_data[var + suffixs[2]], hist_data[var], out=np.zeros_like(hist_data[var + suffixs[2]]), where=hist_data[var]!=0)
-
-        ax_ratio.hist(bins[:-1], bins, weights=ratio_up, histtype='step', label=f'{var + suffixs[1]} / nominal', color='red')
-        ax_ratio.hist(bins[:-1], bins, weights=ratio_down, histtype='step', label=f'{var + suffixs[2]} / nominal', color='green')
-        ax_ratio.axhline(1, color='black', linestyle='--')
-        ax_ratio.set_xlabel(f'{var}')
-        ax_ratio.set_ylabel('Ratio')
-        ax_ratio.legend()
-
-        plt.savefig(f"{output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
+            ax_ratio.hist(bins[:-1], bins, weights=ratio_up, histtype='step', label=f'{var + suffixs[1]} / nominal', color='red')
+            ax_ratio.hist(bins[:-1], bins, weights=ratio_down, histtype='step', label=f'{var + suffixs[2]} / nominal', color='green')
+            ax_ratio.axhline(1, color='black', linestyle='--')
+            ax_ratio.set_xlabel(f'{var}')
+            ax_ratio.set_ylabel('Ratio')
+            ax_ratio.legend()
+        
+        suffx_name = suffixs[1] if len(suffixs) >= 3 else suffixs[0]
+        plt.savefig(f"{output_folder}/{f_strip}_era_{var + suffx_name}_{btag}.png")
         plt.close(fig)
         for suffix in suffixs:
-            print(suffix)
-            save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root")
+            save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffx_name}_{btag}.root")
             # save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffix}_{btag}.root")
 
-        print(f"saved as {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
+        print(f"saved as {output_folder}/{f_strip}_era_{var + suffx_name}_{btag}")
     del tree
     gc.collect()
 def main(folder_path, era, variables, suffixs, channel, btag):
@@ -330,9 +348,11 @@ def main(folder_path, era, variables, suffixs, channel, btag):
     if "" not in suffixs:
         suffixs.insert(0, "")
     for filename in os.listdir(folder_path):
+        # print(filename)
         if not  filename.endswith(".root"):
             continue
         files.append([folder_path, filename, era, copy.deepcopy(variables), suffixs, channel, btag, lumi])
+    print(files)
     for f in files:
         for var in list(f[3]):  # Use list(f[3]) to make a copy for safe iteration
             if check_finished(f"{folder_path}_output", f[1], var, suffixs, btag):
@@ -386,7 +406,7 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,65 , 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
