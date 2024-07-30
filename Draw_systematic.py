@@ -377,6 +377,7 @@ def main(folder_path, era, variables, suffixs, channel, btag):
     pool = Pool(processes=num_cores_to_use)
     max_jobs_per_iteration = 5  # Limit the number of jobs submitted at once
     max_jobs = 50
+    print("About to run jobs for:", files_final)
     try:
         while files_final:
             jobs_submitted = 0  # Reset jobs submitted counter for each iteration
