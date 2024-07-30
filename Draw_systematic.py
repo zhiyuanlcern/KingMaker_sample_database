@@ -1,3 +1,4 @@
+import sys
 import uproot
 import numpy as np
 import matplotlib.pyplot as plt
@@ -47,14 +48,14 @@ def get_variable(tree, var_base, var_suffix=""):
 
         return var
     else:
-        print("no")
-        print(var_name)
+        # print("no")
+        # print(var_name)
         # print(tree.keys())
         var = tree[var_base]
         dtype = var.dtype
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)      
-        print(var_name)
+        # print(var_name)
         return var
 # Function to save numpy arrays as ROOT histograms
 def save_hist_to_root(hist_data, bins, var, output_file):
@@ -70,18 +71,18 @@ def save_hist_to_root(hist_data, bins, var, output_file):
     root_file.Close()
 def check_finished(folder, filename, var, suffixs, btag):
     f_strip = filename.replace(".root", "")
-    print("checking file", f_strip)
-    print(suffixs)
+    # print("checking file", f_strip)
+    # print(suffixs)
     if suffixs == [""]:
         # running only for nominal
         if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
-            print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
+            # print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
             return True
         else: 
             return False
     if "Run2022" in filename:
         if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
-            print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
+            # print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
             return True
         else: 
             return False
@@ -91,10 +92,10 @@ def check_finished(folder, filename, var, suffixs, btag):
             masses_check = [int(match.group(1))]
             m = masses_check[0]
             if f"PNN_{m}" not in var and (var != "mt_tot"):
-                print(f"no need to run for PNN score {folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
+                # print(f"no need to run for PNN score {folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 return True
     if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
-        print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
+        # print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
         return True
     else:
         return False
@@ -132,6 +133,7 @@ def process_file(args):
             columns_final.append(i)
     try:
         tree = rdf.AsNumpy(columns=columns_final)
+        print(filename, variables, '==========')
         print("Successfully converted to NumPy array.")
     except Exception as e:
         print(f"Error during conversion: {e}")
@@ -140,7 +142,7 @@ def process_file(args):
     data = {var + suffix: [] for var in variables for suffix in suffixs}
     weights = {var + suffix: [] for var in variables for suffix in suffixs}
     for suffix in suffixs:
-        print(f"processing {suffix}")
+        # print(f"processing {suffix}")
         extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
         extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
         eta_1 = get_variable(tree, "eta_1",suffix)
@@ -287,7 +289,7 @@ def process_file(args):
             if "Run2022" in filename:
                 continue
             if check_finished(output_folder, filename,  var, suffixs, btag):
-                print(f"already finished running for {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
+                # print(f"already finished running for {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 continue
      
             weights[var + suffix].append(train_weight[selection])
@@ -297,6 +299,10 @@ def process_file(args):
     hist_data = {}
     for var in variables:
         if check_finished(output_folder, filename,  var, suffixs, btag):
+            print("wtf")
+            f_strip = filename.replace(".root", "")
+            print(f"{output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.png")
+            # print(output_folder, filename,  var, suffixs, btag)
             continue
         fig, (ax_main, ax_ratio) = plt.subplots(nrows=2, ncols=1, sharex=True, 
                                                 gridspec_kw={'height_ratios': [3, 1]}, figsize=(8, 6))
@@ -351,29 +357,35 @@ def main(folder_path, era, variables, suffixs, channel, btag):
         # print(filename)
         if not  filename.endswith(".root"):
             continue
+        # if not "DYto2Tau_MLL-4000to6000_TuneCP5_" in filename:
+        #     continue
         files.append([folder_path, filename, era, copy.deepcopy(variables), suffixs, channel, btag, lumi])
-    print(files)
+    # print(files)
+
+    files_final = []
+    print(files_final)
     for f in files:
         for var in list(f[3]):  # Use list(f[3]) to make a copy for safe iteration
             if check_finished(f"{folder_path}_output", f[1], var, suffixs, btag):
-                print(f"finished running for {folder_path}_output", f[1], var, suffixs, btag)
+                # print(f"finished running for {folder_path}_output", f[1], var, suffixs, btag)
                 f[3].remove(var)  # Removing variables that have finished
-        if not f[3]:
+        if  f[3]:
             print(f"finished all variables for file {f[1]}")
-            files.remove(f)
+            # print(files_final)
+            files_final.append(f)
     num_cores_to_use = 2  # Set the number of cores you want to use
     pool = Pool(processes=num_cores_to_use)
     max_jobs_per_iteration = 5  # Limit the number of jobs submitted at once
     max_jobs = 50
     try:
-        while files:
+        while files_final:
             jobs_submitted = 0  # Reset jobs submitted counter for each iteration
-            for f in list(files):  # Use a copy of the list for safe iteration
+            for f in list(files_final):  # Use a copy of the list for safe iteration
                 memory_usage = get_memory_usage()
                 if memory_usage < 40.0 and jobs_submitted < max_jobs_per_iteration:
                     print(f"Memory usage is low ({memory_usage}%). Submitting job for {f[1]}.")
                     pool.apply_async(process_file, args=(f,))
-                    files.remove(f)
+                    files_final.remove(f)
                     jobs_submitted += 1
                     time.sleep(1)  # Add a small delay between job submissions to prevent rapid submissions
                     # gc.collect()
@@ -392,6 +404,7 @@ def main(folder_path, era, variables, suffixs, channel, btag):
     finally:
         pool.close()
         pool.join()
+    print("finished all jobs")
     gc.collect()
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot btag variables from ROOT files with weights.')
@@ -406,7 +419,7 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65 , 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
