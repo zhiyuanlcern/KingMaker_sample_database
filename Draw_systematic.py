@@ -32,9 +32,11 @@ def get_filtered_columns(rdf, suffixs):
                     columns.append(column)
     return columns
 def get_memory_usage():
-    # Return the percentage of used memory
-    memory_usage = psutil.virtual_memory().percent
-    return memory_usage
+    # Return the percentage of available memory
+    memory_info = psutil.virtual_memory()
+    available_memory_percentage = memory_info.available / memory_info.total * 100
+    return available_memory_percentage
+
 def get_variable(tree, var_base, var_suffix=""):
     var_name = f"{var_base}{var_suffix}"
     # print(var_name)
@@ -370,7 +372,7 @@ def main(folder_path, era, variables, suffixs, channel, btag):
                 # print(f"finished running for {folder_path}_output", f[1], var, suffixs, btag)
                 f[3].remove(var)  # Removing variables that have finished
         if  f[3]:
-            print(f"finished all variables for file {f[1]}")
+            print(f"file {f[1]} has unfinished jobs")
             # print(files_final)
             files_final.append(f)
     num_cores_to_use = 2  # Set the number of cores you want to use
@@ -383,14 +385,14 @@ def main(folder_path, era, variables, suffixs, channel, btag):
             jobs_submitted = 0  # Reset jobs submitted counter for each iteration
             for f in list(files_final):  # Use a copy of the list for safe iteration
                 memory_usage = get_memory_usage()
-                if memory_usage < 40.0 and jobs_submitted < max_jobs_per_iteration:
+                if memory_usage > 20.0 and jobs_submitted < max_jobs_per_iteration:
                     print(f"Memory usage is low ({memory_usage}%). Submitting job for {f[1]}.")
                     pool.apply_async(process_file, args=(f,))
                     files_final.remove(f)
                     jobs_submitted += 1
                     time.sleep(1)  # Add a small delay between job submissions to prevent rapid submissions
                     # gc.collect()
-                elif memory_usage >= 40.0:
+                elif memory_usage <= 20.0:
                     print(f"Memory usage is high ({memory_usage}%). Waiting...")
                     break  # Exit the loop if memory usage is high
 
@@ -421,6 +423,7 @@ if __name__ == "__main__":
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
     mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    # mass = [100]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
