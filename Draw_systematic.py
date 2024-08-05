@@ -58,7 +58,7 @@ def get_variable(tree, var_base, var_suffix=""):
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)      
         # print(var_name)
-        if not var:
+        if var_base not in  tree.keys() :
             print(f"{var_base} not exists!!!!")
         return var
 # Function to save numpy arrays as ROOT histograms
@@ -146,7 +146,6 @@ def process_file(args):
     data = {var + suffix: [] for var in variables for suffix in suffixs}
     weights = {var + suffix: [] for var in variables for suffix in suffixs}
     for suffix in suffixs:
-        # print(f"processing {suffix}")
         extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
         extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
         eta_1 = get_variable(tree, "eta_1",suffix)
@@ -296,9 +295,10 @@ def process_file(args):
             if check_finished(output_folder, filename,  var, suffixs, btag):
                 # print(f"already finished running for {output_folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 continue
-     
+            print(var)
             weights[var + suffix].append(train_weight[selection])
-
+            # print("finished ", var, suffix)
+    
     print("Plotting and saving")
     colors = ['blue', 'red', 'green']
     hist_data = {}
@@ -370,8 +370,8 @@ def main(folder_path, era, variables, suffixs, channel, btag):
     files_final = []
     print(files_final)
     for f in files:
-        # if "Run2022" not in f[1]:
-        #     continue
+        # if "ZZ" not in f[1]:
+            # continue
         for var in list(f[3]):  # Use list(f[3]) to make a copy for safe iteration
             if check_finished(f"{folder_path}_output", f[1], var, suffixs, btag):
                 # print(f"finished running for {folder_path}_output", f[1], var, suffixs, btag)
