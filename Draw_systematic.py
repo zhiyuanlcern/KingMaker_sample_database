@@ -58,6 +58,8 @@ def get_variable(tree, var_base, var_suffix=""):
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)      
         # print(var_name)
+        if not var:
+            print(f"{var_base} not exists!!!!")
         return var
 # Function to save numpy arrays as ROOT histograms
 def save_hist_to_root(hist_data, bins, var, output_file):
@@ -114,7 +116,7 @@ def process_file(args):
     file_path = os.path.join(folder_path, filename)
     rdf = R.RDataFrame("ntuple", file_path)
     ## fill the neccessary variables here
-    useful_vars = ["mt_tot", 'PNN_100', 'PNN_105', 'PNN_110', 'PNN_115', 'PNN_120', 'PNN_125', 'PNN_130', 'PNN_135', 'PNN_140', 'PNN_160', 'PNN_180', 'PNN_200', 'PNN_250', 'PNN_60', 'PNN_65', 'PNN_70', 'PNN_75', 'PNN_80', 'PNN_85', 'PNN_90', 'PNN_95',"extramuon_veto","extraelec_veto","eta_1","dz_1","dxy_1","iso_1","phi_2","deltaR_ditaupair","pt_1","eta_2","dz_2","dxy_2","iso_2","pt_2","nbtag","q_1","q_2","puweight","Xsec","genWeight","genEventSumW","gen_match_2","is_wjets","btag_weight","id_wgt_ele_wpTight","id_wgt_mu_2","trg_cross_mu23ele12","trg_cross_mu8ele23","trg_single_ele30","trg_single_ele32","trg_single_ele35","trg_single_mu24","trg_single_mu27","trg_wgt_single_mu24","trg_wgt_single_ele30","trg_cross_mu20tau27_hps","trg_single_tau180_2","trg_single_mu24","trg_single_mu27","id_tau_vsMu_Loose_2","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_wgt_tau_vsJet_Medium_2","FF_weight","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2","id_wgt_tau_vsMu_Tight_2","id_wgt_mu_1","trg_single_ele30"    ,"trg_single_ele32","trg_single_ele35","trg_single_tau180_2","id_tau_vsMu_VLoose_2","id_tau_vsEle_Tight_2","id_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_2","FF_weight","id_wgt_tau_vsEle_Tight_2","id_wgt_ele_wpTight","trg_wgt_single_ele30","trg_wgt_ditau_crosstau_2","trg_double_tau30_plusPFjet60","trg_double_tau30_plusPFjet75","trg_double_tau35_mediumiso_hps","trg_single_deeptau180_1","trg_single_deeptau180_2","id_tau_vsJet_Medium_1","id_tau_vsEle_VVLoose_1","id_tau_vsMu_VLoose_1","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_tau_vsMu_VLoose_2","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","FF_weight","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"]
+    useful_vars = ["mt_tot", 'PNN_100', 'PNN_105', 'PNN_110', 'PNN_115', 'PNN_120', 'PNN_125', 'PNN_130', 'PNN_135', 'PNN_140', 'PNN_160', 'PNN_180', 'PNN_200', 'PNN_250', 'PNN_60', 'PNN_65', 'PNN_70', 'PNN_75', 'PNN_80', 'PNN_85', 'PNN_90', 'PNN_95', 'mt_1', "extramuon_veto","extraelec_veto","eta_1","dz_1","dxy_1","iso_1","phi_2","deltaR_ditaupair","pt_1","eta_2","dz_2","dxy_2","iso_2","pt_2","nbtag","q_1","q_2","puweight","Xsec","genWeight","genEventSumW","gen_match_2","is_wjets","btag_weight","id_wgt_ele_wpTight","id_wgt_mu_2","trg_cross_mu23ele12","trg_cross_mu8ele23","trg_single_ele30","trg_single_ele32","trg_single_ele35","trg_single_mu24","trg_single_mu27","trg_wgt_single_mu24","trg_wgt_single_ele30","trg_cross_mu20tau27_hps","trg_single_tau180_2","trg_single_mu24","trg_single_mu27","id_tau_vsMu_Loose_2","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_wgt_tau_vsJet_Medium_2","FF_weight","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2","id_wgt_tau_vsMu_Tight_2","id_wgt_mu_1","trg_single_ele30"    ,"trg_single_ele32","trg_single_ele35","trg_single_tau180_2","id_tau_vsMu_VLoose_2","id_tau_vsEle_Tight_2","id_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_2","FF_weight","id_wgt_tau_vsEle_Tight_2","id_wgt_ele_wpTight","trg_wgt_single_ele30","trg_wgt_ditau_crosstau_2","trg_double_tau30_plusPFjet60","trg_double_tau30_plusPFjet75","trg_double_tau35_mediumiso_hps","trg_single_deeptau180_1","trg_single_deeptau180_2","id_tau_vsJet_Medium_1","id_tau_vsEle_VVLoose_1","id_tau_vsMu_VLoose_1","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_tau_vsMu_VLoose_2","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","FF_weight","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"]
     no_syst = "True"
     for v in rdf.GetColumnNames():
         if suffixs[1] in v:
@@ -169,6 +171,7 @@ def process_file(args):
         gen_match_2 = get_variable(tree, "gen_match_2",suffix)
         is_wjets = get_variable(tree, "is_wjets",suffix)
         btag_weight = get_variable(tree, "btag_weight",suffix)
+        mt_1 = get_variable(tree, "mt_1", suffix)
         if channel == "em":
             id_wgt_ele_wpTight = get_variable(tree, "id_wgt_ele_wpTight",suffix)
             id_wgt_mu_2 = get_variable(tree, "id_wgt_mu_2",suffix)
@@ -231,18 +234,18 @@ def process_file(args):
             selection_dic["mt"] = (((trg_cross_mu20tau27_hps==1)|(trg_single_mu24==1)|(trg_single_mu27==1)|(trg_single_tau180_2==1)) & \
                 (pt_1 > 25.0) & (pt_2 > 30) & (extramuon_veto == 0)  &  (extraelec_veto == 0) & \
                 (id_tau_vsMu_Loose_2 > 0) & (id_tau_vsJet_Medium_2 > 0) & (id_tau_vsEle_VVLoose_2 > 0 ) & \
-                (( (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) &  ((q_1 * q_2) < 0) )
+                (( (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) &  ((q_1 * q_2) < 0) & (mt_1 < 70) )
             selection_dic["nob_mt"] = selection_dic["mt"] & (nbtag == 0)
             selection_dic["btag_mt"] = selection_dic["mt"] & (nbtag == 1)
         elif channel == "et":
             selection_dic["et"] = (((trg_single_ele30 ==1)| (trg_single_ele32==1)|(trg_single_ele35==1)|(trg_single_tau180_2==1))& \
                 (pt_1 > 30) & (pt_2 > 30)  &  (extramuon_veto == 0)  & (extraelec_veto == 0) & \
                 (id_tau_vsMu_VLoose_2 > 0)  & (id_tau_vsEle_Tight_2 > 0) & (id_tau_vsJet_Medium_2 > 0 ) & \
-                ((   (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) & ((q_1 * q_2) < 0) )  # 
+                ((   (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) & ((q_1 * q_2) < 0) & (mt_1 < 70) )  # 
             selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0)
             selection_dic["btag_et"] = selection_dic["et"] & (nbtag == 1)
             if era == "2022postEE":
-                selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0) &~  (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2) ) )
+                selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0) &~  (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2) ) ) ## &~ stands for and not
                 selection_dic["btag_et"] = selection_dic["et"] & (nbtag == 1) &~ (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  &(eta_2<2.2) ) )
         elif channel == "tt":
             selection_dic["tt"] = ((trg_double_tau35_mediumiso_hps==1) | (trg_single_deeptau180_1==1) | (trg_single_deeptau180_2==1) | (trg_double_tau30_plusPFjet60==1) | (trg_double_tau30_plusPFjet75==1))& \
@@ -367,6 +370,8 @@ def main(folder_path, era, variables, suffixs, channel, btag):
     files_final = []
     print(files_final)
     for f in files:
+        if "Run2022" not in f[1]:
+            continue
         for var in list(f[3]):  # Use list(f[3]) to make a copy for safe iteration
             if check_finished(f"{folder_path}_output", f[1], var, suffixs, btag):
                 # print(f"finished running for {folder_path}_output", f[1], var, suffixs, btag)
@@ -377,8 +382,8 @@ def main(folder_path, era, variables, suffixs, channel, btag):
             files_final.append(f)
     num_cores_to_use = 2  # Set the number of cores you want to use
     pool = Pool(processes=num_cores_to_use)
-    max_jobs_per_iteration = 5  # Limit the number of jobs submitted at once
-    max_jobs = 50
+    max_jobs_per_iteration = 10  # Limit the number of jobs submitted at once
+    max_jobs = 100
     print("About to run jobs for:", files_final)
     try:
         while files_final:
@@ -390,7 +395,7 @@ def main(folder_path, era, variables, suffixs, channel, btag):
                     pool.apply_async(process_file, args=(f,))
                     files_final.remove(f)
                     jobs_submitted += 1
-                    time.sleep(1)  # Add a small delay between job submissions to prevent rapid submissions
+                    # time.sleep(1)  # Add a small delay between job submissions to prevent rapid submissions
                     # gc.collect()
                 elif memory_usage <= 20.0:
                     print(f"Memory usage is high ({memory_usage}%). Waiting...")
@@ -422,7 +427,7 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
+    mass = [60,]#65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
     # mass = [100]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
