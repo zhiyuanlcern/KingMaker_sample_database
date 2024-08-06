@@ -53,13 +53,15 @@ def get_variable(tree, var_base, var_suffix=""):
         # print("no")
         # print(var_name)
         # print(tree.keys())
+        if var_base not in  tree.keys() :
+            print(f"{var_base} not exists!!!!")
+            sys.exit(-1)
         var = tree[var_base]
         dtype = var.dtype
         if not np.issubdtype(dtype, np.number) or dtype == np.uint8 or dtype == np.int16:
             var = var.astype(np.int32)      
         # print(var_name)
-        if var_base not in  tree.keys() :
-            print(f"{var_base} not exists!!!!")
+        
         return var
 # Function to save numpy arrays as ROOT histograms
 def save_hist_to_root(hist_data, bins, var, output_file):
@@ -146,6 +148,7 @@ def process_file(args):
     data = {var + suffix: [] for var in variables for suffix in suffixs}
     weights = {var + suffix: [] for var in variables for suffix in suffixs}
     for suffix in suffixs:
+        print(1)
         extramuon_veto = get_variable(tree, "extramuon_veto",suffix)
         extraelec_veto = get_variable(tree, "extraelec_veto",suffix)
         eta_1 = get_variable(tree, "eta_1",suffix)
@@ -168,9 +171,11 @@ def process_file(args):
         genWeight = get_variable(tree, "genWeight",suffix)
         genEventSumW = get_variable(tree, "genEventSumW",suffix)
         gen_match_2 = get_variable(tree, "gen_match_2",suffix)
+        print(2)
         is_wjets = get_variable(tree, "is_wjets",suffix)
         btag_weight = get_variable(tree, "btag_weight",suffix)
         mt_1 = get_variable(tree, "mt_1", suffix)
+        print(3)
         if channel == "em":
             id_wgt_ele_wpTight = get_variable(tree, "id_wgt_ele_wpTight",suffix)
             id_wgt_mu_2 = get_variable(tree, "id_wgt_mu_2",suffix)
@@ -197,6 +202,7 @@ def process_file(args):
             trg_wgt_ditau_crosstau_2 = get_variable(tree, "trg_wgt_ditau_crosstau_2",suffix)
             id_wgt_tau_vsMu_Tight_2 = get_variable(tree, "id_wgt_tau_vsMu_Tight_2",suffix)
             id_wgt_mu_1 = get_variable(tree, "id_wgt_mu_1",suffix)
+            print(4)
         if channel == 'et': 
             trg_single_ele30 = get_variable(tree, "trg_single_ele30", suffix)    
             trg_single_ele32 = get_variable(tree, "trg_single_ele32", suffix)
@@ -236,6 +242,7 @@ def process_file(args):
                 (( (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) &  ((q_1 * q_2) < 0) & (mt_1 < 70) )
             selection_dic["nob_mt"] = selection_dic["mt"] & (nbtag == 0)
             selection_dic["btag_mt"] = selection_dic["mt"] & (nbtag == 1)
+            print(5)
         elif channel == "et":
             selection_dic["et"] = (((trg_single_ele30 ==1)| (trg_single_ele32==1)|(trg_single_ele35==1)|(trg_single_tau180_2==1))& \
                 (pt_1 > 30) & (pt_2 > 30)  &  (extramuon_veto == 0)  & (extraelec_veto == 0) & \
@@ -269,9 +276,11 @@ def process_file(args):
         # selection = ((nbtag == 0))
         # 应用筛选条件
         # print("selection_dic", selection_dic )
+        print(6)
         selection = selection_dic[f'{btag}_{channel}']
         for var in variables:
             data[var + suffix ].append(get_variable(tree, var, suffix)[selection])
+            print(7)
         print("finshied selection")
         # print(data, "data")
         # 计算 train_weight
