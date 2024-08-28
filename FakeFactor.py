@@ -326,6 +326,7 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
     bin_140 = ff_h.FindBin(180)
     bin_200 = ff_h.FindBin(300)
     bin_350 = ff_h.FindBin(400)
+    # bin_35  = ff_h.FindBin(35)
     
     # f1 = R.TF1('FF'+DR+var + npreb + ratio," [0]+[1]*x + [2]*x*x + [3]*x*x*x  ",30,140)
     # formular_string = " ({0}+{1}*x + {2}*x*x  + {3}*x*x*x  > 0?{0}+{1}*x + {2}*x*x  + {3}*x*x*x: 0 )".format(h_Fit.Parameter(0), h_Fit.Parameter(1),  h_Fit.Parameter(2),h_Fit.Parameter(3))
@@ -345,7 +346,7 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
     thr = 0.5
   
     # formular_string = " ({2}+TMath::Landau(x,{0},{1}, false) )".format(h_Fit.Parameter(0), h_Fit.Parameter(1),  h_Fit.Parameter(2))
-    
+    # bin_35_value ,bin_35_error = ff_h.GetBinContent(bin_35), ff_h.GetBinError(bin_35) 
     bin_120_value ,bin_120_error = ff_h.GetBinContent(bin_120), ff_h.GetBinError(bin_120)
     bin_140_value ,bin_140_error = ff_h.GetBinContent(bin_140), ff_h.GetBinError(bin_140)
     bin_200_value ,bin_200_error = ff_h.GetBinContent(bin_200), ff_h.GetBinError(bin_200)
@@ -367,9 +368,6 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
                 if bin_200_error / bin_200_value < thr :
                     if bin_350_value:
                         if bin_350_error / bin_350_value < thr:
-                            # f2 = R.TF1("f2","x < 140 ? {0} : x < 200?  {1} :   x < 350? {2} : {3}".format(
-                            #     formular_string, bin_140_value,bin_200_value, bin_350_value
-                        # ),30, 2000)
                             hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error)
                             hint = SetValueError(hint,bin_200, bin_200_value,bin_200_error)
                             if bin_350_value > 0.5:
@@ -378,32 +376,20 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
                                 hint = SetValueError(hint,bin_350, bin_350_value,bin_350_error,True)
                             print("I am here 1")
                         else:
-                            # f2 = R.TF1("f2","x < 140 ? {0} : x< 200? {1} :{2}".format(
-                            #     formular_string, bin_140_value, bin_200_value                     
-                        # ),30, 2000)
                             hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error)
                             hint = SetValueError(hint,bin_200, bin_200_value,bin_200_error,True)
                             print("I am here 2")
                     else:
-                            # f2 = R.TF1("f2","x < 140 ? {0} : x< 200? {1} :{2}".format(
-                            #     formular_string, bin_140_value, bin_200_value    ),30, 2000)
                             
                             hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error)
                             hint = SetValueError(hint,bin_200, bin_200_value,bin_200_error,True)
                             print("I am here 3")
                             
                 else:
-                    # f2 = R.TF1("f2","{0}  ".format(
-                    #     formular_string, bin_140_value
-                    # ),30, 2000)   
-                    # # hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error,True)
                     hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error,True)
                     print("I am here 4")
                     
-            else:
-                # f2 = R.TF1("f2","x < 140 ? {0}  :{1}".format(
-                #         formular_string, bin_140_value
-                #     ),30, 2000)  
+            else:  
                 hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error,True)
                 print("I am here 5")
         else:
@@ -411,41 +397,24 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
                 if bin_200_error / bin_200_value < thr:
                     if bin_350_value:
                         if bin_350_error / bin_350_value < thr:
-                            # f2 = R.TF1("f2","x < 200 ?  {0} :x< 350?  {1} : {2}".format(
-                            #     formular_string,bin_200_value,bin_350_value
-                            # ),30, 2000)
                             hint = SetValueError(hint,bin_200, bin_200_value,bin_200_error)
                             hint = SetValueError(hint,bin_350, bin_350_value,bin_350_error,True)
                             print("I am here 6")
                         else:
-                            # f2 = R.TF1("f2","x < 200 ?  {0} :  {1}".format(
-                            #     formular_string,bin_200_value
-                            # ),30, 2000)
                             hint = SetValueError(hint,bin_200, bin_200_value,bin_200_error,True)
                             print("I am here 7")
                     else:
-                        # f2 = R.TF1("f2","x< 350? {0} :{1}".format( 
-                        #     formular_string, bin_350_value
-                        # ),30, 2000)  
                         hint = SetValueError(hint,bin_350, bin_350_value,bin_350_error,True)
                         print("I am here 8")
                 else:
-                    # f2 = R.TF1("f2","{0} ".format( 
-                    #         formular_string,bin_140_value
-                    #     ),30, 2000)  
+                    
                     print("I am here 9")
             else: 
-                # f2 = R.TF1("f2","x< 140? {0} :{1}".format( 
-                #             formular_string,bin_140_value
-                #         ),30, 2000)  
                 if bin_140_value -bin_140_error   >0  and bin_140_error/ (bin_140_value + 0.001) < thr:
                     
                     hint = SetValueError(hint,bin_140, bin_140_value,bin_140_error,True)
                 print("I am here 10")
-    else:
-        # f2 = R.TF1("f2"," {0}".format(
-        #             formular_string
-        #         ),30, 2000)        
+    else:  
         print("I am here 11")  
         if bin_120_value - bin_120_error >0 and  bin_120_error/ (bin_120_value + 0.001) < thr:
             hint = SetValueError(hint,bin_120, bin_120_value,bin_120_error,True)
@@ -492,7 +461,7 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
         graph.SetPoint(bin, bin_center, bin_content)
         if Produce_tot_stat_Syst:            
             bin_content_down = bin_content - bin_err if bin_content - bin_err >0  else 0
-            bin_content_up = bin_content + bin_err if bin_content - bin_err < 1  else 1
+            bin_content_up = bin_content + bin_err if bin_content + bin_err < 1  else  2* bin_content
             graph_down.SetPoint(bin, bin_center, bin_content_down )
             graph_up.SetPoint(bin, bin_center, bin_content_up )
     
@@ -518,8 +487,8 @@ def Fit_FF(DR, npreb, ratio,  var = 'pt_2', Produce_tot_stat_Syst = False, syst=
     output_file = R.TFile(f"{input_path}/FakeFactor_fitted.root", "UPDATE") if os.path.exists(f"{input_path}/FakeFactor_fitted.root") else  R.TFile(f"{input_path}/FakeFactor_fitted.root", "RECREATE")
     graph.Write(f"FF{DR}{var}{npreb}{ratio}{syst}")
     if Produce_tot_stat_Syst:
-        graph_up.Write(f"FF{DR}{var}{npreb}{ratio}_FF_tot_StatUp")
-        graph_down.Write(f"FF{DR}{var}{npreb}{ratio}_FF_tot_StatDown")
+        graph_up.Write(f"FF{DR}{var}{npreb}{ratio}__FF_tot_StatUp")
+        graph_down.Write(f"FF{DR}{var}{npreb}{ratio}__FF_tot_StatDown")
     output_file.Close()
     c.Print( input_path +'/FF'+DR+var + npreb + ratio + syst+'.png')
     fnew.Close()
@@ -990,8 +959,6 @@ if __name__ == '__main__':
                     Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = True, syst="") ## Produce FF_tot_stat systematics
                     for sys in ["__FF_ttbarUp","__FF_ttbarDown", "__FF_wjetsDown","__FF_wjetsUp"  ]:
                         Fit_FF(DR,npreb, ratio,  var,Produce_tot_stat_Syst = False, syst= sys) ## Produce FF_ttbar, FF_Wjets systematics
-    # if produce_final_fakes :
-        # produce the fakes
     for DR in cut_dic:  
         # df_dict, columns = produce_fake(input_path, samples_list, [])
         df_dict, columns = produce_fake(input_path, samples_list, [
