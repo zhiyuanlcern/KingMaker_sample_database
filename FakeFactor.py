@@ -578,11 +578,16 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True ,ind
                 df0= df_data ## in practice the MC subtaction leave a small gap in the SR. The MC subtraction is very small and shouldn't cause any difference
             else:
                 df0 = df_noW if DR == "W" else df_withW
+
+            if DR == "QCD":
+                OS_SS_scale=1.1
+            else:
+                OS_SS_scale=1.0
             if syst == "":
                 if "FF_weight" not in df0.GetColumnNames():
-                    df_dict[DR] = df0.Define("FF_weight", f"genWeight_tmp * ({combined_weight_str})" )
+                    df_dict[DR] = df0.Define("FF_weight", f"genWeight_tmp * ({combined_weight_str}) * {OS_SS_scale}" )
                 else:
-                    df_dict[DR] = df0.Redefine("FF_weight", f"genWeight_tmp * ({combined_weight_str})" )
+                    df_dict[DR] = df0.Redefine("FF_weight", f"genWeight_tmp * ({combined_weight_str}) * {OS_SS_scale}" )
                 
                 df_dict[DR] = df_dict[DR].Redefine(
                     'genWeight', "1.0f").Redefine('is_fake', 'true' ).Redefine("puweight", "double(1.0)")
@@ -596,9 +601,9 @@ def produce_fake(input_path, samples_list, systematics = [], save_DR = True ,ind
             else:
                 ## set pt to -1 if weight is 0, pt if not equal to 0 for syst
                 if f'FF_weight{syst}' not in df_dict[DR].GetColumnNames():
-                    df_dict[DR] = df_dict[DR].Define(f'FF_weight{syst}', f"genWeight_tmp * ({combined_weight_str})" )
+                    df_dict[DR] = df_dict[DR].Define(f'FF_weight{syst}', f"genWeight_tmp * ({combined_weight_str}) * {OS_SS_scale}" )
                 else:
-                    df_dict[DR] = df_dict[DR].Redefine(f'FF_weight{syst}', f"genWeight_tmp * ({combined_weight_str})" )
+                    df_dict[DR] = df_dict[DR].Redefine(f'FF_weight{syst}', f"genWeight_tmp * ({combined_weight_str}) * {OS_SS_scale}" )
             #     df_dict[DR] = df_dict[DR].Define(f'{var}{syst}', f' FF_weight{syst} == 0.0? -1.0 : {var}')
                 
             # ## set pt to -1 if weight is 0, pt if not equal to 0 for nominal
@@ -683,7 +688,9 @@ def combine_Fakes(input_path, df_dict, columns,  apply_fraction = False, systema
             }};
             '''
             # print(GetmTtotweights_code)
-            R.gROOT.LoadMacro('cpp_code/loadFF.C') # load FF histograms /or any other histograms into a dictionary called Weights with key [histname] 
+            R.gROOT.ProcessLine(f'.L cpp_code/loadFF.C+')
+            R.loadFF(era,channel)
+            # R.gROOT.LoadMacro('cpp_code/loadFF.C') # load FF histograms /or any other histograms into a dictionary called Weights with key [histname] 
             R.gInterpreter.Declare(GetmTtotweights_code) 
         
         for syst in systematics:
