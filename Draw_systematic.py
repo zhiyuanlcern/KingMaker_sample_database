@@ -81,13 +81,13 @@ def check_finished(folder, filename, var, suffixs, btag):
     # print(suffixs)
     if suffixs == [""]:
         # running only for nominal
-        if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
+        if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
             # print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
             return True
         else: 
             return False
     if "Run2022" in filename:
-        if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
+        if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}.root"):
             # print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[0]}_{btag}")
             return True
         else: 
@@ -100,7 +100,7 @@ def check_finished(folder, filename, var, suffixs, btag):
             if f"PNN_{m}" not in var and (var != "mt_tot"):
                 # print(f"no need to run for PNN score {folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
                 return True
-    if os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.png") and os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
+    if  os.path.exists(f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}.root"):
         # print("file finished: ", f"{folder}/{f_strip}_era_{var + suffixs[1]}_{btag}")
         return True
     else:
@@ -118,7 +118,7 @@ def process_file(args):
     file_path = os.path.join(folder_path, filename)
     rdf = R.RDataFrame("ntuple", file_path)
     ## fill the neccessary variables here
-    useful_vars = ["mt_tot", 'PNN_100', 'PNN_105', 'PNN_110', 'PNN_115', 'PNN_120', 'PNN_125', 'PNN_130', 'PNN_135', 'PNN_140', 'PNN_160', 'PNN_180', 'PNN_200', 'PNN_250', 'PNN_60', 'PNN_65', 'PNN_70', 'PNN_75', 'PNN_80', 'PNN_85', 'PNN_90', 'PNN_95', 'mt_1', "extramuon_veto","extraelec_veto","eta_1","dz_1","dxy_1","iso_1","phi_2","deltaR_ditaupair","pt_1","eta_2","dz_2","dxy_2","iso_2","pt_2","nbtag","q_1","q_2","puweight","Xsec","genWeight","genEventSumW","gen_match_2","is_wjets","btag_weight","id_wgt_ele_wpTight","id_wgt_mu_2","trg_cross_mu23ele12","trg_cross_mu8ele23","trg_single_ele30","trg_single_ele32","trg_single_ele35","trg_single_mu24","trg_single_mu27","trg_wgt_single_mu24","trg_wgt_single_ele30","trg_cross_mu20tau27_hps","trg_single_tau180_2","trg_single_mu24","trg_single_mu27","id_tau_vsMu_Loose_2","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_wgt_tau_vsJet_Medium_2","FF_weight","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2","id_wgt_tau_vsMu_Tight_2","id_wgt_mu_1","trg_single_ele30"    ,"trg_single_ele32","trg_single_ele35","trg_single_tau180_2","id_tau_vsMu_VLoose_2","id_tau_vsEle_Tight_2","id_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_2","FF_weight","id_wgt_tau_vsEle_Tight_2","id_wgt_ele_wpTight","trg_wgt_single_ele30","trg_wgt_ditau_crosstau_2","trg_double_tau30_plusPFjet60","trg_double_tau30_plusPFjet75","trg_double_tau35_mediumiso_hps","trg_single_deeptau180_1","trg_single_deeptau180_2","id_tau_vsJet_Medium_1","id_tau_vsEle_VVLoose_1","id_tau_vsMu_VLoose_1","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_tau_vsMu_VLoose_2","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","FF_weight","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"]
+    useful_vars = ["mt_tot", 'PNN_100', 'PNN_105', 'PNN_110', 'PNN_115', 'PNN_120', 'PNN_125', 'PNN_130', 'PNN_135', 'PNN_140', 'PNN_160', 'PNN_180', 'PNN_200', 'PNN_250', 'PNN_60', 'PNN_65', 'PNN_70', 'PNN_75', 'PNN_80', 'PNN_85', 'PNN_90', 'PNN_95', 'mt_1', "extramuon_veto","extraelec_veto","eta_1","dz_1","dxy_1","iso_1","phi_2","deltaR_ditaupair","pt_1","eta_2","dz_2","dxy_2","iso_2","pt_2","nbtag","q_1","q_2","puweight","Xsec","genWeight","genEventSumW","gen_match_2","is_wjets","is_ttbar","btag_weight","id_wgt_ele_wpTight","id_wgt_mu_2","trg_cross_mu23ele12","trg_cross_mu8ele23","trg_single_ele30","trg_single_ele32","trg_single_ele35","trg_single_mu24","trg_single_mu27","trg_wgt_single_mu24","trg_wgt_single_ele30","trg_cross_mu20tau27_hps","trg_single_tau180_2","trg_single_mu24","trg_single_mu27","id_tau_vsMu_Tight_2","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_wgt_tau_vsJet_Medium_2","FF_weight","iso_wgt_mu_1","trg_wgt_ditau_crosstau_2","id_wgt_tau_vsMu_Tight_2","id_wgt_mu_1","trg_single_ele30"    ,"trg_single_ele32","trg_single_ele35","trg_single_tau180_2","id_tau_vsMu_VLoose_2","id_tau_vsEle_Tight_2","id_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_2","FF_weight","id_wgt_tau_vsEle_Tight_2","id_wgt_ele_wpTight","trg_wgt_single_ele30","trg_wgt_ditau_crosstau_2","trg_double_tau30_plusPFjet60","trg_double_tau30_plusPFjet75","trg_double_tau35_mediumiso_hps","trg_single_deeptau180_1","trg_single_deeptau180_2","id_tau_vsJet_Medium_1","id_tau_vsEle_VVLoose_1","id_tau_vsMu_VLoose_1","id_tau_vsJet_Medium_2","id_tau_vsEle_VVLoose_2","id_tau_vsMu_VLoose_2","id_wgt_tau_vsJet_Medium_2","id_wgt_tau_vsJet_Medium_1","FF_weight","trg_wgt_ditau_crosstau_1","trg_wgt_ditau_crosstau_2"]
     no_syst = "True"
     for v in rdf.GetColumnNames():
         if suffixs[1] in v:
@@ -173,6 +173,7 @@ def process_file(args):
         gen_match_2 = get_variable(tree, "gen_match_2",suffix)
         print(2)
         is_wjets = get_variable(tree, "is_wjets",suffix)
+        is_ttbar = get_variable(tree, "is_ttbar",suffix)
         btag_weight = get_variable(tree, "btag_weight",suffix)
         mt_1 = get_variable(tree, "mt_1", suffix)
         print(3)
@@ -193,7 +194,7 @@ def process_file(args):
             trg_single_tau180_2 = get_variable(tree, "trg_single_tau180_2",suffix)
             trg_single_mu24 = get_variable(tree, "trg_single_mu24",suffix)
             trg_single_mu27 = get_variable(tree, "trg_single_mu27",suffix)
-            id_tau_vsMu_Loose_2 = get_variable(tree, "id_tau_vsMu_Loose_2",suffix)
+            id_tau_vsMu_Tight_2 = get_variable(tree, "id_tau_vsMu_Tight_2",suffix)
             id_tau_vsJet_Medium_2 = get_variable(tree, "id_tau_vsJet_Medium_2",suffix)
             id_tau_vsEle_VVLoose_2 = get_variable(tree, "id_tau_vsEle_VVLoose_2",suffix)
             id_wgt_tau_vsJet_Medium_2 = get_variable(tree, "id_wgt_tau_vsJet_Medium_2",suffix)
@@ -238,9 +239,9 @@ def process_file(args):
         if channel == "mt":
             selection_dic["mt"] = (((trg_cross_mu20tau27_hps==1)|(trg_single_mu24==1)|(trg_single_mu27==1)|(trg_single_tau180_2==1)) & \
                 (pt_1 > 25.0) & (pt_2 > 30) & (extramuon_veto == 0)  &  (extraelec_veto == 0) & \
-                (id_tau_vsMu_Loose_2 > 0) & (id_tau_vsJet_Medium_2 > 0) & (id_tau_vsEle_VVLoose_2 > 0 ) & \
+                (id_tau_vsMu_Tight_2 > 0) & (id_tau_vsJet_Medium_2 > 0) & (id_tau_vsEle_VVLoose_2 > 0 ) & \
                 (( (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) &  ((q_1 * q_2) < 0) & (mt_1 < 70) )
-            selection_dic["nob_mt"] = selection_dic["mt"] & (nbtag == 0)
+            selection_dic["nob_mt"] = selection_dic["mt"] & (nbtag == 0) & (( (gen_match_2 != 6) & (is_ttbar>0) ) | (is_ttbar <1)  ) 
             selection_dic["btag_mt"] = selection_dic["mt"] & (nbtag == 1)
             print(5)
         elif channel == "et":
@@ -248,7 +249,7 @@ def process_file(args):
                 (pt_1 > 30) & (pt_2 > 30)  &  (extramuon_veto == 0)  & (extraelec_veto == 0) & \
                 (id_tau_vsMu_VLoose_2 > 0)  & (id_tau_vsEle_Tight_2 > 0) & (id_tau_vsJet_Medium_2 > 0 ) & \
                 ((   (gen_match_2 != 6) & (is_wjets>0) ) | (is_wjets <1)  ) & ((q_1 * q_2) < 0) & (mt_1 < 70) )  # 
-            selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0)
+            selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0) & (( (gen_match_2 != 6) & (is_ttbar>0) ) | (is_ttbar <1)  ) 
             selection_dic["btag_et"] = selection_dic["et"] & (nbtag == 1)
             if era == "2022postEE":
                 selection_dic["nob_et"] = selection_dic["et"] & (nbtag == 0) &~  (  ( (phi_2>1.8) & (phi_2< 2.7) & (eta_2 > 1.5)  & (eta_2<2.2) ) ) ## &~ stands for and not
@@ -346,7 +347,7 @@ def process_file(args):
             ax_ratio.legend()
         
         suffx_name = suffixs[1] if len(suffixs) >= 3 else suffixs[0]
-        plt.savefig(f"{output_folder}/{f_strip}_era_{var + suffx_name}_{btag}.png")
+        # plt.savefig(f"{output_folder}/{f_strip}_era_{var + suffx_name}_{btag}.png")
         plt.close(fig)
         for suffix in suffixs:
             save_hist_to_root(hist_data[var + suffix], bins, var + suffix,  f"{output_folder}/{f_strip}_era_{var + suffx_name}_{btag}.root")
@@ -436,8 +437,8 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60, 65, 70,75, 80, 85, 90, 95, 100, 105, 110, 115, 120,   125,  130, 135, 140,  160,  180, 200,250]
-    # mass = [100]
+    mass = [60,  70, 80,  90,  100,  110,  120,     130,  140,  160,  180, 200,250] # 
+    mass = [65,75,85,95,105,115,125,135,]
     PNN_vars= [f"PNN_{m}" for m in mass]
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
