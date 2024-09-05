@@ -15,12 +15,11 @@ lumi = {
 }
 
 #bin_edges = np.linspace(0, 5, 31).tolist()
-bin_edges = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200,
-               250, 300, 350 , 400,500]
+
 
 cuts = {
     "et": "(trg_single_ele30 ==1|| trg_single_ele32==1||trg_single_ele35==1||trg_single_tau180_2==1)  &&extramuon_veto == 0 && extraelec_veto == 0 && id_tau_vsMu_VLoose_2 > 0 &&   id_tau_vsEle_Tight_2 > 0  && pt_1> 30.0 && pt_2 > 30   && (q_1 * q_2) < 0 && id_tau_vsJet_Medium_2 < 1 ",
-    "mt": "(trg_cross_mu20tau27_hps==1||trg_single_mu24==1||trg_single_mu27==1||trg_single_tau180_2==1)&& pt_1> 25.0 &&extramuon_veto == 0  && extraelec_veto == 0 &&(id_tau_vsMu_Loose_2 > 0 &&  id_tau_vsEle_VVLoose_2 > 0 && pt_2 > 30 ) && (q_1 * q_2) < 0 && id_tau_vsJet_Medium_2 < 1 ",
+    "mt": "(trg_cross_mu20tau27_hps==1||trg_single_mu24==1||trg_single_mu27==1||trg_single_tau180_2==1)&& pt_1> 25.0 &&extramuon_veto == 0  && extraelec_veto == 0 &&(id_tau_vsMu_Tight_2 > 0 &&  id_tau_vsEle_VVLoose_2 > 0 && pt_2 > 30 ) && (q_1 * q_2) < 0 && id_tau_vsJet_Medium_2 < 1 ",
     "tt": "(trg_double_tau30_plusPFjet60  ==1 || trg_double_tau30_plusPFjet75  ==1 || trg_double_tau35_mediumiso_hps  ==1 ||  trg_single_deeptau180_1  ==1 || trg_single_deeptau180_2  ==1) && extramuon_veto == 0  && extraelec_veto == 0 && pt_1 > 40 &&  pt_2 > 40  && id_tau_vsEle_VVLoose_1 > 0   &&id_tau_vsMu_VLoose_1 > 0   && id_tau_vsEle_VVLoose_2 > 0   &&id_tau_vsMu_VLoose_2 > 0   && dz_1 < 0.2 && eta_1 < 2.1 && eta_1 > -2.1 && dz_2 < 0.2 && eta_2 < 2.1 && eta_2 > -2.1 && deltaR_ditaupair > 0.5  &&   (q_1 * q_2) < 0  && id_tau_vsJet_Medium_1 < 1 && id_tau_vsJet_Medium_2 >= 1"
 }
 
@@ -59,6 +58,11 @@ def load_files(folder, channel):
         raise ValueError("Invalid channel specified")
 
 def main(folder, channel, era):
+    # bin_edges = [0,  50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200,
+    #            250, 300,3000]
+    # if lumi[era] < 10e3:
+    bin_edges = [0,  60,  80,  100,  120, 140,  160, 180,  200,
+                250, 300,3000]
     ROOT.ROOT.EnableImplicitMT()
     output_file = ROOT.TFile(f"Fraction_{era}_{channel}.root", "RECREATE")
 
@@ -107,8 +111,8 @@ def main(folder, channel, era):
         # hist_wjets.Write()
 
         # # DYJets histograms
-        # hist_dyjets = df_dyjets.Filter(f"{region_cut} && {gen_cut}").Histo1D(("mt_tot", "mt_tot", len(bin_edges) - 1, array.array('d', bin_edges)), "mt_tot", "weight").GetValue()
-        # hist_dyjets.SetName(f"dyjets_AR{name}")
+        hist_dyjets = df_dyjets.Filter(f"{region_cut} && {gen_cut}").Histo1D(("mt_tot", "mt_tot", len(bin_edges) - 1, array.array('d', bin_edges)), "mt_tot", "weight").GetValue()
+        hist_dyjets.SetName(f"dyjets_AR{name}")
 
         # QCD histograms
         hist_qcd = hist_data.Clone(f"QCD_AR{name}")
