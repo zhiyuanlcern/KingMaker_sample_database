@@ -1,0 +1,8 @@
+dbs: /ZZto2L2Nu-2Jets_EW_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/NANOAODSIM
+era: 2023BPix
+filelist:
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto2L2Nu-2Jets_EW_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2520000/97ed4516-3b18-447c-b3bc-b00aa783c66f.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto2L2Nu-2Jets_EW_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2520000/b838858c-a1fe-48ae-b7b5-d1ba7c666031.root
+nfiles: 2
+nick: ZZto2L2Nu-2Jets_EW_TuneCP5_13p6TeV_madgraph-pythia8Run3Summer23BPixNanoAODv12
+sample_type: diboson

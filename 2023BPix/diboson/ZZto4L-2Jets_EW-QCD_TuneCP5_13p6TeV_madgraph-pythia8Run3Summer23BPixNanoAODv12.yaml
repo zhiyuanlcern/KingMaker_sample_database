@@ -1,0 +1,13 @@
+dbs: /ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/NANOAODSIM
+era: 2023BPix
+filelist:
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/06c7c680-563e-4357-ace7-126a93005dfc.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/504f8aac-7d6e-437a-9003-6487a9036367.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/a0c75052-7046-48b9-8527-58b1b9229110.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/c7494178-d048-44e5-8c38-c69fe9ba3b0d.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/ca53f654-e9cd-49b0-9397-e4b0bff878d9.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/ca9c7b92-8600-43b0-9e0e-57c9312d466b.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/2820000/d08ad54b-9ec2-40a0-a9c5-e79b3d1a4a8f.root
+nfiles: 7
+nick: ZZto4L-2Jets_EW-QCD_TuneCP5_13p6TeV_madgraph-pythia8Run3Summer23BPixNanoAODv12
+sample_type: diboson
