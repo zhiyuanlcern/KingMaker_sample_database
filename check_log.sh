@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory containing the txt files
-directory="./"
+directory="./tmpptn05n11"
 
 # Find and loop through each txt file in the directory modified in the last 5 days
 find "$directory" -name 'stdall*.txt' -type f  -print0 | while IFS= read -r -d $'\0' file; do
