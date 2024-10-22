@@ -10,6 +10,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/60000/794ce3d8-2c64-4643-a6ef-6e7afce3f09d.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/60000/c49f8de7-6eee-4e70-875c-9b8f7cb83a32.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/60000/e0462e54-8453-439b-b33d-cd4b83145b93.root
+nevents: 9
 nfiles: 9
 nick: DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
 sample_type: dyjets

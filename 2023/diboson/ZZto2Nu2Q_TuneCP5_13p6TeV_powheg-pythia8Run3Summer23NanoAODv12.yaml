@@ -42,6 +42,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/ZZto2Nu2Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/2820000/f3eee8f2-efef-4ce7-8b1c-ee41960668f6.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/ZZto2Nu2Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/2820000/faf5687b-6ec4-409c-9d6a-010ed80aab5b.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/ZZto2Nu2Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/2820000/ffb879e8-bcfe-4f7b-a79e-115deb18dfc3.root
+nevents: 41
 nfiles: 41
 nick: ZZto2Nu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
 sample_type: diboson

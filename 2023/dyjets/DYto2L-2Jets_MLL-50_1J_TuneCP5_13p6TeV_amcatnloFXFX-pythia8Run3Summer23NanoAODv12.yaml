@@ -813,6 +813,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/40000/fe6221ca-1b9f-44e9-89ce-d76aec7bbb8f.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/40000/ff97476d-9d4a-4870-a948-60d63f187ef4.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/40000/ffdac220-a0ad-41f9-83cb-96e09a6b3897.root
+nevents: 812
 nfiles: 812
 nick: DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
 sample_type: dyjets

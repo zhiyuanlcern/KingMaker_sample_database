@@ -144,6 +144,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/ggZH_Hto2B_Zto2L_M-125_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/40000/f12a333a-1206-4227-9e32-54e1d3c6a8f2.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/ggZH_Hto2B_Zto2L_M-125_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/40000/f5cacdb2-10ce-4cbd-b3a5-d97a47f825d4.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/ggZH_Hto2B_Zto2L_M-125_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/40000/fc3cc971-04fd-4bc3-89d6-a353581ca195.root
+nevents: 143
 nfiles: 143
 nick: ggZH_Hto2B_Zto2L_M-125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
 sample_type: rem_hbb

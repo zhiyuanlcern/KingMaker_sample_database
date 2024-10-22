@@ -430,6 +430,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/50000/fdfaf063-9dc7-47dc-87e0-a4a9457e563c.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/50000/fe2b6bd4-1387-48c6-acde-2da3b002b381.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/50000/fe41dbf3-c55e-4b4d-aa45-9faf98c1e6fc.root
+nevents: 429
 nfiles: 429
 nick: TTto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
 sample_type: ttbar

@@ -213,6 +213,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/70000/ef91609b-a4b9-4458-b4ad-ad49e47bc685.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/70000/f1a69a19-0e31-41fd-bd9e-f6367098b756.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/70000/ffbf20f5-c809-4b22-847a-b5d84b40af56.root
+nevents: 212
 nfiles: 212
 nick: WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
 sample_type: diboson

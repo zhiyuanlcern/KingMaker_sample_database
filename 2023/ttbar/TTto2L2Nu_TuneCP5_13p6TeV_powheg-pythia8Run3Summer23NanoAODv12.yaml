@@ -199,6 +199,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/70000/fdff8318-a89a-4987-acc8-87fa2890fa01.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/70000/fe8f9ec8-753a-41b2-9332-baa76e31247e.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/70000/feea8e56-d629-462f-9dd2-3ede34ecf3f5.root
+nevents: 198
 nfiles: 198
 nick: TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
 sample_type: ttbar

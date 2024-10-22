@@ -199,6 +199,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2B_PT-200_M-125_TuneCP5_13p6TeV_powheg-minlo-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/ee18f7ec-b53b-44ae-96f0-0b8eb167d6ab.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2B_PT-200_M-125_TuneCP5_13p6TeV_powheg-minlo-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/ef350dd7-6a41-4f6c-af2b-e95d9212e0cf.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2B_PT-200_M-125_TuneCP5_13p6TeV_powheg-minlo-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/f8e87a07-22c9-4ecf-bede-799622ab8473.root
+nevents: 198
 nfiles: 198
 nick: GluGluHto2B_PT-200_M-125_TuneCP5_13p6TeV_powheg-minlo-pythia8Run3Summer23BPixNanoAODv12
 sample_type: rem_hbb

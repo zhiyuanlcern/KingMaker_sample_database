@@ -130,6 +130,7 @@ filelist:
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/WtoLNu-4Jets_3J_TuneCP5_13p6TeV_madgraphMLM-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/30000/f98a5b74-5d49-47d3-9c9f-af9e5be75be9.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/WtoLNu-4Jets_3J_TuneCP5_13p6TeV_madgraphMLM-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/30000/fbf8f904-8bbe-40d7-8b31-7ec4cb2f50a4.root
 - root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/WtoLNu-4Jets_3J_TuneCP5_13p6TeV_madgraphMLM-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v3/30000/ffacf247-2598-4b84-959f-deadf5589519.root
+nevents: 129
 nfiles: 129
 nick: WtoLNu-4Jets_3J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12
 sample_type: wjets
