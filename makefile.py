@@ -16,10 +16,15 @@ def process_input_string(input_string, show = False, sample_type="data"):
         era = "2023"
     elif "23BPixNanoAOD" in input_string:
         era = "2023BPix"
-    
+    elif "Run2023B" in input_string or "Run2023C" in input_string:
+        era = "2023"
+    elif "Run2023D" in input_string:
+        era = "2023BPix"
     dataset = input_string.split("/")[1]
     sample_type = sample_type
     nick = input_string.split("/")[1] +  input_string.split("/")[2].split("-")[0]
+    if sample_type == "data":
+        nick = input_string.split("/")[1] + "_"+  input_string.split("/")[2].split("-")[0] +"_"+ input_string.split("/")[2].split("-")[1]
     # xsec = 1.0
 
     # Define the output file path based on the nick variable
@@ -42,7 +47,7 @@ def process_input_string(input_string, show = False, sample_type="data"):
             for file in files:
                 f.write("- root://xrootd-cms.infn.it//{}\n".format(file))
             # f.write("generator_weight: 1.0\n")
-            # f.write("nevents: {}\n".format(len(files)))
+            f.write("nevents: {}\n".format(len(files)))
             f.write("nfiles: {}\n".format(len(files)))
             f.write("nick: {}\n".format(nick))
             f.write("sample_type: {}\n".format(sample_type))
