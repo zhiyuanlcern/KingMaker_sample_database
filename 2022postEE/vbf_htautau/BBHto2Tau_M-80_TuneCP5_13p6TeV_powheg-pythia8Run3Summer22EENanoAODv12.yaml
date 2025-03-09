@@ -1,0 +1,25 @@
+dbs: /BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
+era: 2022postEE
+filelist:
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/026652fc-2e71-4ab7-ad66-66dcd22e9cdc.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/03244039-5d04-4072-b63f-ef0482173d4f.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/0c928297-4783-4450-8895-a0c0454b461b.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/179c5f9e-154f-495b-9127-084ca796f13d.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/2668ae6c-063b-462b-8cdc-d22863c759a2.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/43cb104b-93d0-49db-adf2-6eabb1720bde.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/5068e713-1e5f-400c-8152-193988fead73.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/67e781a0-8fc6-4f8e-9592-2708e11234a0.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/6bb5dcd0-2a24-47a6-bee0-a75e4ae09d7e.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/a0216098-5919-4b19-9d73-d2845f6352d0.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/a9684436-9c67-454c-8afe-e67bc7c52bca.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/bf5052db-8eba-4109-8cac-6c570351c636.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/c25bafc3-73b8-475a-8387-a36119e1645c.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/c57dc18d-3e1f-4d59-887f-ef55cde6e898.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/d0eadff1-03f6-4ea6-a9b3-2b194dc60c63.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/f2b39272-6498-4c9b-8dfd-f2b47118b5c0.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/f2e63ae9-cdcc-4cbc-9595-27664faa591b.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/f3b7e1fd-058b-4965-95fa-0447b9874b31.root
+nevents: 18
+nfiles: 18
+nick: BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12
+sample_type: vbf_htautau

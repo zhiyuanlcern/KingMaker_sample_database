@@ -23,6 +23,8 @@ def process_input_string(input_string, show = False, sample_type="data"):
     dataset = input_string.split("/")[1]
     sample_type = sample_type
     nick = input_string.split("/")[1] +  input_string.split("/")[2].split("-")[0]
+    if "ext1" in input_string:
+        nick += "_ext1"
     if sample_type == "data":
         nick = input_string.split("/")[1] + "_"+  input_string.split("/")[2].split("-")[0] +"_"+ input_string.split("/")[2].split("-")[1]
     # xsec = 1.0

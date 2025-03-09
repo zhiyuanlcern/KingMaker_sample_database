@@ -1,0 +1,10 @@
+dbs: /GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
+era: 2022EE
+filelist:
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22NanoAODv12/GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_v5-v2/30000/2334bf48-7575-4cbd-b689-6f35e588a023.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22NanoAODv12/GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_v5-v2/30000/b5ed5f86-d7cf-432e-bb9d-1963957a8c20.root
+- root://xrootd-cms.infn.it///store/mc/Run3Summer22NanoAODv12/GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_v5-v2/30000/cd04a3c8-49dc-4069-966a-a47807eda7c5.root
+nevents: 3
+nfiles: 3
+nick: GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12
+sample_type: ggh_htautau
