@@ -147,12 +147,11 @@ def filter_df_pnn(df, channel):
 
     opposite_sign = ' ((q_1 * q_2) < 0) '
     same_sign = ' ((q_1 * q_2) > 0) '
-    no_b_cut = "nbtag == 0 "
     em_triggers_selections =  "( (trg_cross_mu23ele12 == 1 || trg_cross_mu8ele23 == 1 ) || (trg_single_ele30 == 1) ||(trg_single_ele32 == 1)|| (trg_single_ele35 == 1) || (trg_single_mu24 == 1)|| (trg_single_mu27 == 1) )"    #" ( (trg_cross_mu23ele12 == 1 && pt_1 > 15 && pt_2 >24)   ||    (trg_cross_mu8ele23 == 1 && pt_1 >24 &&  pt_2 > 15)  )  " 
     # buggy_signal_cut = "( abs(Train_weight) < 10  )"
     def combinecut(*args):
         return '(' + '&&'.join(args) + ')'
-    em_SR = combinecut(em_triggers_selections, em_muon_selection, iso_e, em_electron_selection, iso_mu,lepton_veto, opposite_sign,Dzeta_cut, no_b_cut   )  #  , buggy_signal_cut
+    em_SR = combinecut(em_triggers_selections, em_muon_selection, iso_e, em_electron_selection, iso_mu,lepton_veto, opposite_sign,Dzeta_cut   )  #  , buggy_signal_cut
     selection_dic["em"] =  em_SR
     
     df = df.Filter(selection_dic[channel])
@@ -166,11 +165,11 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
       }
     lumi = luminosities[args.era]
     weight_dict = {
-        "tt": '(is_data && is_fake ==0)? float(1.0) : Xsec *  {0}* puweight * genWeight/genEventSumW *    btag_weight   *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 *  FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 '.format(lumi), # * ggh_NNLO_weight
-        "mt": '(is_data && is_fake ==0)? float(1.0) : Xsec   * {0} * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 '.format(lumi), # * ggh_NNLO_weight
-        "et": '(is_data && is_fake ==0)? float(1.0) : Xsec * {0}* puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 '.format(lumi), # * ggh_NNLO_weight
-        "em": '(is_data && is_fake ==0)? float(1.0) : Xsec * {0} *  genWeight  / genEventSumW * id_wgt_ele_wpTight * id_wgt_mu_2 * btag_weight *  FF_weight * puweight * (trg_wgt_single_mu24 )'.format(lumi),
-        "mm": '(is_data && is_fake ==0)? float(1.0) : Xsec * {0} * genWeight/genEventSumW * puweight *  id_wgt_mu_1*iso_wgt_mu_1*id_wgt_mu_2*iso_wgt_mu_2* trg_wgt_single_mu24'.format(lumi),
+        "tt": '(is_data && is_fake ==0)? double(1.0) : Xsec *  {0}* puweight * genWeight/genEventSumW *    btag_weight   *id_wgt_tau_vsJet_Medium_2 * id_wgt_tau_vsJet_Medium_1 *  FF_weight * trg_wgt_ditau_crosstau_1 *trg_wgt_ditau_crosstau_2 '.format(lumi), # * ggh_NNLO_weight
+        "mt": '(is_data && is_fake ==0)? double(1.0) : Xsec   * {0} * puweight * genWeight/genEventSumW *  btag_weight  * FF_weight *id_wgt_tau_vsJet_Medium_2 * iso_wgt_mu_1  *trg_wgt_ditau_crosstau_2 *  id_wgt_tau_vsMu_Tight_2 * id_wgt_mu_1 '.format(lumi), # * ggh_NNLO_weight
+        "et": '(is_data && is_fake ==0)? double(1.0) : Xsec * {0}* puweight * genWeight/genEventSumW *  id_wgt_tau_vsEle_Tight_2  *  btag_weight * FF_weight * id_wgt_tau_vsJet_Medium_2  * id_wgt_ele_wpTight * trg_wgt_ditau_crosstau_2  * trg_wgt_single_ele30 '.format(lumi), # * ggh_NNLO_weight
+        "em": '(is_data && is_fake ==0)? double(1.0) : Xsec * {0}  genWeight  / genEventSumW * id_wgt_ele_wpTight * id_wgt_mu_2 * btag_weight *  FF_weight * puweight * (trg_wgt_single_mu24 )'.format(lumi),
+        "mm": '(is_data && is_fake ==0)? double(1.0) : Xsec * {0} * genWeight/genEventSumW ' .format(lumi),
     }
     
     print(f"start processing   {f} ")

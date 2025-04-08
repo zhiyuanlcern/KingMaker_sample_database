@@ -148,11 +148,11 @@ fi
 
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_diboson.txt --workers 1 --production-tag 2023MC_diboson &
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_dyjets.txt --workers 1 --production-tag 2023MC_dyjets &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_wjets.txt --workers 1 --production-tag 2023MC_wjets &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_ttbar.txt --workers 1 --production-tag 2023MC_ttbar &
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_ggh_htautau.txt --workers 1 --production-tag 2023MC_ggh_htautau &
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_vbf_htautau.txt --workers 1 --production-tag 2023MC_vbf_htautau &
- law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_wjets.txt --workers 1 --production-tag 2023MC_wjets &
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_singletop.txt --workers 1 --production-tag 2023MC_singletop &
- law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_ttbar.txt --workers 1 --production-tag 2023MC_ttbar &
  
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023data_mt.txt --workers 1 --production-tag 2023data_mt &
  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023data_et.txt --workers 1 --production-tag 2023data_et &
@@ -182,3 +182,115 @@ python3 scripts/ProductionStatus.py  --analysis tau  --config config  --sampleli
 
 
 
+
+
+
+#  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023data_mt.txt --workers 1 --production-tag 2023data_mt_VVVLooseVsJet &
+#  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023data_et.txt --workers 1 --production-tag 2023data_et_VVVLooseVsJet &
+#  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023data_tt.txt --workers 1 --production-tag 2023data_tt_VVVLooseVsJet &
+#  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_dyjets.txt --workers 1 --production-tag 2023MC_dyjets_VVVLooseVsJet &
+#  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_wjets.txt --workers 1 --production-tag 2023MC_wjets_VVVLooseVsJet &
+#  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_ttbar.txt --workers 1 --production-tag 2023MC_ttbar_VVVLooseVsJet &
+
+#  python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist  sample_database/2023MC_dyjets.txt --tag 2023MC_dyjets_VVVLooseVsJet
+
+
+
+# law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_dyjets.txt  --workers 1 --production-tag 2023MC_dyjets_mm${channel}_Version10 & 
+# law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_ttbar.txt  --workers 1 --production-tag 2023MC_ttbar_mm${channel}_Version10  & 
+# law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023data_mt.txt  --workers 1 --production-tag 2023_mm_data_Version10 & 
+
+
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022MC_dyjets.txt --tag 2022MC_LO_dyjets_allsyst
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_singletop.txt  --workers 1 --production-tag 2023MC_ttbar_mm${channel}_Version10  & 
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_singletop.txt  --workers 1 --production-tag 2023MC_singletop_mm${channel}_Version10  
+
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022MC_dyjets.txt --workers 1 --production-tag 2022MC_dyjets_VVVLooseVsJet
+
+ python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist  sample_database/2022MC_dyjets.txt --tag 2022MC_dyjets_VVVLooseVsJet
+
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022MC_dyjets.txt --workers 1 --production-tag 2022MC_LO_dyjets_allsyst &
+
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_dyjets.txt --workers 1 --production-tag 2023MC_dyjets &
+
+
+
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022data_et_skim.txt --workers 1 --production-tag 2022data_et_skim_run &
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist    sample_database/2022data_et_skim.txt   --tag 2022data_et_skim_run 
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022data_et.txt --workers 1 --production-tag 2022data_et_noskim_run &
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist    sample_database/2022data_et.txt   --tag 2022data_et_noskim_run 
+
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022MC_dyjets_2022postEE.txt --workers 1 --production-tag 2022MC_LO_dyjets_Tight_vsEle_TauES &
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist    sample_database/2022MC_dyjets_2022postEE.txt  --tag 2022MC_LO_dyjets_Tight_vsEle_TauES
+
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023MC_dyjets.txt --workers 1 --production-tag 2023MC_dyjets_fixTauEs &
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist  sample_database/2023MC_dyjets.txt --tag 2023MC_dyjets_fixTauEs
+
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022MC_dyjets.txt --workers 1 --production-tag 2022MC_LO_dyjets_allsyst_fix_TauES &
+
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022MC_dyjets.txt  --tag 2022MC_LO_dyjets_allsyst_fix_TauES &
+
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022MC_dyjets.txt  --production-tag 2022MC_LO_dyjets_nominal_fix_TauES_VVVLoose &
+law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_dyjets.txt --production-tag 2023MC_LO_dyjets_nominal_fix_TauES_VVVLoose &
+
+
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022MC_dyjets.txt  --tag 2022MC_LO_dyjets_nominal_fix_TauES_VVVLoose &
+python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2023MC_dyjets.txt  --tag 2023MC_LO_dyjets_nominal_fix_TauES_VVVLoose &
+
+
+
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022data.txt --production-tag 2022data_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022MC_ttbar.txt --production-tag 2022MC_ttbar_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022MC_wjets.txt  --production-tag 2022MC_wjets_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022MC_dyjets.txt --production-tag 2022MC_dyjets_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022MC_diboson.txt --production-tag 2022MC_diboson_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022MC_singletop.txt --production-tag 2022MC_singletop_looseIso &
+
+
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023data_em.txt --production-tag 2023data_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_ttbar.txt --production-tag 2023MC_ttbar_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_wjets.txt  --production-tag 2023MC_wjets_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_dyjets.txt --production-tag 2023MC_dyjets_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_diboson.txt --production-tag 2023MC_diboson_looseIso &
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2023MC_singletop.txt --production-tag 2023MC_singletop_looseIso &
+ 
+
+ python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022data.txt --tag 2022data_looseIso
+ law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022data.txt --production-tag 2022data_looseIso_2022EE &        
+  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022data.txt --production-tag 2022data_looseIso_2022EE_mm & 
+
+  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022data_all.txt    --production-tag 2022data_looseIso_fix_jetveto
+
+  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022data_test.txt    --production-tag 2022data_looseIso_fix_jetveto_test2
+
+  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022data_all.txt    --production-tag 2022data_looseIso_fix_jetveto_test2
+
+
+  python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022data_all.txt  --tag 2022data_looseIso_fix_jetveto_test2 & 
+  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2023data_all.txt    --production-tag 2023data_looseIso_fix_jetveto_test2 &
+
+  law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022EEdata_all.txt    --production-tag 2022data_looseIso_fix_jetveto_test3 &
+
+  python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2023data_all.txt  --tag 2023data_looseIso_fix_jetveto_test2 &
+  python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022EEdata_all.txt  --tag 2022data_looseIso_fix_jetveto_test3 &
+    
+
+     law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022EEdata_et.txt    --production-tag 2022data_looseIso_fix_jetveto_test3_et &
+    
+    python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022EEdata_et.txt  --tag 2022data_looseIso_fix_jetveto_test3_et &
+    python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022_23data_tt.txt   --tag 2022_2023data_looseIso_fix_jetveto_test3_tt &
+
+    law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022_23data_tt.txt    --production-tag 2022_2023data_looseIso_fix_jetveto_test3_tt &
+
+    law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list  sample_database/2022_23data_tt.txt    --production-tag 2022_2023data_looseIso_fix_jetveto_test4_tt &
+
+    python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022_23data_tt.txt   --tag 2022_2023data_looseIso_fix_jetveto_test4_tt &
+
+    law run ProduceSamples --local-scheduler False --analysis tau  --config config --sample-list sample_database/2022_2023data_mt.txt  --workers 1 --production-tag 2022_2023data_looseIso_fix_jetveto_mm & 
+    python3 scripts/ProductionStatus.py  --analysis tau  --config config  --samplelist sample_database/2022_2023data_mt.txt   --tag 2022_2023data_looseIso_fix_jetveto_mm &
