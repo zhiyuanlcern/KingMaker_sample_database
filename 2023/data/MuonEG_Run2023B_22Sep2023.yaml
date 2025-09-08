@@ -1,15 +1,15 @@
 dbs: /MuonEG/Run2023B-22Sep2023-v1/NANOAOD
 era: 2023
 filelist:
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/348e89cc-7473-4570-8df3-f8bb32251bca.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/5bd9d4aa-079e-4ef6-9c3a-0d918c5710bc.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/833c3623-ccc4-4f6a-b57c-19b7074b9b61.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/8bc729fc-5f30-4b79-89b1-df80953cf25e.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/9201c099-8674-4358-bc22-c4e3d5fa25c7.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/c1b7c2a8-976b-4cb2-96d5-31740e99735a.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/de7f0266-0e9a-4f2f-b644-d24741fbc80e.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/e08285fc-f992-435b-9a57-ecea32a19bd4.root
-- root://xrootd-cms.infn.it///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/60000/1a0ab0c2-e5db-4fa1-adc8-10114eff27d4.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/348e89cc-7473-4570-8df3-f8bb32251bca.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/5bd9d4aa-079e-4ef6-9c3a-0d918c5710bc.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/833c3623-ccc4-4f6a-b57c-19b7074b9b61.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/8bc729fc-5f30-4b79-89b1-df80953cf25e.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/9201c099-8674-4358-bc22-c4e3d5fa25c7.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/c1b7c2a8-976b-4cb2-96d5-31740e99735a.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/de7f0266-0e9a-4f2f-b644-d24741fbc80e.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/2530000/e08285fc-f992-435b-9a57-ecea32a19bd4.root
+- root://cmsxrootd.fnal.gov///store/data/Run2023B/MuonEG/NANOAOD/22Sep2023-v1/60000/1a0ab0c2-e5db-4fa1-adc8-10114eff27d4.root
 nevents: 9
 nfiles: 9
 nick: MuonEG_Run2023B_22Sep2023
