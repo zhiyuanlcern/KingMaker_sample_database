@@ -724,14 +724,14 @@ DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAOD
   nfiles: 100 ## dummy number
   nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
   sample_type: dyjets
-  xsec: 1655.8
+  xsec: 4969.83
 DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
   dbs: /DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/NANOAODSIM
   era: 2022EE
   nfiles: 100 ## dummy number
   nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
   sample_type: dyjets
-  xsec: 1655.8
+  xsec: 4969.83
 DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
   dbs: /DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/NANOAODSIM
   era: 2022postEE
