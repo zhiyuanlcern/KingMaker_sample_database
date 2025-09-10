@@ -1,139 +1,313 @@
-# DYto2L:
-#  dbs: /DYto2L
-#  era: 2022EE
-#  nick: DYto2L
-#  sample_type: dyjets_ll
-#  xsec: 1
-# DYto2Tau:
-#  dbs: /DYto2Tau
-#  era: 2022EE
-#  nick: DYto2Tau
-#  sample_type: dyjets_tautau
-#  xsec: 1
-# Hto2B:
-#  dbs: /Hto2B
-#  era: 2022EE
-#  nick: Hto2B
-#  sample_type: ggh_hbb 
-#  xsec: 1
-# Data:
-#  dbs: /Data
-#  era: 2022EE
-#  nick: Data
-#  sample_type: data
-#  xsec: 1
-# Top:
-#  dbs: /Top
-#  era: 2022EE
-#  nick: Top
-#  sample_type: ttbar
-#  xsec: 1
-# Wjets:
-#  dbs: /Wjets
-#  era: 2022EE
-#  nick: Wjets
-#  sample_type: wjets
-#  xsec: 1
-# diboson:
-#  dbs: /diboson
-#  era: 2022EE
-#  nick: diboson
-#  sample_type: diboson
-#  xsec: 1
-# Hto2Tau:
-#  dbs: /Hto2Tau
-#  era: 2022EE
-#  nick: Hto2Tau
-#  sample_type: ggh_htautau
-#  xsec: 1
-# DYto2L:
-#  dbs: /DYto2L
-#  era: 2022EE
-#  nick: DYto2L
-#  sample_type: dyjets_ll
-#  xsec: 1
-# DYto2Tau:
-#  dbs: /DYto2Tau
-#  era: 2022EE
-#  nick: DYto2Tau
-#  sample_type: dyjets_tautau
-#  xsec: 1
-# Hto2B:
-#  dbs: /Hto2B
-#  era: 2022EE
-#  nick: Hto2B
-#  sample_type: ggh_hbb 
-#  xsec: 1
-# Data:
-#  dbs: /Data
-#  era: 2022EE
-#  nick: Data
-#  sample_type: data
-#  xsec: 1
-# Top:
-#  dbs: /Top
-#  era: 2022EE
-#  nick: Top
-#  sample_type: ttbar
-#  xsec: 1
-# Wjets:
-#  dbs: /Wjets
-#  era: 2022EE
-#  nick: Wjets
-#  sample_type: wjets
-#  xsec: 1
-# diboson:
-#  dbs: /diboson
-#  era: 2022EE
-#  nick: diboson
-#  sample_type: diboson
-#  xsec: 1
-# Hto2Tau:
-#  dbs: /Hto2Tau
-#  era: 2022EE
-#  nick: Hto2Tau
-#  sample_type: ggh_htautau
-#  xsec: 1
-DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
+DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM
   era: 2022postEE
-  nick: DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
+  nick: DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
   sample_type: dyjets
-DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
+  xsec: 1656.61
+DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/NANOAODSIM
   era: 2022EE
-  nick: DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
+  nick: DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
   sample_type: dyjets
-DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
+  xsec: 1656.61
+DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v1/NANOAODSIM
+  era: 2023BPix
+  nick: DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v1/NANOAODSIM
+  era: 2023
+  nick: DYto2Tau-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM
   era: 2022postEE
-  nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
+  nick: DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
   sample_type: dyjets
-DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
+  xsec: 316.013
+DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/NANOAODSIM
   era: 2022EE
-  nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
+  nick: DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
   sample_type: dyjets
-DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
+  xsec: 316.013
+DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v1/NANOAODSIM
+  era: 2023BPix
+  nick: DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v1/NANOAODSIM
+  era: 2023
+  nick: DYto2Tau-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/NANOAODSIM
   era: 2022postEE
-  nick: DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
+  nick: DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
   sample_type: dyjets
-DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
+  xsec: 121.87
+DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/NANOAODSIM
   era: 2022EE
-  nick: DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
+  nick: DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
   sample_type: dyjets
-DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
+  xsec: 121.87
+DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v1/NANOAODSIM
+  era: 2023BPix
+  nick: DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+  xsec: 121.87
+DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12: 
+  dbs: /DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v1/NANOAODSIM
+  era: 2023
+  nick: DYto2Tau-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+  xsec: 121.87
+DYto2L_M_50_0J_amcatnloFXFX22EENanoAODv14: 
   era: 2022postEE
-  nick: DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
+  nick: DYto2L_M_50_0J_amcatnloFXFX22EENanoAODv14
   sample_type: dyjets
-DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
-  dbs: /DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
+  xsec: 4969.83
+DYto2L_M_50_1J_amcatnloFXFX22EENanoAODv14: 
+  era: 2022postEE
+  nick: DYto2L_M_50_1J_amcatnloFXFX22EENanoAODv14
+  sample_type: dyjets
+  xsec: 948.04
+DYto2L_M_50_2J_amcatnloFXFX22EENanoAODv14: 
+  era: 2022postEE
+  nick: DYto2L_M_50_2J_amcatnloFXFX22EENanoAODv14
+  sample_type: dyjets
+  xsec: 365.61
+EGamma_Run2022E22EENanoAODv14: 
+  era: 2022postEE
+  nick: EGamma_Run2022E22EENanoAODv14
+  sample_type: data
+  xsec: 1.0
+EGamma_Run2022F22EENanoAODv14: 
+  era: 2022postEE
+  nick: EGamma_Run2022F22EENanoAODv14
+  sample_type: data
+  xsec: 1.0
+EGamma_Run2022G22EENanoAODv14: 
+  era: 2022postEE
+  nick: EGamma_Run2022G22EENanoAODv14
+  sample_type: data
+  xsec: 1.0
+BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
   era: 2022EE
-  nick: DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
-  sample_type: dyjets#diboson
+  nick: BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
+  era: 2022EE
+  nick: BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
+  era: 2022EE
+  nick: BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
+  era: 2022EE
+  nick: BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
+  era: 2022EE
+  nick: BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
+  era: 2022EE
+  nick: BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private: 
+  era: 2022postEE
+  nick: BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private: 
+  era: 2022EE
+  nick: BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private: 
+  era: 2023
+  nick: BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private: 
+  era: 2023BPix
+  nick: BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12_private
+  sample_type: vbf_htautau
+  xsec: 1.0
+DYto2Tau_MLL_50_0J_amcatnloFXFX22EENanoAODv14: 
+  era: 2022postEE
+  nick: DYto2Tau_MLL_50_0J_amcatnloFXFX22EENanoAODv14
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau_MLL_50_1J_amcatnloFXFX22EENanoAODv14: 
+  era: 2022postEE
+  nick: DYto2Tau_MLL_50_1J_amcatnloFXFX22EENanoAODv14
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau_MLL_50_2J_amcatnloFXFX22EENanoAODv14: 
+  era: 2022postEE
+  nick: DYto2Tau_MLL_50_2J_amcatnloFXFX22EENanoAODv14
+  sample_type: dyjets
+  xsec: 121.87
+DYto2Tau_MLL_50_0J_amcatnloFXFX_23NanoAODv14: 
+  nick: DYto2Tau_MLL_50_0J_amcatnloFXFX_23NanoAODv14
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau_MLL_50_1J_amcatnloFXFX_23NanoAODv14: 
+  nick: DYto2Tau_MLL_50_1J_amcatnloFXFX_23NanoAODv14
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau_MLL_50_2J_amcatnloFXFX_23NanoAODv14: 
+  nick: DYto2Tau_MLL_50_2J_amcatnloFXFX_23NanoAODv14
+  sample_type: dyjets
+  xsec: 121.87
+
+DYto2Tau_MLL_50_0J_amcatnloFXFX_23BPixNanoAODv14: 
+  nick: DYto2Tau_MLL_50_0J_amcatnloFXFX_23BPixNanoAODv14
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau_MLL_50_1J_amcatnloFXFX_23BPixNanoAODv14: 
+  nick: DYto2Tau_MLL_50_1J_amcatnloFXFX_23BPixNanoAODv14
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau_MLL_50_2J_amcatnloFXFX_23BPixNanoAODv14: 
+  nick: DYto2Tau_MLL_50_2J_amcatnloFXFX_23BPixNanoAODv14
+  sample_type: dyjets
+  xsec: 121.87
+
+DYto2Tau_MLL_50_0J_amcatnloFXFX_22EENanoAODv14: 
+  nick: DYto2Tau_MLL_50_0J_amcatnloFXFX_22EENanoAODv14
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau_MLL_50_1J_amcatnloFXFX_22EENanoAODv14: 
+  nick: DYto2Tau_MLL_50_1J_amcatnloFXFX_22EENanoAODv14
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau_MLL_50_2J_amcatnloFXFX_22EENanoAODv14: 
+  nick: DYto2Tau_MLL_50_2J_amcatnloFXFX_22EENanoAODv14
+  sample_type: dyjets
+  xsec: 121.87
+
+DYto2Tau_MLL_50_0J_amcatnloFXFX_22NanoAODv14: 
+  nick: DYto2Tau_MLL_50_0J_amcatnloFXFX_22NanoAODv14
+  sample_type: dyjets
+  xsec: 1656.61
+DYto2Tau_MLL_50_1J_amcatnloFXFX_22NanoAODv14: 
+  nick: DYto2Tau_MLL_50_1J_amcatnloFXFX_22NanoAODv14
+  sample_type: dyjets
+  xsec: 316.013
+DYto2Tau_MLL_50_2J_amcatnloFXFX_22NanoAODv14: 
+  nick: DYto2Tau_MLL_50_2J_amcatnloFXFX_22NanoAODv14
+  sample_type: dyjets
+  xsec: 121.87
+
+
 Muon0_Run2023B_22Sep2023: 
   dbs: /Muon0/Run2023B-22Sep2023-v1/NANOAOD
   era: 2023
