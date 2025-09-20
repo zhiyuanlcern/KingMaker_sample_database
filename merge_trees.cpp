@@ -31,7 +31,9 @@ void merge_trees(const char* main_file, const std::vector<std::string>& pnn_file
     TFile* out_f = TFile::Open(output_file, "RECREATE");
     TTree* out_tree = main_tree->CloneTree(0);
     
-    // 4. 添加新分支
+    // 4. 添加新分支并管理存储空间
+    std::map<std::string, float> branch_values;  // 存储所有分支值的映射
+    
     for (size_t i = 0; i < pnn_trees.size(); i++) {
         TObjArray* br_list = pnn_trees[i]->GetListOfBranches();
         for (int j = 0; j < br_list->GetEntries(); j++) {
@@ -41,12 +43,15 @@ void merge_trees(const char* main_file, const std::vector<std::string>& pnn_file
             // 跳过主树已有的分支
             if (main_tree->GetBranch(br_name)) continue;
             
-            // 创建新分支
-            float value = 0;
-            out_tree->Branch(br_name, &value, (std::string(br_name) + "/F").c_str());
+            // 如果分支尚未创建，则创建它
+            if (branch_values.find(br_name) == branch_values.end()) {
+                float value = 0;
+                branch_values[br_name] = value;
+                out_tree->Branch(br_name, &branch_values[br_name], (std::string(br_name) + "/F").c_str());
+            }
             
             // 设置PNN树的分支地址
-            pnn_trees[i]->SetBranchAddress(br_name, &value);
+            pnn_trees[i]->SetBranchAddress(br_name, &branch_values[br_name]);
         }
     }
     
