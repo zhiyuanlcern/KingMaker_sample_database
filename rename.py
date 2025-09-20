@@ -1,25 +1,34 @@
 import ROOT
 
 import re
+import sys
 
+input_file_name =  str(sys.argv[1])
 # Open the source ROOT file
-input_file_name = 'histograms_60_check_2.root'  # Update this to your input ROOT file path
+# input_file_name = 'histograms_60_mt_2022EE.root'  # Update this to your input ROOT file path
 source_file = ROOT.TFile.Open(input_file_name, "READ")
 
 # Create two new ROOT files
-nob_file = ROOT.TFile.Open('test_bkg.root', 'RECREATE')
-nob_bsm_file = ROOT.TFile.Open('test_signal.root', 'RECREATE')
+nob_file = ROOT.TFile.Open(f'{input_file_name}_bkg.root', 'RECREATE')
+nob_bsm_file = ROOT.TFile.Open(f'{input_file_name}_signal.root', 'RECREATE')
 
 # Create a directory named "nob" in each of the new ROOT files
 nob_dir = nob_file.mkdir("nob")
 nob_bsm_dir = nob_bsm_file.mkdir("nob")
 
+processed_histograms = set()
+
 # Loop over all keys in the source file
 source_file.cd()
 for key in ROOT.gDirectory.GetListOfKeys():
-    obj = key.ReadObj()
+    obj_name =key.GetName()
+    if obj_name in processed_histograms:
+        continue
+    obj = source_file.Get(obj_name)
     if obj.InheritsFrom("TH1"):  # Check if the object is a histogram
-        obj_name = obj.GetName()
+    
+            # If the histogram name is already processed, skip it
+
         # Regular expression pattern to match 'pnn_' followed by any digits
         pattern = r"pnn_\d+"
         # Replace matches with an empty string
@@ -53,6 +62,7 @@ for key in ROOT.gDirectory.GetListOfKeys():
             nob_dir.cd()
             obj_clone = obj.Clone()
             obj_clone.Write()
+        processed_histograms.add(obj_name)
 
 # Close the files to save changes
 nob_file.Close()

@@ -437,9 +437,10 @@ if __name__ == "__main__":
     # bins = [0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
 
     # variables = [args.variables, args.variables + args.shift[0], args.variables + args.shift[1]]
-    mass = [60,  70, 80,  90,  100,  110,  120,     130,  140,  160,  180, 200,250] # 
-    mass = [65,75,85,95,105,115,125,135,]
-    PNN_vars= [f"PNN_{m}" for m in mass]
+    # mass = [60,  70, 80,  90,  100,  110,  120,     130,  140,  160,  180, 200,250] # 
+    # mass = [65,75,85,95,105,115,125,135,]
+    # PNN_vars= [f"PNN_{m}" for m in mass]
+    PNN_vars = []
     PNN_vars.append("mt_tot")
     main(args.folder_path,args.era, PNN_vars, args.shift, args.channel, args.btag)
     

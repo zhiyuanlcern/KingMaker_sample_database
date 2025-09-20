@@ -7,7 +7,7 @@ root_file = ROOT.TFile.Open(sys.argv[1])
 # 定义需要遍历的目录列表
 outname = sys.argv[1].strip("_signal_.root")
     
-directories = ["nob1", "nob2", "nob3", "nob4", "btag"]
+directories = ["nob1", "nob2", "nob3", "nob4", "nob5","btag"]
 for dir_name in directories:
     # 进入目录
     dir_obj = root_file.Get(dir_name)

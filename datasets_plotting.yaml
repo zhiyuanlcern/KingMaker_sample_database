@@ -1,3 +1,656 @@
+Muon0_Run2023B_22Sep2023: 
+  era: 2023
+  nick: Muon0_Run2023B_22Sep2023
+  sample_type: data
+Muon0_Run2023C_22Sep2023_v1: 
+  era: 2023
+  nick: Muon0_Run2023C_22Sep2023_v1
+  sample_type: data
+Muon0_Run2023C_22Sep2023_v2: 
+  era: 2023
+  nick: Muon0_Run2023C_22Sep2023_v2
+  sample_type: data
+Muon0_Run2023C_22Sep2023_v3: 
+  era: 2023
+  nick: Muon0_Run2023C_22Sep2023_v3
+  sample_type: data
+Muon0_Run2023C_22Sep2023_v4: 
+  era: 2023
+  nick: Muon0_Run2023C_22Sep2023_v4
+  sample_type: data
+Muon0_Run2023D_22Sep2023_v1: 
+  era: 2023BPix
+  nick: Muon0_Run2023D_22Sep2023_v1
+  sample_type: data
+Muon0_Run2023D_22Sep2023_v2: 
+  era: 2023BPix
+  nick: Muon0_Run2023D_22Sep2023_v2
+  sample_type: data
+Muon1_Run2023B_22Sep2023: 
+  era: 2023
+  nick: Muon1_Run2023B_22Sep2023
+  sample_type: data
+Muon1_Run2023C_22Sep2023_v1: 
+  era: 2023
+  nick: Muon1_Run2023C_22Sep2023_v1
+  sample_type: data
+Muon1_Run2023C_22Sep2023_v2: 
+  era: 2023
+  nick: Muon1_Run2023C_22Sep2023_v2
+  sample_type: data
+Muon1_Run2023C_22Sep2023_v3: 
+  era: 2023
+  nick: Muon1_Run2023C_22Sep2023_v3
+  sample_type: data
+Muon1_Run2023C_22Sep2023_v4: 
+  era: 2023
+  nick: Muon1_Run2023C_22Sep2023_v4
+  sample_type: data
+Muon1_Run2023D_22Sep2023_v1: 
+  era: 2023BPix
+  nick: Muon1_Run2023D_22Sep2023_v1
+  sample_type: data
+Muon1_Run2023D_22Sep2023_v2: 
+  era: 2023BPix
+  nick: Muon1_Run2023D_22Sep2023_v2
+  sample_type: data
+Tau_Run2023B_22Sep2023: 
+  era: 2023
+  nick: Tau_Run2023B_22Sep2023
+  sample_type: data
+Tau_Run2023C_22Sep2023_v1: 
+  era: 2023
+  nick: Tau_Run2023C_22Sep2023_v1
+  sample_type: data
+Tau_Run2023C_22Sep2023_v2: 
+  era: 2023
+  nick: Tau_Run2023C_22Sep2023_v2
+  sample_type: data
+Tau_Run2023C_22Sep2023_v3: 
+  era: 2023
+  nick: Tau_Run2023C_22Sep2023_v3
+  sample_type: data
+Tau_Run2023C_22Sep2023_v4: 
+  era: 2023
+  nick: Tau_Run2023C_22Sep2023_v4
+  sample_type: data
+Tau_Run2023D_22Sep2023_v1: 
+  era: 2023BPix
+  nick: Tau_Run2023D_22Sep2023_v1
+  sample_type: data
+Tau_Run2023D_22Sep2023_v2: 
+  era: 2023BPix
+  nick: Tau_Run2023D_22Sep2023_v2
+  sample_type: data
+EGamma0_Run2023B_22Sep2023: 
+  era: 2023
+  nick: EGamma0_Run2023B_22Sep2023
+  sample_type: data
+EGamma0_Run2023C_22Sep2023_v1: 
+  era: 2023
+  nick: EGamma0_Run2023C_22Sep2023_v1
+  sample_type: data
+EGamma0_Run2023C_22Sep2023_v2: 
+  era: 2023
+  nick: EGamma0_Run2023C_22Sep2023_v2
+  sample_type: data
+EGamma0_Run2023C_22Sep2023_v3: 
+  era: 2023
+  nick: EGamma0_Run2023C_22Sep2023_v3
+  sample_type: data
+EGamma0_Run2023C_22Sep2023_v4: 
+  era: 2023
+  nick: EGamma0_Run2023C_22Sep2023_v4
+  sample_type: data
+EGamma0_Run2023D_22Sep2023_v1: 
+  era: 2023BPix
+  nick: EGamma0_Run2023D_22Sep2023_v1
+  sample_type: data
+EGamma0_Run2023D_22Sep2023_v2: 
+  era: 2023BPix
+  nick: EGamma0_Run2023D_22Sep2023_v2
+  sample_type: data
+EGamma1_Run2023B_22Sep2023: 
+  era: 2023
+  nick: EGamma1_Run2023B_22Sep2023
+  sample_type: data
+EGamma1_Run2023C_22Sep2023_v1: 
+  era: 2023
+  nick: EGamma1_Run2023C_22Sep2023_v1
+  sample_type: data
+EGamma1_Run2023C_22Sep2023_v2: 
+  era: 2023
+  nick: EGamma1_Run2023C_22Sep2023_v2
+  sample_type: data
+EGamma1_Run2023C_22Sep2023_v3: 
+  era: 2023
+  nick: EGamma1_Run2023C_22Sep2023_v3
+  sample_type: data
+EGamma1_Run2023C_22Sep2023_v4: 
+  era: 2023
+  nick: EGamma1_Run2023C_22Sep2023_v4
+  sample_type: data
+EGamma1_Run2023D_22Sep2023_v1: 
+  era: 2023BPix
+  nick: EGamma1_Run2023D_22Sep2023_v1
+  sample_type: data
+EGamma1_Run2023D_22Sep2023_v2: 
+  era: 2023BPix
+  nick: EGamma1_Run2023D_22Sep2023_v2
+  sample_type: data
+MuonEG_Run2023B_22Sep2023: 
+  era: 2023
+  nick: MuonEG_Run2023B_22Sep2023
+  sample_type: data
+MuonEG_Run2023C_22Sep2023_v1: 
+  era: 2023
+  nick: MuonEG_Run2023C_22Sep2023_v1
+  sample_type: data
+MuonEG_Run2023C_22Sep2023_v2: 
+  era: 2023
+  nick: MuonEG_Run2023C_22Sep2023_v2
+  sample_type: data
+MuonEG_Run2023C_22Sep2023_v3: 
+  era: 2023
+  nick: MuonEG_Run2023C_22Sep2023_v3
+  sample_type: data
+MuonEG_Run2023C_22Sep2023_v4: 
+  era: 2023
+  nick: MuonEG_Run2023C_22Sep2023_v4
+  sample_type: data
+MuonEG_Run2023D_22Sep2023_v1: 
+  era: 2023BPix
+  nick: MuonEG_Run2023D_22Sep2023_v1
+  sample_type: data
+MuonEG_Run2023D_22Sep2023_v2: 
+  era: 2023BPix
+  nick: MuonEG_Run2023D_22Sep2023_v2
+  sample_type: data
+WWto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: WWto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+WWto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: WWto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+WZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: WZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+WZto3LNu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: WZto3LNu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+WZtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: WZtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+ZZto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: ZZto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+ZZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: ZZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+ZZto2Nu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: ZZto2Nu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+ZZto4L_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: ZZto4L_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: diboson
+
+
+#dyjets
+DYto2Tau_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-50to120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-50to120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-120to200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-120to200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-200to400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-200to400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-400to800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-400to800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-800to1500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-800to1500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-1500to2500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-1500to2500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-2500to4000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-2500to4000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-4000to6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-4000to6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+
+DYto2Tau_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-50to120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-50to120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-120to200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-120to200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-200to400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-200to400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-400to800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-400to800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-800to1500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-800to1500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-1500to2500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-1500to2500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-2500to4000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-2500to4000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-4000to6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-4000to6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12:
+  nick: DYto2Tau_MLL-6000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+## LO DY Sample
+
+DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: dyjets
+
+DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: dyjets
+
+## LO DY 2022
+
+DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
+  sample_type: dyjets
+DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
+  sample_type: dyjets
+DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12: 
+  nick: DYto2L-2Jets_MLL-50_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22EENanoAODv12
+  sample_type: dyjets
+
+
+
+#hbb
+# ggZH_Hto2B_Zto2L_M-125_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer23NanoAODv12-130X:
+# 
+# 
+#   nick: ggZH_Hto2B_Zto2L_M-125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+#   sample_type: rem_hbb
+# 
+# ggZH_Hto2B_Zto2Nu_M-125_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer23NanoAODv12-130X:
+# 
+# 
+#   nick: ggZH_Hto2B_Zto2Nu_M-125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+#   sample_type: rem_hbb
+# 
+# ggZH_Hto2B_Zto2Q_M-125_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer23NanoAODv12-130X:
+# 
+# 
+#   nick: ggZH_Hto2B_Zto2Q_M-125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+#   sample_type: rem_hbb
+# 
+
+#TTBAR
+TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ttbar
+TTto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TTto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ttbar
+TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ttbar
+  
+VBFHToTauTau_M125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: VBFHToTauTau_M125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+
+#WJETS
+
+WtoLNu-4Jets_1J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12:
+  nick: WtoLNu-4Jets_1J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12
+  sample_type: wjets
+WtoLNu-4Jets_2J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12:
+  nick: WtoLNu-4Jets_2J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12
+  sample_type: wjets
+WtoLNu-4Jets_3J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12:
+  nick: WtoLNu-4Jets_3J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12
+  sample_type: wjets
+WtoLNu-4Jets_4J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12:
+  nick: WtoLNu-4Jets_4J_TuneCP5_13p6TeV_madgraphMLM-pythia8Run3Summer23NanoAODv12
+  sample_type: wjets
+
+#singletop
+
+TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8Run3Summer23NanoAODv12:
+  nick: TbarBQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8Run3Summer23NanoAODv12:
+  nick: TBbarQ_t-channel_4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+
+
+# Fraction derived from WW samples 
+# WW sum: 111.52
+# WW to 2L2Nu: 0.1057209469
+# WW to 4Q: 0.45543400286944
+# WW to LNu2Q: 0.4388450502152
+
+
+
+TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12: 
+  nick: TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
+  sample_type: singletop
+TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: singletop
+
+
+
+#BBH##############
+
+BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-60_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-65_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-65_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-70_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-70_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-75_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-75_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-80_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-85_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-85_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-90_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-90_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-95_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-95_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-100_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-100_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-105_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-110_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-115_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-115_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-120_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-125_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-130_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-130_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-135_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-140_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-160_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-180_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-180_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-300_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-300_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-350_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-350_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-450_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-450_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-600_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-600_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-700_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-700_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-900_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-900_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-1000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-1000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-1100_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-1100_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-1400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-1400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-1600_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-1600_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-1800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-1800_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-2000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-2000_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-2300_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-2300_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-2600_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-2600_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-2900_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-2900_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-3200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-3200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+BBHto2Tau_M-3500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: BBHto2Tau_M-3500_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: vbf_htautau
+
+
+#ggH
+
+
+#ggh
+GluGluHto2Tau_M-60_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-60_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-65_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-65_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-70_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-70_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-75_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-75_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-80_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-80_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-85_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-85_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-90_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-90_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-95_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-95_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-105_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-105_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-110_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-110_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-115_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-115_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-120_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-120_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-125_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-125_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-125_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-125_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-130_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-130_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-140_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-140_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-160_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-160_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-180_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-180_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-200_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-200_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-250_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-250_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-300_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-300_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-350_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-350_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-400_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-400_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-600_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-600_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-700_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-700_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-800_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-800_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-900_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-900_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-1000_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-1000_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-1200_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-1200_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-1400_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-1400_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-1600_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-1600_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-1800_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-1800_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-2000_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-2000_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-2300_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-2300_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-2600_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-2600_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-2900_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-2900_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-3200_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-3200_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12:
+  nick: GluGluHto2Tau_M-3500_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
+  sample_type: ggh_htautau
+
+
+
 # DYto2L:
 #  era: 2022EE
 #  nick: DYto2L

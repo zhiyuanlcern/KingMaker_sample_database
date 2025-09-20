@@ -15,15 +15,48 @@ def hist_to_numpy(hist):
     return bin_contents
 
 
-def fast_walk_and_filter(directory, extension=".root", var="mt_tot", must_have=""):
+def fast_walk_and_filter(directory, extension=".root", var="mt_tot", must_have="", signal ="ggH"):
+    print("scanning for entry",f"_{var}_" )
     for entry in os.scandir(directory):
         if entry.is_dir(follow_symlinks=False):
-            yield from fast_walk_and_filter(entry.path, extension, var)
+            yield from fast_walk_and_filter(entry.path, extension, var, signal)
         elif entry.is_file():
-            if entry.name.endswith(extension) and var in entry.name and must_have in entry.name:
+            # print("entry name", entry.name)
+            if entry.name.endswith(extension) and f"_{var}{signal}" in entry.name and must_have in entry.name:
                 yield entry.path
+def cut_bins(hist):
+        
+    # Get the number of bins (excluding underflow/overflow)
+    n_bins = hist.GetNbinsX()
 
+    if n_bins > 10:
+        # Calculate how many bins to keep (last 80%)
+        bins_to_keep = int(0.2 * n_bins)
+        # bins_to_keep = n_bins-1
+        start_bin = n_bins - bins_to_keep + 1  # ROOT bins start at 1 (not 0)
 
+        # Create a new histogram with the remaining bins
+        new_hist = ROOT.TH1D(
+            hist.GetName(),  # New histogram name
+            hist.GetTitle(),  # Keep the original title
+            bins_to_keep,     # Number of bins to keep
+            hist.GetBinLowEdge(start_bin),  # New low edge
+            hist.GetBinLowEdge(n_bins + 1)  # New high edge (n_bins+1 gives the last edge)
+        )
+
+        # Copy the bin contents from the original histogram
+        for i in range(1, bins_to_keep + 1):
+            original_bin = start_bin + i - 1
+            new_hist.SetBinContent(i, hist.GetBinContent(original_bin))
+            new_hist.SetBinError(i, hist.GetBinError(original_bin))
+
+        print(f"Original bins: {n_bins}, kept last {bins_to_keep} bins.")
+        # new_hist.Draw()  # Optional: Draw the new histogram
+    else:
+        print(f"Number of bins ({n_bins}) <= 5, no trimming needed.")
+        new_hist = hist
+
+    return new_hist
 
 def classify_file(filename):
     if filename.startswith("Muon") or filename.startswith("Tau") or filename.startswith("EGamma") or filename.startswith("DoubleMuon") or filename.startswith("SingleMuon"):  
@@ -39,8 +72,12 @@ def classify_file(filename):
             return f"bbH_signal_{m}"
         else:
             sys.exit()
-    elif filename.startswith("DYto2L"):
-        return "Zto2L"
+    elif filename.startswith("DYto2L-tt"):
+        return "Zto2L_tt"
+    elif filename.startswith("DYto2L-ll"):
+        return "Zto2L_ll"
+    elif filename.startswith("DYto2L-2Jets_MLL"):  ## deprecated!! replace with DYto2L-tt/ll later
+        return "Zto2L"    
     elif filename.startswith("FF_Combined"):
         return "fakes"
     elif filename.startswith("TTtoLNu2Q") or filename.startswith("TTto2L2Nu") or filename.startswith("TTto4Q") or filename.startswith("TBbarQ_t") or filename.startswith("TbarBQ_t") or filename.startswith("TbarWplus") or filename.startswith("TWminus"):  
@@ -55,6 +92,8 @@ def classify_file(filename):
 
 def extract_variables(filename, era):
     # Remove the .root extension
+    print(filename)
+    print("era:", era)
     filename = filename.replace('.root', '')
     # Split by '_era_'
     parts = filename.split(f'_{era}_')
@@ -63,23 +102,15 @@ def extract_variables(filename, era):
     f_strip = parts[0]
     # Split the remaining part by the last '_'
     remaining_parts = parts[1]
+    print("remaining_parts start", remaining_parts)
     ## remaing_parts: nob_mt_tot
-    if remaining_parts.startswith("nob"):
-        var_suffix = remaining_parts.split("_")[1] + "_" + remaining_parts.split("_")[2]
-    if remaining_parts.startswith("btag"):
-        var_suffix = remaining_parts[5:]
-    # Extract var + suffixs[1]
-    # print(remaining_parts)
-    # Extract btag
+    if "nob" not in remaining_parts and "btag" not in remaining_parts:
+        remaining_parts = parts[2]
+    print("remaining_parts =============== ", remaining_parts)
+
     btag = remaining_parts.split("_")[0]
-    if "__" in filename:
-        # Further split var_suffix to extract var and syst
-        var, syst = var_suffix.split('__', 1)   
-    else:
-        var = var_suffix
-        syst = ''
-    # print(f_strip, var, syst, btag)
-    return f_strip, var, syst, btag
+   
+    return f_strip,  btag
 def rebin_histogram(hist, new_bins):
     # Create a new histogram with the specified binning
     new_hist_name = hist.GetName() 
@@ -134,11 +165,12 @@ def get_bins_from_file(era, channel, var, btag, signal_type):
     except (SyntaxError, ValueError) as e:
         raise ValueError(f"Failed to parse bin edges from {filepath}: {str(e)}")        
 
-def process_file(input_file, histograms_by_type, processed_processes, era, nom_only, signal_type):
+def process_file(input_file, histograms_by_type, variable, processed_processes, era, nom_only, signal_type):
     # print(input_file)
     file = os.path.basename(input_file)
+
     
-    physics_process, variable, syst, region = extract_variables(file, era)
+    physics_process,   region = extract_variables(file, era)
     if not physics_process:
         return
     
@@ -176,10 +208,6 @@ def process_file(input_file, histograms_by_type, processed_processes, era, nom_o
             print(hist)
             continue
         
-
-        # if hist.GetNbinsX() >= 1000: ## this needs to rebin
-        #     new_bins = get_bins_from_file(era, channel, variable, region, signal_type)
-        #     hist = rebin_histogram(hist, new_bins)
 
         if s_type == "fakes":
             for ibins in range(0, hist.GetNbinsX()+1):
@@ -241,54 +269,38 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
     else:
         print("wrong input name provided")
         sys.exit(-1)
-    input_files = list(fast_walk_and_filter(input_dir, ".root", var))  # Convert generator to list
+    input_files = list(fast_walk_and_filter(input_dir, ".root", var, signal))  # Convert generator to list
     print(f"lenght of input files: {len(input_files)}")
     # Adjust the number of workers based on your system's capability
     num_workers = min(4, len(input_files))  # Example: use 32 workers or the number of files, whichever is smaller
     for f in input_files:
-        process_file(f, histograms_by_type, processed_processes, era, nom_only, signal)
+        if f"{signal}.root" not in f:
+            continue
+        process_file(f, histograms_by_type, var, processed_processes, era, nom_only, signal)
 
     fout = ROOT.TFile(output_dir, "RECREATE")
     print("creating output file")
 
     # Create the directories "nob" and "btag"
-    if var == "mt_tot":
+    if  "PNN" not in var:
         fout.mkdir("nob")
     else:
         fout.mkdir("nob1")
         fout.mkdir("nob2")
         fout.mkdir("nob3")
         fout.mkdir("nob4")
+        fout.mkdir("nob5")
     fout.mkdir("btag")
 
- 
-    # Loop over the histograms and save them in the corresponding directories
-    if "PNN" in var:
-        mass = var[4:] 
-        for index in range(1,5):
-            print(histograms_by_type[f"{signal}_signal_{mass}"])
-            # print( histograms_by_type[f"{signal}_signal_{mass}"][f"nob{index}"][var])
-            h_sig_nob = histograms_by_type[f"{signal}_signal_{mass}"][f"nob{index}"][var][f"{signal}_signal_{mass}_{var}"] 
-            try:
-                h_bkg = histograms_by_type[f"Zto2L"][f"nob{index}"][var][f"Zto2L_{var}"].Clone()
-                h_bkg.Add(histograms_by_type[f"fakes"][f"nob{index}"][var][f"fakes_{var}"])
-            except:
-                h_bkg = histograms_by_type[f"Zto2L"][f"nob{index}"][var][f"Zto2L_{var}"].Clone()
-  
-        h_sig_btag = histograms_by_type[f"{signal}_signal_{mass}"]["btag"][var][f"{signal}_signal_{mass}_{var}"] 
-        try:
-            h_bkg_btag = histograms_by_type[f"Zto2L"]["btag"][var][f"Zto2L_{var}"].Clone()
-            h_bkg_btag.Add(histograms_by_type[f"fakes"]["btag"][var][f"fakes_{var}"]).Clone()
-        except:
-            h_bkg_btag = histograms_by_type[f"Zto2L"]["btag"][var][f"Zto2L_{var}"]
-       
 
     for s_type, regions in histograms_by_type.items():
-        print( "s_type, regions", s_type, regions)
+        # print( "s_type, regions", s_type, regions)
         for region, variables in regions.items():
+            print(region, variables)
             # Change to the correct directory based on the region
             if "nob" in region:
                 fout.cd()
+                print(region)
                 fout.cd(region)
             elif region == "btag":
                 fout.cd()
@@ -297,8 +309,8 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
                 continue  # Skip if the region is not recognized
             
             for variable, hists in variables.items():
-                if variable != "mt_tot":
-                    new_bins = get_bins_from_file(era, channel, variable, region, signal)
+                # if variable != "mt_tot" and variable != "m_fastmtt":
+                #     new_bins = get_bins_from_file(era, channel, variable, region, signal)
                 
                 for hist_name, hist in hists.items():
                     final_hist_name = hist_name.replace(f"_{variable}", "")
@@ -326,17 +338,36 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
                     if "__" in final_hist_name:
                         if final_hist_name.endswith("up"):
                             final_hist_name = final_hist_name[:-2] + "Up"
-                        if final_hist_name.endswith("down"):
+                        elif final_hist_name.endswith("down"):
                             final_hist_name = final_hist_name[:-4] + "Down"
+                        else:
+                            # 处理带数字后缀的情况
+                            for i in range(0, 20):
+                                suffix_up = f"up{i}"
+                                suffix_down = f"down{i}"
+                                
+                                if final_hist_name.endswith(suffix_up):
+                                    # 计算要移除的后缀长度：len(f"up{i}")
+                                    remove_len = len(suffix_up)
+                                    # 替换为 i + "Up" (保留原始数字)
+                                    final_hist_name = final_hist_name[:-remove_len] + f"{i}Up"
+                                    break  # 匹配成功后跳出循环
+                                    
+                                elif final_hist_name.endswith(suffix_down):
+                                    remove_len = len(suffix_down)
+                                    final_hist_name = final_hist_name[:-remove_len] + f"{i}Down"
+                                    break  # 匹配成功后跳出循环
                     hist.SetName(final_hist_name)
-                    if "PNN" in hist_name:
+                    if "PNN" in var:
                         if hist.GetNbinsX() >= 1000: ## this needs to rebin
                             rebinned_hist = rebin_histogram(hist, new_bins)
                         else:
                             rebinned_hist = hist
                         rebinned_hist.SetName(final_hist_name)
+                        rebinned_hist=cut_bins(rebinned_hist)
                         rebinned_hist.Write()
                     else:
+                        # hist=cut_bins(hist)
                         hist.SetName(final_hist_name)
                         hist.Write()                    
 
@@ -349,7 +380,7 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
         fout.Close()
         print("finish filling output file, nominal only")
         return 0
-    indices = list(range(1,5)) if "PNN" in var else [""]
+    indices = list(range(1,5)) if ("PNN" in var )  else [""]
     for index in indices:
         if "_em_" in input_dir:
             continue
@@ -358,6 +389,7 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
         h_closure1Up = fout.Get(f"nob{index}/fakes__FF_closure1Up")
         h_closure1Down = fout.Get(f"nob{index}/fakes__FF_closure1Down")
         # Calculate integrals first before scaling
+        print("integrating for nob", index)
         integralUp = h_closure1Up.Integral()
         integralDown = h_closure1Down.Integral()
         totalIntegral = h_closure.Integral()
@@ -365,6 +397,7 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
         # Scale histograms and reassign them
         h_closure1Up.Scale(2 * totalIntegral / (integralUp + integralDown))
         h_closure1Down.Scale(2 * totalIntegral / (integralUp + integralDown))
+        print(f"nob{index}")
         fout.cd(f"nob{index}")
         h_closure1Up.Write()
         h_closure1Down.Write()

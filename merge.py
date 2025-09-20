@@ -14,8 +14,11 @@ def hist_to_numpy(hist):
     bin_contents = np.array([hist.GetBinContent(i) for i in range(1, nbins + 1)])
     return bin_contents
 
-def rebin_histogram_PNN(signal_mva, background_mva, Z_threshold=1):
+
+def rebin_histogram_PNN(signal_mva, background_mva, signal_hist_original, Z_threshold=1):
     # signal_hist, _ = np.histogram(signaTackground_mva, bins=np.linspace(0, 1, num=num))
+
+    
     signal_hist = signal_mva
     background_hist = background_mva
     num = len(signal_hist) 
@@ -27,13 +30,15 @@ def rebin_histogram_PNN(signal_mva, background_mva, Z_threshold=1):
     def Z(k, l, l_original):
         ns = np.sum(signal_hist[k:l+1])
         nb = np.sum(background_hist[k:l+1])
+        
         # pb = 20
         ps = 25
         # if Ns < 12.5:
         #     ps = min((round(Ns/0.2) + 1), 25) 
         #     # ps = max(ps, 25)
         #     # ps =max(ps, 10)
-        if nb >=1:
+        if nb >=1 :
+            
             return  ps * ns/Ns
         else:
             return 0
@@ -55,7 +60,22 @@ def rebin_histogram_PNN(signal_mva, background_mva, Z_threshold=1):
             k -= 1
             # print("k, l,l_original, Z(k,l,l_original)", k, l,l_original, Z(k,l,l_original))
             # print( np.sum(signal_hist[k:l+1]) )
-            
+        ## now the Z requirement is met, we need to satisfy signal MC stats error requirement
+        signal_mc_err = 0
+        for i in range(k, l+2):
+            signal_mc_err += signal_hist_original.GetBinError(i) **2
+        signal_mc_err = signal_mc_err ** 0.5
+        print(signal_mc_err)
+        ns = np.sum(signal_hist[k:l+1])
+        while ns <= 0 or  signal_mc_err/ns >= 0.5:
+            k-=1
+            if k < 0: 
+                break
+            ns = np.sum(signal_hist[k:l+1])
+            signal_mc_err = signal_hist_original.GetBinError(k) **2 +  signal_mc_err ** 2
+            signal_mc_err = signal_mc_err ** 0.5
+
+
         nb = np.sum(background_hist[k:l+1])
         print("background yield",nb, k, l+ 1)
         print("ns =",  np.sum(signal_hist[k:l+1]) ,"nb = ",  np.sum(background_hist[k:l+1]))
@@ -66,6 +86,10 @@ def rebin_histogram_PNN(signal_mva, background_mva, Z_threshold=1):
     new_bins = [(x/(num-1))for x in new_bins]
     print(new_bins)
     return new_bins
+
+
+
+
 def fast_walk_and_filter(directory, extension=".root", var="mt_tot", must_have=""):
     for entry in os.scandir(directory):
         if entry.is_dir(follow_symlinks=False):
@@ -113,8 +137,13 @@ def extract_variables(filename, era):
     # Extract f_strip
     f_strip = parts[0]
     # Split the remaining part by the last '_'
+    print(parts)
+    print("=============")
     remaining_parts = parts[1]
+    if "nob" not in remaining_parts and "btag" not in remaining_parts:
+        remaining_parts = parts[2]
     ## remaing_parts: nob_mt_tot
+    print("remaining_parts =============== ", remaining_parts)
     if remaining_parts.startswith("nob"):
         var_suffix = remaining_parts.split("_")[1] + "_" + remaining_parts.split("_")[2]
     if remaining_parts.startswith("btag"):
@@ -158,7 +187,7 @@ def get_latest_histograms(file):
     return latest_hists
 
 
-def process_file(input_file, histograms_by_type, processed_processes, new_bins_nob, new_bins_btag, era, nom_only):
+def process_file(input_file, histograms_by_type, processed_processes, era, nom_only):
     # print(input_file)
     file = os.path.basename(input_file)
     physics_process, variable, syst, region = extract_variables(file, era)
@@ -250,110 +279,60 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
     print("start processing")
     histograms_by_type = {}
     processed_processes = set()
-    # new_bins = [0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.54, 0.58, 0.62, 0.66, 0.7, 0.74, 0.78, 0.82, 0.86, 0.9, 0.905, 0.91, 0.915, 0.92, 0.925, 0.93, 0.935, 0.94,
-    #             0.945, 0.95, 0.955, 0.96, 0.965, 0.97, 0.975, 0.98, 0.985, 0.99, 0.995, 1.]
-    new_bins_nob = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 
-                0.525, 0.55, 0.575, 0.6, 0.625, 0.65, 0.675, 0.7, 0.725, 0.75, 0.775, 
-                0.8, 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1.0]
-
-    # new_bins_nob = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6,0.7,0.8,0.9,1] 
-    new_bins_btag =  [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.82, 0.84, 0.86, 0.88, 0.9, 0.92, 0.94, 0.96,  0.98, 1.0]
-    # new_bins_btag =  [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6,0.7,0.8,0.9,1] 
-    new_bins_mt_tot=[0,50.0,60.0,70.0,80.0,90.0,100.0,110.0,120.0,130.0,140.0,150.0,160.0,170.0,180.0,190.0,200.0,225.0,250.0,275.0,300.0,325.0,350.0,400.0,450.0,500.0,600.0,700.0,800.0,900.0,1100.0,1300.0,2100.0,5000.0]
-
     
     input_files = list(fast_walk_and_filter(input_dir, ".root", var))  # Convert generator to list
     print(f"lenght of input files: {len(input_files)}")
     # Adjust the number of workers based on your system's capability
     num_workers = min(4, len(input_files))  # Example: use 32 workers or the number of files, whichever is smaller
     for f in input_files:
-        process_file(f, histograms_by_type, processed_processes, new_bins_nob, new_bins_btag, era, nom_only)
+        process_file(f, histograms_by_type, processed_processes,  era, nom_only)
 
     fout = ROOT.TFile(output_dir, "RECREATE")
     print("creating output file")
+    print(var)
 
+    region_list=["nob1", "nob2", "nob3", "nob4", "nob5", "btag"] if var != "mt_tot" else ["nob",  "btag"]
     # Create the directories "nob" and "btag"
-    if var == "mt_tot":
-        fout.mkdir("nob")
-    else:
-        fout.mkdir("nob1")
-        fout.mkdir("nob2")
-        fout.mkdir("nob3")
-        fout.mkdir("nob4")
-    fout.mkdir("btag")
-
+    for r in region_list:
+        fout.mkdir(r)
     
-    new_bin_edges_nob = {}
-    new_bin_edges_btag = {}
+    new_bin_edges= {}
     # Loop over the histograms and save them in the corresponding directories
+    # in this step, rebinning algorithm is used
     if "PNN" in var:
         mass = var[4:] 
-        for index in range(1,5):
+        for r in region_list:
             print(histograms_by_type[f"{signal}_signal_{mass}"])
             # print( histograms_by_type[f"{signal}_signal_{mass}"][f"nob{index}"][var])
-            h_sig_nob = histograms_by_type[f"{signal}_signal_{mass}"][f"nob{index}"][var][f"{signal}_signal_{mass}_{var}"] 
+            h_sig = histograms_by_type[f"{signal}_signal_{mass}"][f"{r}"][var][f"{signal}_signal_{mass}_{var}"] 
+            
+            h_bkg = histograms_by_type[f"Zto2L"][f"{r}"][var][f"Zto2L_{var}"].Clone()
+            h_bkg.Add(histograms_by_type[f"ttbar"][f"{r}"][var][f"ttbar_{var}"])
+            h_bkg.Add(histograms_by_type[f"diboson"][f"{r}"][var][f"diboson_{var}"])
+            h_bkg.Add(histograms_by_type[f"other"][f"{r}"][var][f"other_{var}"])
             try:
-                h_bkg = histograms_by_type[f"Zto2L"][f"nob{index}"][var][f"Zto2L_{var}"].Clone()
-                h_bkg.Add(histograms_by_type[f"fakes"][f"nob{index}"][var][f"fakes_{var}"])
+                h_bkg.Add(histograms_by_type[f"fakes"][f"{r}"][var][f"fakes_{var}"])
             except:
-                h_bkg = histograms_by_type[f"Zto2L"][f"nob{index}"][var][f"Zto2L_{var}"].Clone()
-            signal_mva = hist_to_numpy(h_sig_nob)
+                pass
+            signal_mva = hist_to_numpy(h_sig)
             background_mva = hist_to_numpy(h_bkg)
             # Use the rebin function to get the new bin edges
-            new_bins_nob = rebin_histogram_PNN(signal_mva, background_mva)
-            # new_bins_nob = [0, 0.1, 0.2, 0.3,0.4,0.5, 0.6, 0.7, 0.8, 0.9,1.0]
-            # Convert new bin edges to a ROOT-compatible format
-            new_bin_edges_nob[f"nob{index}"] = np.array(new_bins_nob)
+            new_bins = rebin_histogram_PNN(signal_mva, background_mva,h_sig)
+            print(new_bins)
+            new_bin_edges[r] = np.array(new_bins)
         
-        h_sig_btag = histograms_by_type[f"{signal}_signal_{mass}"]["btag"][var][f"{signal}_signal_{mass}_{var}"] 
-        try:
-            h_bkg_btag = histograms_by_type[f"Zto2L"]["btag"][var][f"Zto2L_{var}"].Clone()
-            h_bkg_btag.Add(histograms_by_type[f"fakes"]["btag"][var][f"fakes_{var}"]).Clone()
-        except:
-            h_bkg_btag = histograms_by_type[f"Zto2L"]["btag"][var][f"Zto2L_{var}"]
-        signal_mva = hist_to_numpy(h_sig_btag)
-        background_mva = hist_to_numpy(h_bkg_btag)
-        # Use the rebin function to get the new bin edges
-        new_bins_btag = rebin_histogram_PNN(signal_mva, background_mva)
-        # Convert new bin edges to a ROOT-compatible format
-        new_bin_edges_btag["btag"] = np.array(new_bins_btag)    
+        
     for s_type, regions in histograms_by_type.items():
         print( "s_type, regions", s_type, regions)
         for region, variables in regions.items():
             # Change to the correct directory based on the region
-            if "nob" in region:
-                fout.cd()
-                fout.cd(region)
-            elif region == "btag":
-                fout.cd()
-                fout.cd("btag")
-            else:
-                continue  # Skip if the region is not recognized
+            fout.cd()
+            fout.cd(region)
+            
             
             for variable, hists in variables.items():
                 for hist_name, hist in hists.items():
                     final_hist_name = hist_name.replace(f"_{variable}", "")
-                    
-                    if "__" in final_hist_name:
-                        if "nob" in region:
-                            if "FF_tot_Stat" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_tot_Stat", "FF_tot_Stat1")
-                            if "FF_ttbar" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_ttbar", "FF_ttbar1")
-                            if "FF_wjets" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_wjets", "FF_wjets1")
-                            if "FF_closure" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_closure", "FF_closure1")
-                        if region == "btag":
-                            if "FF_tot_Stat" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_tot_Stat", "FF_tot_Stat2")
-                            if "FF_ttbar" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_ttbar", "FF_ttbar2")
-                            if "FF_wjets" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_wjets", "FF_wjets2")
-                            if "FF_closure" in final_hist_name:
-                                final_hist_name = final_hist_name.replace("FF_closure", "FF_closure2")
-                    
                     if "__" in final_hist_name:
                         if final_hist_name.endswith("up"):
                             final_hist_name = final_hist_name[:-2] + "Up"
@@ -361,96 +340,21 @@ def merge_systematics_by_type(input_dir, output_dir, var, era, signal, nom_only)
                             final_hist_name = final_hist_name[:-4] + "Down"
                     hist.SetName(final_hist_name)
                     if "PNN" in hist_name:
-                        if "nob" in region:
-                            new_bins = new_bin_edges_nob[f"{region}"]
-                        if region == "btag":
-                            new_bins = new_bin_edges_btag["btag"]
+                        new_bins=new_bin_edges[region]
                         
                         rebinned_hist = rebin_histogram(hist, new_bins)
                         rebinned_hist.SetName(final_hist_name)
                         rebinned_hist.Write()
                     else:
-                        # custom_bins = array('d', new_bins_mt_tot)
-                        # hist = hist.Rebin(len(custom_bins) - 1, hist.GetName(), custom_bins)
                         hist.SetName(final_hist_name)
                         hist.Write()                    
-
-
-        
-    # for s_type, regions in histograms_by_type.items():
-    #     # print( "s_type, regions", s_type, regions)
-    #     for region, variables in regions.items():
-    #         if region == "nob":
-    #             fout.cd()
-    #             fout.cd("nob")
-    #         elif region == "btag":
-    #             fout.cd()
-    #             fout.cd("btag")
-    #         for variable, hists in variables.items():
-    #             for hist_name, hist in hists.items():
-    #                 if "PNN" in hist_name:
-    #                     if region == "nob":
-    #                         new_bins = new_bin_edges_nob
-    #                     if region == "btag":
-    #                         new_bins = new_bin_edges_btag
-                        
-    #                     rebinned_hist = rebin_histogram(hist, new_bins)
-    #                     # rebinned_hist.SetName(final_hist_name)
-    #                     rebinned_hist.Write()
-    #                 else:
-    #                     custom_bins = array('d', new_bins_mt_tot)
-    #                     hist = hist.Rebin(len(custom_bins) - 1, hist.GetName(), custom_bins)
-    #                     hist.Write()
-
-        # Close the ROOT file
 
     fout.cd()
     if nom_only:
         fout.Close()
         print("finish filling output file, nominal only")
         return 0
-    indices = list(range(1,5)) if "PNN" in var else [""]
-    for index in indices:
-        if "_em_" in input_dir:
-            continue
-        ## there is some small issue with the closure uncertainty, post-process it here
-        h_closure = fout.Get(f"nob{index}/fakes")
-        h_closure1Up = fout.Get(f"nob{index}/fakes__FF_closure1Up")
-        h_closure1Down = fout.Get(f"nob{index}/fakes__FF_closure1Down")
-        # Calculate integrals first before scaling
-        integralUp = h_closure1Up.Integral()
-        integralDown = h_closure1Down.Integral()
-        totalIntegral = h_closure.Integral()
 
-        # Scale histograms and reassign them
-        h_closure1Up.Scale(2 * totalIntegral / (integralUp + integralDown))
-        h_closure1Down.Scale(2 * totalIntegral / (integralUp + integralDown))
-        fout.cd(f"nob{index}")
-        h_closure1Up.Write()
-        h_closure1Down.Write()
-        fout.cd()
-    
-    ad_hoc_systs = {"fakes":"FF_closure2",}# "ttbar":"btagUncLF"}
-    for hist in ad_hoc_systs:
-        if "_em_" in input_dir:
-            continue
-        fout.cd()
-        h_closure = fout.Get(f"btag/{hist}")
-        h_closure2Up = fout.Get(f"btag/{hist}__{ad_hoc_systs[hist]}Up")
-        h_closure2Down = fout.Get(f"btag/{hist}__{ad_hoc_systs[hist]}Down")
-        # Calculate integrals first before scaling
-        integralUp = h_closure2Up.Integral()
-        integralDown = h_closure2Down.Integral()
-        totalIntegral = h_closure.Integral()
-
-
-
-        # Scale histograms and reassign them
-        h_closure2Up.Scale(2 * totalIntegral / (integralUp + integralDown))
-        h_closure2Down.Scale(2 * totalIntegral / (integralUp + integralDown))
-        fout.cd("btag")
-        h_closure2Up.Write()
-        h_closure2Down.Write()
 
 
     fout.Close()
