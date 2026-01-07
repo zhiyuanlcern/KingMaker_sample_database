@@ -25,11 +25,11 @@ def Add_new_column(df,new_column, overwrite=False):
     ''' 
     modified = False
     col_names = df.GetColumnNames()
-    print("calling adding new column")
+    # print("calling adding new column")
     for c in new_column:    
         if c not in col_names:    
             df = df.Define(c,str(new_column[c])) 
-            print(f"Adding new Column {c}")
+            # print(f"Adding new Column {c}")
             modified = True
         elif overwrite and c in col_names:
             df = df.Redefine(c,str(new_column[c])) 
@@ -131,16 +131,16 @@ def filter_df(df, channel, FF_cut =False):
 def filter_df_pnn(df, channel):
     selection_dic = {}
     selection_dic["mt"] = "(((trg_cross_mu20tau27_hps==1||trg_single_mu24==1||trg_single_tau180_2==1)&& pt_1> 25.0 &&extramuon_veto == 0  && extraelec_veto == 0 &&(id_tau_vsMu_Tight_2 > 0 && id_tau_vsJet_Medium_2 > 0 &&  \
-    id_tau_vsEle_VVLoose_2 > 0 && pt_2 > 30 ) )&& ((q_1 * q_2) < 0) &&mt_1 < 50) && mt_1 > 0 && Train_weight !=0 &&(std::isnan(pzetamissvis) == 0)  && met > 0"
+    id_tau_vsEle_VVLoose_2 > 0 && pt_2 > 30 ) )&& ((q_1 * q_2) < 0) &&mt_1 < 50) && mt_1 > 0 && Train_weight !=0  && met > 0 " # && jpt_1 >-99 &&(std::isnan(pzetamissvis) == 0) 
     selection_dic["tt"] = '( (trg_double_tau35_mediumiso_hps ==1 && pt_1 > 40 && pt_2 > 40 ) || (trg_double_tau30_plusPFjet60 ==1 && pt_1 > 35 && pt_2 > 35) \
     || (trg_double_tau30_plusPFjet75 ==1 && pt_1 > 35 && pt_2 > 35) || trg_single_tau180_1==1 || trg_single_tau180_2==1 ) \
     && extramuon_veto == 0 && extraelec_veto == 0 && (id_tau_vsJet_Medium_1 > 0 && dz_1 < 0.2 && eta_1 < 2.1 && eta_1 > -2.1 && id_tau_vsEle_VVLoose_1 > 0 \
     && id_tau_vsMu_VLoose_1 > 0 ) && (id_tau_vsJet_Medium_2 > 0 && dz_2 < 0.2 && eta_2 < 2.1 && eta_2 > -2.1 && id_tau_vsEle_VVLoose_2 > 0 && id_tau_vsMu_VLoose_2 > 0 \
-    && deltaR_ditaupair > 0.5 ) && ((q_1 * q_2) < 0) && met > 0'
-    selection_dic["et"] =  "met > 0 && mt_1 > 0&& mt_1 < 50 &&  ((q_1 * q_2) < 0) && (trg_single_tau180_2==1 || ( trg_single_ele30==1 && pt_1 > 31) || (trg_cross_ele24tau30_hps==1 && pt_1 > 25 && pt_2 > 35))  \
-    &&(iso_1 < 0.15 && abs(eta_1) < 2.1)&&extramuon_veto == 0  && extraelec_veto == 0 && (id_tau_vsMu_VLoose_2 > 0 && id_tau_vsJet_Medium_2 > 0 &&  id_tau_vsEle_Tight_2 > 0 && abs(eta_2) < 2.3) "
+    && deltaR_ditaupair > 0.5 ) && ((q_1 * q_2) < 0) && met > 0 ' #&& jpt_1 >-99
+    selection_dic["et"] =  "met > 0 && mt_1 > 0&& mt_1 < 50 &&  ((q_1 * q_2) < 0) && (trg_single_tau180_2==1 || ( trg_single_ele30==1 && pt_1 > 31) )  \
+    &&(iso_1 < 0.15 && abs(eta_1) < 2.1)&&extramuon_veto == 0  && extraelec_veto == 0 && (id_tau_vsMu_VLoose_2 > 0 && id_tau_vsJet_Medium_2 > 0 &&  id_tau_vsEle_Tight_2 > 0 && abs(eta_2) < 2.3)  "# && jpt_1 >-99
     
-    Dzeta_cut = "(pzetamissvis > -35  && mt_1 > 0 && met > 0)"
+    Dzeta_cut = "( mt_1 > 0 && met > 0)" #pzetamissvis > -35  &&
     #Dzeta_cut = "(mt_1 > 0)"
     lepton_veto = "  (extramuon_veto == 0  && extraelec_veto == 0) " 
 
@@ -158,16 +158,16 @@ def filter_df_pnn(df, channel):
     # buggy_signal_cut = "( abs(Train_weight) < 10  )"
     def combinecut(*args):
         return '(' + '&&'.join(args) + ')'
-    em_SR = combinecut(em_triggers_selections, em_muon_selection, iso_e, em_electron_selection, iso_mu,lepton_veto, opposite_sign,Dzeta_cut   )  #  , buggy_signal_cut
+    em_SR = combinecut( em_triggers_selections, em_muon_selection, iso_e, em_electron_selection, iso_mu,lepton_veto, opposite_sign,Dzeta_cut   )  #  , buggy_signal_cut # "jpt_1 > -99", 
     selection_dic["em"] =  em_SR
     
-    df = df.Filter(selection_dic[channel])
+    df = df.Filter(selection_dic[channel] )
     return df
 def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='mt', cut=0, out_vars =[], pnn_format= False):
     luminosities = {
     "2022EE":8.077009684e3,
     "2022postEE":  26.671609707e3,
-    "2023": 0.641474303e3 + 18.062659111e3, # B + C
+    "2023":  18.062659111e3, # B 
     "2023BPix": 9.693130053e3, # D 
       }
     lumi = luminosities[args.era]
@@ -192,8 +192,8 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
     df_mc = R.RDataFrame(tree_name, f)
     ## apply or not preselection
     modified_initial = False
+    before_cut = df_mc.Count().GetValue()
     if cut:
-        before_cut = df_mc.Count().GetValue()
         if "FF_Combined" in f:
             df_mc = filter_df(df_mc, channel, FF_cut = True)    
         else:
@@ -201,11 +201,20 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
         after_cut = df_mc.Count().GetValue()
         if before_cut != after_cut:
             modified_initial = True
+    if "DYto2L-2Jets_MLL-50" in f:
+        print(f"processing DY to 2L, filtering")
+        df_mc = df_mc.Filter( "gen_match_1 == 1 || gen_match_1 == 2")
+        after_cut = df_mc.Count().GetValue()
+        if before_cut != after_cut:
+            modified_initial = True
+    
+
     gensumw = 0
     col_names = df_mc.GetColumnNames()
     if 'genEventSumW'  not in col_names:    
         for n in samples_list:
-            if n == f.strip(f"_{channel}.root"):
+            f_tmp =  os.path.basename(f)
+            if n == f_tmp.strip(f"_{channel}.root"):
                 print(f,n)
                 gensumw = R.RDataFrame('conditions', f).Sum('genEventSumw').GetValue()
                 if ("Run2022" in f) or( "Run2023" in f ):
@@ -217,6 +226,42 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
         if gensumw ==0 :
             print(f"file {f} not found in sample_database yaml list")
             sys.exit()
+        
+        if 'Glu' in f and '2HDM' in f:
+            lhe_sumw_vec = R.RDataFrame('conditions', f).Take['vector<double>']('LHEScaleSumw').GetValue()  # 显式指定返回类型
+            print(lhe_sumw_vec)
+
+            # 初始化结果向量
+            sum_vec = [0.0] * 9  # 初始化 9 个元素为 0.0
+
+            # 遍历所有向量，将对应索引的元素相加
+            for vec in lhe_sumw_vec:
+                for i in range(9):
+                    sum_vec[i] += vec[i]
+
+            # 将结果添加到 df_mc 中
+            df_mc = df_mc.Define(
+                'LHEScaleSumw0', f'float({sum_vec[0]})').Define(
+                'LHEScaleSumw1', f'float({sum_vec[1]})').Define(
+                'LHEScaleSumw2', f'float({sum_vec[2]})').Define(
+                'LHEScaleSumw3', f'float({sum_vec[3]})').Define(
+                'LHEScaleSumw4', f'float({sum_vec[4]})').Define(
+                'LHEScaleSumw5', f'float({sum_vec[5]})').Define(
+                'LHEScaleSumw6', f'float({sum_vec[6]})').Define(
+                'LHEScaleSumw7', f'float({sum_vec[7]})').Define(
+                'LHEScaleSumw8', f'float({sum_vec[8]})')
+            ## LHEScaleSumw4 is the nominal
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeightDown", "lhe_scale_weight__LHEScaleWeightDown / ( LHEScaleSumw0 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeightUp", "lhe_scale_weight__LHEScaleWeightUp / ( LHEScaleSumw8 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeight_1_0p5", "lhe_scale_weight__LHEScaleWeight_1_0p5 / ( LHEScaleSumw1 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeight_2_0p5", "lhe_scale_weight__LHEScaleWeight_2_0p5 / ( LHEScaleSumw2 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeight_0p5_1", "lhe_scale_weight__LHEScaleWeight_0p5_1 / ( LHEScaleSumw3 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeight_2_1", "lhe_scale_weight__LHEScaleWeight_2_1 / ( LHEScaleSumw5 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeight_0p5_2", "lhe_scale_weight__LHEScaleWeight_0p5_2 / ( LHEScaleSumw6 /LHEScaleSumw4)")
+            df_mc = df_mc.Redefine("lhe_scale_weight__LHEScaleWeight_1_2", "lhe_scale_weight__LHEScaleWeight_1_2 / ( LHEScaleSumw7 /LHEScaleSumw4)")
+
+        
+
     else:
         print(f'genEventSumW was added in file {f} already. ') 
     df_mc, _1 = Add_new_column(df_mc,  
@@ -225,88 +270,18 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
     'id_wgt_ele_wpTight': 'float(1.0)', 'ZPtMassReweightWeight': 'double(1.0)',
     'id_wgt_tau_vsMu_Tight_2' : "float(1.0)","id_wgt_tau_vsEle_Tight_2" : 'float(1.0)', 'id_wgt_tau_vsMu_VLoose_2': 'float(1.0)', "id_wgt_tau_vsMu_Loose_2" : "float(1.0)", "id_wgt_tau_vsEle_VVLoose_2" : "float(1.0)", "id_wgt_tau_vsJet_Medium_2" : "float(1.0)",  'id_wgt_tau_vsJet_Medium_1': 'float(1.0)', 
     "trg_wgt_single_mu24ormu27" : "float(1.0)", 'trg_wgt_ditau_crosstau_2': 'float(1.0)','trg_wgt_ditau_crosstau_1': 'float(1.0)', 'trg_wgt_single_ele30' : 'float(1.0)', 'trg_wgt_single_mu24' :'float(1.0)',
-    "FF_weight": "float(1.0)",
+    "FF_weight": "double(1.0)",
     'C_QCD': 'met/pt_2 * cos(metphi - phi_2 ) ',  'C_W': '(met + pt_1)/pt_2 * cos(metphi + phi_1- phi_2 )',
     'tau_gen_match_2' : 'bool(0)',
     'Lumi': str(lumi),  "ggh_NNLO_weight": "double(1.0)",})
-    # if channel != "mm":
-    #     df_mc, _1 = Add_new_column(df_mc,  {
-    # "costhstar_1_LT": "calculate_costhstar(pt_1, eta_1, phi_1, mass_1,  pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-    #     "costhstar_2_LT": "calculate_costhstar(pt_2, eta_2, phi_2, mass_2,  pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-    #     "deltaR_LT": "calculate_deltaR(pt_1_LT, eta_1_LT, phi_1_LT, mass_1, pt_2_LT, eta_2_LT, phi_2_LT, mass_2)",
-    #     "kT_LT": "calculate_kT(pt_1_LT, eta_1_LT, phi_1_LT, mass_1, pt_2_LT, eta_2_LT, phi_2_LT, mass_2)",  ## calculate anti-kt? # check delta R definition with CROWN?
-    #     "antikT_LT": "calculate_antikT(pt_1_LT, eta_1_LT, phi_1_LT, mass_1, pt_2_LT, eta_2_LT, phi_2_LT, mass_2)",  ## calculate anti-kt? # check delta R definition with CROWN?
-
-    #     "Z_NN_LT": "calculate_z_NN(pt_1_LT, eta_1_LT, phi_1_LT, mass_1, pt_2_LT, eta_2_LT, phi_2_LT, mass_2)",
-        
-    #     "pt1_to_ptH": "pt_1/pt_fastmtt",
-    #     "pt2_to_ptH": "pt_2/pt_fastmtt",
-    #     "pt_fastmtt_LT": "calculate_boost_pt(pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-    #     "eta_fastmtt_LT": "calculate_boost_eta(pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-    #     "phi_fastmtt_LT": "calculate_boost_phi(pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-    #     "phi_met_LT": "calculate_boost_phi(met, 0, metphi, met, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-
-        
-    #     'dtheta_12' : 'calculate_theta_12(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)',
-    #     "m_vis_square": "calculate_m_vis_square(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2)",
-        
-        # 'dphi_H1_LT' : 'abs(TVector2::Phi_mpi_pi(phi_1_LT-phi_fastmtt))', ## don't transform H
-        # 'dphi_H2_LT' : 'abs(TVector2::Phi_mpi_pi(phi_2_LT-phi_fastmtt))',
-        # 'dphi_HMET' : 'abs(TVector2::Phi_mpi_pi(metphi-phi_fastmtt))',
-        # 'dphi_MET_1' : 'abs(TVector2::Phi_mpi_pi(metphi-phi_1))',
-        # 'dphi_MET_2' : 'abs(TVector2::Phi_mpi_pi(metphi-phi_2))',
-        # 'dphi_HMET_LT' : 'abs(TVector2::Phi_mpi_pi(phi_met_LT-phi_fastmtt_LT))',
-        # 'dphi_MET_1_LT' : 'abs(TVector2::Phi_mpi_pi(phi_met_LT-phi_1_LT))',
-        # 'dphi_MET_2_LT' : 'abs(TVector2::Phi_mpi_pi(phi_met_LT-phi_2_LT))',
-        # "pt1_to_mH" :  "pt_1/m_fastmtt",
-        # "pt2_to_mH" :  "pt_2/m_fastmtt",
-        
-        # "pt_tt_to_mH" : "pt_tt/m_fastmtt",
-        # "pt_fastmtt_to_mH" : "pt_fastmtt/m_fastmtt",
-        # "pt_vis_to_mH" : "pt_vis/m_fastmtt",
-        # "pt1_LT_to_pt2_LT" :  "pt_1_LT/pt_2_LT",
-        # 'deta_12_LT' : 'eta_1_LT - eta_2_LT',
-        # 'dphi_12_LT' : 'abs(TVector2::Phi_mpi_pi(phi_1_LT-phi_2_LT))',
-
-    # 'cos_dphi_H1' : 'cos(dphi_H1)',    ## don't allow < 0
-    # 'cos_dphi_H2' : 'cos(dphi_H2)',
-    # 'cos_dphi_H1_LT' : 'cos(dphi_H1_LT)',
-    # 'cos_dphi_H2_LT' : 'cos(dphi_H2_LT)',
-    # 'cos_dphi_HMET' : 'cos(dphi_HMET)',
-    # 'cos_dphi_MET_1' : 'cos(dphi_MET_1)',
-    # 'cos_dphi_MET_2' : 'cos(dphi_MET_2)',
-    # 'cos_dphi_HMET_LT' : 'cos(dphi_HMET_LT)',
-    # 'cos_dphi_MET_1_LT' : 'cos(dphi_MET_1_LT)',
-    # 'cos_dphi_MET_2_LT' : 'cos(dphi_MET_2_LT)',
-    # 'cos_dtheta_12' : 'calculate_costheta_12(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)',
-    # 'dtheta_12' : 'calculate_theta_12(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)',
-    # 'eta_vis' :'calculate_eta_tt(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2)',
-    # 'phi_vis' :'calculate_phi_tt(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2)',
-    # } )
-    # df_mc, _1 = Add_new_column(df_mc,
-    # {   
-        
-
-    # },
-    # overwrite = True
-    # )
+  
     df_mc, _2 = Add_new_column(df_mc, 
                                 {'Train_weight': weight_dict[channel],
                                 # 'dphi_12' : 'phi_1 - phi_2',
                                 }
-                                , overwrite=True)
-    df_mc,_2 = Redefine_type(df_mc,"ZPtMassReweightWeight", "Float_t","double"  )
-    # df_mc = df_mc.Filter("jpt_1 > -99")
-    # df_mc,_3 = Redefine_type(df_mc,"pzetamissvis_pf", "Double_t","float"  )
-    # df_mc,_4 = Redefine_type(df_mc,"trg_wgt_single_ele30", "Float_t","double"  )
-    # df_mc,_5 = Redefine_type(df_mc,"tau_gen_match_2", "Bool_t","UChar_t"  )
-    # df_mc,_6 = Redefine_type(df_mc, "id_wgt_tau_vsJet_Medium_1",  "Float_t","double"  )
-    # df_mc,_7 = Redefine_type(df_mc, "id_wgt_tau_vsJet_Medium_2",  "Float_t","double"  )
-    # df_mc,_8 = Redefine_type(df_mc, "btag_weight",  "Float_t","double"  )
-    # df_mc,_9 = Redefine_type(df_mc, "trg_wgt_ditau_crosstau_2",  "Float_t","double"  )
-    # df_mc,_10 = Redefine_type(df_mc,"pzetamissvis", "Double_t","float"  )
-    # df_mc,_11 = Redefine_type(df_mc,"iso_wgt_mu_1", "Float_t","double"  )
-    # df_mc,_12 = Redefine_type(df_mc,"FF_weight", "Float_t","double"  )
+                                , overwrite=False)
+    
+
     if( channel!= "mm" ) :
         df_mc, _12 = Add_new_column(df_mc, {
             'deta_12' : 'eta_1 - eta_2', 
@@ -315,10 +290,7 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
             # "costheta_2_LT": "calculate_costheta(pt_2, eta_2, phi_2, mass_2,  pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
             "pt_1_LT": "calculate_boost_pt(pt_1, eta_1, phi_1, mass_1, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
             "pt_2_LT": "calculate_boost_pt(pt_2, eta_2, phi_2, mass_2, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-            # "eta_1_LT": "calculate_boost_eta(pt_1, eta_1, phi_1, mass_1, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-            # "eta_2_LT": "calculate_boost_eta(pt_2, eta_2, phi_2, mass_2, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-            # "phi_1_LT": "calculate_boost_phi(pt_1, eta_1, phi_1, mass_1, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
-            # "phi_2_LT": "calculate_boost_phi(pt_2, eta_2, phi_2, mass_2, pt_fastmtt, eta_fastmtt, phi_fastmtt, m_fastmtt)",
+            
             "kT": "calculate_kT(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2)",  
             "antikT": "calculate_antikT(pt_1, eta_1, phi_1, mass_1, pt_2, eta_2, phi_2, mass_2)",
             # "m_vis_square": "calculate_m_vis_square(pt_1_LT, eta_1_LT, phi_1_LT, mass_1, pt_2_LT, eta_2_LT, phi_2_LT, mass_2)",
@@ -326,15 +298,26 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
             "pt2_LT_to_ptH" :  "pt_2_LT/pt_fastmtt",
             'dphi_H1' : 'abs(TVector2::Phi_mpi_pi(phi_1-phi_fastmtt))',
             'dphi_H2' : 'abs(TVector2::Phi_mpi_pi(phi_2-phi_fastmtt))',
-            # "pt1_LT_to_mH" :  "pt_1_LT/m_fastmtt",
-            # "pt2_LT_to_mH" :  "pt_2_LT/m_fastmtt",
+
             }, overwrite=False)
-    
+        df_mc, _12 = Add_new_column(df_mc, {
+            'b_deta_1': 'beta_1 - eta_1',
+            'b_deta_2': 'beta_1 - eta_2',
+            'b_dphi_1': 'abs(TVector2::Phi_mpi_pi(bphi_1-phi_1))',
+            'b_dphi_2': 'abs(TVector2::Phi_mpi_pi(bphi_1-phi_2))',
+            'dphi_Hb' : 'abs(TVector2::Phi_mpi_pi(bphi_1-phi_fastmtt))',
+            'deta_Hb': 'beta_1 - eta_fastmtt',
+            'bpt_to_pt1': "bpt_1/pt_1",
+            'bpt_to_pt2': "bpt_1/pt_2",
+            'bpt_to_ptH': "bpt_1/pt_fastmtt",
+            'deltaR_Hb': 'calculate_deltaR(bpt_1, beta_1, bphi_1, 0, pt_fastmtt, eta_fastmtt, phi_fastmtt, 125)',
+            'deltaR_b1': 'calculate_deltaR(bpt_1, beta_1, bphi_1, 0, pt_1, eta_1, phi_1, 0)',
+            'deltaR_b2': 'calculate_deltaR(bpt_2, beta_2, bphi_2, 0, pt_2, eta_2, phi_2, 0)',
+            
+             
+        },overwrite =False)
 
 
-    # df_mc = df_mc.Redefine("njets", "((jpt_1 < 50 && abs(jeta_1) > 2.5 &&abs(jeta_1) < 3 ) || (jpt_2 < 50 && abs(jeta_2) > 2.5 &&abs(jeta_2) < 3 )) ? 0 : njets "  )
-    # df_mc,_12 = Redefine_type(df_mc,"FF_weight", "Double_t","float"  )
-    # modified = _1 or _2 or _3 or _4 or _5 or _6 or _7 or _8 or _9 or _10 or _11 or _12
     modified = _1 or _2 or modified_initial
     # modified=True
     if keep_only_nom:
@@ -351,7 +334,9 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
     # "mass_tt","met","metSumEt","metphi","mjj","mt_1","mt_2","mt_tot","nbtag","njets","nprebjets","phi_1","phi_2","phi_fastmtt",
     # "pt_1","pt_2","pt_dijet","pt_fastmtt","pt_tt","pt_ttjj","pt_vis","pzetamissvis","q_1","q_2"]
     pnn_remove = ["genWeight_tmp","FF_weight_tmp", "FF_weight_tmp1", "FF_weight_tmp2" , "ggh_NNLO_weight", "mjj", "id_wgt_tau_vsJet_VTight_2", "id_wgt_tau_vsJet_VTight_1", "id_wgt_tau_vsJet_Tight_2", "id_wgt_tau_vsJet_Tight_1",
-        "gen_pdgid_1", "gen_pdgid_2","gen_taujet_pt_2","genbosonmass", "genbosonpt", "PNN", "__", "gen_higgs_p4", "fCoordinates", "ZPtMassReweightWeight", "pzetamissvis_pf", "pzetamissvis", "trg_wgt_ditau_crosstau_2", "iso_wgt_mu_1", "pt_ttjj", "pt_dijet" , "pt2_to_mH", "pt1_to_mH"]
+        "gen_pdgid_1", "gen_pdgid_2","gen_taujet_pt_2","genbosonmass", "genbosonpt", "PNN", "__", "gen_higgs_p4", 
+        "fCoordinates", "pzetamissvis_pf",  "trg_wgt_ditau_crosstau_2", 
+        "pt_ttjj", "pt_dijet" ,]
     for i in output_columns:
         if "HTXS" in i:
             pnn_remove.append(i)
@@ -370,6 +355,12 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
                     output_columns.remove(var)
                     modified = True
     print(output_columns)
+    if pnn_format:
+        Nevents = df_mc.Count().GetValue()
+        df_mc = filter_df_pnn(df_mc, channel)
+        Nevents_after = df_mc.Count().GetValue()
+        if Nevents_after != Nevents:
+            modified = True
     if modified:
         if pnn_format and ('2HDM' in f or 'BBH' in f):
             M = extract_number(f)
@@ -377,11 +368,8 @@ def post_proc(f, samples_list, keep_only_nom=False, era='2022postEE', channel='m
             if int(M[0]) > 250:
                 print("no need to process mass greater than 250")
                 sys.exit(0)
-            df_mc = filter_df_pnn(df_mc, channel)
             df_mc.Snapshot(f"Xtohh{M[0]}",   f'{f}a.root',output_columns ) # update the file finished    # PNN_vars
-        
-        elif pnn_format:
-            df_mc = filter_df_pnn(df_mc, channel)
+        elif pnn_format:           
             df_mc.Snapshot(f"ntuple",   f'{f}a.root',output_columns) # update the file finished  #PNN_vars
         else:   
             df_mc.Snapshot("ntuple",   f'{f}a.root', output_columns) # update the file finished
