@@ -1,17 +1,7 @@
-dbs: /BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
 era: 2022postEE
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/0997a03a-121e-4568-9145-167917b17c73.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/26d1cb0c-f380-4796-a409-3eab8f81182f.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/2fd647e1-efc4-454e-9b69-263c3c695a96.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/47d10c9b-1ad3-4772-9816-9c31111b10b0.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/48d2cc59-d112-4948-a475-3bbbbe645339.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/a3d3a6e6-5c3e-4b54-b1d8-6d321b767e0d.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/afebd016-3da7-4fc0-9eb1-5fe7bfce2522.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/b0d1121d-a969-4eac-9c1e-648891e19fcd.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/bf69b2b7-1c18-4cde-bf21-dd2df6d8273d.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/130000/fffda210-10c8-4318-a044-bfc74ee906ca.root
-nevents: 10
-nfiles: 10
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/BBHto2Tau_M_250/nano_0.root
+nevents: 1
+nfiles: 1
 nick: BBHto2Tau_M-250_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12
 sample_type: vbf_htautau

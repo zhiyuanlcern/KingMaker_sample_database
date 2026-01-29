@@ -1,15 +1,11 @@
-dbs: /GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/NANOAODSIM
 era: 2022postEE
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/1c543ee5-0d41-4d08-9995-cc4440c49463.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/1dc31505-7ce9-48c1-b0a7-8688570accb4.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/993f6a64-a341-4008-be6c-20e5c0c99e34.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/b630fd35-7b49-415b-94f9-d56054c1ab4d.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/b898c86e-9954-4624-b116-3a390b15057f.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/bdba18d0-65e4-401b-84b3-a083817a6b39.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/c5455e61-33a7-4278-b0cc-cc59ca60cd41.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22EENanoAODv12/GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_postEE_v6-v2/30000/c69d723c-f48d-43ba-aa54-312c81dea725.root
-nevents: 8
-nfiles: 8
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/GluGluHto2Tau_M_1100_2HDM_II/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/GluGluHto2Tau_M_1100_2HDM_II/nano_1.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/GluGluHto2Tau_M_1100_2HDM_II/nano_2.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/GluGluHto2Tau_M_1100_2HDM_II/nano_3.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/GluGluHto2Tau_M_1100_2HDM_II/nano_4.root
+nevents: 5
+nfiles: 5
 nick: GluGluHto2Tau_M-1100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22EENanoAODv12
 sample_type: ggh_htautau

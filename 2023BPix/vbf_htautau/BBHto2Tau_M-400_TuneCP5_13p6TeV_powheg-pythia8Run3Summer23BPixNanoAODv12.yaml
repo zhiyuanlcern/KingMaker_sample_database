@@ -1,16 +1,7 @@
-dbs: /BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/NANOAODSIM
 era: 2023BPix
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/2da56b3f-e5f8-4650-90f7-cb03b41fb2c9.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/607131d1-75fd-44a9-942b-93447e85db82.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/8a5209de-b72c-49ba-b463-a4754c48bd2d.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/952acdcd-b96a-40d7-9483-0f6babd0739f.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/abbde7e7-9e2f-42bb-9e77-0646ee98cf1a.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/b8c3318a-5106-45f9-a741-01cbf31543bf.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/b9bbfe98-5f6e-43a1-9022-aff0ca58b698.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/e36dfda6-4d22-428b-a9b3-8289e9d3b7ac.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v6-v2/60000/e6131719-61f8-4a10-b354-135eb4dca5f6.root
-nevents: 9
-nfiles: 9
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/BBHto2Tau_M_400/nano_0.root
+nevents: 1
+nfiles: 1
 nick: BBHto2Tau_M-400_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
 sample_type: vbf_htautau

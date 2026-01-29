@@ -1,0 +1,18 @@
+era: 2022EE
+filelist:
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_1.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_10.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_11.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_2.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_3.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_4.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_5.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_6.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_7.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_8.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TWminustoLNu2Q/nano_9.root
+nevents: 12
+nfiles: 12
+nick: TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_LNu2Q
+sample_type: singletop

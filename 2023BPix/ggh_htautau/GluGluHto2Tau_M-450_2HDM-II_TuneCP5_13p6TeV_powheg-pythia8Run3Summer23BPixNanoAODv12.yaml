@@ -1,11 +1,8 @@
-dbs: /GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v2/NANOAODSIM
 era: 2023BPix
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/19ebbc4d-0059-45f6-93cb-980444459b8e.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/8f4f3ef2-195c-4f08-bb01-5659afd594ed.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/b07f7f0c-21e8-428f-b208-617c3180f19a.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23BPixNanoAODv12/GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/40000/b46c2ed7-14b4-4cf4-9ff3-2edec94af5cf.root
-nevents: 4
-nfiles: 4
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M_450_2HDM_II/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M_450_2HDM_II/nano_1.root
+nevents: 2
+nfiles: 2
 nick: GluGluHto2Tau_M-450_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23BPixNanoAODv12
 sample_type: ggh_htautau

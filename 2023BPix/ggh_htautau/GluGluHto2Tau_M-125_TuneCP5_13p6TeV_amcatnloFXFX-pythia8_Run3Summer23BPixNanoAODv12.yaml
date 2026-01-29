@@ -1,0 +1,12 @@
+era: 2023BPix
+filelist:
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M125_amcatnloFXFX/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M125_amcatnloFXFX/nano_1.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M125_amcatnloFXFX/nano_2.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M125_amcatnloFXFX/nano_3.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M125_amcatnloFXFX/nano_4.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023BPix/GluGluHto2Tau_M125_amcatnloFXFX/nano_5.root
+nevents: 6
+nfiles: 6
+nick: GluGluHto2Tau_M-125_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_Run3Summer23BPixNanoAODv12
+sample_type: ggh_htautau

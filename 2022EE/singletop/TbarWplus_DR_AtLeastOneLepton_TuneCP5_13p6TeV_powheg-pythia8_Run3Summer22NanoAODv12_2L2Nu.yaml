@@ -1,0 +1,12 @@
+era: 2022EE
+filelist:
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TbarWplusto2L2Nu/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TbarWplusto2L2Nu/nano_1.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TbarWplusto2L2Nu/nano_2.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TbarWplusto2L2Nu/nano_3.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TbarWplusto2L2Nu/nano_4.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/TbarWplusto2L2Nu/nano_5.root
+nevents: 6
+nfiles: 6
+nick: TbarWplus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22NanoAODv12_2L2Nu
+sample_type: singletop

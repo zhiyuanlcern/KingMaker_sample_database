@@ -1,0 +1,26 @@
+era: 2022postEE
+filelist:
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_1.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_10.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_11.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_12.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_13.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_14.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_15.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_16.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_17.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_18.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_19.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_2.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_3.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_4.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_5.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_6.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_7.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_8.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022EE/TWminusto2L2Nu/nano_9.root
+nevents: 20
+nfiles: 20
+nick: TWminus_DR_AtLeastOneLepton_TuneCP5_13p6TeV_powheg-pythia8_Run3Summer22EENanoAODv12_2L2Nu
+sample_type: singletop

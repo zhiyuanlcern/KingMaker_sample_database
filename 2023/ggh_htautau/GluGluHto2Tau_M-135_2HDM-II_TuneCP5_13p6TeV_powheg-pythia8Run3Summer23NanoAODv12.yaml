@@ -1,14 +1,9 @@
-dbs: /GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v2/NANOAODSIM
-era: 2023
+era: '2023'
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/06802a74-912f-4050-abad-1b49bcfedd21.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/22ee327a-c1ec-4d3b-ba36-5b7dcf0ab07f.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/670a0dc3-a73a-4eba-ac29-f14f8bc4ba5c.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/6fbce816-ea51-433e-b38e-73afedae78e9.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/86c681b1-4bc0-45db-8a66-c304e2bd051b.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/8ba2e2c8-5acd-474e-80f5-74a0062080ff.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v14-v2/2550000/e8d936a5-ad3a-41e2-8bb8-05e0cc5e614b.root
-nevents: 7
-nfiles: 7
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023/GluGluHto2Tau_M_135_2HDM_II/nano_0.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023/GluGluHto2Tau_M_135_2HDM_II/nano_1.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023/GluGluHto2Tau_M_135_2HDM_II/nano_2.root
+nevents: 3
+nfiles: 3
 nick: GluGluHto2Tau_M-135_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
 sample_type: ggh_htautau

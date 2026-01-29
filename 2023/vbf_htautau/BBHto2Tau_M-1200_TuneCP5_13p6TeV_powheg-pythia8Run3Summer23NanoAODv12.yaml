@@ -1,11 +1,7 @@
-dbs: /BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v2/NANOAODSIM
-era: 2023
+era: '2023'
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v15-v2/60000/1b8c3a41-b0f4-43eb-befa-4afa89bf1a58.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v15-v2/60000/3e01d4d5-1886-4080-9cd2-063cd259c483.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v15-v2/60000/49ea4d29-c451-4ffd-8c0b-328a522af487.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer23NanoAODv12/BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2023_realistic_v15-v2/60000/6444b076-ff3f-4284-b745-e6b0c59c9639.root
-nevents: 4
-nfiles: 4
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2023/BBHto2Tau_M_1200/nano_0.root
+nevents: 1
+nfiles: 1
 nick: BBHto2Tau_M-1200_TuneCP5_13p6TeV_powheg-pythia8Run3Summer23NanoAODv12
 sample_type: vbf_htautau

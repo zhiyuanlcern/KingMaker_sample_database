@@ -1,9 +1,7 @@
-dbs: /GluGluHto2Tau_M-100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
 era: 2022EE
 filelist:
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22NanoAODv12/GluGluHto2Tau_M-100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_v5-v2/30000/571410a6-7ef3-4a1f-be2c-46ae6e62d300.root
-- root://xrootd-cms.infn.it///store/mc/Run3Summer22NanoAODv12/GluGluHto2Tau_M-100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8/NANOAODSIM/130X_mcRun3_2022_realistic_v5-v2/30000/8f51d1a7-bed8-491d-b256-80b0833d5427.root
-nevents: 2
-nfiles: 2
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/GluGluHto2Tau_M_100_2HDM_II/nano_0.root
+nevents: 1
+nfiles: 1
 nick: GluGluHto2Tau_M-100_2HDM-II_TuneCP5_13p6TeV_powheg-pythia8Run3Summer22NanoAODv12
 sample_type: ggh_htautau
