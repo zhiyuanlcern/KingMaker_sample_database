@@ -85,7 +85,8 @@ def build_command(
     if args.extra_args:
         command.extend(args.extra_args)
 
-    return command
+    # ensure all tokens are strings so shlex.quote and subprocess.run work
+    return [str(t) for t in command]
 
 
 def run_commands(commands: list[list[str]], dry_run: bool, keep_going: bool) -> int:
