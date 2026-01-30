@@ -1,0 +1,17 @@
+Htautau_input_list/NanoV12_2022MC_ggh_htautau.txt  
+
+Htautau_input_list/NanoV12_2022MC_vbf_htautau.txt 
+
+Htautau_input_list/NanoV12_2022MC_dyjets.txt 
+
+Htautau_input_list/NanoV12_2022MC_diboson.txt 
+
+Htautau_input_list/NanoV12_2022MC_ttbar.txt 
+
+Htautau_input_list/NanoV12_2022MC_singletop.txt 
+Htautau_input_list/NanoV12_2022MC_htautau.txt 
+Htautau_input_list/NanoV12_2022MC_wjets.txt 
+data_em.txt
+data_mt.txt
+data_tt.txt
+data_et.txt
