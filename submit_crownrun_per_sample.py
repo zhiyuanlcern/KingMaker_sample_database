@@ -52,7 +52,7 @@ def build_command(
         "--files-per-task",
         str(args.files_per_task),
         "--no-poll",
-        "True",
+        "False",
     ]
 
     if args.local_scheduler:
@@ -91,24 +91,48 @@ def build_command(
 
 def run_commands(commands: list[list[str]], dry_run: bool, keep_going: bool) -> int:
     return_code = 0
-    for i, command in enumerate(commands):
-        printable = " ".join(shlex.quote(token) for token in command)
-        print(f"[submit] {printable}", flush=True)
-
-        if dry_run:
-            continue
-
-        completed = subprocess.run(command, check=False)
-        if completed.returncode != 0:
-            print(f"[submit] command failed with exit code {completed.returncode}", file=sys.stderr, flush=True)
-            return_code = completed.returncode
-            if not keep_going:
-                break
-
-        # wait 2 seconds between submissions to avoid submitting too fast
-        if i < len(commands) - 1:
-            time.sleep(2)
-
+    
+    if dry_run:
+        for command in commands:
+            printable = " ".join(shlex.quote(token) for token in command)
+            print(f"[submit] {printable}", flush=True)
+        return 0
+    
+    # 最多10个并发作业
+    max_concurrent = 10
+    active_processes: list[tuple[subprocess.Popen, list[str]]] = []
+    command_queue = commands.copy()
+    
+    while command_queue or active_processes:
+        # 启动新进程直到达到并发限制
+        while len(active_processes) < max_concurrent and command_queue:
+            command = command_queue.pop(0)
+            printable = " ".join(shlex.quote(token) for token in command)
+            print(f"[submit] {printable}", flush=True)
+            proc = subprocess.Popen(command)
+            active_processes.append((proc, command))
+            time.sleep(2)  # 等待2秒再启动下一个
+        
+        # 检查完成的进程
+        for proc, command in active_processes[:]:
+            retcode = proc.poll()
+            if retcode is not None:
+                active_processes.remove((proc, command))
+                if retcode != 0:
+                    printable = " ".join(shlex.quote(token) for token in command)
+                    print(f"[submit] command failed with exit code {retcode}: {printable}", 
+                          file=sys.stderr, flush=True)
+                    return_code = retcode
+                    if not keep_going:
+                        # 终止所有活动进程
+                        for p, _ in active_processes:
+                            p.terminate()
+                        return return_code
+        
+        # 短暂休眠避免忙等待
+        if active_processes:
+            time.sleep(1)
+    
     return return_code
 
 
