@@ -10,6 +10,7 @@ import time
 from pathlib import Path
 from typing import Optional
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import yaml
 
@@ -72,81 +73,141 @@ def update_luigi_config(config_path: Path, scopes_str: str, files_per_task: int)
     print(f"[config] 已更新 {config_path}: shifts=[\"All\"], scopes={replacements['scopes']}, files_per_task={files_per_task}")
 
 
-def get_incomplete_samples(
-    analysis: str,
-    config: str,
-    sample_list: Path,
-    production_tag: str,
-    log_dir: Optional[Path] = None,
-    min_complete_percent: float = 80.0,
-) -> list[str]:
-    """运行 ProductionStatus.py 并返回未完成的样本列表"""
+def check_single_sample(nick: str, sample_meta: dict, args: argparse.Namespace, min_complete_percent: float) -> tuple[str, Optional[float], str]:
+    """检查单个样本的完成情况，返回 (nick, percent, output)"""
+    # 构建 law 命令（与 build_command 保持一致，所有参数转为str）
     cmd = [
-        "python3",
-        "scripts/ProductionStatus.py",
-        "--analysis", analysis,
-        "--config", config,
-        "--sample-list", str(sample_list),
-        "--production-tag", production_tag
+        "law",
+        "run",
+        "CROWNRun",
+        "--nick", str(nick),
+        "--analysis", str(args.analysis),
+        "--config", str(args.config),
+        "--production-tag", str(args.production_tag),
+        "--scopes", str(args.scopes),
+        "--sampletype", str(sample_meta["sample_type"]),
+        "--era", str(sample_meta["era"]),
+        "--files-per-task", str(args.files_per_task),
+        "--print-status", "1",
     ]
     
-    print(f"[check] 检查作业状态: {' '.join(cmd)}")
+    # 添加可选参数（与 build_command 保持一致）
+    if args.sampletypes:
+        cmd.extend(["--sampletypes", str(args.sampletypes)])
+    else:
+        cmd.extend(["--sampletypes", f'["{sample_meta["sample_type"]}"]'])
+    
+    if args.eras:
+        cmd.extend(["--eras", str(args.eras)])
+    else:
+        cmd.extend(["--eras", f'["{sample_meta["era"]}"]'])
+    
+    if args.channel:
+        cmd.extend(["--channel", str(args.channel)])
+    
+    if args.systematic:
+        cmd.extend(["--systematic", str(args.systematic)])
     
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
         output = result.stdout + result.stderr
+        
+        # 解析输出找完成百分比（模仿 ProductionStatus.py 的方法）
+        percent = None
+        lines = output.splitlines()
+        for i, line in enumerate(lines):
+            if "NestedSiblingFileCollection" in line:
+                if i + 1 < len(lines):
+                    statusline = lines[i + 1]
+                    match = re.search(r'\((\d+)/(\d+)\)', statusline)
+                    if match:
+                        done = int(match.group(1))
+                        total = int(match.group(2))
+                        if total > 0:
+                            percent = (done / total) * 100.0
+                        break
+        
+        return (nick, percent, output)
+        
     except subprocess.TimeoutExpired:
-        print("[warn] ProductionStatus 超时，将提交所有样本", file=sys.stderr)
-        return []
+        return (nick, None, f"Timeout after 30s")
     except Exception as e:
-        print(f"[warn] ProductionStatus 运行失败: {e}，将提交所有样本", file=sys.stderr)
-        return []
+        return (nick, None, f"Error: {e}")
+
+
+def get_incomplete_samples(
+    samples: list[str],
+    datasets: dict,
+    args: argparse.Namespace,
+    log_dir: Optional[Path] = None,
+    min_complete_percent: float = 80.0,
+    skip_completed: Optional[set[str]] = None,
+) -> tuple[list[str], set[str]]:
+    """并行检查所有样本的完成情况，返回 (incomplete_samples, completed_samples)"""
+    if skip_completed is None:
+        skip_completed = set()
     
-    # 保存 ProductionStatus 输出
-    if log_dir is not None:
+    incomplete = []
+    completed = set()
+    all_status_output = []
+    
+    # 过滤掉已完成的样本
+    samples_to_check = [s for s in samples if s not in skip_completed]
+    print(f"[check] 并行检查 {len(samples_to_check)} 个样本（跳过 {len(skip_completed)} 个已完成样本）...")
+    
+    if not samples_to_check:
+        return (incomplete, completed)
+    
+    # 准备要检查的样本列表
+    check_tasks = []
+    for nick in samples_to_check:
+        sample_meta = datasets.get(nick)
+        if sample_meta is None:
+            print(f"[warn] 样本 {nick} 无 metadata，跳过", file=sys.stderr)
+            continue
+        check_tasks.append((nick, sample_meta))
+    
+    # 并行执行检查（最多50个并发）
+    with ThreadPoolExecutor(max_workers=50) as executor:
+        futures = {
+            executor.submit(check_single_sample, nick, meta, args, min_complete_percent): nick
+            for nick, meta in check_tasks
+        }
+        
+        for future in as_completed(futures):
+            nick = futures[future]
+            try:
+                result_nick, percent, output = future.result()
+                all_status_output.append(f"=== {result_nick} ===\n{output}\n")
+                
+                if percent is not None:
+                    if percent < min_complete_percent:
+                        incomplete.append(result_nick)
+                        print(f"[check] 未完成: {result_nick} ({percent:.1f}%)")
+                    else:
+                        completed.add(result_nick)
+                        print(f"[check] 已完成: {result_nick} ({percent:.1f}%)")
+                else:
+                    print(f"[check] 无法解析状态: {result_nick}，标记为未完成", file=sys.stderr)
+                    incomplete.append(result_nick)
+            except Exception as e:
+                print(f"[warn] 检查 {nick} 失败: {e}，标记为未完成", file=sys.stderr)
+                incomplete.append(nick)
+    
+    # 保存状态检查输出
+    if log_dir is not None and all_status_output:
         log_dir.mkdir(parents=True, exist_ok=True)
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        status_log = log_dir / f"ProductionStatus_{production_tag}_{ts}.log"
-        status_log.write_text(output, encoding="utf-8")
-        print(f"[check] ProductionStatus 输出已保存: {status_log}")
-
-    # 解析表格输出找到未完成的样本（Percent != 100%）
-    incomplete = []
-    in_table = False
-    
-    for line in output.splitlines():
-        # 检测表格内容行（包含 │ 且不是表头分隔符）
-        if '│' in line and '┃' not in line and '━' not in line and 'Sample' not in line:
-            parts = [p.strip() for p in line.split('│')]
-            
-            # 表格格式: │ Sample │ Done │ Total │ Percent │
-            # parts[0] 为空, parts[1] 为 Sample, parts[2] 为 Done, parts[3] 为 Total, parts[4] 为 Percent
-            if len(parts) >= 5:
-                sample_name = parts[1].strip()
-                percent_str = parts[4].strip()
-                
-                # 检查是否未完成（Percent != 100%）
-                if sample_name and percent_str:
-                    if sample_name.strip().lower() == "total":
-                        continue
-                    in_table = True
-                    # 提取百分比数字
-                    match = re.search(r'(\d+(?:\.\d+)?)\s*%', percent_str)
-                    if match:
-                        percent = float(match.group(1))
-                        if percent < min_complete_percent:
-                            incomplete.append(sample_name)
-                            print(f"[check] 未完成: {sample_name} ({percent_str})")
+        status_log = log_dir / f"status_check_{args.production_tag}_{ts}.log"
+        status_log.write_text("".join(all_status_output), encoding="utf-8")
+        print(f"[check] 状态检查输出已保存: {status_log}")
     
     if incomplete:
-        print(f"[check] 共发现 {len(incomplete)} 个未完成样本")
+        print(f"[check] 共发现 {len(incomplete)} 个未完成样本，{len(completed)} 个已完成样本")
     else:
-        if in_table:
-            print("[check] 所有样本已完成")
-        else:
-            print("[check] 未能解析状态表格，将提交所有样本")
+        print(f"[check] 检查完成: {len(completed)} 个已完成样本，0 个未完成样本")
     
-    return incomplete
+    return (incomplete, completed)
 
 
 def build_command(
@@ -410,16 +471,15 @@ def main() -> int:
     scope_tag = get_scope_tag(args.scopes)
     resolved_log_dir = args.log_dir.resolve() / scope_tag
 
-    # 如果需要检查状态，先更新 luigi config 再运行 ProductionStatus
+    # 如果需要检查状态，先更新 luigi config 再检查状态
     if args.check_status:
         luigi_config = args.luigi_config.resolve()
         update_luigi_config(luigi_config, args.scopes, args.files_per_task)
         
-        incomplete_samples = get_incomplete_samples(
-            args.analysis,
-            args.config,
-            sample_list,
-            args.production_tag,
+        incomplete_samples, completed_samples = get_incomplete_samples(
+            samples,
+            datasets,
+            args,
             resolved_log_dir,
             args.min_complete_percent,
         )
@@ -458,27 +518,30 @@ def main() -> int:
     
     # 如果启用重试且不是 dry-run，循环检查并重新提交未完成的作业
     if args.retry_incomplete and not args.dry_run and args.check_status:
+        all_completed_samples = set(completed_samples)  # 记录所有已完成的样本
         retry_count = 0
         while retry_count < args.max_retries:
             retry_count += 1
             print(f"\n[retry] 第 {retry_count} 次重新检查状态...")
             
-            # 重新检查状态
-            incomplete_samples = get_incomplete_samples(
-                args.analysis,
-                args.config,
-                sample_list,
-                args.production_tag,
+            # 重新检查状态（跳过已完成的样本）
+            original_samples = load_sample_list(sample_list)
+            incomplete_samples, newly_completed = get_incomplete_samples(
+                original_samples,
+                datasets,
+                args,
                 resolved_log_dir,
                 args.min_complete_percent,
+                skip_completed=all_completed_samples,
             )
+            
+            all_completed_samples.update(newly_completed)
             
             if not incomplete_samples:
                 print("[retry] 所有样本已完成！")
                 break
             
             # 过滤出仍在原始 sample_list 中且未完成的样本
-            original_samples = load_sample_list(sample_list)
             samples_to_retry = [s for s in original_samples if s in incomplete_samples]
             
             if not samples_to_retry:
