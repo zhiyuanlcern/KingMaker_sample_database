@@ -54,8 +54,8 @@ law run ProduceSamples --local-scheduler False --analysis tau  --config config_f
 sleep 50
 
 ## script to resubmit (after you have compiled!!!):
-# python sample_database//submit_crownrun_per_sample.py --analysis tau --config config_fullsyst --production-tag NanoV14_2022signal_all_Version13_syst_tt --sample-list sample_database/Htautau_input_list/NanoV12_2022signal_all.txt --scopes '["tt"]'  --files-per-task 1 
-# python sample_database//submit_crownrun_per_sample.py --analysis tau --config config_fullsyst --production-tag NanoV14_2023signal_all_Version13_syst_tt --sample-list sample_database/Htautau_input_list/NanoV12_2023signal_all.txt --scopes '["tt"]'  --files-per-task 1 
+# python sample_database//submit_crownrun_per_sample.py --analysis tau --config config_fullsyst --production-tag NanoV14_2022signal_all_Version13_syst_tt --sample-list sample_database/Htautau_input_list/NanoV12_2022signal_all.txt --scopes '["tt"]'  --files-per-task 1 --check-status --retry-incomplete --log-dir KingMaker_logs/submit_crownrun_per_sample
+# python sample_database//submit_crownrun_per_sample.py --analysis tau --config config_fullsyst --production-tag NanoV14_2023signal_all_Version13_syst_tt --sample-list sample_database/Htautau_input_list/NanoV12_2023signal_all.txt --scopes '["tt"]'  --files-per-task 1 --check-status --retry-incomplete --log-dir KingMaker_logs/submit_crownrun_per_sample
 
 
 
