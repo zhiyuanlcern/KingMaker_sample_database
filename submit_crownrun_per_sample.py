@@ -471,6 +471,10 @@ def main() -> int:
     scope_tag = get_scope_tag(args.scopes)
     resolved_log_dir = args.log_dir.resolve() / scope_tag
 
+    # 保存原始样本列表（用于重试）
+    original_samples = samples.copy()
+    completed_samples = set()
+
     # 如果需要检查状态，先更新 luigi config 再检查状态
     if args.check_status:
         luigi_config = args.luigi_config.resolve()
@@ -525,7 +529,6 @@ def main() -> int:
             print(f"\n[retry] 第 {retry_count} 次重新检查状态...")
             
             # 重新检查状态（跳过已完成的样本）
-            original_samples = load_sample_list(sample_list)
             incomplete_samples, newly_completed = get_incomplete_samples(
                 original_samples,
                 datasets,
