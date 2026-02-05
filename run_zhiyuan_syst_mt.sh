@@ -48,13 +48,15 @@ sed -i '/^scopes = /c\'"$replacement" "lawluigi_configs/KingMaker_lxplus_luigi.c
 
 
 
-law run ProduceSamples --local-scheduler False --analysis tau  --config config_fullsyst --sample-list sample_database/Htautau_input_list/NanoV12_2022signal_all.txt  --workers 1 --production-tag NanoV14_2022signal_all_Version13_syst_mt > KingMaker_logs/NanoV12_2022signal_all_Version13_syst_mt.log & 
+# law run ProduceSamples --local-scheduler False --analysis tau  --config config_fullsyst --sample-list sample_database/Htautau_input_list/NanoV12_2022signal_all.txt  --workers 1 --production-tag NanoV14_2022signal_all_Version13_syst_mt > KingMaker_logs/NanoV12_2022signal_all_Version13_syst_mt.log & 
 python3 scripts/ProductionStatus.py --analysis tau --config config_fullsyst --sample-list sample_database/Htautau_input_list/NanoV12_2022signal_all.txt --production-tag NanoV14_2022signal_all_Version13_syst_mt &
-sleep 50
+# sleep 50
 replacement="scopes = [\"mt\"]"
 sed -i '/^scopes = /c\'"$replacement" "lawluigi_configs/KingMaker_lxplus_luigi.cfg"
-law run ProduceSamples --local-scheduler False --analysis tau  --config config_fullsyst --sample-list sample_database/Htautau_input_list/NanoV12_2023signal_all.txt  --workers 1 --production-tag NanoV14_2023signal_all_Version13_syst_mt > KingMaker_logs/NanoV12_2023signal_all_Version13_syst_mt.log & 
+# law run ProduceSamples --local-scheduler False --analysis tau  --config config_fullsyst --sample-list sample_database/Htautau_input_list/NanoV12_2023signal_all.txt  --workers 1 --production-tag NanoV14_2023signal_all_Version13_syst_mt > KingMaker_logs/NanoV12_2023signal_all_Version13_syst_mt.log & 
 python3 scripts/ProductionStatus.py --analysis tau --config config_fullsyst --sample-list sample_database/Htautau_input_list/NanoV12_2023signal_all.txt --production-tag NanoV14_2023signal_all_Version13_syst_mt &
+
+
 
 sleep 50
 
@@ -62,5 +64,5 @@ sleep 50
 # python sample_database//submit_crownrun_per_sample.py --analysis tau --config config_fullsyst --production-tag NanoV14_2022signal_all_Version13_syst_mt --sample-list sample_database/Htautau_input_list/NanoV12_2022signal_all.txt --scopes '["mt"]'  --files-per-task 1 
 # python sample_database//submit_crownrun_per_sample.py --analysis tau --config config_fullsyst --production-tag NanoV14_2023signal_all_Version13_syst_mt --sample-list sample_database/Htautau_input_list/NanoV12_2023signal_all.txt --scopes '["mt"]'  --files-per-task 1 
 
-
+--CROWNRun-tasks-per-job
 
