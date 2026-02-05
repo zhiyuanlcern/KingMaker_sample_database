@@ -30,11 +30,16 @@
 map<TString,TH1F*> Weights;
 void loadFF(TString era, TString channel) {
     // 构造文件名
-    TString filename = "sample_database/fractions/Fraction_" + era + "_" + channel + ".root";
+    // TString filename = "/data/bond/zhiyuanl/Plotting/sample_database//fractions/Fraction_" + era + "_" + channel + ".root";
+    TString filename = "/data/bond/zhiyuanl/Plotting/Version12_samples/Fraction_" + era + "_" + channel + ".root";
     std::cout<< filename << std::endl;
     // 打开文件
     TFile* f_fraction = new TFile(filename); // 动态加载根文件
     std::cout<< f_fraction << std::endl;
+    if (!f_fraction || f_fraction->IsZombie()) {
+        std::cerr << "[loadFF] ERROR: cannot open fraction file: " << filename << std::endl;
+        throw std::runtime_error("loadFF: failed to open fraction file");
+    }
     // 定义权重字典
     
 
@@ -47,6 +52,11 @@ void loadFF(TString era, TString channel) {
             TString histname = d + "_AR" + r + "mt_tot";
             std::cout<< histname << std::endl;
             TH1F* h = (TH1F*) f_fraction->Get(histname);
+            if (!h) {
+                std::cerr << "[loadFF] ERROR: missing hist " << histname
+                          << " in file " << filename << std::endl;
+                throw std::runtime_error("loadFF: missing histogram");
+            }
             h->SetDirectory(0);
             Weights[histname] = h;
         }
