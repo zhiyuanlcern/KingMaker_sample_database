@@ -48,9 +48,13 @@ for sample_name, sample_data in datasets.items():
             # Create YAML file for this sample
             output_file = os.path.join(output_dir, f"{sample_name}.yaml")
             
+            # Override sample_type to correct value for BBH samples
+            sample_data_copy = sample_data.copy()
+            sample_data_copy['sample_type'] = 'bbh_htautau'
+            
             # Write the YAML file
             with open(output_file, 'w') as out:
-                yaml.dump({sample_name: sample_data}, out, default_flow_style=False, sort_keys=False)
+                yaml.dump({sample_name: sample_data_copy}, out, default_flow_style=False, sort_keys=False)
             
             count += 1
             print(f"Created: {os.path.basename(output_file)}")
