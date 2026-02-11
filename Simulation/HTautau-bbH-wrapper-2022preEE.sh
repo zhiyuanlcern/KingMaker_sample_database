@@ -3,6 +3,7 @@
 # Wrapper script to generate BBH (bottom quark fusion) Higgs to tau tau YAML files
 # for 2022preEE era (Run3Summer22NanoAODv12)
 # This script extracts BBH samples from datasets.yaml and creates individual YAML files
+# Note: 2022preEE corresponds to the directory 2022EE in this repository
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
@@ -29,7 +30,6 @@ export OUTPUT_DIR
 python3 << 'EOF'
 import yaml
 import os
-import sys
 
 datasets_file = os.environ.get('DATASETS_FILE')
 output_dir = os.environ.get('OUTPUT_DIR')

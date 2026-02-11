@@ -29,7 +29,6 @@ export OUTPUT_DIR
 python3 << 'EOF'
 import yaml
 import os
-import sys
 
 datasets_file = os.environ.get('DATASETS_FILE')
 output_dir = os.environ.get('OUTPUT_DIR')
