@@ -38,11 +38,13 @@ with open(datasets_file, 'r') as f:
     datasets = yaml.safe_load(f)
 
 # Filter BBH samples for Summer23BPixNanoAODv12 (era: 2023BPix)
+# Note: datasets.yaml uses '2023BPix' as era value, which corresponds to 2023postBPix data-taking period
 count = 0
 for sample_name, sample_data in datasets.items():
     if 'BBHto2Tau' in sample_name and 'Run3Summer23BPixNanoAODv12_private' in sample_name:
         era = sample_data.get('era')
         # era can be either a string or the directory name
+        # datasets.yaml uses '2023BPix', but also accept '2023postBPix' for flexibility
         if era in ['2023BPix', '2023postBPix'] or str(era) == '2023BPix':
             # Create YAML file for this sample
             output_file = os.path.join(output_dir, f"{sample_name}.yaml")

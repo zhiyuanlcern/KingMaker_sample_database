@@ -38,6 +38,7 @@ with open(datasets_file, 'r') as f:
     datasets = yaml.safe_load(f)
 
 # Filter BBH samples for Summer23NanoAODv12 (era: 2023)
+# Note: datasets.yaml uses integer 2023 as era value, which corresponds to 2023preBPix data-taking period
 count = 0
 for sample_name, sample_data in datasets.items():
     if 'BBHto2Tau' in sample_name and 'Run3Summer23NanoAODv12_private' in sample_name and 'BPix' not in sample_name:
