@@ -1,0 +1,8 @@
+dbs: /WGtoLNuG-1Jets_PTG-10to100_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/NANOAODSIM
+era: 2022EE
+generator_weight: 1.0
+nevents: 380
+nfiles: 380
+nick: WGtoLNuG-1Jets_PTG-10to100_TuneCP5_13p6TeV_amcatnloFXFX-pythia8_Run3Summer22NanoAODv12
+sample_type: wg
+xsec: 662.2
