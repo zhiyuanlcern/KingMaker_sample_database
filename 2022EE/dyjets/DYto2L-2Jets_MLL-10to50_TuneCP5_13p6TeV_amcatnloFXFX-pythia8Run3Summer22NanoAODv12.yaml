@@ -1,4 +1,4 @@
-era: 2022postEE
+era: 2022EE
 filelist:
 - /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoEE_0.root
 - /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoEE_10.root
@@ -34,7 +34,21 @@ filelist:
 - /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoMuMu_7.root
 - /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoMuMu_8.root
 - /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoMuMu_9.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_0.root   
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_3.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_10.root  
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_4.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_11.root  
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_5.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_12.root  
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_6.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_13.root  
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_7.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_1.root   
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_8.root
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_2.root   
+- /eos/cms/store/group/phys_higgs/HLepRare/skim_2025_v1/Run3_2022/DYto2L_M_10to50_amcatnloFXFX/nanoTauTau_9.root
 nick: DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8Run3Summer22NanoAODv12
 sample_type: dyjets
-nfiles: 34
-nevents: 34
+nfiles: 48
+nevents: 48
